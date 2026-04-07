@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isaac Demers | Stirring Dreams in Others</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #E51636;
+  --red-dark: #C41230;
+  --red-glow: rgba(229,22,54,0.15);
+  --navy: #0F1C32;
+  --navy-mid: #1A2E4A;
+  --navy-light: #2A4060;
+  --cream: #FAF5EE;
+  --cream-dark: #F0E8DA;
+  --warm: #FEFCF8;
+  --gold: #C9963B;
+  --gold-light: #DEAE54;
+  --sage: #5E8F64;
+  --sage-light: #82B488;
+  --text: #1A2E4A;
+  --text-mid: #4A5F7A;
+  --text-light: #8A9AB0;
+  --border: rgba(26,46,74,0.08);
+  --sh-sm: 0 2px 8px rgba(15,28,50,0.05);
+  --sh-md: 0 8px 32px rgba(15,28,50,0.07);
+  --sh-lg: 0 20px 60px rgba(15,28,50,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--warm);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:1000;padding:1.1rem 2rem;transition:all .4s;background:transparent}
+nav.scrolled{background:rgba(254,252,248,.96);backdrop-filter:blur(20px);box-shadow:var(--sh-sm);padding:.65rem 2rem}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:-.02em}
+.nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-mid);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--red);transition:width .3s}
+.nav-links a:hover{color:var(--red)}
+.nav-links a:hover::after{width:100%}
+.mob-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.mob-toggle span{display:block;width:22px;height:2px;background:var(--navy);margin:5px 0;transition:.3s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(145deg,var(--navy) 0%,#081220 55%,#12243E 100%)}
+.hero-grain{position:absolute;inset:0;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px}
+.hero-orbs{position:absolute;inset:0}
+.hero-orbs::before,.hero-orbs::after{content:'';position:absolute;border-radius:50%;filter:blur(80px)}
+.hero-orbs::before{width:500px;height:500px;top:-10%;left:-5%;background:rgba(229,22,54,.08)}
+.hero-orbs::after{width:400px;height:400px;bottom:0;right:-5%;background:rgba(201,150,59,.06)}
+.hero-content{text-align:center;position:relative;z-index:2;padding:2rem;max-width:900px}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease .3s forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6.5vw,5.2rem);font-weight:700;color:white;line-height:1.08;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease .5s forwards;letter-spacing:-.03em}
+.hero-title em{font-style:italic;color:var(--gold-light);font-weight:500}
+.hero-sub{font-size:1.15rem;color:rgba(255,255,255,.5);font-weight:300;line-height:1.75;max-width:620px;margin:0 auto 2.5rem;opacity:0;animation:fadeUp .8s ease .7s forwards}
+.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease .9s forwards}
+.hero-stat{text-align:center}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:white}
+.hero-stat-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.2rem}
+.hero-current{margin-top:2.5rem;opacity:0;animation:fadeUp .8s ease 1.1s forwards}
+.hero-current-badge{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:100px;padding:.5rem 1.2rem}
+.hero-current-dot{width:8px;height:8px;border-radius:50%;background:var(--sage-light);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-current-text{font-size:.8rem;color:rgba(255,255,255,.6);font-weight:400}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);opacity:0;animation:fadeUp .8s ease 1.3s forwards}
+.hero-scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,rgba(255,255,255,.25),transparent);margin:0 auto;position:relative;overflow:hidden}
+.hero-scroll-line::after{content:'';position:absolute;top:-20px;left:0;width:1px;height:20px;background:var(--gold);animation:scrollD 2s ease infinite}
+@keyframes scrollD{0%{top:-20px}100%{top:50px}}
+
+/* SECTIONS */
+section{padding:6rem 2rem}
+.sec-inner{max-width:1100px;margin:0 auto}
+.sec-label{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:.75rem}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;color:var(--navy);margin-bottom:1rem;letter-spacing:-.02em;line-height:1.15}
+.sec-sub{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px;font-weight:300}
+
+/* STORY */
+.story-sec{background:var(--cream)}
+.story-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;margin-top:3rem;align-items:start}
+.story-text p{font-size:1.02rem;line-height:1.85;color:var(--text-mid);margin-bottom:1.2rem}
+.story-text p:first-of-type::first-letter{font-family:'Cormorant Garamond',serif;font-size:3.8rem;float:left;line-height:1;margin-right:.5rem;color:var(--red);font-weight:700}
+.story-highlights{position:sticky;top:6rem}
+.story-card{background:white;border-radius:14px;padding:1.75rem;margin-bottom:1.25rem;box-shadow:var(--sh-sm);border-left:4px solid var(--red);transition:transform .3s,box-shadow .3s}
+.story-card:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+.story-card:nth-child(2){border-left-color:var(--gold)}
+.story-card:nth-child(3){border-left-color:var(--sage)}
+.story-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
+.story-card p{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+
+/* TIMELINE */
+.tl-sec{background:var(--warm)}
+.timeline{position:relative;margin-top:3rem;padding-left:3rem}
+.timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),var(--sage),var(--navy-light))}
+.tl-item{position:relative;margin-bottom:2.5rem;opacity:0;transform:translateY(20px);transition:all .6s}
+.tl-item.visible{opacity:1;transform:translateY(0)}
+.tl-dot{position:absolute;left:-3rem;top:.2rem;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center}
+.tl-dot.gold{border-color:var(--gold)}.tl-dot.sage{border-color:var(--sage)}.tl-dot.navy{border-color:var(--navy-light)}.tl-dot.active{border-color:var(--sage);box-shadow:0 0 0 4px rgba(94,143,100,.2)}
+.tl-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--red)}
+.tl-dot.gold .tl-dot-inner{background:var(--gold)}.tl-dot.sage .tl-dot-inner{background:var(--sage)}.tl-dot.navy .tl-dot-inner{background:var(--navy-light)}.tl-dot.active .tl-dot-inner{background:var(--sage);animation:pulse 2s ease infinite}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-light);letter-spacing:.05em;margin-bottom:.4rem}
+.tl-card{background:white;border-radius:14px;padding:1.5rem;box-shadow:var(--sh-sm);transition:transform .3s,box-shadow .3s}
+.tl-card:hover{transform:translateX(4px);box-shadow:var(--sh-md)}
+.tl-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
+.tl-card p{font-size:.9rem;color:var(--text-mid);line-height:1.6}
+.tl-tag{display:inline-block;padding:.15rem .6rem;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-top:.6rem}
+.tag-career{background:rgba(229,22,54,.06);color:var(--red)}
+.tag-edu{background:rgba(201,150,59,.1);color:#A07A20}
+.tag-personal{background:rgba(94,143,100,.1);color:#4A7550}
+.tag-current{background:rgba(94,143,100,.12);color:var(--sage);border:1px solid rgba(94,143,100,.2)}
+
+/* ASSIGNMENTS */
+.assign-sec{background:var(--navy);color:white;padding:6rem 2rem}
+.assign-sec .sec-label{color:var(--gold)}.assign-sec .sec-title{color:white}.assign-sec .sec-sub{color:rgba(255,255,255,.5)}
+.assign-tabs{display:flex;gap:.5rem;margin-top:2.5rem;margin-bottom:2rem}
+.assign-tab{padding:.6rem 1.5rem;border-radius:100px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.5);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .3s}
+.assign-tab.active,.assign-tab:hover{background:rgba(255,255,255,.1);color:white;border-color:rgba(255,255,255,.2)}
+.assign-panel{display:none}.assign-panel.active{display:block}
+.assign-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.assign-header h3{font-family:'Cormorant Garamond',serif;font-size:2rem;color:white;font-weight:600}
+.assign-header .assign-loc{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+.assign-header .assign-period{font-size:.85rem;color:rgba(255,255,255,.4)}
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.metric-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:1.25rem;text-align:center;transition:background .3s}
+.metric-box:hover{background:rgba(255,255,255,.07)}
+.metric-val{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:white}
+.metric-val.up{color:var(--sage-light)}.metric-val.gold{color:var(--gold-light)}
+.metric-lbl{font-size:.68rem;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;margin-top:.2rem}
+.chart-section{margin-bottom:2rem}
+.chart-title{font-size:.85rem;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:1rem}
+.bar-chart{display:flex;align-items:flex-end;gap:6px;height:140px;padding-bottom:1.5rem;position:relative;border-bottom:1px solid rgba(255,255,255,.06)}
+.bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+.bar{width:100%;max-width:40px;border-radius:6px 6px 0 0;transition:height 1s ease;position:relative}
+.bar-label{font-size:.6rem;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace}
+.bar-value{font-size:.6rem;color:rgba(255,255,255,.6);font-family:'JetBrains Mono',monospace;position:absolute;top:-16px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.highlights-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.5rem}
+.highlight-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:1.5rem}
+.highlight-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:white;margin-bottom:.5rem;font-weight:600}
+.highlight-card p{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.6}
+.highlight-card .hl-metric{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin-bottom:.25rem}
+.hl-metric.green{color:var(--sage-light)}.hl-metric.gold{color:var(--gold-light)}.hl-metric.red{color:var(--red)}
+
+/* PEOPLE */
+.people-sec{background:var(--cream)}
+.people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem;margin-top:3rem}
+.person-card{background:white;border-radius:14px;padding:1.75rem;text-align:center;box-shadow:var(--sh-sm);transition:all .3s}
+.person-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.person-avatar{width:56px;height:56px;border-radius:50%;margin:0 auto .75rem;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:white}
+.pa-1{background:var(--red)}.pa-2{background:var(--navy)}.pa-3{background:var(--sage)}.pa-4{background:var(--gold)}.pa-5{background:var(--red-dark)}.pa-6{background:#5B7FA5}.pa-7{background:#8B6B4A}.pa-8{background:#6B5B8A}.pa-9{background:#4A7B6B}.pa-10{background:#7A5B5B}
+.person-card h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--navy);margin-bottom:.2rem}
+.person-role{font-size:.75rem;color:var(--red);font-weight:600;letter-spacing:.02em;margin-bottom:.5rem}
+.person-card p{font-size:.82rem;color:var(--text-mid);line-height:1.55}
+
+/* FEEDBACK */
+.feedback-sec{background:var(--warm)}
+.feedback-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-top:3rem}
+.feedback-card{background:white;border-radius:18px;padding:2rem;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.feedback-card::before{content:'\201C';position:absolute;top:.5rem;left:1.25rem;font-family:'Cormorant Garamond',serif;font-size:5rem;color:var(--red);opacity:.08;line-height:1}
+.feedback-from{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--navy);margin-bottom:.2rem}
+.feedback-role{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem}
+.feedback-body p{font-size:.88rem;color:var(--text-mid);line-height:1.7;margin-bottom:.75rem}
+.feedback-rating{display:flex;align-items:center;gap:.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.rating-item{font-size:.72rem;color:var(--text-light);display:flex;align-items:center;gap:.3rem}
+.rating-num{font-weight:700;color:var(--navy);font-size:.85rem}
+
+/* DEVELOPMENT */
+.dev-sec{background:var(--cream)}
+.dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;margin-top:3rem}
+.dev-card{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s}
+.dev-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.dev-card-hdr{padding:1.75rem 1.75rem 1rem}
+.dev-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:.75rem}
+.dev-card:nth-child(1) .dev-icon{background:rgba(229,22,54,.07)}
+.dev-card:nth-child(2) .dev-icon{background:rgba(201,150,59,.1)}
+.dev-card:nth-child(3) .dev-icon{background:rgba(94,143,100,.1)}
+.dev-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
+.dev-card-body{padding:0 1.75rem 1.75rem}
+.dev-card-body p{font-size:.88rem;color:var(--text-mid);line-height:1.7}
+.book-list{list-style:none;margin-top:.75rem}
+.book-list li{padding:.4rem 0;border-bottom:1px solid rgba(0,0,0,.03);font-size:.82rem;color:var(--text-mid);display:flex;align-items:center;gap:.4rem}
+.book-list li::before{content:'\1F4D6';font-size:.8rem}
+
+/* FINANCES */
+.fin-sec{background:linear-gradient(145deg,var(--navy) 0%,#081220 100%);color:white;padding:6rem 2rem}
+.fin-sec .sec-label{color:var(--gold)}.fin-sec .sec-title{color:white}.fin-sec .sec-sub{color:rgba(255,255,255,.45)}
+.fin-dash{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.fin-main{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:2.5rem;text-align:center}
+.fin-main-lbl{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem}
+.fin-main-val{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:700;color:white}
+.fin-main-sub{color:var(--sage-light);font-size:.88rem;margin-top:.25rem}
+.fin-bar-wrap{margin-top:1.5rem}
+.fin-bar-labels{display:flex;justify-content:space-between;margin-bottom:.4rem;font-size:.75rem;color:rgba(255,255,255,.4)}
+.fin-bar{height:8px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.fin-bar-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:100px;transition:width 2s ease}
+.fin-details{display:flex;flex-direction:column;gap:1.25rem}
+.fin-detail{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1.25rem}
+.fin-detail-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.fin-detail-icon.inc{background:rgba(94,143,100,.15)}.fin-detail-icon.debt{background:rgba(229,22,54,.1)}.fin-detail-icon.goal{background:rgba(201,150,59,.12)}.fin-detail-icon.sal{background:rgba(90,130,180,.12)}
+.fin-detail h4{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:white;margin-bottom:.15rem;font-weight:600}
+.fin-detail p{font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.4}
+
+/* PERSONAL */
+.pers-sec{background:var(--cream)}
+.pers-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem}
+.pers-block{background:white;border-radius:18px;padding:2.25rem;box-shadow:var(--sh-sm)}
+.pers-block h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--navy);margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+.pers-block p{font-size:.92rem;color:var(--text-mid);line-height:1.8}
+.pers-block p+p{margin-top:.75rem}
+
+/* GALLERY */
+.gallery-sec{background:var(--warm)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}
+.gallery-slot{aspect-ratio:1;background:var(--cream-dark);border-radius:14px;display:flex;align-items:center;justify-content:center;border:2px dashed rgba(26,46,74,.1);transition:all .3s;cursor:default}
+.gallery-slot:nth-child(1),.gallery-slot:nth-child(6){grid-column:span 2;aspect-ratio:2/1}
+.gallery-slot-inner{text-align:center;color:var(--text-light);font-size:.8rem}
+.gallery-slot-inner .gallery-icon{font-size:1.5rem;margin-bottom:.25rem;opacity:.4}
+
+/* QUOTE */
+.quote-sec{background:var(--red);padding:5rem 2rem;text-align:center}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2.3rem);color:white;font-style:italic;font-weight:400;max-width:780px;margin:0 auto;line-height:1.5}
+.quote-author{margin-top:1.25rem;font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+
+/* AHEAD */
+.ahead-sec{background:var(--warm)}
+.ahead-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;margin-top:3rem}
+.ahead-card{background:white;border-radius:18px;padding:2.25rem;box-shadow:var(--sh-sm);position:relative;overflow:hidden;transition:all .3s}
+.ahead-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px}
+.ahead-card:nth-child(1)::after{background:var(--red)}.ahead-card:nth-child(2)::after{background:var(--gold)}.ahead-card:nth-child(3)::after{background:var(--sage)}
+.ahead-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.ahead-card h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--navy);margin-bottom:.6rem}
+.ahead-card p{font-size:.88rem;color:var(--text-mid);line-height:1.7}
+.ahead-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:700;color:rgba(0,0,0,.03);position:absolute;top:.75rem;right:1.25rem}
+
+/* FOOTER */
+footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
+.footer-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;margin-bottom:.3rem}
+.footer-tag{color:rgba(255,255,255,.35);font-size:.88rem;margin-bottom:1.25rem}
+.footer-updated{font-size:.7rem;color:rgba(255,255,255,.2);font-family:'JetBrains Mono',monospace}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{opacity:0;transform:translateY(25px);transition:all .7s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .story-grid,.pers-grid,.fin-dash,.feedback-grid{grid-template-columns:1fr}
+  .people-grid{grid-template-columns:repeat(2,1fr)}
+  .dev-grid,.ahead-cards{grid-template-columns:1fr}
+  .metrics-row{grid-template-columns:repeat(2,1fr)}
+  .highlights-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-slot:nth-child(1),.gallery-slot:nth-child(6){grid-column:span 1;aspect-ratio:1}
+  .nav-links{display:none}.mob-toggle{display:block}
+  section{padding:4rem 1.25rem}
+  .story-highlights{position:static}
+  .assign-tabs{flex-wrap:wrap}
+  .hero-stats{gap:1.5rem}
+}
+@media(max-width:600px){.hero-stats{flex-direction:column;gap:.75rem}.people-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Isaac <span>Demers</span></a>
+    <ul class="nav-links">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#assignments">Results</a></li>
+      <li><a href="#people">People</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+      <li><a href="#finances">Finances</a></li>
+      <li><a href="#ahead">Ahead</a></li>
+    </ul>
+    <button class="mob-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grain"></div>
+  <div class="hero-orbs"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Leadership Development Program</div>
+    <h1 class="hero-title">Stirring <em>Dreams</em><br>in Others</h1>
+    <p class="hero-sub">A journey rooted in faith, forged through persistence, and driven by a calling to develop people and steward a Chick-fil-A restaurant with excellence.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">LDP Assignments</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">10+</div><div class="hero-stat-label">Years in Hospitality</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">1+</div><div class="hero-stat-label">Year in LDP</div></div>
+    </div>
+    <div class="hero-current">
+      <div class="hero-current-badge">
+        <div class="hero-current-dot"></div>
+        <span class="hero-current-text">Currently: GOS at Latham Farms, Albany, NY</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- MY STORY -->
+<section class="story-sec" id="story">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">My Story</div>
+    <h2 class="sec-title fade-in">Built on Faith, Family, and a Refusal to Quit</h2>
+    <div class="story-grid">
+      <div class="story-text fade-in">
+        <p>My story starts with my grandparents. Henry and Pauline Demers built and operated two full-service nursing homes from the ground up in New Hampshire. My grandmother was a nurse and my grandfather, a Korean War veteran, had a heart for entrepreneurship. On the other side, David and Nancy Hawkbaker modeled selfless hospitality. My grandfather was a stonemason who put others before himself, and my grandmother's kitchen table was a palace of love where anyone who walked through the door became family.</p>
+        <p>My parents met at Faith School of Theology in Charleston, Maine, and eventually found themselves serving others in ministry in Toronto, Canada, where I was born. My father served in multiple capacities in ministry throughout my childhood, and that deeply shaped my heart to serve. My brother Levi and I were raised near downtown Toronto in one of the most diverse cities in the world, strongly influenced by my parents' selfless passion for loving people and serving others through the Salvation Army and the local church.</p>
+        <p>At 11, my family moved to Newport News, Virginia, where my father had been accepted into a competitive program to become an accredited CPE Chaplain. One of the first restaurants we visited was Chick-fil-A. I remember being served with selfless and genuine hospitality that I thought only existed in five-star restaurants. That moment made me a fan for life.</p>
+        <p>At 13, we moved to Cumberland, Maryland, where I found belonging and eventually launched my career. At 18, I started as a valet attendant at Rocky Gap Casino and Resort and spent over six years rising through the ranks. In 2021, I pursued Chick-fil-A, interviewed externally for LDP, received a no, and went all-in anyway. I restarted my career as a kitchen team member at Chick-fil-A Ridgeside Drive. I applied again, made it to the third round, and was told no a second time. I applied a third time and was finally accepted. That persistence is one of my proudest accomplishments because it proved my calling to this work was bigger than any setback.</p>
+      </div>
+      <div class="story-highlights">
+        <div class="story-card fade-in">
+          <h4>Three-Time Applicant</h4>
+          <p>Applied to LDP three times before acceptance. Each rejection refined my readiness and deepened my resolve.</p>
+        </div>
+        <div class="story-card fade-in">
+          <h4>Grandparents' Legacy</h4>
+          <p>Henry and Pauline Demers built two nursing homes in New Hampshire. Their entrepreneurial spirit and care for people are the blueprint for how I want to operate.</p>
+        </div>
+        <div class="story-card fade-in">
+          <h4>Personal Vision</h4>
+          <p>"Stirring dreams in others" is a commitment to helping every person I lead discover what they are capable of and equipping them to get there.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="tl-sec" id="journey">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">The Journey</div>
+    <h2 class="sec-title fade-in">From Valet to Operator Candidate</h2>
+    <p class="sec-sub fade-in">Every chapter built on the last. Every setback became a setup.</p>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot navy"><div class="tl-dot-inner"></div></div><div class="tl-date">AUG 2015 - OCT 2021 &bull; 6 yrs 3 mos</div><div class="tl-card"><h3>Rocky Gap Casino & Resort</h3><p>Rose from Valet Attendant to Lead Valet to Valet Supervisor to Hotel Operations Supervisor to Marketing Manager over six years. Built operational systems, led cross-functional teams, and developed leaders including Josh James, Angelina Bloom, Jacob Santameyer, and Brandon Stotler.</p><span class="tl-tag tag-career">Career Foundation</span></div></div>
+
+      <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-date">2020</div><div class="tl-card"><h3>Liberty University, Graduated with Honors</h3><p>Completed my degree while working demanding hospitality hours at Rocky Gap. Proved that discipline and commitment could coexist, even when the schedule said otherwise.</p><span class="tl-tag tag-edu">Education</span></div></div>
+
+      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">OCT 2021 - APR 2025 &bull; 3 yrs 6 mos</div><div class="tl-card"><h3>Assistant Director, Chick-fil-A Ridgeside Drive</h3><p>Built the Drive-Thru Playbook from the ground up, helping achieve top Maryland drive-thru rankings and record-breaking throughput days. Developed Danny Caporotti (now accepted into LDP), Izzy Reyes (Assistant Director of FOH), and Harry Horyat (Assistant Director of DT, now ranked #1 in Maryland).</p><span class="tl-tag tag-career">CFA Career</span></div></div>
+
+      <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-date">MAR 2025</div><div class="tl-card"><h3>Accepted into LDP (Third Application)</h3><p>After two rejections, accepted into the Leadership Development Program. Joined March 3, 2025, at the Chick-fil-A Corporate Support Center.</p><span class="tl-tag tag-personal">Milestone</span></div></div>
+
+      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">APR - SEP 2025</div><div class="tl-card"><h3>IM Assignment 1: Mall of Louisiana</h3><p>Served as Interim Manager on a six-month assignment. Promoted Hayleigh Bozant to Executive Director. Drove 12%+ sales growth, achieved 100% QIV in Q2, and executed the largest catering delivery in the location's history at $10,600. Tracy Roper told me he would hand me the keys to a restaurant.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div>
+
+      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">NOV 2025 - MAR 2026</div><div class="tl-card"><h3>IM Assignment 2: Altamesa & McCart, Fort Worth, TX</h3><p>First IM on grounds during a confidential operator transition. Led through power outages, roof leaks, sewage issues, and organizational rebuilds. Promoted Tonia Coulston and Sevastian Galvan. QIV rose from 76.6% to 91.1%. Swung net profit from -11.5% to +9.2% in one month.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div>
+
+      <div class="tl-item"><div class="tl-dot active"><div class="tl-dot-inner"></div></div><div class="tl-date">MAR 2026 - PRESENT</div><div class="tl-card"><h3>GOS Assignment: Latham Farms, Albany, NY</h3><p>Currently serving as Grand Opening Supervisor for my first grand opening assignment. Leading operations, team readiness, and community launch strategy.</p><span class="tl-tag tag-current">Current Assignment</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSIGNMENTS -->
+<section class="assign-sec" id="assignments">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">Assignment Results</div>
+    <h2 class="sec-title fade-in">Tangible Impact, Measurable Growth</h2>
+    <p class="sec-sub fade-in">Real data from real assignments. Every number represents people served and systems built.</p>
+
+    <div class="assign-tabs">
+      <button class="assign-tab active" onclick="showPanel('mol')">Mall of Louisiana</button>
+      <button class="assign-tab" onclick="showPanel('alt')">Altamesa & McCart</button>
+    </div>
+
+    <!-- MOL PANEL -->
+    <div class="assign-panel active" id="mol">
+      <div class="assign-header">
+        <div><div class="assign-loc">Baton Rouge, Louisiana</div><h3>Mall of Louisiana</h3></div>
+        <div class="assign-period">April - September 2025 &bull; IM Assignment</div>
+      </div>
+      <div class="metrics-row">
+        <div class="metric-box"><div class="metric-val up">+12.15%</div><div class="metric-lbl">YTD Sales Growth</div></div>
+        <div class="metric-box"><div class="metric-val up">+13.04%</div><div class="metric-lbl">Transaction Growth</div></div>
+        <div class="metric-box"><div class="metric-val gold">100%</div><div class="metric-lbl">Q2 QIV Score</div></div>
+        <div class="metric-box"><div class="metric-val gold">$10,600</div><div class="metric-lbl">Record Catering Delivery</div></div>
+      </div>
+      <div class="chart-section">
+        <div class="chart-title">Customer Experience: Overall Satisfaction (OSAT) by Quarter</div>
+        <div class="bar-chart" id="molOsat">
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--navy-light)" data-h="86.25%"><div class="bar-value">69</div></div><div class="bar-label">Q3-23</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--navy-light)" data-h="87.5%"><div class="bar-value">70</div></div><div class="bar-label">Q4-23</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--navy-mid)" data-h="92.5%"><div class="bar-value">74</div></div><div class="bar-label">Q1-24</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--navy-mid)" data-h="90%"><div class="bar-value">72</div></div><div class="bar-label">Q2-24</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:rgba(201,150,59,.6)" data-h="96.25%"><div class="bar-value">77</div></div><div class="bar-label">Q3-24</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:rgba(201,150,59,.6)" data-h="93.75%"><div class="bar-value">75</div></div><div class="bar-label">Q4-24</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--sage)" data-h="97.5%"><div class="bar-value">78</div></div><div class="bar-label">Q1-25</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--sage)" data-h="95%"><div class="bar-value">76</div></div><div class="bar-label">Q2-25</div></div>
+        </div>
+      </div>
+      <div class="highlights-grid">
+        <div class="highlight-card"><div class="hl-metric gold">8.17%</div><h4>July Net Profit Margin</h4><p>Achieved strong profitability in July 2025 with labor productivity at $79 per labor hour.</p></div>
+        <div class="highlight-card"><div class="hl-metric green">2.57%</div><h4>Positive Food Cost Gap</h4><p>Consistent food cost management well above the MALL average of 2.25% positive gap.</p></div>
+        <div class="highlight-card"><div class="hl-metric gold">$1.58M</div><h4>YTD Sales (Aug 2025)</h4><p>Sales of $1,575,736 through August, up 12.15% year over year with 13.04% transaction count growth.</p></div>
+        <div class="highlight-card"><div class="hl-metric green">3 of 3</div><h4>Remarkable Futures Scholarships</h4><p>Nominated three team members for the Chick-fil-A Remarkable Futures Scholarship. All three won.</p></div>
+      </div>
+    </div>
+
+    <!-- ALTAMESA PANEL -->
+    <div class="assign-panel" id="alt">
+      <div class="assign-header">
+        <div><div class="assign-loc">Fort Worth, Texas</div><h3>Altamesa & McCart FSU</h3></div>
+        <div class="assign-period">November 2025 - March 2026 &bull; IM Assignment (Confidential Transition)</div>
+      </div>
+      <div class="metrics-row">
+        <div class="metric-box"><div class="metric-val up">+9.98%</div><div class="metric-lbl">Jan Sales YoY</div></div>
+        <div class="metric-box"><div class="metric-val up">+13.70%</div><div class="metric-lbl">Jan Transaction Growth</div></div>
+        <div class="metric-box"><div class="metric-val gold">91.1%</div><div class="metric-lbl">QIV (from 76.6%)</div></div>
+        <div class="metric-box"><div class="metric-val up">5 to 3</div><div class="metric-lbl">Food Safety Score</div></div>
+      </div>
+      <div class="chart-section">
+        <div class="chart-title">Customer Experience: OSAT Trend (Q1-2024 through Q4-2025)</div>
+        <div class="bar-chart" id="altOsat">
+          <div class="bar-group"><div class="bar" style="height:0%;background:rgba(229,22,54,.4)" data-h="57%"><div class="bar-value">57</div></div><div class="bar-label">Q1-24</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:rgba(229,22,54,.5)" data-h="64%"><div class="bar-value">64</div></div><div class="bar-label">Q2-24</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--navy-light)" data-h="68%"><div class="bar-value">68</div></div><div class="bar-label">Q3-24</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--navy-light)" data-h="67%"><div class="bar-value">67</div></div><div class="bar-label">Q4-24</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--navy-mid)" data-h="65%"><div class="bar-value">65</div></div><div class="bar-label">Q1-25</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--navy-mid)" data-h="66%"><div class="bar-value">66</div></div><div class="bar-label">Q2-25</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:rgba(201,150,59,.6)" data-h="69%"><div class="bar-value">69</div></div><div class="bar-label">Q3-25</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--sage)" data-h="69%"><div class="bar-value">69</div></div><div class="bar-label">Q4-25</div></div>
+        </div>
+      </div>
+      <div class="chart-section">
+        <div class="chart-title">Monthly Sales Performance (Nov 2025 - Jan 2026)</div>
+        <div class="bar-chart" id="altSales">
+          <div class="bar-group"><div class="bar" style="height:0%;background:rgba(229,22,54,.5)" data-h="58%"><div class="bar-value">$488K</div></div><div class="bar-label">Nov</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:var(--sage)" data-h="72%"><div class="bar-value">$608K</div></div><div class="bar-label">Dec</div></div>
+          <div class="bar-group"><div class="bar" style="height:0%;background:rgba(201,150,59,.7)" data-h="67%"><div class="bar-value">$566K</div></div><div class="bar-label">Jan</div></div>
+        </div>
+      </div>
+      <div class="highlights-grid">
+        <div class="highlight-card"><div class="hl-metric green">-11.5% to +9.2%</div><h4>Net Profit Turnaround</h4><p>Swung from nearly 12% net loss in November to over 9% positive net profit in December. A dramatic one-month financial turnaround.</p></div>
+        <div class="highlight-card"><div class="hl-metric gold">8% to 78%</div><h4>AHA Usage Recovery</h4><p>AHA usage had dropped to 8% before the transition. Rebuilt systems and accountability to reach 78% by January.</p></div>
+        <div class="highlight-card"><div class="hl-metric green">1.39%</div><h4>Positive Food Cost Gap (Jan)</h4><p>Improved food cost gap from 2.69% in November to 1.39% in January, representing a 1.30% improvement through focused inventory management.</p></div>
+        <div class="highlight-card"><div class="hl-metric gold">$7.24M</div><h4>2025 Annual Sales</h4><p>Full-year sales of $7,238,793, up 2.70% over 2024 with average daily transactions at 1,522 (up 4.92%).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section class="people-sec" id="people">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">People Developed</div>
+    <h2 class="sec-title fade-in">The Legacy That Matters Most</h2>
+    <p class="sec-sub fade-in">Developing people is not a box to check. It is the work. These leaders carry forward everything we built together.</p>
+    <div class="people-grid">
+      <div class="person-card fade-in"><div class="person-avatar pa-1">HB</div><h4>Hayleigh Bozant</h4><div class="person-role">Executive Director, MOL</div><p>Promoted at Mall of Louisiana. Grew from strong contributor to the leader driving the entire operation.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-2">TC</div><h4>Tonia Coulston</h4><div class="person-role">FOH Executive Director, Altamesa</div><p>Promoted at Altamesa. Her growth in leadership presence and accountability became a model for the team.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-3">SG</div><h4>Sevastian Galvan</h4><div class="person-role">BOH Supervisor, FTS</div><p>Promoted at Altamesa. Became a Field Talent Staff member, executed a New York grand opening, and built a BOH training tracker that became a standout resource.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-4">DC</div><h4>Danny Caporotti</h4><div class="person-role">Accepted into LDP</div><p>Developed at Ridgeside Drive. Danny's acceptance into LDP is a testament to the multiplying effect of intentional leadership.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-5">HH</div><h4>Harry Horyat</h4><div class="person-role">Asst. Director of DT, Ridgeside</div><p>Stepped into the role after Isaac left. Led the drive-thru to become ranked number one in Maryland.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-6">IR</div><h4>Izzy Reyes</h4><div class="person-role">Asst. Director of FOH, Ridgeside</div><p>Developed at Ridgeside Drive into a front of house leader who now drives guest experience and team culture.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-7">JJ</div><h4>Josh James</h4><div class="person-role">Hotel Ops Supervisor, Rocky Gap</div><p>Started as a valet attendant with no clear direction. Led the COVID reopening and achieved record guest satisfaction scores.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-8">AB</div><h4>Angelina Bloom</h4><div class="person-role">Supervisor, Rocky Gap</div><p>Became one of the strongest supervisors on the team at Rocky Gap Casino and Resort.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-9">JS</div><h4>Jacob Santameyer</h4><div class="person-role">Front Desk Supervisor, Rocky Gap</div><p>Grew into a front desk supervisor during Isaac's tenure at the resort.</p></div>
+      <div class="person-card fade-in"><div class="person-avatar pa-10">BS</div><h4>Brandon Stotler</h4><div class="person-role">Valet Supervisor, Rocky Gap</div><p>Developed into a valet supervisor, carrying forward the leadership standard Isaac established in the department.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK -->
+<section class="feedback-sec" id="feedback">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">Feedback</div>
+    <h2 class="sec-title fade-in">What Others Say</h2>
+    <p class="sec-sub fade-in">Feedback from the consultants and leaders who have worked alongside me.</p>
+    <div class="feedback-grid">
+      <div class="feedback-card fade-in">
+        <div class="feedback-from">Zach Brezina</div>
+        <div class="feedback-role">Consultant, Altamesa</div>
+        <div class="feedback-body">
+          <p>The team absolutely loves Isaac. This might be his Super Power. He has great knowledge of restaurant systems and processes, and we are up 12% in transactions due in large part to his efforts.</p>
+          <p>Isaac leads with an others-first mindset and that is how he creates buy-in with people. He works hard and does not come across arrogant. He is great to work alongside.</p>
+        </div>
+        <div class="feedback-rating">
+          <div class="rating-item">Restaurant: <span class="rating-num">4/4</span></div>
+          <div class="rating-item">Connects: <span class="rating-num">4/4</span></div>
+          <div class="rating-item">Acts Wisely: <span class="rating-num">4/4</span></div>
+        </div>
+      </div>
+      <div class="feedback-card fade-in">
+        <div class="feedback-from">Brandon McGee</div>
+        <div class="feedback-role">Consultant, Altamesa</div>
+        <div class="feedback-body">
+          <p>Isaac took a restaurant that was struggling on all fronts and brought it to a stage of stability and growth. He led from a place of humility this entire assignment.</p>
+          <p>Isaac communicates clearly, thoroughly, and directly. There was never a moment where expectations between Isaac and the team were unclear. He anticipates conflict and proactively provides solutions.</p>
+        </div>
+      </div>
+      <div class="feedback-card fade-in">
+        <div class="feedback-from">Walt Anderson</div>
+        <div class="feedback-role">Transition Lead / Direct Supervisor</div>
+        <div class="feedback-body">
+          <p>Isaac is On Track and performing ahead of expectations for this point in the program. He leads with compassion, clarity, and high standards, demonstrating a mature balance of support and challenge.</p>
+          <p>His relational approach made a transformational impact on the team. His presence, empathy, and consistency created a healthy culture in a restaurant that had experienced instability for years.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPMENT -->
+<section class="dev-sec" id="development">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">Development</div>
+    <h2 class="sec-title fade-in">Always Growing, Always Learning</h2>
+    <div class="dev-grid">
+      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#128218;</div><h3>Reading & Learning</h3></div><div class="dev-card-body"><p>I read consistently to challenge my thinking and expand my leadership capacity.</p><ul class="book-list"><li>Covert Cows (Chick-fil-A History)</li><li>It's My Pleasure (Truett Cathy)</li><li>The Speed of Trust</li><li>Who: The A Method for Hiring</li><li>Eat Mor Chikin: Inspire More People</li><li>Do Hard Things (Brett & Alex Harris)</li></ul></div></div>
+      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#127919;</div><h3>Competency Growth</h3></div><div class="dev-card-body"><p>Zach Brezina rated me 4/4 on multiple competencies and called my team connection "possibly your superpower." Walt Anderson described my leadership as "performing ahead of expectations."</p><p style="margin-top:.75rem">Currently working with an executive coach through Leadership Consulting to sharpen interview readiness and leadership presence. Public speaking in large group settings is my identified growth area.</p></div></div>
+      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#127939;</div><h3>Personal Wellness</h3></div><div class="dev-card-body"><p>Leading well starts with being well. My development plan includes a structured morning rhythm of prayer, journaling, and reflection. I pursue physical fitness, creative expression through photography and writing, and restorative rest.</p><p style="margin-top:.75rem">I have been solo skydiving seven times. I believe in chasing discomfort and putting myself in unfamiliar territory to expand capacity.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCES -->
+<section class="fin-sec" id="finances">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">Financial Readiness</div>
+    <h2 class="sec-title fade-in">Prepared and Positioned</h2>
+    <p class="sec-sub fade-in">Financial stewardship is a reflection of discipline and preparedness.</p>
+    <div class="fin-dash">
+      <div class="fin-main fade-in">
+        <div class="fin-main-lbl">Net Worth</div>
+        <div class="fin-main-val" id="nwCounter">$0</div>
+        <div class="fin-main-sub">Savings + Retirement - Debt</div>
+        <div class="fin-bar-wrap">
+          <div class="fin-bar-labels"><span>Savings Goal: $60,000 by End of 2026</span><span id="barPct">0%</span></div>
+          <div class="fin-bar"><div class="fin-bar-fill" id="barFill" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="fin-details">
+        <div class="fin-detail fade-in"><div class="fin-detail-icon sal">&#128176;</div><div><h4>$85,000 Annual Salary</h4><p>Monthly take-home: $4,732. Near-zero expenses beyond subscriptions, allowing aggressive savings.</p></div></div>
+        <div class="fin-detail fade-in"><div class="fin-detail-icon inc">&#127974;</div><div><h4>$30,738 in Savings & Checking</h4><p>Plus $2,935 in retirement investments. Franchise fee and living expenses covered within current reserves.</p></div></div>
+        <div class="fin-detail fade-in"><div class="fin-detail-icon debt">&#128195;</div><div><h4>$17,293 Total Debt</h4><p>$16,280 in student loans and $1,013 in credit card debt. Planned to be eliminated within two years.</p></div></div>
+        <div class="fin-detail fade-in"><div class="fin-detail-icon goal">&#127919;</div><div><h4>$60,000 Savings Goal</h4><p>Target by end of 2026. With minimal expenses and consistent income, this goal is well within reach.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAITH & FAMILY -->
+<section class="pers-sec" id="personal">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">Faith & Family</div>
+    <h2 class="sec-title fade-in">The Foundation Beneath Everything</h2>
+    <div class="pers-grid">
+      <div class="pers-block fade-in">
+        <h3>&#10013;&#65039; Faith</h3>
+        <p>My faith in Jesus is the foundation of my leadership. Growing up, my parents served in ministry in multiple capacities, and that shaped my heart to serve others with compassion and intentionality. My father's journey from ministry in Toronto to becoming a hospital chaplain showed me what it looks like to follow God's calling even when it means leaving everything behind.</p>
+        <p>Lexie and I are active in our local church community wherever we are assigned. We host gatherings, serve in small groups, and prioritize being planted in a faith community even during temporary assignments.</p>
+      </div>
+      <div class="pers-block fade-in">
+        <h3>&#10084;&#65039; Lexie Allen</h3>
+        <p>Lexie and I have been together for nearly three years. She is a third-grade teacher with an incredible heart for kids and active involvement with Chick-fil-A. Her patience, support, and alignment with the mission of this brand make her not just my partner in life, but my partner in this calling.</p>
+        <p>We have navigated every assignment together, from Louisiana to Texas and now New York. She understands the demands of this journey because she has lived them alongside me. Her role in this chapter is central to who I am and how I will operate.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-sec" id="gallery">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">Life in LDP</div>
+    <h2 class="sec-title fade-in">Moments Along the Way</h2>
+    <div class="gallery-grid">
+      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-sec">
+  <div class="sec-inner">
+    <div class="quote-text fade-in">"Nearly every moment of every day we have the opportunity to give something to someone else: our time, our love, our resources. I have always found more joy in giving when I did not expect anything in return."</div>
+    <div class="quote-author fade-in">S. Truett Cathy</div>
+  </div>
+</section>
+
+<!-- AHEAD -->
+<section class="ahead-sec" id="ahead">
+  <div class="sec-inner">
+    <div class="sec-label fade-in">What's Ahead</div>
+    <h2 class="sec-title fade-in">The Next Chapter</h2>
+    <div class="ahead-cards">
+      <div class="ahead-card fade-in"><div class="ahead-num">01</div><h3>Operator Application</h3><p>Finalizing and submitting my Owner-Operator franchise application. Every essay reflects genuine strategic thinking, not just good intentions. Every word has been refined to show who I am and what I will bring to a restaurant.</p></div>
+      <div class="ahead-card fade-in"><div class="ahead-num">02</div><h3>DMA Selections</h3><p>Manchester, NH is my top choice, tied to my paternal family legacy and my grandparents' nursing home entrepreneurship. I am also considering Maryland, Washington DC/Hagerstown, and the Salisbury/Eastern Shore market.</p></div>
+      <div class="ahead-card fade-in"><div class="ahead-num">03</div><h3>Building the Dream</h3><p>I want to build a restaurant that is the best place anyone has ever worked. A place where team members discover their potential, guests feel genuinely cared for, and the community knows they have a partner invested in their wellbeing.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Isaac Demers</div>
+  <div class="footer-tag">Stirring Dreams in Others</div>
+  <div class="footer-updated">Last updated: April 2026</div>
+</footer>
+
+<script>
+/* ============================================================
+   ISAAC'S EASY-EDIT CONFIG
+   ============================================================
+   Update ONLY the values below to keep your site current.
+   Everything else on the page reads from this config.
+   After editing, save the file and re-upload to Netlify.
+   ============================================================ */
+
+const CONFIG = {
+
+  // ---- LAST UPDATED (shown in footer) ----
+  lastUpdated: "April 2026",
+
+  // ---- CURRENT ASSIGNMENT (green badge on hero) ----
+  currentAssignment: "GOS at Latham Farms, Albany, NY",
+
+  // ---- HERO STATS (the 3 numbers on the landing page) ----
+  heroStats: [
+    { number: "3",   label: "LDP Assignments" },
+    { number: "10+", label: "Years in Hospitality" },
+    { number: "1+",  label: "Year in LDP" },
+  ],
+
+  // ---- FINANCES (updates the counters and progress bar) ----
+  finances: {
+    savings:      30738,    // Savings & checking balance
+    retirement:   2935.11,  // Retirement investments
+    studentLoans: 16280,    // Student loan balance
+    creditCard:   1013,     // Credit card balance
+    salary:       85000,    // Annual salary
+    monthlyNet:   4732,     // Monthly take-home
+    savingsGoal:  60000,    // End-of-year savings target
+  },
+
+  // ---- GALLERY PHOTOS ----
+  // Replace the placeholder text with image URLs when ready.
+  // Example: "https://i.imgur.com/yourphoto.jpg"
+  // Set to null or "" to keep the placeholder.
+  galleryPhotos: [
+    { url: "", caption: "Photo coming soon" },
+    { url: "", caption: "Photo coming soon" },
+    { url: "", caption: "Photo coming soon" },
+    { url: "", caption: "Photo coming soon" },
+    { url: "", caption: "Photo coming soon" },
+    { url: "", caption: "Photo coming soon" },
+    { url: "", caption: "Photo coming soon" },
+    { url: "", caption: "Photo coming soon" },
+  ],
+
+};
+
+/* ============================================================
+   END OF CONFIG - Do not edit below unless you know HTML/JS
+   ============================================================ */
+
+// --- Apply Config to Page ---
+
+// Hero stats
+const heroStatEls = document.querySelectorAll('.hero-stat');
+CONFIG.heroStats.forEach((s, i) => {
+  if (heroStatEls[i]) {
+    heroStatEls[i].querySelector('.hero-stat-num').textContent = s.number;
+    heroStatEls[i].querySelector('.hero-stat-label').textContent = s.label;
+  }
+});
+
+// Current assignment badge
+const curText = document.querySelector('.hero-current-text');
+if (curText) curText.textContent = "Currently: " + CONFIG.currentAssignment;
+
+// Footer updated date
+const footerDate = document.querySelector('.footer-updated');
+if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
+
+// Finance display values
+(function applyFinance() {
+  const f = CONFIG.finances;
+  // Update the detail cards text
+  const detailCards = document.querySelectorAll('.fin-detail');
+  if (detailCards[0]) detailCards[0].querySelector('h4').textContent = '$' + f.salary.toLocaleString() + ' Annual Salary';
+  if (detailCards[0]) detailCards[0].querySelector('p').textContent = 'Monthly take-home: $' + f.monthlyNet.toLocaleString() + '. Near-zero expenses beyond subscriptions, allowing aggressive savings.';
+  if (detailCards[1]) detailCards[1].querySelector('h4').textContent = '$' + Math.round(f.savings).toLocaleString() + ' in Savings & Checking';
+  if (detailCards[1]) detailCards[1].querySelector('p').textContent = 'Plus $' + f.retirement.toLocaleString() + ' in retirement investments. Franchise fee and living expenses covered within current reserves.';
+  const totalDebt = f.studentLoans + f.creditCard;
+  if (detailCards[2]) detailCards[2].querySelector('h4').textContent = '$' + totalDebt.toLocaleString() + ' Total Debt';
+  if (detailCards[2]) detailCards[2].querySelector('p').textContent = '$' + f.studentLoans.toLocaleString() + ' in student loans and $' + f.creditCard.toLocaleString() + ' in credit card debt. Planned to be eliminated within two years.';
+  if (detailCards[3]) detailCards[3].querySelector('h4').textContent = '$' + f.savingsGoal.toLocaleString() + ' Savings Goal';
+  // Update progress bar label
+  const barLabel = document.querySelector('.fin-bar-labels span:first-child');
+  if (barLabel) barLabel.textContent = 'Savings Goal: $' + f.savingsGoal.toLocaleString() + ' by End of 2026';
+})();
+
+// Gallery photos
+(function applyGallery() {
+  const slots = document.querySelectorAll('.gallery-slot');
+  CONFIG.galleryPhotos.forEach((photo, i) => {
+    if (slots[i] && photo.url) {
+      slots[i].innerHTML = '';
+      slots[i].style.backgroundImage = 'url(' + photo.url + ')';
+      slots[i].style.backgroundSize = 'cover';
+      slots[i].style.backgroundPosition = 'center';
+      slots[i].style.border = 'none';
+      if (photo.caption) {
+        const cap = document.createElement('div');
+        cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:.5rem .75rem;background:linear-gradient(transparent,rgba(0,0,0,.6));color:white;font-size:.75rem;border-radius:0 0 14px 14px';
+        cap.textContent = photo.caption;
+        slots[i].style.position = 'relative';
+        slots[i].appendChild(cap);
+      }
+    }
+  });
+})();
+
+// --- Core Functionality (animations, nav, etc.) ---
+
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+// Fade-in observer
+const obs = new IntersectionObserver(e => e.forEach(el => {
+  if (el.isIntersecting) el.target.classList.add('visible');
+}), { threshold: .1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in,.tl-item').forEach(el => obs.observe(el));
+
+// Bar chart animation
+const chartObs = new IntersectionObserver(e => e.forEach(el => {
+  if (el.isIntersecting) {
+    el.target.querySelectorAll('.bar').forEach(b => { b.style.height = b.dataset.h });
+    chartObs.unobserve(el.target);
+  }
+}), { threshold: .3 });
+document.querySelectorAll('.bar-chart').forEach(c => chartObs.observe(c));
+
+// Assignment tabs
+function showPanel(id) {
+  document.querySelectorAll('.assign-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.assign-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  document.getElementById(id).querySelectorAll('.bar-chart').forEach(c => {
+    c.querySelectorAll('.bar').forEach(b => {
+      b.style.height = '0%';
+      setTimeout(() => b.style.height = b.dataset.h, 100);
+    });
+  });
+}
+
+// Finance counter animation
+let counted = false;
+const finObs = new IntersectionObserver(e => e.forEach(el => {
+  if (el.isIntersecting && !counted) { counted = true; animateNW(); animateBar(); }
+}), { threshold: .3 });
+const nwEl = document.getElementById('nwCounter');
+if (nwEl) finObs.observe(nwEl.closest('.fin-main'));
+
+function animateNW() {
+  const f = CONFIG.finances;
+  const target = Math.round(f.savings + f.retirement - f.studentLoans - f.creditCard);
+  const dur = 2000; const start = performance.now();
+  function upd(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    nwEl.textContent = '$' + Math.round(eased * target).toLocaleString();
+    if (p < 1) requestAnimationFrame(upd);
+  }
+  requestAnimationFrame(upd);
+}
+
+function animateBar() {
+  const pct = Math.round((CONFIG.finances.savings / CONFIG.finances.savingsGoal) * 100);
+  setTimeout(() => {
+    document.getElementById('barFill').style.width = pct + '%';
+    document.getElementById('barPct').textContent = pct + '%';
+  }, 500);
+}
+
+// Smooth scroll for nav
+document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', e => {
+  e.preventDefault();
+  const t = document.querySelector(l.getAttribute('href'));
+  if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}));
+</script>
+</body>
+</html>
