@@ -529,9 +529,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <p class="sec-sub fade-in">Financial stewardship is a reflection of discipline and preparedness.</p>
     <div class="fin-dash">
       <div class="fin-main fade-in">
-        <div class="fin-main-lbl">Net Worth</div>
-        <div class="fin-main-val" id="nwCounter">$0</div>
-        <div class="fin-main-sub">Savings + Retirement - Debt</div>
+        <div class="fin-main-lbl">Savings</div>
+        <div class="fin-main-val" id="savingsCounter">$0</div>
+        <div class="fin-main-sub">Savings &amp; Checking Balance</div>
         <div class="fin-bar-wrap">
           <div class="fin-bar-labels"><span>Savings Goal: $60,000 by End of 2026</span><span id="barPct">0%</span></div>
           <div class="fin-bar"><div class="fin-bar-fill" id="barFill" style="width:0%"></div></div>
@@ -539,7 +539,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       </div>
       <div class="fin-details">
         <div class="fin-detail fade-in"><div class="fin-detail-icon sal">&#128176;</div><div><h4>$85,000 Annual Salary</h4><p>Monthly take-home: $4,732. Near-zero expenses beyond subscriptions, allowing aggressive savings.</p></div></div>
-        <div class="fin-detail fade-in"><div class="fin-detail-icon inc">&#127974;</div><div><h4>$30,738 in Savings & Checking</h4><p>Plus $2,935 in retirement investments. Franchise fee and living expenses covered within current reserves.</p></div></div>
+        <div class="fin-detail fade-in"><div class="fin-detail-icon inc">&#128202;</div><div><h4>$16,380 Net Worth</h4><p>Savings and retirement minus debt. Includes $2,935 in retirement investments alongside $30,738 in savings &amp; checking.</p></div></div>
         <div class="fin-detail fade-in"><div class="fin-detail-icon debt">&#128195;</div><div><h4>$17,293 Total Debt</h4><p>$16,280 in student loans and $1,013 in credit card debt. Planned to be eliminated within two years.</p></div></div>
         <div class="fin-detail fade-in"><div class="fin-detail-icon goal">&#127919;</div><div><h4>$60,000 Savings Goal</h4><p>Target by end of 2026. With minimal expenses and consistent income, this goal is well within reach.</p></div></div>
       </div>
@@ -694,9 +694,10 @@ if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
   const detailCards = document.querySelectorAll('.fin-detail');
   if (detailCards[0]) detailCards[0].querySelector('h4').textContent = '$' + f.salary.toLocaleString() + ' Annual Salary';
   if (detailCards[0]) detailCards[0].querySelector('p').textContent = 'Monthly take-home: $' + f.monthlyNet.toLocaleString() + '. Near-zero expenses beyond subscriptions, allowing aggressive savings.';
-  if (detailCards[1]) detailCards[1].querySelector('h4').textContent = '$' + Math.round(f.savings).toLocaleString() + ' in Savings & Checking';
-  if (detailCards[1]) detailCards[1].querySelector('p').textContent = 'Plus $' + f.retirement.toLocaleString() + ' in retirement investments. Franchise fee and living expenses covered within current reserves.';
   const totalDebt = f.studentLoans + f.creditCard;
+  const netWorth = Math.round(f.savings + f.retirement - totalDebt);
+  if (detailCards[1]) detailCards[1].querySelector('h4').textContent = '$' + netWorth.toLocaleString() + ' Net Worth';
+  if (detailCards[1]) detailCards[1].querySelector('p').textContent = 'Savings and retirement minus debt. Includes $' + f.retirement.toLocaleString() + ' in retirement investments alongside $' + Math.round(f.savings).toLocaleString() + ' in savings & checking.';
   if (detailCards[2]) detailCards[2].querySelector('h4').textContent = '$' + totalDebt.toLocaleString() + ' Total Debt';
   if (detailCards[2]) detailCards[2].querySelector('p').textContent = '$' + f.studentLoans.toLocaleString() + ' in student loans and $' + f.creditCard.toLocaleString() + ' in credit card debt. Planned to be eliminated within two years.';
   if (detailCards[3]) detailCards[3].querySelector('h4').textContent = '$' + f.savingsGoal.toLocaleString() + ' Savings Goal';
@@ -764,19 +765,19 @@ function showPanel(id) {
 // Finance counter animation
 let counted = false;
 const finObs = new IntersectionObserver(e => e.forEach(el => {
-  if (el.isIntersecting && !counted) { counted = true; animateNW(); animateBar(); }
+  if (el.isIntersecting && !counted) { counted = true; animateSavings(); animateBar(); }
 }), { threshold: .3 });
-const nwEl = document.getElementById('nwCounter');
-if (nwEl) finObs.observe(nwEl.closest('.fin-main'));
+const savingsEl = document.getElementById('savingsCounter');
+if (savingsEl) finObs.observe(savingsEl.closest('.fin-main'));
 
-function animateNW() {
+function animateSavings() {
   const f = CONFIG.finances;
-  const target = Math.round(f.savings + f.retirement - f.studentLoans - f.creditCard);
+  const target = Math.round(f.savings);
   const dur = 2000; const start = performance.now();
   function upd(now) {
     const p = Math.min((now - start) / dur, 1);
     const eased = 1 - Math.pow(1 - p, 3);
-    nwEl.textContent = '$' + Math.round(eased * target).toLocaleString();
+    savingsEl.textContent = '$' + Math.round(eased * target).toLocaleString();
     if (p < 1) requestAnimationFrame(upd);
   }
   requestAnimationFrame(upd);
