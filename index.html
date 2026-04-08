@@ -213,7 +213,12 @@ section{padding:6rem 2rem}
 
 /* GALLERY */
 .gallery-sec{background:var(--warm)}
-.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}
+.gallery-tabs{display:flex;gap:.5rem;margin-top:2.5rem;flex-wrap:wrap}
+.gallery-tab{padding:.6rem 1.5rem;border-radius:100px;border:1px solid rgba(26,46,74,.15);background:transparent;color:rgba(26,46,74,.55);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .3s}
+.gallery-tab.active,.gallery-tab:hover{background:rgba(26,46,74,.08);color:var(--text);border-color:rgba(26,46,74,.3)}
+.gallery-panel{display:none}.gallery-panel.active{display:block}
+.gallery-empty{margin-top:2rem;padding:4rem 2rem;text-align:center;color:var(--text-light);font-size:.95rem;background:var(--cream-dark);border-radius:14px;border:2px dashed rgba(26,46,74,.1)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
 .gallery-slot{aspect-ratio:1;background:var(--cream-dark);border-radius:14px;display:flex;align-items:center;justify-content:center;border:2px dashed rgba(26,46,74,.1);transition:all .3s;cursor:default}
 .gallery-slot:nth-child(1),.gallery-slot:nth-child(6){grid-column:span 2;aspect-ratio:2/1}
 .gallery-slot-inner{text-align:center;color:var(--text-light);font-size:.8rem}
@@ -572,16 +577,14 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   <div class="sec-inner">
     <div class="sec-label fade-in">Life in LDP</div>
     <h2 class="sec-title fade-in">Moments Along the Way</h2>
-    <div class="gallery-grid">
-      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
-      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
-      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
-      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
-      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
-      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
-      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
-      <div class="gallery-slot fade-in"><div class="gallery-slot-inner"><div class="gallery-icon">&#128247;</div>Photo coming soon</div></div>
+    <div class="gallery-tabs fade-in">
+      <button class="gallery-tab active" onclick="showGalleryPanel('mol-gallery')">Mall of Louisiana</button>
+      <button class="gallery-tab" onclick="showGalleryPanel('alt-gallery')">Altamesa &amp; McCart</button>
+      <button class="gallery-tab" onclick="showGalleryPanel('lat-gallery')">Latham Farms</button>
     </div>
+    <div class="gallery-panel active" id="mol-gallery"><div class="gallery-grid"></div></div>
+    <div class="gallery-panel" id="alt-gallery"><div class="gallery-grid"></div></div>
+    <div class="gallery-panel" id="lat-gallery"><div class="gallery-grid"></div></div>
   </div>
 </section>
 
@@ -648,19 +651,21 @@ const CONFIG = {
   },
 
   // ---- GALLERY PHOTOS ----
-  // Replace the placeholder text with image URLs when ready.
-  // Example: "https://i.imgur.com/yourphoto.jpg"
-  // Set to null or "" to keep the placeholder.
-  galleryPhotos: [
-    { url: "", caption: "Photo coming soon" },
-    { url: "", caption: "Photo coming soon" },
-    { url: "", caption: "Photo coming soon" },
-    { url: "", caption: "Photo coming soon" },
-    { url: "", caption: "Photo coming soon" },
-    { url: "", caption: "Photo coming soon" },
-    { url: "", caption: "Photo coming soon" },
-    { url: "", caption: "Photo coming soon" },
-  ],
+  // Photos are grouped by assignment tab. Add new entries to the
+  // matching list. Use a direct image URL (e.g. https://i.imgur.com/abc.jpg).
+  galleryPhotos: {
+    "mol-gallery": [
+      { url: "https://i.imgur.com/XavAfve.jpg", caption: "Nick's homemade Jambalaya — my Baton Rouge farewell. Incredible!" },
+      { url: "https://i.imgur.com/RejGQn3.jpg", caption: "Cody Salomone's Dedication Dinner with Braden Keyes." },
+      { url: "https://i.imgur.com/t7gCuTf.jpg", caption: "Little convincing needed for Walt to join me on the carousel during our final Mall of Louisiana visit." },
+      { url: "https://i.imgur.com/DpMd6a8.jpg", caption: "A phenomenal visit with Tracy Roper and Sally Pierce." },
+      { url: "https://i.imgur.com/E5xWWCx.jpg", caption: "No chance against Nick — I need someone more my speed at pickleball!" },
+      { url: "https://i.imgur.com/mJAcoZA.jpg", caption: "First LSU game!" },
+      { url: "https://i.imgur.com/nEBJTnr.jpg", caption: "Let's go Tigers!" },
+    ],
+    "alt-gallery": [],
+    "lat-gallery": [],
+  },
 
 };
 
@@ -706,24 +711,45 @@ if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
   if (barLabel) barLabel.textContent = 'Savings Goal: $' + f.savingsGoal.toLocaleString() + ' by End of 2026';
 })();
 
-// Gallery photos
+// Gallery photos (grouped by assignment tab)
 (function applyGallery() {
-  const slots = document.querySelectorAll('.gallery-slot');
-  CONFIG.galleryPhotos.forEach((photo, i) => {
-    if (slots[i] && photo.url) {
-      slots[i].innerHTML = '';
-      slots[i].style.backgroundImage = 'url(' + photo.url + ')';
-      slots[i].style.backgroundSize = 'cover';
-      slots[i].style.backgroundPosition = 'center';
-      slots[i].style.border = 'none';
-      if (photo.caption) {
-        const cap = document.createElement('div');
-        cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:.5rem .75rem;background:linear-gradient(transparent,rgba(0,0,0,.6));color:white;font-size:.75rem;border-radius:0 0 14px 14px';
-        cap.textContent = photo.caption;
-        slots[i].style.position = 'relative';
-        slots[i].appendChild(cap);
-      }
+  Object.entries(CONFIG.galleryPhotos).forEach(([panelId, photos]) => {
+    const panel = document.getElementById(panelId);
+    if (!panel) return;
+    const grid = panel.querySelector('.gallery-grid');
+    if (!grid) return;
+    if (!photos || photos.length === 0) {
+      grid.remove();
+      const empty = document.createElement('div');
+      empty.className = 'gallery-empty fade-in';
+      empty.textContent = 'Photos coming soon';
+      panel.appendChild(empty);
+      return;
     }
+    grid.innerHTML = '';
+    photos.forEach(photo => {
+      const slot = document.createElement('div');
+      slot.className = 'gallery-slot fade-in';
+      if (photo.url) {
+        slot.style.backgroundImage = 'url(' + photo.url + ')';
+        slot.style.backgroundSize = 'cover';
+        slot.style.backgroundPosition = 'center';
+        slot.style.border = 'none';
+        slot.style.position = 'relative';
+        if (photo.caption) {
+          const cap = document.createElement('div');
+          cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:.5rem .75rem;background:linear-gradient(transparent,rgba(0,0,0,.6));color:white;font-size:.75rem;border-radius:0 0 14px 14px';
+          cap.textContent = photo.caption;
+          slot.appendChild(cap);
+        }
+      } else {
+        const inner = document.createElement('div');
+        inner.className = 'gallery-slot-inner';
+        inner.innerHTML = '<div class="gallery-icon">&#128247;</div>' + (photo.caption || 'Photo coming soon');
+        slot.appendChild(inner);
+      }
+      grid.appendChild(slot);
+    });
   });
 })();
 
@@ -760,6 +786,14 @@ function showPanel(id) {
       setTimeout(() => b.style.height = b.dataset.h, 100);
     });
   });
+}
+
+// Gallery tabs
+function showGalleryPanel(id) {
+  document.querySelectorAll('.gallery-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
 }
 
 // Finance counter animation
