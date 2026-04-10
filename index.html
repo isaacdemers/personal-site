@@ -268,6 +268,51 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .fade-in{opacity:0;transform:translateY(25px);transition:all .7s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
+/* === ASSIGNMENTS SECTION ANIMATIONS === */
+/* Ambient floating orbs */
+.assign-sec{position:relative;overflow:hidden}
+.assign-orb{position:absolute;border-radius:50%;pointer-events:none}
+.assign-orb-1{width:750px;height:750px;top:-22%;right:-14%;background:rgba(201,150,59,.04);filter:blur(140px);animation:aOrbDrift 14s ease-in-out infinite alternate}
+.assign-orb-2{width:600px;height:600px;bottom:-18%;left:-12%;background:rgba(229,22,54,.045);filter:blur(115px);animation:aOrbDrift 11s ease-in-out 2s infinite alternate-reverse}
+.assign-orb-3{width:400px;height:400px;top:38%;left:40%;background:rgba(94,143,100,.03);filter:blur(100px);animation:aOrbDrift 18s ease-in-out 5s infinite}
+@keyframes aOrbDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(22px,-28px) scale(1.09)}}
+
+/* Initial invisible state for animated elements */
+.assign-sec .metric-box,.assign-sec .highlight-card{opacity:0}
+
+/* Metric box entrance stagger */
+@keyframes mBoxIn{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.metrics-row.anim .metric-box:nth-child(1){animation:mBoxIn .54s cubic-bezier(.22,.68,0,1.2) .05s forwards}
+.metrics-row.anim .metric-box:nth-child(2){animation:mBoxIn .54s cubic-bezier(.22,.68,0,1.2) .16s forwards}
+.metrics-row.anim .metric-box:nth-child(3){animation:mBoxIn .54s cubic-bezier(.22,.68,0,1.2) .27s forwards}
+.metrics-row.anim .metric-box:nth-child(4){animation:mBoxIn .54s cubic-bezier(.22,.68,0,1.2) .38s forwards}
+
+/* Highlight card entrance stagger */
+@keyframes hlIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.highlights-grid.anim .highlight-card:nth-child(1){animation:hlIn .65s ease .12s forwards}
+.highlights-grid.anim .highlight-card:nth-child(2){animation:hlIn .65s ease .24s forwards}
+.highlights-grid.anim .highlight-card:nth-child(3){animation:hlIn .65s ease .36s forwards}
+.highlights-grid.anim .highlight-card:nth-child(4){animation:hlIn .65s ease .48s forwards}
+
+/* Panel fade on tab switch */
+@keyframes panelFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.assign-panel.fading-in{animation:panelFade .44s ease}
+
+/* Value shimmer burst after counter finishes */
+@keyframes valBurst{0%,100%{filter:none}35%{filter:brightness(1.65) drop-shadow(0 0 10px currentColor)}70%{filter:brightness(1.25) drop-shadow(0 0 4px currentColor)}}
+.metric-val.shimmed,.hl-metric.shimmed{animation:valBurst 1.15s ease}
+
+/* Enhanced metric box hover */
+.metric-box{transition:background .3s,border-color .3s,transform .25s,box-shadow .25s}
+.metric-box:hover{background:rgba(255,255,255,.09);border-color:rgba(201,150,59,.28);transform:translateY(-5px);box-shadow:0 18px 48px rgba(0,0,0,.32),0 0 0 1px rgba(201,150,59,.1)}
+
+/* Enhanced highlight card hover */
+.highlight-card{transition:background .3s,border-color .3s,transform .25s,box-shadow .25s}
+.highlight-card:hover{background:rgba(255,255,255,.08);border-color:rgba(201,150,59,.22);transform:translateY(-4px);box-shadow:0 20px 52px rgba(0,0,0,.38)}
+
+/* Bar chart smoother wave */
+.bar{transition:height .92s cubic-bezier(.22,.68,0,1.08)}
+
 /* RESPONSIVE */
 @media(max-width:900px){
   .story-grid,.pers-grid,.fin-dash,.feedback-grid{grid-template-columns:1fr}
@@ -439,6 +484,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 <!-- ASSIGNMENTS -->
 <section class="assign-sec" id="assignments">
+  <div class="assign-orb assign-orb-1"></div>
+  <div class="assign-orb assign-orb-2"></div>
+  <div class="assign-orb assign-orb-3"></div>
   <div class="sec-inner">
     <div class="sec-label fade-in">Assignment Results</div>
     <h2 class="sec-title fade-in">Tangible Impact, Measurable Growth</h2>
@@ -456,10 +504,10 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="assign-period">April - September 2025 &bull; IM Assignment</div>
       </div>
       <div class="metrics-row">
-        <div class="metric-box"><div class="metric-val up">+12.15%</div><div class="metric-lbl">YTD Sales Growth</div></div>
-        <div class="metric-box"><div class="metric-val up">+13.04%</div><div class="metric-lbl">Transaction Growth</div></div>
-        <div class="metric-box"><div class="metric-val gold">100%</div><div class="metric-lbl">Q2 QIV Score</div></div>
-        <div class="metric-box"><div class="metric-val gold">$10,600</div><div class="metric-lbl">Record Catering Delivery</div></div>
+        <div class="metric-box"><div class="metric-val up" data-count data-prefix="+" data-target="12.15" data-suffix="%" data-dec="2">+12.15%</div><div class="metric-lbl">YTD Sales Growth</div></div>
+        <div class="metric-box"><div class="metric-val up" data-count data-prefix="+" data-target="13.04" data-suffix="%" data-dec="2">+13.04%</div><div class="metric-lbl">Transaction Growth</div></div>
+        <div class="metric-box"><div class="metric-val gold" data-count data-target="100" data-suffix="%" data-dec="0">100%</div><div class="metric-lbl">Q2 QIV Score</div></div>
+        <div class="metric-box"><div class="metric-val gold" data-count data-prefix="$" data-target="10600" data-dec="0" data-locale>$10,600</div><div class="metric-lbl">Record Catering Delivery</div></div>
       </div>
       <div class="chart-section">
         <div class="chart-title">Customer Experience: Overall Satisfaction (OSAT) by Quarter</div>
@@ -475,9 +523,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         </div>
       </div>
       <div class="highlights-grid">
-        <div class="highlight-card"><div class="hl-metric gold">8.17%</div><h4>July Net Profit Margin</h4><p>Achieved strong profitability in July 2025 with labor productivity at $79 per labor hour.</p></div>
-        <div class="highlight-card"><div class="hl-metric green">2.57%</div><h4>Positive Food Cost Gap</h4><p>Consistent food cost management well above the MALL average of 2.25% positive gap.</p></div>
-        <div class="highlight-card"><div class="hl-metric gold">$1.58M</div><h4>YTD Sales (Aug 2025)</h4><p>Sales of $1,575,736 through August, up 12.15% year over year with 13.04% transaction count growth.</p></div>
+        <div class="highlight-card"><div class="hl-metric gold" data-count data-target="8.17" data-suffix="%" data-dec="2">8.17%</div><h4>July Net Profit Margin</h4><p>Achieved strong profitability in July 2025 with labor productivity at $79 per labor hour.</p></div>
+        <div class="highlight-card"><div class="hl-metric green" data-count data-target="2.57" data-suffix="%" data-dec="2">2.57%</div><h4>Positive Food Cost Gap</h4><p>Consistent food cost management well above the MALL average of 2.25% positive gap.</p></div>
+        <div class="highlight-card"><div class="hl-metric gold" data-count data-prefix="$" data-target="1.58" data-suffix="M" data-dec="2">$1.58M</div><h4>YTD Sales (Aug 2025)</h4><p>Sales of $1,575,736 through August, up 12.15% year over year with 13.04% transaction count growth.</p></div>
         <div class="highlight-card"><div class="hl-metric green">3 of 3</div><h4>Remarkable Futures Scholarships</h4><p>Nominated three team members for the Chick-fil-A Remarkable Futures Scholarship. All three won.</p></div>
       </div>
     </div>
@@ -489,9 +537,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="assign-period">November 2025 - March 2026 &bull; IM Assignment (Confidential Transition)</div>
       </div>
       <div class="metrics-row">
-        <div class="metric-box"><div class="metric-val up">+9.98%</div><div class="metric-lbl">Jan Sales YoY</div></div>
-        <div class="metric-box"><div class="metric-val up">+13.70%</div><div class="metric-lbl">Jan Transaction Growth</div></div>
-        <div class="metric-box"><div class="metric-val gold">91.1%</div><div class="metric-lbl">QIV (from 76.6%)</div></div>
+        <div class="metric-box"><div class="metric-val up" data-count data-prefix="+" data-target="9.98" data-suffix="%" data-dec="2">+9.98%</div><div class="metric-lbl">Jan Sales YoY</div></div>
+        <div class="metric-box"><div class="metric-val up" data-count data-prefix="+" data-target="13.70" data-suffix="%" data-dec="2">+13.70%</div><div class="metric-lbl">Jan Transaction Growth</div></div>
+        <div class="metric-box"><div class="metric-val gold" data-count data-target="91.1" data-suffix="%" data-dec="1">91.1%</div><div class="metric-lbl">QIV (from 76.6%)</div></div>
         <div class="metric-box"><div class="metric-val up">5 to 3</div><div class="metric-lbl">Food Safety Score</div></div>
       </div>
       <div class="chart-section">
@@ -518,8 +566,8 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       <div class="highlights-grid">
         <div class="highlight-card"><div class="hl-metric green">-11.5% to +9.2%</div><h4>Net Profit Turnaround</h4><p>Swung from nearly 12% net loss in November to over 9% positive net profit in December. A dramatic one-month financial turnaround.</p></div>
         <div class="highlight-card"><div class="hl-metric gold">8% to 78%</div><h4>AHA Usage Recovery</h4><p>AHA usage had dropped to 8% before the transition. Rebuilt systems and accountability to reach 78% by January.</p></div>
-        <div class="highlight-card"><div class="hl-metric green">1.39%</div><h4>Positive Food Cost Gap (Jan)</h4><p>Improved food cost gap from 2.69% in November to 1.39% in January, representing a 1.30% improvement through focused inventory management.</p></div>
-        <div class="highlight-card"><div class="hl-metric gold">$7.24M</div><h4>2025 Annual Sales</h4><p>Full-year sales of $7,238,793, up 2.70% over 2024 with average daily transactions at 1,522 (up 4.92%).</p></div>
+        <div class="highlight-card"><div class="hl-metric green" data-count data-target="1.39" data-suffix="%" data-dec="2">1.39%</div><h4>Positive Food Cost Gap (Jan)</h4><p>Improved food cost gap from 2.69% in November to 1.39% in January, representing a 1.30% improvement through focused inventory management.</p></div>
+        <div class="highlight-card"><div class="hl-metric gold" data-count data-prefix="$" data-target="7.24" data-suffix="M" data-dec="2">$7.24M</div><h4>2025 Annual Sales</h4><p>Full-year sales of $7,238,793, up 2.70% over 2024 with average daily transactions at 1,522 (up 4.92%).</p></div>
       </div>
     </div>
   </div>
@@ -890,14 +938,83 @@ const obs = new IntersectionObserver(e => e.forEach(el => {
 }), { threshold: .1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-in,.tl-item').forEach(el => obs.observe(el));
 
-// Bar chart animation
-const chartObs = new IntersectionObserver(e => e.forEach(el => {
-  if (el.isIntersecting) {
-    el.target.querySelectorAll('.bar').forEach(b => { b.style.height = b.dataset.h });
-    chartObs.unobserve(el.target);
-  }
-}), { threshold: .3 });
-document.querySelectorAll('.bar-chart').forEach(c => chartObs.observe(c));
+// === ASSIGNMENT SECTION ANIMATION ENGINE ===
+
+// Animate a counter element from 0 to its target value
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.target);
+  if (isNaN(target)) return;
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  const dec = parseInt(el.dataset.dec || '0');
+  const useLocale = el.hasAttribute('data-locale');
+  const dur = 1850;
+  const start = performance.now();
+  (function tick(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const val = eased * target;
+    el.textContent = prefix + (useLocale ? Math.round(val).toLocaleString() : val.toFixed(dec)) + suffix;
+    if (p < 1) { requestAnimationFrame(tick); }
+    else {
+      el.textContent = prefix + (useLocale ? Math.round(target).toLocaleString() : target.toFixed(dec)) + suffix;
+      el.classList.add('shimmed');
+      setTimeout(() => el.classList.remove('shimmed'), 1300);
+    }
+  })(performance.now());
+}
+
+// Trigger all entrance animations for a given panel
+function triggerPanelAnimations(id) {
+  const panel = document.getElementById(id);
+  if (!panel) return;
+
+  // 1. Metric boxes cascade in
+  panel.querySelectorAll('.metrics-row').forEach(row => {
+    row.classList.remove('anim');
+    void row.offsetWidth;
+    row.classList.add('anim');
+  });
+
+  // 2. Highlight cards cascade in after boxes start
+  panel.querySelectorAll('.highlights-grid').forEach(grid => {
+    grid.classList.remove('anim');
+    setTimeout(() => { void grid.offsetWidth; grid.classList.add('anim'); }, 400);
+  });
+
+  // 3. Sequential bar chart wave (bars animate left to right)
+  let chartDelay = 180;
+  panel.querySelectorAll('.bar-chart').forEach(chart => {
+    const bars = chart.querySelectorAll('.bar');
+    bars.forEach((b, bi) => {
+      b.style.height = '0%';
+      setTimeout(() => { b.style.height = b.dataset.h; }, chartDelay + bi * 80);
+    });
+    chartDelay += bars.length * 80 + 280;
+  });
+
+  // 4. Counter animations staggered with metric box entrances
+  panel.querySelectorAll('[data-count]').forEach((el, i) => {
+    el.textContent = (el.dataset.prefix || '') + '0' + (el.dataset.suffix || '');
+    setTimeout(() => animateCounter(el), 320 + i * 95);
+  });
+}
+
+// Observe the section — trigger on first scroll into view
+(function() {
+  const sec = document.querySelector('.assign-sec');
+  if (!sec) return;
+  const secObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const active = sec.querySelector('.assign-panel.active');
+        if (active) triggerPanelAnimations(active.id);
+        secObs.unobserve(sec);
+      }
+    });
+  }, { threshold: 0.12 });
+  secObs.observe(sec);
+})();
 
 // Story expand/collapse toggle
 function toggleStory() {
@@ -921,16 +1038,13 @@ function toggleStory() {
 
 // Assignment tabs
 function showPanel(id) {
-  document.querySelectorAll('.assign-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.assign-panel').forEach(p => p.classList.remove('active', 'fading-in'));
   document.querySelectorAll('.assign-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  const panel = document.getElementById(id);
+  panel.classList.add('active', 'fading-in');
+  setTimeout(() => panel.classList.remove('fading-in'), 520);
   event.target.classList.add('active');
-  document.getElementById(id).querySelectorAll('.bar-chart').forEach(c => {
-    c.querySelectorAll('.bar').forEach(b => {
-      b.style.height = '0%';
-      setTimeout(() => b.style.height = b.dataset.h, 100);
-    });
-  });
+  triggerPanelAnimations(id);
 }
 
 // Gallery tabs
