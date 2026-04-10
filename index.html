@@ -114,7 +114,7 @@ section{padding:6rem 2rem}
 .tag-current{background:rgba(94,143,100,.12);color:var(--sage);border:1px solid rgba(94,143,100,.2)}
 .tl-row{display:flex;gap:1rem;align-items:flex-start}
 .tl-content{flex:1;min-width:0}
-.tl-photo{width:110px;height:82px;border-radius:10px;object-fit:cover;flex-shrink:0;margin-top:1.5rem;box-shadow:var(--sh-sm)}
+.tl-photo{width:110px;height:82px;border-radius:10px;object-fit:cover;flex-shrink:0;margin-top:1.5rem;box-shadow:var(--sh-sm);cursor:pointer}
 
 /* ASSIGNMENTS */
 .assign-sec{background:var(--navy);color:white;padding:6rem 2rem}
@@ -226,6 +226,20 @@ section{padding:6rem 2rem}
 .gallery-slot:nth-child(1),.gallery-slot:nth-child(6){grid-column:span 2;aspect-ratio:2/1}
 .gallery-slot-inner{text-align:center;color:var(--text-light);font-size:.8rem}
 .gallery-slot-inner .gallery-icon{font-size:1.5rem;margin-bottom:.25rem;opacity:.4}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.active{opacity:1;pointer-events:all}
+.lightbox-img{max-width:90vw;max-height:85vh;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,.6);object-fit:contain;transform:scale(.95);transition:transform .3s}
+.lightbox.active .lightbox-img{transform:scale(1)}
+.lightbox-close{position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,.1);border:none;color:white;font-size:1.4rem;line-height:1;cursor:pointer;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .25s;z-index:1}
+.lightbox-close:hover{background:rgba(255,255,255,.25)}
+.lightbox-caption{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.85);font-size:.85rem;text-align:center;background:rgba(0,0,0,.55);padding:.45rem 1.25rem;border-radius:100px;max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:white;font-size:1.8rem;line-height:1;cursor:pointer;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .25s}
+.lightbox-prev{left:1.25rem}.lightbox-next{right:1.25rem}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,.22)}
+.lightbox-prev[disabled],.lightbox-next[disabled]{opacity:.2;cursor:default}
+.lightbox-counter{position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.45);font-size:.75rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
 
 /* QUOTE */
 .quote-sec{background:var(--red);padding:5rem 2rem;text-align:center}
@@ -674,6 +688,16 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   <div class="footer-updated">Last updated: April 2026</div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">&#x2715;</button>
+  <button class="lightbox-prev" id="lbPrev">&#8249;</button>
+  <img class="lightbox-img" id="lbImg" src="" alt="">
+  <button class="lightbox-next" id="lbNext">&#8250;</button>
+  <div class="lightbox-caption" id="lbCaption"></div>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
+
 <script>
 /* ============================================================
    ISAAC'S EASY-EDIT CONFIG
@@ -824,6 +848,7 @@ if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
       return;
     }
     grid.innerHTML = '';
+    const urlPhotos = photos.filter(p => p.url);
     photos.forEach(photo => {
       const slot = document.createElement('div');
       slot.className = 'gallery-slot fade-in';
@@ -833,12 +858,15 @@ if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
         slot.style.backgroundPosition = 'center';
         slot.style.border = 'none';
         slot.style.position = 'relative';
+        slot.style.cursor = 'pointer';
         if (photo.caption) {
           const cap = document.createElement('div');
           cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:.5rem .75rem;background:linear-gradient(transparent,rgba(0,0,0,.6));color:white;font-size:.75rem;border-radius:0 0 14px 14px';
           cap.textContent = photo.caption;
           slot.appendChild(cap);
         }
+        const urlIdx = urlPhotos.indexOf(photo);
+        slot.addEventListener('click', function() { openLightbox(urlPhotos, urlIdx); });
       } else {
         const inner = document.createElement('div');
         inner.className = 'gallery-slot-inner';
@@ -948,6 +976,74 @@ document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click
   const t = document.querySelector(l.getAttribute('href'));
   if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }));
+
+// --- Lightbox ---
+var _lbPhotos = [], _lbIdx = 0;
+
+function openLightbox(photos, idx) {
+  _lbPhotos = photos;
+  _lbIdx = idx;
+  _updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function _updateLightbox() {
+  var p = _lbPhotos[_lbIdx];
+  var img = document.getElementById('lbImg');
+  img.src = p.url;
+  img.alt = p.caption || '';
+  var cap = document.getElementById('lbCaption');
+  cap.textContent = p.caption || '';
+  cap.style.display = p.caption ? '' : 'none';
+  var counter = document.getElementById('lbCounter');
+  if (_lbPhotos.length > 1) {
+    counter.textContent = (_lbIdx + 1) + ' / ' + _lbPhotos.length;
+    counter.style.display = '';
+  } else {
+    counter.style.display = 'none';
+  }
+  var prev = document.getElementById('lbPrev');
+  var next = document.getElementById('lbNext');
+  prev.style.display = _lbPhotos.length > 1 ? '' : 'none';
+  next.style.display = _lbPhotos.length > 1 ? '' : 'none';
+  prev.disabled = _lbIdx === 0;
+  next.disabled = _lbIdx === _lbPhotos.length - 1;
+}
+
+function lightboxNav(dir) {
+  _lbIdx = Math.max(0, Math.min(_lbPhotos.length - 1, _lbIdx + dir));
+  _updateLightbox();
+}
+
+function _closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('lbClose').addEventListener('click', _closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', function() { lightboxNav(-1); });
+document.getElementById('lbNext').addEventListener('click', function() { lightboxNav(1); });
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) _closeLightbox();
+});
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'Escape') _closeLightbox();
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+});
+
+// Timeline photo lightbox
+(function() {
+  var tlPhotos = [];
+  document.querySelectorAll('.tl-photo').forEach(function(img) {
+    tlPhotos.push({ url: img.src, caption: img.alt });
+  });
+  document.querySelectorAll('.tl-photo').forEach(function(img, i) {
+    img.addEventListener('click', function() { openLightbox(tlPhotos, i); });
+  });
+})();
 </script>
 </body>
 </html>
