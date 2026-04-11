@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Isaac Demers | Stirring Dreams in Others</title>
+<meta name="description" content="Isaac Demers — Chick-fil-A Leadership Development Program participant. A journey rooted in faith, forged through persistence, and driven by a calling to develop people and steward a Chick-fil-A restaurant with excellence.">
+<meta name="author" content="Isaac Demers">
+<meta name="theme-color" content="#0F1C32">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Isaac Demers | Stirring Dreams in Others">
+<meta property="og:description" content="A journey rooted in faith, forged through persistence, and driven by a calling to develop people and steward a Chick-fil-A restaurant with excellence.">
+<meta property="og:site_name" content="Isaac Demers">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Isaac Demers | Stirring Dreams in Others">
+<meta name="twitter:description" content="A journey rooted in faith, forged through persistence, and driven by a calling to develop people and steward a Chick-fil-A restaurant with excellence.">
+
+<!-- Favicon (inline SVG so no extra file needed) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F1C32'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23E51636'%3EID%3C/text%3E%3C/svg%3E">
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -22,7 +40,7 @@
   --sage-light: #82B488;
   --text: #1A2E4A;
   --text-mid: #4A5F7A;
-  --text-light: #8A9AB0;
+  --text-light: #5B6D84;
   --border: rgba(26,46,74,0.08);
   --sh-sm: 0 2px 8px rgba(15,28,50,0.05);
   --sh-md: 0 8px 32px rgba(15,28,50,0.07);
@@ -38,7 +56,7 @@ nav.scrolled{background:rgba(254,252,248,.96);backdrop-filter:blur(20px);box-sha
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:-.02em}
 .nav-logo span{color:var(--red)}
-.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links{display:flex;gap:1.6rem;list-style:none}
 .nav-links a{text-decoration:none;color:var(--text-mid);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .3s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--red);transition:width .3s}
 .nav-links a:hover{color:var(--red)}
@@ -121,6 +139,15 @@ section{padding:6rem 2rem}
 @media(max-width:480px){.story-metrics{grid-template-columns:1fr}}
 .story-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
 .story-card p{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+.story-quote{border-left:2px solid var(--red);padding-left:1.25rem;margin:1.5rem 0 .5rem}
+.story-quote p.q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--text-mid);line-height:1.6}
+.story-quote p.a{font-family:'Outfit',sans-serif;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-light);margin-top:.4rem}
+.full-story{max-height:0;overflow:hidden;transition:max-height .8s ease,opacity .6s ease;opacity:0}
+.full-story strong{color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:1.1rem;display:block}
+.full-story .fs-first{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(26,46,74,.08)}
+.story-toggle{margin-top:1.25rem;background:none;border:2px solid var(--red);color:var(--red);padding:.6rem 1.5rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.4rem}
+.story-toggle:hover{background:var(--red);color:white}
+.story-toggle .arrow{transition:transform .3s;display:inline-block}
 
 /* TIMELINE */
 .tl-sec{background:var(--warm)}
@@ -402,7 +429,13 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .highlights-grid{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .gallery-slot:nth-child(1),.gallery-slot:nth-child(6){grid-column:span 1;aspect-ratio:1}
-  .nav-links{display:none}.mob-toggle{display:block}
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:rgba(254,252,248,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:5rem 2rem 2rem;gap:1.4rem;box-shadow:-10px 0 40px rgba(15,28,50,.12);transform:translateX(100%);transition:transform .35s ease;z-index:999}
+  .nav-links.show{transform:translateX(0)}
+  .nav-links a{font-size:.95rem}
+  .mob-toggle{display:block;z-index:1001;position:relative}
+  .mob-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .mob-toggle.open span:nth-child(2){opacity:0}
+  .mob-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   section{padding:4rem 1.25rem}
   .story-highlights{position:static}
   .tl-photo{display:none}
@@ -422,30 +455,28 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 <nav id="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">Isaac <span>Demers</span></a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="#story">Story</a></li>
       <li><a href="#legacy">Legacy</a></li>
-      <li><a href="#faith-family">Faith</a></li>
       <li><a href="#journey">Journey</a></li>
       <li><a href="#assignments">Results</a></li>
       <li><a href="#people">People</a></li>
-      <li><a href="#feedback">Feedback</a></li>
       <li><a href="#finances">Finances</a></li>
       <li><a href="#ahead">Ahead</a></li>
     </ul>
-    <button class="mob-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="mob-toggle" id="mobToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <canvas id="heroCanvas"></canvas>
-  <div class="hero-grain"></div>
-  <div class="hero-orbs"></div>
-  <div class="hero-orb-a"></div>
-  <div class="hero-orb-b"></div>
-  <div class="hero-orb-c"></div>
-  <div class="hero-center-glow"></div>
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-orbs" aria-hidden="true"></div>
+  <div class="hero-orb-a" aria-hidden="true"></div>
+  <div class="hero-orb-b" aria-hidden="true"></div>
+  <div class="hero-orb-c" aria-hidden="true"></div>
+  <div class="hero-center-glow" aria-hidden="true"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Leadership Development Program</div>
     <h1 class="hero-title">Stirring <em>Dreams</em><br>in Others</h1>
@@ -453,7 +484,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="hero-stats">
       <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">LDP Assignments</div></div>
       <div class="hero-stat"><div class="hero-stat-num">10+</div><div class="hero-stat-label">Years in Hospitality</div></div>
-      <div class="hero-stat"><div class="hero-stat-num">1+</div><div class="hero-stat-label">Year in LDP</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">13</div><div class="hero-stat-label">Months in LDP</div></div>
     </div>
     <div class="hero-current">
       <div class="hero-current-badge">
@@ -462,7 +493,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       </div>
     </div>
   </div>
-  <div class="hero-scroll"><div class="hero-scroll-line"></div></div>
+  <div class="hero-scroll" aria-hidden="true"><div class="hero-scroll-line"></div></div>
 </section>
 
 <!-- MY STORY -->
@@ -485,7 +516,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       </div>
       <div class="story-metric-card" style="border-top-color:var(--gold)">
         <div class="story-metric-val" style="color:var(--gold)">5+</div>
-        <div class="story-metric-lbl">Leaders promoted to director across LDP</div>
+        <div class="story-metric-lbl">Leaders I have developed into director-level roles</div>
       </div>
     </div>
     <div class="story-grid">
@@ -496,51 +527,36 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
         <p>At 18, I fell in love with hospitality as a valet attendant at Rocky Gap Casino and Resort. Over six years I rose through five roles to Hotel Operations Supervisor and Marketing Manager, building systems and developing leaders the entire way. Josh James, Angelina Bloom, Jacob Santameyer, and Brandon Stotler all grew under my mentorship. I did not just work at Rocky Gap for six years. I built people there. But something was missing. When my brother Levi, a former Chick-fil-A Training Director, introduced me to the brand, I found the alignment I had been searching for. I applied externally for LDP and was told no. I left my career, restarted as a kitchen team member at Chick-fil-A Ridgeside Drive, and went all-in.</p>
 
-        <p>Ridgeside Drive in Mount Airy, Maryland became my home for over three years. I built our Drive-Thru Playbook from the ground up, helped take our location to the top of Maryland drive-thru rankings, and broke throughput records. More importantly, I developed leaders who carry that operation forward today. Danny Caporotti grew into an Assistant Director of Back of House and was just accepted into LDP. Harry Horyat stepped into the Assistant Director of Drive-Thru role after I left and led it to become the number one drive-thru in Maryland. Izzy Reyes became an Assistant Director of Front of House. To play any part in someone's journey to LDP, knowing what that program means in my own life, is something I do not take lightly. While I was building at Ridgeside, I applied to LDP again. I made it to the third round and was told no a second time. I applied a third time and was finally accepted in March 2025. Some dreams never die. They just take longer than you planned.</p>
+        <p>Ridgeside Drive in Mount Airy, Maryland became my home for over three years. I built our Drive-Thru Playbook from the ground up, helped take the location to the top of Maryland drive-thru rankings, and broke throughput records. More importantly, I developed leaders who carry that operation forward today &mdash; Danny Caporotti, Harry Horyat, and Izzy Reyes all grew into director roles under my mentorship, and Danny was just accepted into LDP himself. To play any part in someone else's journey to this program, knowing what it means in my own life, is something I do not take lightly. While I was building at Ridgeside I applied to LDP again, made it to the third round, and was told no a second time. I applied a third time and was finally accepted in March 2025. Some dreams never die. They just take longer than you planned.</p>
 
-        <p>LDP has been the hardest and most rewarding chapter of my life. At Mall of Louisiana, I served a six-month Interim Manager assignment in a challenging environment. I promoted Hayleigh Bozant to Executive Director, executed the largest catering delivery in that location's history at $10,600, achieved a perfect 100% QIV in Q2, and after a full day with my team, Tracy Roper told me that if it were up to him, he would hand me the keys and make me an Operator. At Altamesa and McCart in Fort Worth, I walked into a confidential operator transition and led the team through power outages, sewage backups, a leaking ceiling, a broken water heater, and the complexity of working alongside an operator being let go. Over five months I promoted Tonia Coulston to Executive Director of Front of House, swung the restaurant from nearly 12% net loss in November to over 9% positive in December, and improved QIV from 76.6% to 91.1%. Walt Anderson wrote that I was performing ahead of expectations and described my relational leadership as transformational. I am currently serving as a Grand Opening Supervisor in Albany, New York, learning what it takes to launch a restaurant from day one. Every assignment has prepared me for the calling I have been pursuing my entire life: to become a Chick-fil-A Owner-Operator and stir dreams in the people I lead.</p>
+        <p>LDP has been the hardest and most rewarding chapter of my life. Mall of Louisiana tested whether I could turn numbers in a challenging environment. Altamesa and McCart in Fort Worth tested whether I could hold a team together through chaos &mdash; power outages, sewage backups, a leaking ceiling, and a confidential operator transition all in five months. In both assignments I promoted directors, moved the metrics, and was told I was performing ahead of expectations. The full numbers live further down the page. What I want you to take from the story is this: I am now serving as a Grand Opening Supervisor in Albany, learning what it takes to launch a restaurant from day one, and every assignment has prepared me for the calling I have been pursuing my entire life &mdash; to become a Chick-fil-A Owner-Operator and stir dreams in the people I lead.</p>
 
-        <blockquote style="border-left:2px solid var(--red);padding-left:1.25rem;margin-top:1.5rem;margin-bottom:0.5rem">
-          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--text-mid);line-height:1.6">"Performing ahead of expectations. His relational leadership is transformational."</p>
-          <p style="font-family:'Outfit',sans-serif;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-light);margin-top:0.4rem">Walt Anderson, LDP Transition Lead</p>
+        <blockquote class="story-quote">
+          <p class="q">"Performing ahead of expectations. His relational leadership is transformational."</p>
+          <p class="a">Walt Anderson, LDP Transition Lead</p>
         </blockquote>
 
         <!-- EXPANDABLE FULL STORY -->
-        <div id="fullStory" style="max-height:0;overflow:hidden;transition:max-height 0.8s ease,opacity 0.6s ease;opacity:0">
-          <p style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(26,46,74,0.08)"><strong style="color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:1.1rem">The Roots</strong></p>
+        <div id="fullStory" class="full-story">
+          <p class="fs-first"><strong>The Roots</strong></p>
           <p>My father's parents, the late Henry Christostone Demers and Pauline Rita Demers, created a business that made every client feel heard and seen. My grandmother was a nurse. My grandfather, a Korean War veteran with a heart for entrepreneurship. On the other side, my maternal grandfather David Niel Hawkbaker was a stonemason who worked his entire life with his hands. My grandmother Nancy kept a home where you were family the moment you walked through the door, no matter your history, upbringing, race, or religion. My parents met at Faith School of Theology in Charleston, Maine. My mother grew up in Clearspring, Maryland. My father grew up in Manchester and Bedford, New Hampshire. They fell in love, moved to Toronto, and built a life around serving others.</p>
 
-          <p><strong style="color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:1.1rem">Toronto</strong></p>
+          <p><strong>Toronto</strong></p>
           <p>My brother Levi and I were raised near downtown Toronto in one of the most diverse cities in the world. My father was an addictions counselor with the Salvation Army. Our dinner table welcomed people from every walk of life. He saw beyond the addictions, past the mistakes, and saw people for who they truly were. For who they wanted to become. Every Sunday we loaded vans of equipment and food, drove to a community center, and served hot lunches. Every Christmas we collected donations through the Christmas Kettle program. While other kids followed Lego instructions, I threw them away and built hotels and businesses. My parents enrolled me in a Discover Ability program where I uncovered my passion for art and creativity, passions I have leaned into ever since.</p>
 
-          <p><strong style="color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:1.1rem">Newport News & Cumberland</strong></p>
+          <p><strong>Newport News &amp; Cumberland</strong></p>
           <p>At 11, my family moved to Newport News, Virginia for my father's chaplaincy program. I can vividly remember lying in our empty 12th-story apartment the night before we left, realizing I was leaving everything behind. We moved into a small apartment in Monarch Crossing. We did not have a car. Walking 2.5 miles to Walmart became routine. Our church was an all-African-American congregation where my family was the only Caucasian family. There were moments I sat alone at youth group. It taught me what it feels like to be unseen, and it made me determined to never let anyone I lead feel that way. Two years later we moved to Cumberland for my father's chaplaincy at a maximum-security prison. It was there I found Central Assembly of God, a church where I felt genuine belonging for the first time. My faith became personal. I attended Calvary Christian Academy, played basketball, competed in Fine Arts through photography and videography, won the Voice of Democracy writing competition, and graduated with honors.</p>
 
-          <p><strong style="color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:1.1rem">Rocky Gap & the Pivot</strong></p>
+          <p><strong>Rocky Gap &amp; the Pivot</strong></p>
           <p>At 18 I started as a valet attendant at Rocky Gap Casino and Resort and spent six years rising through five roles. I developed Josh James, who became Hotel Operations Supervisor and led through a complex COVID reopening. Angelina Bloom became my strongest supervisor. Jacob Santameyer and Brandon Stotler grew into supervisors under my leadership. I did not just work at Rocky Gap for six years. I built people there. But a disconnect with the company's values led me to Chick-fil-A. Each LDP rejection taught me something I needed to learn. The first taught me humility. The second taught me patience. The acceptance taught me that God-sized dreams come on God's timeline, not mine.</p>
 
-          <p><strong style="color:var(--navy);font-family:'Cormorant Garamond',serif;font-size:1.1rem">Who I Am Today</strong></p>
+          <p><strong>Who I Am Today</strong></p>
           <p>I am a strong D on DiSC and an Enneagram 1. I love photography, 35mm film, writing, pickleball, and putting myself in unfamiliar territory. I have been solo skydiving seven times and hope to get certified after the program. My favorite movie is Interstellar. My favorite show is The Office. I love good cinematography and good comedy in equal measure. My name means joy and laughter, and I try to live up to it every day. I read books on faith, business, and leadership. I travel with a camera. I dream big. My father always told my brother and me, "Dream big, and may your dreams come true." That has become a way of life for me, and it is what I want to instill in everyone I lead.</p>
         </div>
 
-        <button id="storyToggle" onclick="toggleStory()" style="
-          margin-top:1.25rem;
-          background:none;
-          border:2px solid var(--red);
-          color:var(--red);
-          padding:.6rem 1.5rem;
-          border-radius:100px;
-          font-family:'Outfit',sans-serif;
-          font-size:.85rem;
-          font-weight:500;
-          cursor:pointer;
-          transition:all .3s;
-          display:inline-flex;
-          align-items:center;
-          gap:.4rem;
-        " onmouseover="this.style.background='var(--red)';this.style.color='white'" onmouseout="this.style.background='none';this.style.color='var(--red)'">
+        <button id="storyToggle" class="story-toggle" type="button">
           <span id="storyToggleText">Read the Full Story</span>
-          <span id="storyToggleArrow" style="transition:transform .3s;display:inline-block">&#8595;</span>
+          <span id="storyToggleArrow" class="arrow">&#8595;</span>
         </button>
       </div>
       <div class="story-highlights">
@@ -741,9 +757,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 <!-- ASSIGNMENTS -->
 <section class="assign-sec" id="assignments">
-  <div class="assign-orb assign-orb-1"></div>
-  <div class="assign-orb assign-orb-2"></div>
-  <div class="assign-orb assign-orb-3"></div>
+  <div class="assign-orb assign-orb-1" aria-hidden="true"></div>
+  <div class="assign-orb assign-orb-2" aria-hidden="true"></div>
+  <div class="assign-orb assign-orb-3" aria-hidden="true"></div>
   <div class="sec-inner">
     <div class="sec-label fade-in">Assignment Results</div>
     <h2 class="sec-title fade-in">Tangible Impact, Measurable Growth</h2>
@@ -1272,6 +1288,7 @@ function toggleStory() {
     arrow.style.transform = 'rotate(180deg)';
   }
 }
+document.getElementById('storyToggle')?.addEventListener('click', toggleStory);
 
 // Assignment tabs
 function showPanel(id) {
@@ -1343,8 +1360,23 @@ function showGalleryPanel(id) {
 })();
 
 // Smooth scroll for nav
+// Mobile nav drawer toggle
+(function() {
+  const btn = document.getElementById('mobToggle');
+  const drawer = document.getElementById('navLinks');
+  if (!btn || !drawer) return;
+  btn.addEventListener('click', () => {
+    const open = drawer.classList.toggle('show');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+})();
+
 document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', e => {
   const href = l.getAttribute('href');
+  // Close mobile drawer on any link tap
+  document.querySelector('.nav-links').classList.remove('show');
+  document.querySelector('.mob-toggle').classList.remove('open');
   if (!href || !href.startsWith('#')) return;
   e.preventDefault();
   const t = document.querySelector(href);
