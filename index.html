@@ -590,7 +590,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-inner">
 
       <!-- Demers family -->
-      <h2 class="legacy-section-hdr fade-in">The Demers family, Manchester, New Hampshire</h2>
+      <h2 class="legacy-section-hdr fade-in">The Demers family &mdash; Manchester, New Hampshire</h2>
       <div class="legacy-card-grid">
         <div class="legacy-card fade-in">
           <div class="legacy-photo-placeholder">Photo coming soon</div>
@@ -607,7 +607,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       </div>
 
       <!-- Hawkbaker family -->
-      <h2 class="legacy-section-hdr fade-in">The Hawkbaker family, Clearspring, Maryland</h2>
+      <h2 class="legacy-section-hdr fade-in">The Hawkbaker family &mdash; Clearspring, Maryland</h2>
       <div class="legacy-card-grid">
         <div class="legacy-card fade-in">
           <div class="legacy-photo-placeholder">Photo coming soon</div>
@@ -630,7 +630,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   <div class="truett-section">
     <div class="sec-inner">
       <div class="sec-label fade-in">Philosophy</div>
-      <h2 class="sec-title fade-in">S. Truett Cathy, the philosophy I inherited</h2>
+      <h2 class="sec-title fade-in">S. Truett Cathy &mdash; the philosophy I inherited</h2>
       <div class="truett-profile fade-in">
         <div class="truett-photo-placeholder">Truett Cathy</div>
         <div class="truett-body">
@@ -928,26 +928,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="fin-detail fade-in"><div class="fin-detail-icon inc">&#128202;</div><div><h4>$16,380 Net Worth</h4><p>Savings and retirement minus debt. Includes $2,935 in retirement investments alongside $30,738 in savings &amp; checking.</p></div></div>
         <div class="fin-detail fade-in"><div class="fin-detail-icon debt">&#128195;</div><div><h4>$17,293 Total Debt</h4><p>$16,280 in student loans and $1,013 in credit card debt. Planned to be eliminated within two years.</p></div></div>
         <div class="fin-detail fade-in"><div class="fin-detail-icon goal">&#127919;</div><div><h4>$60,000 Savings Goal</h4><p>Target by end of 2026. With minimal expenses and consistent income, this goal is well within reach.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAITH & FAMILY -->
-<section class="pers-sec" id="personal">
-  <div class="sec-inner">
-    <div class="sec-label fade-in">Faith & Family</div>
-    <h2 class="sec-title fade-in">The Foundation Beneath Everything</h2>
-    <div class="pers-grid">
-      <div class="pers-block fade-in">
-        <h3>&#10013;&#65039; Faith</h3>
-        <p>My faith in Jesus is the foundation of my leadership. Growing up, my parents served in ministry in multiple capacities, and that shaped my heart to serve others with compassion and intentionality. My father's journey from ministry in Toronto to becoming a hospital chaplain showed me what it looks like to follow God's calling even when it means leaving everything behind.</p>
-        <p>Lexie and I are active in our local church community wherever we are assigned. We host gatherings, serve in small groups, and prioritize being planted in a faith community even during temporary assignments.</p>
-      </div>
-      <div class="pers-block fade-in">
-        <h3>&#10084;&#65039; Lexie Allen</h3>
-        <p>Lexie and I have been together for nearly three years. She is a third-grade teacher with an incredible heart for kids and active involvement with Chick-fil-A. Her patience, support, and alignment with the mission of this brand make her not just my partner in life, but my partner in this calling.</p>
-        <p>We have navigated every assignment together, from Louisiana to Texas and now New York. She understands the demands of this journey because she has lived them alongside me. Her role in this chapter is central to who I am and how I will operate.</p>
       </div>
     </div>
   </div>
@@ -1316,34 +1296,19 @@ function showGalleryPanel(id) {
   event.target.classList.add('active');
 }
 
-// Finance counter animation
-let counted = false;
-const finObs = new IntersectionObserver(e => e.forEach(el => {
-  if (el.isIntersecting && !counted) { counted = true; animateSavings(); animateBar(); }
-}), { threshold: .3 });
-const savingsEl = document.getElementById('savingsCounter');
-if (savingsEl) finObs.observe(savingsEl.closest('.fin-main'));
-
-function animateSavings() {
+// Finance display: render final values from CONFIG on load (no count-up
+// animation, so the number never flashes back to $0 on scroll).
+(function() {
   const f = CONFIG.finances;
   const target = Math.round(f.savings);
-  const dur = 2000; const start = performance.now();
-  function upd(now) {
-    const p = Math.min((now - start) / dur, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    savingsEl.textContent = '$' + Math.round(eased * target).toLocaleString();
-    if (p < 1) requestAnimationFrame(upd);
-  }
-  requestAnimationFrame(upd);
-}
-
-function animateBar() {
-  const pct = Math.round((CONFIG.finances.savings / CONFIG.finances.savingsGoal) * 100);
-  setTimeout(() => {
-    document.getElementById('barFill').style.width = pct + '%';
-    document.getElementById('barPct').textContent = pct + '%';
-  }, 500);
-}
+  const pct = Math.round((f.savings / f.savingsGoal) * 100);
+  const savingsEl = document.getElementById('savingsCounter');
+  if (savingsEl) savingsEl.textContent = '$' + target.toLocaleString();
+  const barFill = document.getElementById('barFill');
+  if (barFill) barFill.style.width = pct + '%';
+  const barPct = document.getElementById('barPct');
+  if (barPct) barPct.textContent = pct + '%';
+})();
 
 // Smooth scroll for nav
 document.querySelectorAll('.nav-links a').forEach(l => l.addEventListener('click', e => {
