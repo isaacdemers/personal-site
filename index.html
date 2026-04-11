@@ -228,7 +228,7 @@ section{padding:6rem 2rem}
 .fin-bar-wrap{margin-top:1.5rem}
 .fin-bar-labels{display:flex;justify-content:space-between;margin-bottom:.4rem;font-size:.75rem;color:rgba(255,255,255,.4)}
 .fin-bar{height:8px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
-.fin-bar-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:100px;transition:width 2s ease}
+.fin-bar-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:100px}
 .fin-details{display:flex;flex-direction:column;gap:1.25rem}
 .fin-detail{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1.25rem}
 .fin-detail-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
@@ -392,9 +392,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .ff-photo-placeholder{height:200px;background:var(--cream-dark);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-light);font-size:.85rem;font-family:'Outfit',sans-serif;margin-bottom:1rem;text-align:center;padding:1rem}
 .ff-card p{font-size:.92rem;color:var(--text-mid);line-height:1.8}
 .ff-pullquote{background:transparent;border-left:4px solid var(--red);padding:1.25rem 2rem;margin:.5rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--navy);line-height:1.55}
-
-/* AHEAD CARD 4TH */
-.ahead-card:nth-child(4)::after{background:var(--navy-light)}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -916,11 +913,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="fin-dash">
       <div class="fin-main fade-in">
         <div class="fin-main-lbl">Savings</div>
-        <div class="fin-main-val" id="savingsCounter">$30,738</div>
+        <div class="fin-main-val" id="savingsCounter">$0</div>
         <div class="fin-main-sub">Savings &amp; Checking Balance</div>
         <div class="fin-bar-wrap">
-          <div class="fin-bar-labels"><span>Savings Goal: $60,000 by End of 2026</span><span id="barPct">51%</span></div>
-          <div class="fin-bar"><div class="fin-bar-fill" id="barFill" style="width:51%"></div></div>
+          <div class="fin-bar-labels"><span>Savings Goal: $60,000 by End of 2026</span><span id="barPct">0%</span></div>
+          <div class="fin-bar"><div class="fin-bar-fill" id="barFill" style="width:0%"></div></div>
         </div>
       </div>
       <div class="fin-details">
@@ -963,10 +960,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">What's Ahead</div>
     <h2 class="sec-title fade-in">The Next Chapter</h2>
     <div class="ahead-cards">
-      <div class="ahead-card fade-in"><div class="ahead-num">01</div><h3>Operator Application</h3><p>Finalizing and submitting my Owner-Operator franchise application. Every essay reflects genuine strategic thinking, not just good intentions. Every word has been refined to show who I am and what I will bring to a restaurant.</p></div>
-      <div class="ahead-card fade-in"><div class="ahead-num">02</div><h3>DMA Selections</h3><p>Manchester, NH is my top choice, tied to my paternal family legacy and my grandparents' nursing home entrepreneurship. I am also considering Maryland, Washington DC/Hagerstown, and the Salisbury/Eastern Shore market.</p></div>
-      <div class="ahead-card fade-in"><div class="ahead-num">03</div><h3>Partnership in the Calling</h3><p>Lexie is in Mount Airy finishing her first year teaching third grade while I move from assignment to assignment, and when I imagine the restaurant we are going to build, she is not in the background of that picture. She is in it. She has already spent years inside this brand, she still works on Jason Bearinger's team, and she sees the same future I do.</p></div>
-      <div class="ahead-card fade-in"><div class="ahead-num">04</div><h3>Building the Dream</h3><p>I want to build a restaurant that is the best place anyone has ever worked. A place where team members discover their potential, guests feel genuinely cared for, and the community knows they have a partner invested in their wellbeing.</p></div>
+      <div class="ahead-card fade-in"><div class="ahead-num">01</div><h3>DMA Selections</h3><p>Manchester, NH is my top choice, tied to my paternal family legacy and my grandparents' nursing home entrepreneurship. I am also considering Maryland, Washington DC/Hagerstown, and the Salisbury/Eastern Shore market.</p></div>
+      <div class="ahead-card fade-in"><div class="ahead-num">02</div><h3>Partnership in the Calling</h3><p>Lexie is in Mount Airy finishing her first year teaching third grade while I move from assignment to assignment, and when I imagine the restaurant we are going to build, she is not in the background of that picture. She is in it. She has already spent years inside this brand, she still works on Jason Bearinger's team, and she sees the same future I do.</p></div>
+      <div class="ahead-card fade-in"><div class="ahead-num">03</div><h3>Building the Dream</h3><p>I want to build a restaurant that is the best place anyone has ever worked. A place where team members discover their potential, guests feel genuinely cared for, and the community knows they have a partner invested in their wellbeing.</p></div>
     </div>
   </div>
 </section>
@@ -1296,18 +1292,54 @@ function showGalleryPanel(id) {
   event.target.classList.add('active');
 }
 
-// Finance display: render final values from CONFIG on load (no count-up
-// animation, so the number never flashes back to $0 on scroll).
+// Finance counter + bar animation
+// Counter and progress bar animate together via a single requestAnimationFrame
+// loop, driven by an IntersectionObserver on the savings card so the sequence
+// only runs once, when the card enters the viewport. The rootMargin fires
+// slightly before the card is fully in view so the animation is already under
+// way by the time the user's eye lands on the numbers.
 (function() {
   const f = CONFIG.finances;
   const target = Math.round(f.savings);
-  const pct = Math.round((f.savings / f.savingsGoal) * 100);
+  const pctTarget = Math.round((f.savings / f.savingsGoal) * 100);
   const savingsEl = document.getElementById('savingsCounter');
-  if (savingsEl) savingsEl.textContent = '$' + target.toLocaleString();
   const barFill = document.getElementById('barFill');
-  if (barFill) barFill.style.width = pct + '%';
   const barPct = document.getElementById('barPct');
-  if (barPct) barPct.textContent = pct + '%';
+  if (!savingsEl || !barFill || !barPct) return;
+
+  let animated = false;
+  function runAnimation() {
+    if (animated) return;
+    animated = true;
+    const dur = 2000;
+    const start = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const curSavings = Math.round(eased * target);
+      const curPct = Math.round(eased * pctTarget);
+      savingsEl.textContent = '$' + curSavings.toLocaleString();
+      barFill.style.width = curPct + '%';
+      barPct.textContent = curPct + '%';
+      if (p < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        savingsEl.textContent = '$' + target.toLocaleString();
+        barFill.style.width = pctTarget + '%';
+        barPct.textContent = pctTarget + '%';
+      }
+    })(performance.now());
+  }
+
+  const finMain = savingsEl.closest('.fin-main');
+  if (!finMain || typeof IntersectionObserver === 'undefined') {
+    runAnimation();
+    return;
+  }
+  const finObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) runAnimation(); });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0 });
+  finObs.observe(finMain);
 })();
 
 // Smooth scroll for nav
