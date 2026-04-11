@@ -131,9 +131,20 @@ section{padding:6rem 2rem}
 .story-card:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
 .story-card:nth-child(2){border-left-color:var(--gold)}
 .story-card:nth-child(3){border-left-color:var(--sage)}
+.story-card.edge-navy{border-left-color:var(--navy-light)}
+.story-card.edge-sage{border-left-color:var(--sage)}
+.story-card.edge-red{border-left-color:var(--red)}
 .story-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;margin-bottom:2.5rem}
 .story-metric-card{background:var(--cream-dark);border-radius:12px;padding:1.25rem 1.5rem;border:1px solid var(--border);border-top:2px solid}
+.story-metric-card.accent-red{border-top-color:var(--red)}
+.story-metric-card.accent-navy{border-top-color:var(--navy)}
+.story-metric-card.accent-sage{border-top-color:var(--sage)}
+.story-metric-card.accent-gold{border-top-color:var(--gold)}
 .story-metric-val{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1.1;margin-bottom:.35rem}
+.story-metric-card.accent-red .story-metric-val{color:var(--red)}
+.story-metric-card.accent-navy .story-metric-val{color:var(--navy)}
+.story-metric-card.accent-sage .story-metric-val{color:var(--sage)}
+.story-metric-card.accent-gold .story-metric-val{color:var(--gold)}
 .story-metric-lbl{font-family:'Outfit',sans-serif;font-size:.75rem;color:var(--text-light);line-height:1.45}
 @media(max-width:900px){.story-metrics{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.story-metrics{grid-template-columns:1fr}}
@@ -240,6 +251,7 @@ section{padding:6rem 2rem}
 .dev-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
 .dev-card-body{padding:0 1.75rem 1.75rem}
 .dev-card-body p{font-size:.88rem;color:var(--text-mid);line-height:1.7}
+.dev-card-body p + p{margin-top:.75rem}
 .book-list{list-style:none;margin-top:.75rem}
 .book-list li{padding:.4rem 0;border-bottom:1px solid rgba(0,0,0,.03);font-size:.82rem;color:var(--text-mid);display:flex;align-items:center;gap:.4rem}
 .book-list li::before{content:'\1F4D6';font-size:.8rem}
@@ -406,6 +418,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .through-line-intro{font-size:1.05rem;color:var(--text-mid);line-height:1.75;max-width:680px;margin:0 auto 3rem;font-weight:300}
 .through-line-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;text-align:left}
 .through-line-col{background:white;border-radius:14px;padding:1.75rem;box-shadow:var(--sh-sm);border-top:3px solid}
+.through-line-col.accent-sage{border-top-color:var(--sage)}
+.through-line-col.accent-gold{border-top-color:var(--gold)}
+.through-line-col.accent-red{border-top-color:var(--red)}
 .through-line-col-label{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:.5rem}
 .through-line-col p{font-size:.88rem;color:var(--text-mid);line-height:1.65}
 
@@ -502,20 +517,20 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">My Story</div>
     <h2 class="sec-title fade-in">Some Dreams Never Die</h2>
     <div class="story-metrics fade-in">
-      <div class="story-metric-card" style="border-top-color:var(--red)">
-        <div class="story-metric-val" style="color:var(--red)">100%</div>
+      <div class="story-metric-card accent-red">
+        <div class="story-metric-val">100%</div>
         <div class="story-metric-lbl">QIV score, Q2 Mall of Louisiana</div>
       </div>
-      <div class="story-metric-card" style="border-top-color:var(--navy)">
-        <div class="story-metric-val" style="color:var(--navy)">$10,600</div>
+      <div class="story-metric-card accent-navy">
+        <div class="story-metric-val">$10,600</div>
         <div class="story-metric-lbl">Largest catering delivery in location history</div>
       </div>
-      <div class="story-metric-card" style="border-top-color:var(--sage)">
-        <div class="story-metric-val" style="color:var(--sage)">+21 pts</div>
+      <div class="story-metric-card accent-sage">
+        <div class="story-metric-val">+21 pts</div>
         <div class="story-metric-lbl">QIV improvement at Altamesa (76% to 91%)</div>
       </div>
-      <div class="story-metric-card" style="border-top-color:var(--gold)">
-        <div class="story-metric-val" style="color:var(--gold)">5+</div>
+      <div class="story-metric-card accent-gold">
+        <div class="story-metric-val">5+</div>
         <div class="story-metric-lbl">Leaders I have developed into director-level roles</div>
       </div>
     </div>
@@ -568,19 +583,19 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <h4>Grandparents' Legacy</h4>
           <p>Henry and Pauline Demers built two nursing homes in New Hampshire. David and Nancy Hawkbaker kept a kitchen table where strangers became family. Their spirit is the blueprint for how I want to operate.</p>
         </div>
-        <div class="story-card fade-in" style="border-left-color:var(--navy-light)">
+        <div class="story-card fade-in edge-navy">
           <h4>Manchester roots</h4>
           <p>My late grandfather Henry Demers built two nursing homes from the ground up in New Hampshire. Manchester is my top market priority. The business case and the personal meaning are inseparable. My family has deep roots there and I intend to build something worthy of that legacy.</p>
         </div>
-        <div class="story-card fade-in" style="border-left-color:var(--sage)">
+        <div class="story-card fade-in edge-sage">
           <h4>People I have developed</h4>
           <p>Danny Caporotti grew into Assistant Director of BOH and was accepted into LDP. Harry Horyat led Ridgeside Drive to the number one drive-thru ranking in Maryland after I left. Hayleigh Bozant was promoted to Executive Director at Mall of Louisiana. Tonia Coulston was promoted to FOH Executive Director at Altamesa.</p>
         </div>
-        <div class="story-card fade-in" style="border-left-color:var(--sage)">
+        <div class="story-card fade-in edge-sage">
           <h4>Personal Vision</h4>
           <p>Stirring dreams in others. Helping every person I lead discover what they are capable of and equipping them to get there.</p>
         </div>
-        <div class="story-card fade-in" style="border-left-color:var(--red)">
+        <div class="story-card fade-in edge-red">
           <h4>Core Convictions</h4>
           <p>Faith. Family. Creativity. Growth. Excellence. Do hard things. Dream big. Show up as your best.</p>
         </div>
@@ -674,15 +689,15 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       <h2 class="sec-title fade-in">The through-line</h2>
       <p class="through-line-intro fade-in">Four grandparents. Two nursing homes. One kitchen table always open. An operator who believed business was a vehicle for people. These are not separate stories. They are the same story, and I am the next chapter of it.</p>
       <div class="through-line-cols">
-        <div class="through-line-col fade-in" style="border-top-color:var(--sage)">
+        <div class="through-line-col fade-in accent-sage">
           <div class="through-line-col-label">Henry built</div>
           <p>A business that served overlooked people and developed every staff member who cared for them</p>
         </div>
-        <div class="through-line-col fade-in" style="border-top-color:var(--gold)">
+        <div class="through-line-col fade-in accent-gold">
           <div class="through-line-col-label">Truett built</div>
           <p>A brand where the restaurant was a vehicle for people, not the other way around</p>
         </div>
-        <div class="through-line-col fade-in" style="border-top-color:var(--red)">
+        <div class="through-line-col fade-in accent-red">
           <div class="through-line-col-label">Isaac builds</div>
           <p>A Chick-fil-A in Manchester where the Dream Fund makes this legacy operational, not sentimental</p>
         </div>
@@ -766,8 +781,8 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <p class="sec-sub fade-in">Real data from real assignments. Every number represents people served and systems built.</p>
 
     <div class="assign-tabs">
-      <button class="assign-tab active" onclick="showPanel('mol')">Mall of Louisiana</button>
-      <button class="assign-tab" onclick="showPanel('alt')">Altamesa & McCart</button>
+      <button class="assign-tab active" type="button" data-panel="mol">Mall of Louisiana</button>
+      <button class="assign-tab" type="button" data-panel="alt">Altamesa &amp; McCart</button>
     </div>
 
     <!-- MOL PANEL -->
@@ -914,8 +929,8 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <h2 class="sec-title fade-in">Always Growing, Always Learning</h2>
     <div class="dev-grid">
       <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#128218;</div><h3>Reading & Learning</h3></div><div class="dev-card-body"><p>I read consistently to challenge my thinking and expand my leadership capacity.</p><ul class="book-list"><li>Covert Cows (Chick-fil-A History)</li><li>It's My Pleasure (Truett Cathy)</li><li>The Speed of Trust</li><li>Who: The A Method for Hiring</li><li>Eat Mor Chikin: Inspire More People</li><li>Do Hard Things (Brett & Alex Harris)</li></ul></div></div>
-      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#127919;</div><h3>Competency Growth</h3></div><div class="dev-card-body"><p>Zach Brezina rated me 4/4 on multiple competencies and called my team connection "possibly your superpower." Walt Anderson described my leadership as "performing ahead of expectations."</p><p style="margin-top:.75rem">Currently working with an executive coach through Leadership Consulting to sharpen interview readiness and leadership presence. Public speaking in large group settings is my identified growth area.</p></div></div>
-      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#127939;</div><h3>Personal Wellness</h3></div><div class="dev-card-body"><p>Leading well starts with being well. My development plan includes a structured morning rhythm of prayer, journaling, and reflection. I pursue physical fitness, creative expression through photography and writing, and restorative rest.</p><p style="margin-top:.75rem">I have been solo skydiving seven times. I believe in chasing discomfort and putting myself in unfamiliar territory to expand capacity.</p></div></div>
+      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#127919;</div><h3>Competency Growth</h3></div><div class="dev-card-body"><p>Zach Brezina rated me 4/4 on multiple competencies and called my team connection "possibly your superpower." Walt Anderson described my leadership as "performing ahead of expectations."</p><p>Currently working with an executive coach through Leadership Consulting to sharpen interview readiness and leadership presence. Public speaking in large group settings is my identified growth area.</p></div></div>
+      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#127939;</div><h3>Personal Wellness</h3></div><div class="dev-card-body"><p>Leading well starts with being well. My development plan includes a structured morning rhythm of prayer, journaling, and reflection. I pursue physical fitness, creative expression through photography and writing, and restorative rest.</p><p>I have been solo skydiving seven times. I believe in chasing discomfort and putting myself in unfamiliar territory to expand capacity.</p></div></div>
     </div>
   </div>
 </section>
@@ -952,9 +967,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">Life in LDP</div>
     <h2 class="sec-title fade-in">Moments Along the Way</h2>
     <div class="gallery-tabs fade-in">
-      <button class="gallery-tab active" onclick="showGalleryPanel('mol-gallery')">Mall of Louisiana</button>
-      <button class="gallery-tab" onclick="showGalleryPanel('alt-gallery')">Altamesa &amp; McCart</button>
-      <button class="gallery-tab" onclick="showGalleryPanel('lat-gallery')">Latham Farms</button>
+      <button class="gallery-tab active" type="button" data-panel="mol-gallery">Mall of Louisiana</button>
+      <button class="gallery-tab" type="button" data-panel="alt-gallery">Altamesa &amp; McCart</button>
+      <button class="gallery-tab" type="button" data-panel="lat-gallery">Latham Farms</button>
     </div>
     <div class="gallery-panel active" id="mol-gallery"><div class="gallery-grid"></div></div>
     <div class="gallery-panel" id="alt-gallery"><div class="gallery-grid"></div></div>
@@ -1291,23 +1306,33 @@ function toggleStory() {
 document.getElementById('storyToggle')?.addEventListener('click', toggleStory);
 
 // Assignment tabs
-function showPanel(id) {
+// Assignment tabs
+function showPanel(id, btn) {
   document.querySelectorAll('.assign-panel').forEach(p => p.classList.remove('active', 'fading-in'));
   document.querySelectorAll('.assign-tab').forEach(t => t.classList.remove('active'));
   const panel = document.getElementById(id);
+  if (!panel) return;
   panel.classList.add('active', 'fading-in');
   setTimeout(() => panel.classList.remove('fading-in'), 520);
-  event.target.classList.add('active');
+  if (btn) btn.classList.add('active');
   triggerPanelAnimations(id);
 }
+document.querySelectorAll('.assign-tab').forEach(btn => {
+  btn.addEventListener('click', () => showPanel(btn.dataset.panel, btn));
+});
 
 // Gallery tabs
-function showGalleryPanel(id) {
+function showGalleryPanel(id, btn) {
   document.querySelectorAll('.gallery-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+  const panel = document.getElementById(id);
+  if (!panel) return;
+  panel.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
+document.querySelectorAll('.gallery-tab').forEach(btn => {
+  btn.addEventListener('click', () => showGalleryPanel(btn.dataset.panel, btn));
+});
 
 // Finance counter + bar animation
 // Counter and progress bar animate together via a single requestAnimationFrame
