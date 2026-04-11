@@ -22,6 +22,8 @@
 <!-- Favicon (inline SVG so no extra file needed) -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F1C32'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23E51636'%3EID%3C/text%3E%3C/svg%3E">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -73,7 +75,7 @@ nav.scrolled{background:rgba(254,252,248,.96);backdrop-filter:blur(20px);box-sha
 .hero-orbs::after{width:400px;height:400px;bottom:0;right:-5%;background:rgba(201,150,59,.06)}
 .hero-content{text-align:center;position:relative;z-index:2;padding:2rem;max-width:900px}
 .hero-eyebrow{font-size:.78rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease .3s forwards}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6.5vw,5.2rem);font-weight:700;color:white;line-height:1.08;margin-bottom:1.5rem;opacity:0;letter-spacing:-.03em}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6.5vw,5.2rem);font-weight:700;color:white;line-height:1.08;margin-bottom:1.5rem;opacity:0;letter-spacing:-.03em;animation:fadeUp .8s ease .5s forwards}
 .hero-title em{font-style:italic;color:var(--gold-light);font-weight:500}
 .hero-sub{font-size:1.15rem;color:rgba(255,255,255,.5);font-weight:300;line-height:1.75;max-width:620px;margin:0 auto 2.5rem;opacity:0;animation:fadeUp .8s ease .7s forwards}
 .hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s ease .9s forwards}
@@ -234,9 +236,6 @@ section{padding:6rem 2rem}
 .feedback-from{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--navy);margin-bottom:.2rem}
 .feedback-role{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:1rem}
 .feedback-body p{font-size:.88rem;color:var(--text-mid);line-height:1.7;margin-bottom:.75rem}
-.feedback-rating{display:flex;align-items:center;gap:.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
-.rating-item{font-size:.72rem;color:var(--text-light);display:flex;align-items:center;gap:.3rem}
-.rating-num{font-weight:700;color:var(--navy);font-size:.85rem}
 
 /* DEVELOPMENT */
 .dev-sec{background:var(--cream)}
@@ -334,7 +333,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{opacity:0;transform:translateY(25px);transition:all .7s ease}
+.fade-in{opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
 /* === ASSIGNMENTS SECTION ANIMATIONS === */
@@ -463,6 +462,17 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .legacy-page-hero{padding:6rem 1.25rem 3rem}
 }
 @media(max-width:600px){.hero-stats{flex-direction:column;gap:.75rem}.people-grid{grid-template-columns:1fr}}
+
+/* Reduced motion: honor OS setting for vestibular/sensitivity users */
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .fade-in{opacity:1!important;transform:none!important}
+  .hero-title{opacity:1!important;animation:none!important}
+  .hero-eyebrow,.hero-sub,.hero-stats,.hero-current,.hero-scroll{opacity:1!important;animation:none!important}
+  .hero-cursor{display:none!important}
+  #heroCanvas{display:none!important}
+  .hero-orb-a,.hero-orb-b,.hero-orb-c{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -554,7 +564,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <!-- EXPANDABLE FULL STORY -->
         <div id="fullStory" class="full-story">
           <p class="fs-first"><strong>The Roots</strong></p>
-          <p>My father's parents, the late Henry Christostone Demers and Pauline Rita Demers, created a business that made every client feel heard and seen. My grandmother was a nurse. My grandfather, a Korean War veteran with a heart for entrepreneurship. On the other side, my maternal grandfather David Niel Hawkbaker was a stonemason who worked his entire life with his hands. My grandmother Nancy kept a home where you were family the moment you walked through the door, no matter your history, upbringing, race, or religion. My parents met at Faith School of Theology in Charleston, Maine. My mother grew up in Clearspring, Maryland. My father grew up in Manchester and Bedford, New Hampshire. They fell in love, moved to Toronto, and built a life around serving others.</p>
+          <p>My father's parents, the late Henry Christostone Demers and Pauline Rita Demers, created a business that made every client feel heard and seen. My grandmother was a nurse. My grandfather, a Korean War veteran with a heart for entrepreneurship. On the other side, my maternal grandfather David Niel Hawkbaker was a stonemason who worked his entire life with his hands. My grandmother Nancy kept a home where you were family the moment you walked through the door, no matter your history, upbringing, race, or religion. My parents met at Faith School of Theology in Charleston, Maine. My mother grew up in Clear Spring, Maryland. My father grew up in Manchester and Bedford, New Hampshire. They fell in love, moved to Toronto, and built a life around serving others.</p>
 
           <p><strong>Toronto</strong></p>
           <p>My brother Levi and I were raised near downtown Toronto in one of the most diverse cities in the world. My father was an addictions counselor with the Salvation Army. Our dinner table welcomed people from every walk of life. He saw beyond the addictions, past the mistakes, and saw people for who they truly were. For who they wanted to become. Every Sunday we loaded vans of equipment and food, drove to a community center, and served hot lunches. Every Christmas we collected donations through the Christmas Kettle program. While other kids followed Lego instructions, I threw them away and built hotels and businesses. My parents enrolled me in a Discover Ability program where I uncovered my passion for art and creativity, passions I have leaned into ever since.</p>
@@ -579,13 +589,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <h4>Three-Time Applicant</h4>
           <p>Applied to LDP three times. Each rejection refined my readiness. Some dreams never die. They just take longer than you planned.</p>
         </div>
-        <div class="story-card fade-in">
-          <h4>Grandparents' Legacy</h4>
-          <p>Henry and Pauline Demers built two nursing homes in New Hampshire. David and Nancy Hawkbaker kept a kitchen table where strangers became family. Their spirit is the blueprint for how I want to operate.</p>
-        </div>
         <div class="story-card fade-in edge-navy">
-          <h4>Manchester roots</h4>
-          <p>My late grandfather Henry Demers built two nursing homes from the ground up in New Hampshire. Manchester is my top market priority. The business case and the personal meaning are inseparable. My family has deep roots there and I intend to build something worthy of that legacy.</p>
+          <h4>Manchester Legacy</h4>
+          <p>Henry and Pauline Demers built two nursing homes from the ground up in New Hampshire. David and Nancy Hawkbaker kept a kitchen table where strangers became family. Manchester is my top market priority because the business case and the personal meaning are inseparable &mdash; I intend to build something worthy of that legacy.</p>
         </div>
         <div class="story-card fade-in edge-sage">
           <h4>People I have developed</h4>
@@ -635,7 +641,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       </div>
 
       <!-- Hawkbaker family -->
-      <h2 class="legacy-section-hdr fade-in">The Hawkbaker family &mdash; Clearspring, Maryland</h2>
+      <h2 class="legacy-section-hdr fade-in">The Hawkbaker family &mdash; Clear Spring, Maryland</h2>
       <div class="legacy-card-grid">
         <div class="legacy-card fade-in">
           <div class="legacy-photo-placeholder">Photo coming soon</div>
@@ -665,7 +671,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <div class="truett-name">S. Truett Cathy</div>
           <div class="truett-dates">1921 to 2014, Founder of Chick-fil-A</div>
           <p>Truett Cathy opened the first Dwarf Grill in 1946 in Hapeville, Georgia. He built Chick-fil-A on the belief that a business exists not only to serve customers, but to develop people. He was still at work into his eighties. The business was never the point. The people were.</p>
-          <p>Two of his convictions shape how I think about operating a restaurant. The first: it is better to build boys than mend men. The second: every person has worth beyond what they produce. Both of those ideas live in my Dream Fund.</p>
+          <p>Two of his convictions shape how I think about operating a restaurant. The first: it is better to build boys than mend men. The second: every person has worth beyond what they produce. Both of those ideas live in my Dream Fund &mdash; a dedicated line item in my operating model that funds team member education, growth, and community investment from day one.</p>
         </div>
       </div>
       <div class="principle-cards">
@@ -676,7 +682,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="principle-card fade-in">
           <div class="principle-quote">"We should be about more than just selling chicken."</div>
           <p class="legacy-bridge">That conviction is the reason my return to Manchester is not about market share. It is about extending a legacy that was already being built there long before I applied to LDP.</p>
-          <p>Manchester has 1.4 million residents and three Chick-fil-A locations. The market opportunity is real. But the reason I want to be there runs deeper than market share. My grandfather built there. My family is still there. I am not entering that community. I am returning to it.</p>
+          <p>Greater Manchester is home to more than 400,000 people and has three Chick-fil-A locations. The market opportunity is real. But the reason I want to be there runs deeper than market share. My grandfather built there. My family is still there. I am not entering that community. I am returning to it.</p>
         </div>
       </div>
     </div>
@@ -753,19 +759,19 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <h2 class="sec-title fade-in">From Valet to Operator Candidate</h2>
     <p class="sec-sub fade-in">Every chapter built on the last. Every setback became a setup.</p>
     <div class="timeline">
-      <div class="tl-item"><div class="tl-dot navy"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">AUG 2015 - OCT 2021 &bull; 6 yrs 3 mos</div><div class="tl-card"><h3>Rocky Gap Casino & Resort</h3><p>Rose from Valet Attendant to Lead Valet to Valet Supervisor to Hotel Operations Supervisor to Marketing Manager over six years. Built operational systems, led cross-functional teams, and developed leaders including Josh James, Angelina Bloom, Jacob Santameyer, and Brandon Stotler.</p><span class="tl-tag tag-career">Career Foundation</span></div></div><img class="tl-photo" src="https://i.imgur.com/sTd4qf9.jpg" alt="Rocky Gap Casino & Resort"></div></div>
+      <div class="tl-item"><div class="tl-dot navy"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">AUG 2015 - OCT 2021 &bull; 6 yrs 3 mos</div><div class="tl-card"><h3>Rocky Gap Casino & Resort</h3><p>Rose from Valet Attendant to Lead Valet to Valet Supervisor to Hotel Operations Supervisor to Marketing Manager over six years. Built operational systems, led cross-functional teams, and developed leaders including Josh James, Angelina Bloom, Jacob Santameyer, and Brandon Stotler.</p><span class="tl-tag tag-career">Career Foundation</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/sTd4qf9.jpg" alt="Rocky Gap Casino & Resort"></div></div>
 
-      <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">2020</div><div class="tl-card"><h3>Liberty University, Graduated with Honors</h3><p>Completed my degree while working demanding hospitality hours at Rocky Gap. Proved that discipline and commitment could coexist, even when the schedule said otherwise.</p><span class="tl-tag tag-edu">Education</span></div></div><img class="tl-photo" src="https://i.imgur.com/ePrgZy7.jpg" alt="Liberty University"></div></div>
+      <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">2020</div><div class="tl-card"><h3>Liberty University, Graduated with Honors</h3><p>Completed my degree while working demanding hospitality hours at Rocky Gap. Proved that discipline and commitment could coexist, even when the schedule said otherwise.</p><span class="tl-tag tag-edu">Education</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/ePrgZy7.jpg" alt="Liberty University"></div></div>
 
-      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">OCT 2021 - APR 2025 &bull; 3 yrs 6 mos</div><div class="tl-card"><h3>Assistant Director, Chick-fil-A Ridgeside Drive</h3><p>Built the Drive-Thru Playbook from the ground up, helping achieve top Maryland drive-thru rankings and record-breaking throughput days. Developed Danny Caporotti (now accepted into LDP), Izzy Reyes (Assistant Director of FOH), and Harry Horyat (Assistant Director of DT, now ranked #1 in Maryland).</p><span class="tl-tag tag-career">CFA Career</span></div></div><img class="tl-photo" src="https://i.imgur.com/cOKzjmM.jpg" alt="Assistant Director at CFA"></div></div>
+      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">OCT 2021 - APR 2025 &bull; 3 yrs 6 mos</div><div class="tl-card"><h3>Assistant Director, Chick-fil-A Ridgeside Drive</h3><p>Built the Drive-Thru Playbook from the ground up, helping achieve top Maryland drive-thru rankings and record-breaking throughput days. Developed Danny Caporotti (now accepted into LDP), Izzy Reyes (Assistant Director of FOH), and Harry Horyat (Assistant Director of DT, now ranked #1 in Maryland).</p><span class="tl-tag tag-career">CFA Career</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/cOKzjmM.jpg" alt="Assistant Director at CFA"></div></div>
 
-      <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">MAR 2025</div><div class="tl-card"><h3>Accepted into LDP (Third Application)</h3><p>After two rejections, accepted into the Leadership Development Program. Joined March 3, 2025, at the Chick-fil-A Corporate Support Center.</p><span class="tl-tag tag-personal">Milestone</span></div></div><img class="tl-photo" src="https://i.imgur.com/rgLP9eE.jpg" alt="LDP Acceptance"></div></div>
+      <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">MAR 2025</div><div class="tl-card"><h3>Accepted into LDP (Third Application)</h3><p>After two rejections, accepted into the Leadership Development Program. Joined March 3, 2025, at the Chick-fil-A Corporate Support Center.</p><span class="tl-tag tag-personal">Milestone</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/rgLP9eE.jpg" alt="LDP Acceptance"></div></div>
 
-      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">APR - SEP 2025</div><div class="tl-card"><h3>IM Assignment 1: Mall of Louisiana</h3><p>Served as Interim Manager on a six-month assignment. Promoted Hayleigh Bozant to Executive Director. Drove 12%+ sales growth, achieved 100% QIV in Q2, and executed the largest catering delivery in the location's history at $10,600. Tracy Roper told me he would hand me the keys to a restaurant.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" src="https://i.imgur.com/bAsOOSv.jpg" alt="Mall of Louisiana"></div></div>
+      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">APR - SEP 2025</div><div class="tl-card"><h3>IM Assignment 1: Mall of Louisiana</h3><p>Served as Interim Manager on a six-month assignment. Promoted Hayleigh Bozant to Executive Director. Drove 12%+ sales growth, achieved 100% QIV in Q2, and executed the largest catering delivery in the location's history at $10,600. Tracy Roper told me he would hand me the keys to a restaurant.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/bAsOOSv.jpg" alt="Mall of Louisiana"></div></div>
 
-      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">NOV 2025 - MAR 2026</div><div class="tl-card"><h3>IM Assignment 2: Altamesa & McCart, Fort Worth, TX</h3><p>First IM on grounds during a confidential operator transition. Led through power outages, roof leaks, sewage issues, and organizational rebuilds. Promoted Tonia Coulston and Sevastian Galvan. QIV rose from 76.6% to 91.1%. Swung net profit from -11.5% to +9.2% in one month.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" src="https://i.imgur.com/pvCAR3x.jpg" alt="Altamesa & McCart"></div></div>
+      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">NOV 2025 - MAR 2026</div><div class="tl-card"><h3>IM Assignment 2: Altamesa & McCart, Fort Worth, TX</h3><p>First IM on grounds during a confidential operator transition. Led through power outages, roof leaks, sewage issues, and organizational rebuilds. Promoted Tonia Coulston and Sevastian Galvan. QIV rose from 76.6% to 91.1%. Swung net profit from -11.5% to +9.2% in one month.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/pvCAR3x.jpg" alt="Altamesa & McCart"></div></div>
 
-      <div class="tl-item"><div class="tl-dot active"><div class="tl-dot-inner"></div></div><div class="tl-date">MAR 2026 - PRESENT</div><div class="tl-card"><h3>GOS Assignment: Latham Farms, Albany, NY</h3><p>Currently serving as Grand Opening Supervisor for my first grand opening assignment. Leading operations, team readiness, and community launch strategy.</p><span class="tl-tag tag-current">Current Assignment</span></div></div>
+      <div class="tl-item"><div class="tl-dot active"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">MAR 2026 - PRESENT</div><div class="tl-card"><h3>GOS Assignment: Latham Farms, Albany, NY</h3><p>Currently serving as Grand Opening Supervisor for my first grand opening assignment. Leading operations, team readiness, and community launch strategy.</p><span class="tl-tag tag-current">Current Assignment</span></div></div></div></div>
     </div>
   </div>
 </section>
@@ -895,11 +901,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="feedback-body">
           <p>The team absolutely loves Isaac. This might be his Super Power. He has great knowledge of restaurant systems and processes, and we are up 12% in transactions due in large part to his efforts.</p>
           <p>Isaac leads with an others-first mindset and that is how he creates buy-in with people. He works hard and does not come across arrogant. He is great to work alongside.</p>
-        </div>
-        <div class="feedback-rating">
-          <div class="rating-item">Restaurant: <span class="rating-num">4/4</span></div>
-          <div class="rating-item">Connects: <span class="rating-num">4/4</span></div>
-          <div class="rating-item">Acts Wisely: <span class="rating-num">4/4</span></div>
         </div>
       </div>
       <div class="feedback-card fade-in">
@@ -1035,7 +1036,7 @@ const CONFIG = {
   heroStats: [
     { number: "3",   label: "LDP Assignments" },
     { number: "10+", label: "Years in Hospitality" },
-    { number: "1+",  label: "Year in LDP" },
+    { number: "13",  label: "Months in LDP" },
   ],
 
   // ---- FINANCES (updates the counters and progress bar) ----
@@ -1075,7 +1076,7 @@ const CONFIG = {
       { url: "https://i.imgur.com/VU5v1P3.jpg", caption: "HTeaO is a must when you are in Texas" },
       { url: "https://i.imgur.com/PDnGhaG.jpg", caption: "I love when mom and dad visit!" },
       { url: "https://i.imgur.com/q70O5a9.jpg", caption: "Took mom and dad to the Stock Yards" },
-      { url: "https://i.imgur.com/LTEDmxq.jpg", caption: "Kate & John were rock star FTS" },
+      { url: "https://i.imgur.com/LTEDmxq.jpg", caption: "Kate & John were rock-star FTS" },
       { url: "https://i.imgur.com/hAO0NyB.jpg", caption: "Serving Fort Worth one smile at a time" },
       { url: "https://i.imgur.com/UDBl14x.jpg", caption: "So happy Izzy could serve as an FTS at my assignment" },
       { url: "https://i.imgur.com/Y34i5XW.jpg", caption: "Yasmine has such an incredible heart!" },
@@ -1139,7 +1140,7 @@ if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
   const totalDebt = f.studentLoans + f.creditCard;
   const netWorth = Math.round(f.savings + f.retirement - totalDebt);
   if (detailCards[1]) detailCards[1].querySelector('h4').textContent = '$' + netWorth.toLocaleString() + ' Net Worth';
-  if (detailCards[1]) detailCards[1].querySelector('p').textContent = 'Savings and retirement minus debt. Includes $' + f.retirement.toLocaleString() + ' in retirement investments alongside $' + Math.round(f.savings).toLocaleString() + ' in savings & checking.';
+  if (detailCards[1]) detailCards[1].querySelector('p').textContent = 'Savings and retirement minus debt. Includes $' + Math.round(f.retirement).toLocaleString() + ' in retirement investments alongside $' + Math.round(f.savings).toLocaleString() + ' in savings & checking.';
   if (detailCards[2]) detailCards[2].querySelector('h4').textContent = '$' + totalDebt.toLocaleString() + ' Total Debt';
   if (detailCards[2]) detailCards[2].querySelector('p').textContent = '$' + f.studentLoans.toLocaleString() + ' in student loans and $' + f.creditCard.toLocaleString() + ' in credit card debt. Planned to be eliminated within two years.';
   if (detailCards[3]) detailCards[3].querySelector('h4').textContent = '$' + f.savingsGoal.toLocaleString() + ' Savings Goal';
@@ -1305,7 +1306,6 @@ function toggleStory() {
 }
 document.getElementById('storyToggle')?.addEventListener('click', toggleStory);
 
-// Assignment tabs
 // Assignment tabs
 function showPanel(id, btn) {
   document.querySelectorAll('.assign-panel').forEach(p => p.classList.remove('active', 'fading-in'));
@@ -1615,6 +1615,7 @@ document.addEventListener('keydown', function(e) {
   var speed = 64;
   var si = 0, ci = 0;
 
+  el.style.animation = 'none';
   el.style.opacity = '1';
   el.innerHTML = '<span class="hero-cursor"></span>';
 
