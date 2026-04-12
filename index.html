@@ -400,11 +400,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .legacy-card-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--navy);margin-bottom:.35rem}
 .legacy-card-tag{display:inline-block;padding:.2rem .75rem;border-radius:100px;background:rgba(26,46,74,.06);color:var(--text-mid);font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.85rem}
 .legacy-card p{font-size:.92rem;color:var(--text-mid);line-height:1.8}
-.legacy-card-merged{background:white;border-radius:16px;padding:2rem;box-shadow:var(--sh-sm);margin-bottom:3.5rem}
-.legacy-merged-photo{width:100%;aspect-ratio:1;max-height:420px;object-fit:cover;object-position:top;border-radius:12px;margin-bottom:1.5rem}
+.legacy-card-merged{background:white;border-radius:16px;padding:2rem;box-shadow:var(--sh-sm);margin-bottom:3.5rem;display:grid;grid-template-columns:300px 1fr;gap:2rem;align-items:start}
+.legacy-merged-photo{width:300px;height:300px;object-fit:cover;object-position:top;border-radius:12px}
 .legacy-merged-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--navy);margin-bottom:.5rem}
 .legacy-merged-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem}
-.legacy-merged-bios{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.legacy-merged-bios{display:flex;flex-direction:column;gap:1.5rem}
 .legacy-merged-bios .legacy-bio-col strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--navy);margin-bottom:.35rem}
 .legacy-merged-bios .legacy-bio-col p{font-size:.92rem;color:var(--text-mid);line-height:1.8}
 .truett-photo{width:200px;height:200px;object-fit:cover;object-position:top;border-radius:12px;flex-shrink:0}
@@ -464,7 +464,9 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .assign-tabs{flex-wrap:wrap}
   .hero-stats{gap:1.5rem}
   .legacy-card-grid,.principle-cards,.through-line-cols,.ff-roots-grid{grid-template-columns:1fr}
-  .legacy-merged-bios{grid-template-columns:1fr}
+  .legacy-card-merged{grid-template-columns:1fr;justify-items:center}
+  .legacy-merged-photo{width:100%;max-width:300px;height:auto;aspect-ratio:1}
+  .legacy-card-merged .legacy-merged-content{text-align:left;width:100%}
   .truett-profile{grid-template-columns:1fr}
   .truett-photo-placeholder{width:100%;height:200px}
   .legacy-family-section,.truett-section,.through-line-section{padding:3.5rem 1.25rem}
@@ -636,19 +638,21 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       <h2 class="legacy-section-hdr fade-in">The Demers family &mdash; Manchester, New Hampshire</h2>
       <div class="legacy-card-merged fade-in">
         <img src="https://i.imgur.com/0D2lKpi.jpg" alt="The Late Henry and Pauline Demers" class="legacy-merged-photo" loading="lazy">
-        <div class="legacy-merged-title">The Late Henry &amp; Pauline Demers</div>
-        <div class="legacy-merged-tags">
-          <span class="legacy-card-tag">Korean War veteran / Entrepreneur</span>
-          <span class="legacy-card-tag">Nurse / Co-founder</span>
-        </div>
-        <div class="legacy-merged-bios">
-          <div class="legacy-bio-col">
-            <strong>Henry Christostone Demers</strong>
-            <p>Built two nursing homes from the ground up in Manchester, New Hampshire. A Korean War veteran with an entrepreneur's heart, he saw people the world overlooked and built something to serve them. Every resident received care. Every staff member received investment. That was his operating philosophy, and it is mine.</p>
+        <div class="legacy-merged-content">
+          <div class="legacy-merged-title">The Late Henry &amp; Pauline Demers</div>
+          <div class="legacy-merged-tags">
+            <span class="legacy-card-tag">Korean War veteran / Entrepreneur</span>
+            <span class="legacy-card-tag">Nurse / Co-founder</span>
           </div>
-          <div class="legacy-bio-col">
-            <strong>Pauline Rita Demers</strong>
-            <p>A nurse who built the operation alongside Henry. She made every client feel heard and seen not because it was her job, but because it was her character. The care was professional. The warmth was personal. She is where I learned that hospitality is not a skill. It is a posture.</p>
+          <div class="legacy-merged-bios">
+            <div class="legacy-bio-col">
+              <strong>Henry Christostone Demers</strong>
+              <p>Built two nursing homes from the ground up in Manchester, New Hampshire. A Korean War veteran with an entrepreneur's heart, he saw people the world overlooked and built something to serve them. Every resident received care. Every staff member received investment. That was his operating philosophy, and it is mine.</p>
+            </div>
+            <div class="legacy-bio-col">
+              <strong>Pauline Rita Demers</strong>
+              <p>A nurse who built the operation alongside Henry. She made every client feel heard and seen not because it was her job, but because it was her character. The care was professional. The warmth was personal. She is where I learned that hospitality is not a skill. It is a posture.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -657,19 +661,21 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       <h2 class="legacy-section-hdr fade-in">The Hawkbaker family &mdash; Clear Spring, Maryland</h2>
       <div class="legacy-card-merged fade-in">
         <img src="https://i.imgur.com/YdlhiND.jpg" alt="David and Nancy Hawkbaker" class="legacy-merged-photo" loading="lazy">
-        <div class="legacy-merged-title">David &amp; Nancy Hawkbaker</div>
-        <div class="legacy-merged-tags">
-          <span class="legacy-card-tag">Stonemason</span>
-          <span class="legacy-card-tag">Hospitality / Faith</span>
-        </div>
-        <div class="legacy-merged-bios">
-          <div class="legacy-bio-col">
-            <strong>David Niel Hawkbaker</strong>
-            <p>Worked his entire life with his hands. Built things that lasted. Did not seek recognition. Just showed up and did the work. He is where I learned that excellence is a character trait, not a performance.</p>
+        <div class="legacy-merged-content">
+          <div class="legacy-merged-title">David &amp; Nancy Hawkbaker</div>
+          <div class="legacy-merged-tags">
+            <span class="legacy-card-tag">Stonemason</span>
+            <span class="legacy-card-tag">Hospitality / Faith</span>
           </div>
-          <div class="legacy-bio-col">
-            <strong>Nancy Hawkbaker</strong>
-            <p>Kept a kitchen table where every stranger became family, regardless of their history, upbringing, race, or religion. She did not have a policy for hospitality. She had a door that was always open. That is the restaurant I want to run.</p>
+          <div class="legacy-merged-bios">
+            <div class="legacy-bio-col">
+              <strong>David Niel Hawkbaker</strong>
+              <p>Worked his entire life with his hands. Built things that lasted. Did not seek recognition. Just showed up and did the work. He is where I learned that excellence is a character trait, not a performance.</p>
+            </div>
+            <div class="legacy-bio-col">
+              <strong>Nancy Hawkbaker</strong>
+              <p>Kept a kitchen table where every stranger became family, regardless of their history, upbringing, race, or religion. She did not have a policy for hospitality. She had a door that was always open. That is the restaurant I want to run.</p>
+            </div>
           </div>
         </div>
       </div>
