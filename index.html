@@ -8,6 +8,10 @@
 <meta name="author" content="Isaac Demers">
 <meta name="theme-color" content="#0F1C32">
 
+<!-- Security headers (defense-in-depth for this static site) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.imgur.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Isaac Demers | Stirring Dreams in Others">
@@ -1218,7 +1222,11 @@ if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
       } else {
         const inner = document.createElement('div');
         inner.className = 'gallery-slot-inner';
-        inner.innerHTML = '<div class="gallery-icon">&#128247;</div>' + (photo.caption || 'Photo coming soon');
+        const icon = document.createElement('div');
+        icon.className = 'gallery-icon';
+        icon.textContent = '\u{1F4F7}';
+        inner.appendChild(icon);
+        inner.appendChild(document.createTextNode(photo.caption || 'Photo coming soon'));
         slot.appendChild(inner);
       }
       grid.appendChild(slot);
