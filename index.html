@@ -62,6 +62,8 @@ nav.scrolled{background:rgba(254,252,248,.96);backdrop-filter:blur(20px);box-sha
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:-.02em}
 .nav-logo span{color:var(--red)}
+.nav-first-name{color:var(--navy);opacity:0;transition:opacity .5s ease}
+nav.scrolled .nav-first-name{opacity:1}
 .nav-links{display:flex;gap:1.6rem;list-style:none}
 .nav-links a{text-decoration:none;color:var(--text-mid);font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .3s;position:relative}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--red);transition:width .3s}
@@ -497,7 +499,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">Isaac <span>Demers</span></a>
+    <a href="#" class="nav-logo"><span class="nav-first-name">Isaac </span><span>Demers</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#story">Story</a></li>
       <li><a href="#legacy">Legacy</a></li>
