@@ -498,6 +498,253 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   #heroCanvas{display:none!important}
   .hero-orb-a,.hero-orb-b,.hero-orb-c{display:none!important}
 }
+
+/* =====================
+   THE JOURNEY SECTION
+   ===================== */
+
+.journey-section {
+  padding: 100px 0;
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.journey-section .sec-label {
+  color: var(--gold);
+}
+
+.journey-section .sec-title {
+  color: var(--cream);
+}
+
+.journey-section .sec-sub {
+  color: var(--cream);
+  opacity: 0.7;
+}
+
+.journey-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.journey-stop {
+  display: flex;
+  gap: 32px;
+  position: relative;
+}
+
+.journey-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 8px;
+}
+
+.journey-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--navy);
+  outline: 2px solid var(--gold);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.current-dot {
+  width: 20px;
+  height: 20px;
+  background: var(--red);
+  outline-color: var(--red);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(228, 0, 43, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(228, 0, 43, 0); }
+}
+
+.journey-line {
+  width: 2px;
+  flex: 1;
+  min-height: 40px;
+  background: linear-gradient(to bottom, var(--gold), rgba(200, 160, 80, 0.2));
+  margin-top: 8px;
+}
+
+.journey-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 40px;
+  flex: 1;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.journey-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(200, 160, 80, 0.4);
+}
+
+.current-card {
+  border-color: rgba(228, 0, 43, 0.3);
+  background: rgba(228, 0, 43, 0.05);
+}
+
+.current-card:hover {
+  border-color: rgba(228, 0, 43, 0.5);
+  background: rgba(228, 0, 43, 0.08);
+}
+
+.journey-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.journey-badge {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.8;
+}
+
+.journey-status-tag {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.completed-tag {
+  background: rgba(200, 160, 80, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(200, 160, 80, 0.3);
+}
+
+.current-tag {
+  background: rgba(228, 0, 43, 0.15);
+  color: #ff6b6b;
+  border: 1px solid rgba(228, 0, 43, 0.3);
+}
+
+.journey-restaurant {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--cream);
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.journey-location {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--cream);
+  opacity: 0.5;
+  margin: 0 0 4px;
+}
+
+.journey-role {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: var(--cream);
+  opacity: 0.5;
+  margin: 0 0 20px;
+}
+
+.journey-headline {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border-left: 3px solid var(--gold);
+}
+
+.current-card .journey-headline {
+  border-left-color: var(--red);
+}
+
+.journey-stat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.current-card .journey-stat {
+  color: #ff8080;
+}
+
+.journey-stat-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: var(--cream);
+  opacity: 0.6;
+}
+
+.journey-teaser {
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--cream);
+  opacity: 0.7;
+  margin: 0 0 20px;
+}
+
+.journey-link {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+
+.journey-link:hover {
+  opacity: 0.7;
+}
+
+.current-card .journey-link {
+  color: #ff8080;
+}
+
+@media (max-width: 600px) {
+  .journey-stop {
+    gap: 16px;
+  }
+
+  .journey-card {
+    padding: 20px;
+  }
+
+  .journey-restaurant {
+    font-size: 22px;
+  }
+
+  .journey-headline {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
 </style>
 </head>
 <body>
@@ -795,7 +1042,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 </section>
 
 <!-- TIMELINE -->
-<section class="tl-sec" id="journey">
+<section class="tl-sec" id="career-timeline">
   <div class="sec-inner">
     <div class="sec-label fade-in">The Journey</div>
     <h2 class="sec-title fade-in">From Valet to Operator Candidate</h2>
@@ -1039,6 +1286,87 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       <div class="ahead-card fade-in"><div class="ahead-num">01</div><h3>DMA Selections</h3><p>Manchester, NH is my top choice, tied to my paternal family legacy and my grandparents' nursing home entrepreneurship. I am also considering Maryland, Washington DC/Hagerstown, and the Salisbury/Eastern Shore market.</p></div>
       <div class="ahead-card fade-in"><div class="ahead-num">02</div><h3>Partnership in the Calling</h3><p>Lexie is in Mount Airy finishing her first year teaching third grade while I move from assignment to assignment, and when I imagine the restaurant we are going to build, she is not in the background of that picture. She is in it. She has already spent years inside this brand, she still works on Jason Bearinger's team, and she sees the same future I do.</p></div>
       <div class="ahead-card fade-in"><div class="ahead-num">03</div><h3>Building the Dream</h3><p>I want to build a restaurant that is the best place anyone has ever worked. A place where team members discover their potential, guests feel genuinely cared for, and the community knows they have a partner invested in their wellbeing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE JOURNEY SECTION -->
+<section id="journey" class="journey-section">
+  <div class="sec-inner">
+    <div class="sec-label">Field Assignments</div>
+    <h2 class="sec-title">The Journey</h2>
+    <p class="sec-sub" style="text-align:center;margin-bottom:60px;">Every assignment is a new restaurant, a new community, and a new set of problems to solve. This is the work.</p>
+
+    <div class="journey-timeline">
+
+      <!-- Assignment 1: Mall of Louisiana -->
+      <div class="journey-stop completed">
+        <div class="journey-connector">
+          <div class="journey-dot"></div>
+          <div class="journey-line"></div>
+        </div>
+        <div class="journey-card">
+          <div class="journey-meta">
+            <span class="journey-badge">Assignment 01</span>
+            <span class="journey-status-tag completed-tag">Completed</span>
+          </div>
+          <h3 class="journey-restaurant">Mall of Louisiana</h3>
+          <p class="journey-location">Baton Rouge, Louisiana</p>
+          <p class="journey-role">Interim Manager &nbsp;·&nbsp; Apr 17, 2025 – Oct 11, 2025</p>
+          <div class="journey-headline">
+            <span class="journey-stat">100% QIV</span>
+            <span class="journey-stat-label">Quality Improvement Visit — Perfect Score</span>
+          </div>
+          <p class="journey-teaser">Took over a struggling mall location with no accountability infrastructure, pest problems, equipment failures, and severe absenteeism. Left it with a perfect quality score, a record-breaking catering delivery, and three leaders awarded Remarkable Futures Scholarships.</p>
+          <a href="mol.html" class="journey-link">View Full Assignment &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Assignment 2: Altamesa & McCart -->
+      <div class="journey-stop completed">
+        <div class="journey-connector">
+          <div class="journey-dot"></div>
+          <div class="journey-line"></div>
+        </div>
+        <div class="journey-card">
+          <div class="journey-meta">
+            <span class="journey-badge">Assignment 02</span>
+            <span class="journey-status-tag completed-tag">Completed</span>
+          </div>
+          <h3 class="journey-restaurant">Altamesa &amp; McCart</h3>
+          <p class="journey-location">Fort Worth, Texas</p>
+          <p class="journey-role">Interim Manager &nbsp;·&nbsp; Oct 12, 2025 – Mar 9, 2026</p>
+          <div class="journey-headline">
+            <span class="journey-stat">+14.5 pts</span>
+            <span class="journey-stat-label">QIV Score Improvement in One Quarter</span>
+          </div>
+          <p class="journey-teaser">The most complex assignment in the program — first Interim Manager on grounds during a confidential operator transition. Walked into a restaurant losing nearly 12% net profit. Left it hosting LDP readiness classes as a model environment for incoming participants.</p>
+          <a href="altamesa.html" class="journey-link">View Full Assignment &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Assignment 3: Latham Farms -->
+      <div class="journey-stop current">
+        <div class="journey-connector">
+          <div class="journey-dot current-dot"></div>
+        </div>
+        <div class="journey-card current-card">
+          <div class="journey-meta">
+            <span class="journey-badge">Assignment 03</span>
+            <span class="journey-status-tag current-tag">In Progress</span>
+          </div>
+          <h3 class="journey-restaurant">Latham Farms</h3>
+          <p class="journey-location">Latham, New York</p>
+          <p class="journey-role">Grand Opening Supervisor &nbsp;·&nbsp; Mar 17, 2026 – Present</p>
+          <div class="journey-headline">
+            <span class="journey-stat">GOS</span>
+            <span class="journey-stat-label">Grand Opening Support — Currently In Field</span>
+          </div>
+          <p class="journey-teaser">Currently supporting the grand opening of Chick-fil-A Latham Farms in Latham, New York. Building culture, developing leaders, and establishing operational excellence from day one at a brand new restaurant.</p>
+          <a href="albany.html" class="journey-link">View Full Assignment &rarr;</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
