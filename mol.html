@@ -141,6 +141,8 @@ nav.scrolled .nav-back{color:var(--text-mid)}
 
   <!-- HERO -->
   <section class="assignment-hero">
+    <div class="hero-orb hero-orb-a" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-b" aria-hidden="true"></div>
     <div class="container">
       <span class="assignment-number">Assignment 01 &nbsp;·&nbsp; Baton Rouge, Louisiana</span>
       <h1>Mall of Louisiana</h1>
@@ -329,10 +331,9 @@ nav.scrolled .nav-back{color:var(--text-mid)}
     </div>
 
     <!-- NEXT ASSIGNMENT NAV -->
-    <div style="display:flex; justify-content:flex-end; margin-top:40px; padding-top:40px; border-top:1px solid var(--border);">
-      <a href="altamesa.html" style="font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; color:var(--navy); text-decoration:none; letter-spacing:0.05em;">
-        Next: Altamesa &amp; McCart &rarr;
-      </a>
+    <div class="assignment-nav">
+      <span></span>
+      <a href="altamesa.html">Next: Altamesa &amp; McCart &rarr;</a>
     </div>
 
   </div>
@@ -346,5 +347,13 @@ nav.scrolled .nav-back{color:var(--text-mid)}
     <p class="footer-copy">&copy; 2026 Isaac Demers. LDP Candidacy Site.</p>
   </footer>
 
+<script>
+(function(){
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>
