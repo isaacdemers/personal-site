@@ -263,9 +263,9 @@ section{padding:6rem 2rem}
 
 /* FINANCES */
 .fin-sec{background:linear-gradient(145deg,var(--navy) 0%,#081220 100%);color:white;padding:6rem 2rem;position:relative;overflow:hidden}
-.fin-orb{position:absolute;border-radius:50%;pointer-events:none}
-.fin-orb-1{width:650px;height:650px;top:-20%;right:-12%;background:rgba(201,150,59,.18);filter:blur(100px);animation:aOrbDrift 16s ease-in-out infinite alternate}
-.fin-orb-2{width:500px;height:500px;bottom:-18%;left:-10%;background:rgba(94,143,100,.14);filter:blur(85px);animation:aOrbDrift 12s ease-in-out 3s infinite alternate-reverse}
+.fin-orb{position:absolute;border-radius:50%;pointer-events:none;will-change:transform}
+.fin-orb-1{width:650px;height:650px;top:-20%;right:-12%;background:rgba(201,150,59,.18);filter:blur(100px)}
+.fin-orb-2{width:500px;height:500px;bottom:-18%;left:-10%;background:rgba(94,143,100,.14);filter:blur(85px)}
 .fin-sec .sec-label{color:var(--gold)}.fin-sec .sec-title{color:white}.fin-sec .sec-sub{color:rgba(255,255,255,.45)}
 .fin-dash{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 .fin-main{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:2.5rem;text-align:center}
@@ -319,10 +319,7 @@ section{padding:6rem 2rem}
 .lightbox-counter{position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.45);font-size:.75rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
 
 /* QUOTE */
-.quote-sec{background:var(--red);padding:5rem 2rem;text-align:center;position:relative;overflow:hidden}
-.quote-sec::before{content:'';position:absolute;width:700px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(255,255,255,.22) 0%,rgba(255,255,255,.06) 50%,transparent 70%);border-radius:50%;animation:quotePulse 4.5s ease-in-out infinite;pointer-events:none;z-index:0}
-.quote-sec .sec-inner{position:relative;z-index:1}
-@keyframes quotePulse{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(.8)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.25)}}
+.quote-sec{background:var(--red);padding:5rem 2rem;text-align:center}
 .quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2.3rem);color:white;font-style:italic;font-weight:400;max-width:780px;margin:0 auto;line-height:1.5}
 .quote-author{margin-top:1.25rem;font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65)}
 
@@ -1640,6 +1637,32 @@ document.addEventListener('keydown', function(e) {
       var bx = Math.sin(t * c.bf + c.ph) * c.ba;
       var by = Math.cos(t * c.bf * 0.71 + c.ph + 1.2) * c.ba * 0.62;
       orb.style.transform = 'translate(' + (bx + mx * c.ps) + 'px,' + (by + my * c.ps) + 'px)';
+    });
+    requestAnimationFrame(loop);
+  })(t0);
+})();
+
+// Finance orb breathing
+(function() {
+  var orbs = [
+    document.querySelector('.fin-orb-1'),
+    document.querySelector('.fin-orb-2')
+  ].filter(Boolean);
+  if (!orbs.length) return;
+
+  var cfg = [
+    { bf: 0.00038, ba: 22, ph: 0 },
+    { bf: 0.00029, ba: 18, ph: 1.8 }
+  ];
+  var t0 = performance.now();
+
+  (function loop(now) {
+    var t = now - t0;
+    orbs.forEach(function(orb, i) {
+      var c = cfg[i];
+      var bx = Math.sin(t * c.bf + c.ph) * c.ba;
+      var by = Math.cos(t * c.bf * 0.71 + c.ph + 1.2) * c.ba * 0.62;
+      orb.style.transform = 'translate(' + bx + 'px,' + by + 'px)';
     });
     requestAnimationFrame(loop);
   })(t0);
