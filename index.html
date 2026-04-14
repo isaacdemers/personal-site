@@ -77,8 +77,8 @@ nav.scrolled .nav-first-name{opacity:1}
 .hero-grain{position:absolute;inset:0;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:128px}
 .hero-orbs{position:absolute;inset:0}
 .hero-orbs::before,.hero-orbs::after{content:'';position:absolute;border-radius:50%;filter:blur(80px)}
-.hero-orbs::before{width:500px;height:500px;top:-10%;left:-5%;background:rgba(229,22,54,.08)}
-.hero-orbs::after{width:400px;height:400px;bottom:0;right:-5%;background:rgba(201,150,59,.06)}
+.hero-orbs::before{width:500px;height:500px;top:-10%;left:-5%;background:rgba(229,22,54,.16)}
+.hero-orbs::after{width:400px;height:400px;bottom:0;right:-5%;background:rgba(201,150,59,.13)}
 .hero-content{text-align:center;position:relative;z-index:2;padding:2rem;max-width:900px}
 .hero-eyebrow{font-size:.78rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease .3s forwards}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6.5vw,5.2rem);font-weight:700;color:white;line-height:1.08;margin-bottom:1.5rem;opacity:0;letter-spacing:-.03em;animation:fadeUp .8s ease .5s forwards}
@@ -110,12 +110,12 @@ nav.scrolled .nav-first-name{opacity:1}
 
 /* Extra JS-animated orb elements */
 .hero-orb-a,.hero-orb-b,.hero-orb-c{position:absolute;border-radius:50%;pointer-events:none;will-change:transform;z-index:1}
-.hero-orb-a{width:380px;height:380px;top:18%;right:12%;background:rgba(201,150,59,.055);filter:blur(90px)}
-.hero-orb-b{width:270px;height:270px;bottom:22%;left:18%;background:rgba(229,22,54,.065);filter:blur(75px)}
-.hero-orb-c{width:200px;height:200px;top:52%;right:28%;background:rgba(94,143,100,.045);filter:blur(65px)}
+.hero-orb-a{width:380px;height:380px;top:18%;right:12%;background:rgba(201,150,59,.13);filter:blur(90px)}
+.hero-orb-b{width:270px;height:270px;bottom:22%;left:18%;background:rgba(229,22,54,.18);filter:blur(75px)}
+.hero-orb-c{width:200px;height:200px;top:52%;right:28%;background:rgba(94,143,100,.10);filter:blur(65px)}
 
 /* Central glow pulse behind title */
-.hero-center-glow{position:absolute;width:720px;height:520px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(201,150,59,.09) 0%,rgba(229,22,54,.05) 42%,transparent 70%);border-radius:50%;animation:cGlow 5.5s ease-in-out infinite;pointer-events:none;z-index:1}
+.hero-center-glow{position:absolute;width:720px;height:520px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(201,150,59,.18) 0%,rgba(229,22,54,.10) 42%,transparent 70%);border-radius:50%;animation:cGlow 5.5s ease-in-out infinite;pointer-events:none;z-index:1}
 @keyframes cGlow{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
 
 /* Typewriter cursor */
@@ -262,7 +262,10 @@ section{padding:6rem 2rem}
 .book-list li::before{content:'\1F4D6';font-size:.8rem}
 
 /* FINANCES */
-.fin-sec{background:linear-gradient(145deg,var(--navy) 0%,#081220 100%);color:white;padding:6rem 2rem}
+.fin-sec{background:linear-gradient(145deg,var(--navy) 0%,#081220 100%);color:white;padding:6rem 2rem;position:relative;overflow:hidden}
+.fin-orb{position:absolute;border-radius:50%;pointer-events:none}
+.fin-orb-1{width:650px;height:650px;top:-20%;right:-12%;background:rgba(201,150,59,.05);filter:blur(130px);animation:aOrbDrift 16s ease-in-out infinite alternate}
+.fin-orb-2{width:500px;height:500px;bottom:-18%;left:-10%;background:rgba(94,143,100,.04);filter:blur(110px);animation:aOrbDrift 12s ease-in-out 3s infinite alternate-reverse}
 .fin-sec .sec-label{color:var(--gold)}.fin-sec .sec-title{color:white}.fin-sec .sec-sub{color:rgba(255,255,255,.45)}
 .fin-dash{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 .fin-main{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:2.5rem;text-align:center}
@@ -316,7 +319,9 @@ section{padding:6rem 2rem}
 .lightbox-counter{position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.45);font-size:.75rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em}
 
 /* QUOTE */
-.quote-sec{background:var(--red);padding:5rem 2rem;text-align:center}
+.quote-sec{background:var(--red);padding:5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.quote-sec::before{content:'';position:absolute;width:700px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(255,255,255,.10) 0%,transparent 70%);border-radius:50%;animation:quotePulse 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes quotePulse{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(.85)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}}
 .quote-text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,3vw,2.3rem);color:white;font-style:italic;font-weight:400;max-width:780px;margin:0 auto;line-height:1.5}
 .quote-author{margin-top:1.25rem;font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.65)}
 
@@ -334,7 +339,9 @@ section{padding:6rem 2rem}
 /* FOOTER */
 footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .footer-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;margin-bottom:.3rem}
-.footer-tag{color:rgba(255,255,255,.35);font-size:.88rem;margin-bottom:1.25rem}
+.footer-tag{color:rgba(255,255,255,.35);font-size:.88rem;margin-bottom:1rem}
+.footer-email{display:block;color:rgba(255,255,255,.4);font-size:.75rem;text-decoration:none;font-family:'JetBrains Mono',monospace;letter-spacing:.03em;margin-bottom:1.25rem;transition:color .25s}
+.footer-email:hover{color:rgba(255,255,255,.72)}
 .footer-updated{font-size:.7rem;color:rgba(255,255,255,.2);font-family:'JetBrains Mono',monospace}
 
 /* ANIMATIONS */
@@ -610,7 +617,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <p>Applied to LDP three times. Each rejection refined my readiness. Some dreams never die. They just take longer than you planned.</p>
         </div>
         <div class="story-card fade-in edge-navy">
-          <h4>Manchester Legacy</h4>
+          <h4>Legacy</h4>
           <p>Henry and Pauline Demers built two nursing homes from the ground up in New Hampshire. David and Nancy Hawkbaker kept a kitchen table where strangers became family. Manchester is my top market priority because the business case and the personal meaning are inseparable &mdash; I intend to build something worthy of that legacy.</p>
         </div>
         <div class="story-card fade-in edge-sage">
@@ -975,6 +982,8 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 <!-- FINANCES -->
 <section class="fin-sec" id="finances">
+  <div class="fin-orb fin-orb-1" aria-hidden="true"></div>
+  <div class="fin-orb fin-orb-2" aria-hidden="true"></div>
   <div class="sec-inner">
     <div class="sec-label fade-in">Financial Readiness</div>
     <h2 class="sec-title fade-in">Prepared and Positioned</h2>
@@ -1039,6 +1048,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 <footer>
   <div class="footer-name">Isaac Demers</div>
   <div class="footer-tag">Stirring Dreams in Others</div>
+  <a href="mailto:isaac.demers2@cfacorp.com" class="footer-email">isaac.demers2@cfacorp.com</a>
   <div class="footer-updated">Last updated: April 2026</div>
 </footer>
 
@@ -1557,13 +1567,21 @@ document.addEventListener('keydown', function(e) {
   resize();
   window.addEventListener('resize', resize);
 
-  var pts = Array.from({ length: 90 }, function() {
+  var smx = 0, smy = 0;
+  document.addEventListener('mousemove', function(e) {
+    if (window.scrollY < window.innerHeight * 0.8) {
+      smx = (e.clientX / window.innerWidth - 0.5);
+      smy = (e.clientY / window.innerHeight - 0.5);
+    }
+  });
+
+  var pts = Array.from({ length: 130 }, function() {
     return {
       x: Math.random(), y: Math.random(),
-      r: Math.random() * 1.1 + 0.25,
+      r: Math.random() * 1.4 + 0.35,
       v: Math.random() * 0.00013 + 0.00004,
       d: (Math.random() - 0.5) * 0.00009,
-      o: Math.random() * 0.32 + 0.06,
+      o: Math.random() * 0.45 + 0.12,
       tw: Math.random() * Math.PI * 2,
       ts: Math.random() * 0.0012 + 0.0005
     };
@@ -1578,8 +1596,10 @@ document.addEventListener('keydown', function(e) {
       var twinkle = 0.72 + Math.sin(p.tw) * 0.28;
       var fade = Math.min(p.y * 10, 1);
       ctx.globalAlpha = p.o * twinkle * fade;
+      var px = p.x * w + smx * p.r * 28;
+      var py = p.y * h + smy * p.r * 28;
       ctx.beginPath();
-      ctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
+      ctx.arc(px, py, p.r, 0, Math.PI * 2);
       ctx.fillStyle = '#ffffff';
       ctx.fill();
     });
