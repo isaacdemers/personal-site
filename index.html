@@ -291,18 +291,6 @@ section{padding:6rem 2rem}
 .pers-block p{font-size:.92rem;color:var(--text-mid);line-height:1.8}
 .pers-block p+p{margin-top:.75rem}
 
-/* GALLERY */
-.gallery-sec{background:var(--warm)}
-.gallery-tabs{display:flex;gap:.5rem;margin-top:2.5rem;flex-wrap:wrap}
-.gallery-tab{padding:.6rem 1.5rem;border-radius:100px;border:1px solid rgba(26,46,74,.15);background:transparent;color:rgba(26,46,74,.55);font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .3s}
-.gallery-tab.active,.gallery-tab:hover{background:rgba(26,46,74,.08);color:var(--text);border-color:rgba(26,46,74,.3)}
-.gallery-panel{display:none}.gallery-panel.active{display:block}
-.gallery-empty{margin-top:2rem;padding:4rem 2rem;text-align:center;color:var(--text-light);font-size:.95rem;background:var(--cream-dark);border-radius:14px;border:2px dashed rgba(26,46,74,.1)}
-.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
-.gallery-slot{aspect-ratio:1;background:var(--cream-dark);border-radius:14px;display:flex;align-items:center;justify-content:center;border:2px dashed rgba(26,46,74,.1);transition:all .3s;cursor:default}
-.gallery-slot:nth-child(1),.gallery-slot:nth-child(6){grid-column:span 2;aspect-ratio:2/1}
-.gallery-slot-inner{text-align:center;color:var(--text-light);font-size:.8rem}
-.gallery-slot-inner .gallery-icon{font-size:1.5rem;margin-bottom:.25rem;opacity:.4}
 
 /* LIGHTBOX */
 .lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
@@ -463,9 +451,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .dev-grid,.ahead-cards{grid-template-columns:1fr}
   .metrics-row{grid-template-columns:repeat(2,1fr)}
   .highlights-grid{grid-template-columns:1fr}
-  .gallery-grid{grid-template-columns:repeat(2,1fr)}
-  .gallery-slot:nth-child(1),.gallery-slot:nth-child(6){grid-column:span 1;aspect-ratio:1}
-  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:rgba(254,252,248,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:5rem 2rem 2rem;gap:1.4rem;box-shadow:-10px 0 40px rgba(15,28,50,.12);transform:translateX(100%);transition:transform .35s ease;z-index:999}
+.nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:rgba(254,252,248,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:5rem 2rem 2rem;gap:1.4rem;box-shadow:-10px 0 40px rgba(15,28,50,.12);transform:translateX(100%);transition:transform .35s ease;z-index:999}
   .nav-links.show{transform:translateX(0)}
   .nav-links a{font-size:.95rem}
   .mob-toggle{display:block;z-index:1001;position:relative}
@@ -917,7 +903,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <!-- EXPANDABLE FULL STORY -->
         <div id="fullStory" class="full-story">
           <p class="fs-first"><strong>The Roots</strong></p>
-          <p>My father's parents, the late Henry Christostone Demers and Pauline Rita Demers, created a business that made every client feel heard and seen. My grandmother was a nurse. My grandfather, a Korean War veteran with a heart for entrepreneurship. On the other side, my maternal grandfather David Niel Hawkbaker was a stonemason who worked his entire life with his hands. My grandmother Nancy kept a home where you were family the moment you walked through the door, no matter your history, upbringing, race, or religion. My parents met at Faith School of Theology in Charleston, Maine. My mother grew up in Clear Spring, Maryland. My father grew up in Manchester and Bedford, New Hampshire. They fell in love, moved to Toronto, and built a life around serving others.</p>
+          <p>My father's parents, the late Henry Christostone Demers and Pauline Rita Demers, created a business that made every client feel heard and seen. My grandmother was a nurse. My grandfather, a Korean War veteran with a heart for entrepreneurship. On the other side, my maternal grandfather David Niel Hawbaker was a stonemason who worked his entire life with his hands. My grandmother Nancy kept a home where you were family the moment you walked through the door, no matter your history, upbringing, race, or religion. My parents met at Faith School of Theology in Charleston, Maine. My mother grew up in Clear Spring, Maryland. My father grew up in Manchester and Bedford, New Hampshire. They fell in love, moved to Toronto, and built a life around serving others.</p>
 
           <p><strong>Toronto</strong></p>
           <p>My brother Levi and I were raised near downtown Toronto in one of the most diverse cities in the world. My father was an addictions counselor with the Salvation Army. Our dinner table welcomed people from every walk of life. He saw beyond the addictions, past the mistakes, and saw people for who they truly were. For who they wanted to become. Every Sunday we loaded vans of equipment and food, drove to a community center, and served hot lunches. Every Christmas we collected donations through the Christmas Kettle program. While other kids followed Lego instructions, I threw them away and built hotels and businesses. My parents enrolled me in a Discover Ability program where I uncovered my passion for art and creativity, passions I have leaned into ever since.</p>
@@ -944,7 +930,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         </div>
         <div class="story-card fade-in edge-navy">
           <h4>Legacy</h4>
-          <p>Henry and Pauline Demers built two nursing homes from the ground up in New Hampshire. David and Nancy Marie Hawkbaker kept a kitchen table where strangers became family. Manchester is my top market priority because the business case and the personal meaning are inseparable &mdash; I intend to build something worthy of that legacy.</p>
+          <p>Henry and Pauline Demers built two nursing homes from the ground up in New Hampshire. David and Nancy Marie Hawbaker kept a kitchen table where strangers became family. Manchester is my top market priority because the business case and the personal meaning are inseparable &mdash; I intend to build something worthy of that legacy.</p>
         </div>
         <div class="story-card fade-in edge-sage">
           <h4>People I have developed</h4>
@@ -1004,23 +990,23 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <figcaption>One of the nursing homes Henry and Pauline built in Manchester, New Hampshire.</figcaption>
       </figure>
 
-      <!-- Hawkbaker family -->
-      <h2 class="legacy-section-hdr fade-in">The Hawkbaker family &mdash; Clear Spring, Maryland</h2>
+      <!-- Hawbaker family -->
+      <h2 class="legacy-section-hdr fade-in">The Hawbaker family &mdash; Clear Spring, Maryland</h2>
       <div class="legacy-card-merged fade-in">
-        <img src="https://i.imgur.com/YdlhiND.jpg" alt="David and Nancy Marie Hawkbaker" class="legacy-merged-photo" loading="lazy">
+        <img src="https://i.imgur.com/YdlhiND.jpg" alt="David and Nancy Marie Hawbaker" class="legacy-merged-photo" loading="lazy">
         <div class="legacy-merged-content">
-          <div class="legacy-merged-title">David &amp; Nancy Marie Hawkbaker</div>
+          <div class="legacy-merged-title">David &amp; Nancy Marie Hawbaker</div>
           <div class="legacy-merged-tags">
             <span class="legacy-card-tag">Stonemason</span>
             <span class="legacy-card-tag">Hospitality / Faith</span>
           </div>
           <div class="legacy-merged-bios">
             <div class="legacy-bio-col">
-              <strong>David Niel Hawkbaker</strong>
+              <strong>David Niel Hawbaker</strong>
               <p>Worked his entire life with his hands. Built things that lasted. Did not seek recognition. Just showed up and did the work. He is where I learned that excellence is a character trait, not a performance.</p>
             </div>
             <div class="legacy-bio-col">
-              <strong>Nancy Marie Hawkbaker</strong>
+              <strong>Nancy Marie Hawbaker</strong>
               <p>Kept a kitchen table where every stranger became family, regardless of their history, upbringing, race, or religion. She did not have a policy for hospitality. She had a door that was always open. That is the restaurant I want to run.</p>
             </div>
           </div>
@@ -1332,21 +1318,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   </div>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery-sec" id="gallery">
-  <div class="sec-inner">
-    <div class="sec-label fade-in">Life in LDP</div>
-    <h2 class="sec-title fade-in">Moments Along the Way</h2>
-    <div class="gallery-tabs fade-in">
-      <button class="gallery-tab active" type="button" data-panel="mol-gallery">Mall of Louisiana</button>
-      <button class="gallery-tab" type="button" data-panel="alt-gallery">Altamesa &amp; McCart</button>
-      <button class="gallery-tab" type="button" data-panel="lat-gallery">Latham Farms</button>
-    </div>
-    <div class="gallery-panel active" id="mol-gallery"><div class="gallery-grid"></div></div>
-    <div class="gallery-panel" id="alt-gallery"><div class="gallery-grid"></div></div>
-    <div class="gallery-panel" id="lat-gallery"><div class="gallery-grid"></div></div>
-  </div>
-</section>
 
 <!-- QUOTE -->
 <section class="quote-sec">
@@ -1421,61 +1392,6 @@ const CONFIG = {
     savingsGoal:  60000,    // End-of-year savings target
   },
 
-  // ---- GALLERY PHOTOS ----
-  // Photos are grouped by assignment tab. Add new entries to the
-  // matching list. Use a direct image URL (e.g. https://i.imgur.com/abc.jpg).
-  galleryPhotos: {
-    "mol-gallery": [
-      { url: "https://i.imgur.com/XavAfve.jpg", caption: "Nick's homemade Jambalaya — my Baton Rouge farewell. Incredible!" },
-      { url: "https://i.imgur.com/RejGQn3.jpg", caption: "Cody Salomone's Dedication Dinner with Braden Keyes." },
-      { url: "https://i.imgur.com/t7gCuTf.jpg", caption: "Little convincing needed for Walt to join me on the carousel during our final Mall of Louisiana visit." },
-      { url: "https://i.imgur.com/DpMd6a8.jpg", caption: "A phenomenal visit with Tracy Roper and Sally Pierce." },
-      { url: "https://i.imgur.com/E5xWWCx.jpg", caption: "No chance against Nick — I need someone more my speed at pickleball!" },
-      { url: "https://i.imgur.com/mJAcoZA.jpg", caption: "First LSU game!" },
-      { url: "https://i.imgur.com/nEBJTnr.jpg", caption: "Let's go Tigers!" },
-      { url: "https://i.imgur.com/amjyxoB.jpg", caption: "So proud of Mary for winning employee of the month!" },
-      { url: "https://i.imgur.com/5KPHkYE.jpg", caption: "Team bonding at the movies!" },
-      { url: "https://i.imgur.com/suMIKBV.jpg", caption: "Best BBQ in Louisiana and even better company!" },
-      { url: "https://i.imgur.com/NoeTItv.jpg", caption: "On our way to deliver $10,600 in box meals! Jaylen does not seem as thrilled" },
-      { url: "https://i.imgur.com/c8KOK9U.jpg", caption: "They made me a t-shirt with my face for my last day :(" },
-      { url: "https://i.imgur.com/0QSQFo3.jpg", caption: "I miss this team!" },
-      { url: "https://i.imgur.com/HWnEQPt.jpg", caption: "$10,600 in catering box meals complete!" },
-      { url: "https://i.imgur.com/0s25wsW.jpg", caption: "Alicia is the GOAT" },
-    ],
-    "alt-gallery": [
-      { url: "https://i.imgur.com/dWZxQ2q.jpg", caption: "Domingo & Sevastian = BOH Legends" },
-      { url: "https://i.imgur.com/VU5v1P3.jpg", caption: "HTeaO is a must when you are in Texas" },
-      { url: "https://i.imgur.com/PDnGhaG.jpg", caption: "I love when mom and dad visit!" },
-      { url: "https://i.imgur.com/q70O5a9.jpg", caption: "Took mom and dad to the Stock Yards" },
-      { url: "https://i.imgur.com/LTEDmxq.jpg", caption: "Kate & John were rock-star FTS" },
-      { url: "https://i.imgur.com/hAO0NyB.jpg", caption: "Serving Fort Worth one smile at a time" },
-      { url: "https://i.imgur.com/UDBl14x.jpg", caption: "So happy Izzy could serve as an FTS at my assignment" },
-      { url: "https://i.imgur.com/Y34i5XW.jpg", caption: "Yasmine has such an incredible heart!" },
-      { url: "https://i.imgur.com/xfukgeU.jpg", caption: "Could not have transitioned well in Fort Worth without this FTS team!" },
-      { url: "https://i.imgur.com/YPrEkaz.jpg", caption: "The wooden king chess piece I found in front of the store" },
-      { url: "https://i.imgur.com/IbeCxoD.jpg", caption: "Sonja will always have a special place in my heart" },
-      { url: "https://i.imgur.com/o0wTw8H.jpg", caption: "Took the leadership team to a nearby CFA for inspiration" },
-      { url: "https://i.imgur.com/UYDnLPE.jpg", caption: "Ice storm in Fort Worth!" },
-      { url: "https://i.imgur.com/bijZvIR.jpg", caption: "Kevin cared so well for our dining room guests" },
-      { url: "https://i.imgur.com/RdMbkG0.jpg", caption: "Adrian stopped by for a surprise visit!" },
-      { url: "https://i.imgur.com/4EelSnN.jpg", caption: "Jonathan and I picked berries while serving at Cedar Ridge Preserve" },
-      { url: "https://i.imgur.com/yJHo4Y5.jpg", caption: "Field trip!" },
-      { url: "https://i.imgur.com/hTv7UHQ.jpg", caption: "Mavs Game! Great time with great people!" },
-      { url: "https://i.imgur.com/s4XaCVt.jpg", caption: "Brandon McGee is the GOAT" },
-      { url: "https://i.imgur.com/iyzMvvH.jpg", caption: "Awesome dinner with Tony Revellese & Walt Anderson!" },
-      { url: "https://i.imgur.com/1xCnwjd.jpg", caption: "Levi came to work with me as an FTS. Brothers are back together!" },
-      { url: "https://i.imgur.com/YHPItIO.jpg", caption: "Haunted House with Gary and his leadership team" },
-      { url: "https://i.imgur.com/KkdTCpv.jpg", caption: "Love Paulina & Halle!" },
-      { url: "https://i.imgur.com/Az6fsOI.jpg", caption: "Group dinner to celebrate my 30th birthday!" },
-      { url: "https://i.imgur.com/imbqEXn.jpg", caption: "Texas BBQ with an awesome LDP crew!" },
-    ],
-    "lat-gallery": [
-      { url: "https://i.imgur.com/q5tRaKL.jpg", caption: "Was able to visit Matt in NYC" },
-      { url: "https://i.imgur.com/xYKGJ0t.jpg", caption: "Yes, we climb the stairs. Yes, I am out of shape." },
-      { url: "https://i.imgur.com/WP2xp4A.jpg", caption: "One bite, everyone knows the rules." },
-    ],
-  },
-
 };
 
 /* ============================================================
@@ -1518,56 +1434,6 @@ if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
   // Update progress bar label
   const barLabel = document.querySelector('.fin-bar-labels span:first-child');
   if (barLabel) barLabel.textContent = 'Savings Goal: $' + f.savingsGoal.toLocaleString() + ' by End of 2026';
-})();
-
-// Gallery photos (grouped by assignment tab)
-(function applyGallery() {
-  Object.entries(CONFIG.galleryPhotos).forEach(([panelId, photos]) => {
-    const panel = document.getElementById(panelId);
-    if (!panel) return;
-    const grid = panel.querySelector('.gallery-grid');
-    if (!grid) return;
-    if (!photos || photos.length === 0) {
-      grid.remove();
-      const empty = document.createElement('div');
-      empty.className = 'gallery-empty fade-in';
-      empty.textContent = 'Photos coming soon';
-      panel.appendChild(empty);
-      return;
-    }
-    grid.innerHTML = '';
-    const urlPhotos = photos.filter(p => p.url);
-    photos.forEach(photo => {
-      const slot = document.createElement('div');
-      slot.className = 'gallery-slot fade-in';
-      if (photo.url) {
-        slot.style.backgroundImage = 'url(' + photo.url + ')';
-        slot.style.backgroundSize = 'cover';
-        slot.style.backgroundPosition = 'center';
-        slot.style.border = 'none';
-        slot.style.position = 'relative';
-        slot.style.cursor = 'pointer';
-        if (photo.caption) {
-          const cap = document.createElement('div');
-          cap.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:.5rem .75rem;background:linear-gradient(transparent,rgba(0,0,0,.6));color:white;font-size:.75rem;border-radius:0 0 14px 14px';
-          cap.textContent = photo.caption;
-          slot.appendChild(cap);
-        }
-        const urlIdx = urlPhotos.indexOf(photo);
-        slot.addEventListener('click', function() { openLightbox(urlPhotos, urlIdx); });
-      } else {
-        const inner = document.createElement('div');
-        inner.className = 'gallery-slot-inner';
-        const icon = document.createElement('div');
-        icon.className = 'gallery-icon';
-        icon.textContent = '\u{1F4F7}';
-        inner.appendChild(icon);
-        inner.appendChild(document.createTextNode(photo.caption || 'Photo coming soon'));
-        slot.appendChild(inner);
-      }
-      grid.appendChild(slot);
-    });
-  });
 })();
 
 // --- Core Functionality (animations, nav, etc.) ---
@@ -1694,19 +1560,6 @@ function showPanel(id, btn) {
 }
 document.querySelectorAll('.assign-tab').forEach(btn => {
   btn.addEventListener('click', () => showPanel(btn.dataset.panel, btn));
-});
-
-// Gallery tabs
-function showGalleryPanel(id, btn) {
-  document.querySelectorAll('.gallery-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.gallery-tab').forEach(t => t.classList.remove('active'));
-  const panel = document.getElementById(id);
-  if (!panel) return;
-  panel.classList.add('active');
-  if (btn) btn.classList.add('active');
-}
-document.querySelectorAll('.gallery-tab').forEach(btn => {
-  btn.addEventListener('click', () => showGalleryPanel(btn.dataset.panel, btn));
 });
 
 // Finance counter + bar animation

@@ -101,10 +101,12 @@ nav.scrolled .nav-back{color:var(--text-mid)}
 .doc-link:hover{color:var(--navy)}
 
 /* PHOTO GRID */
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-top:.5rem}
-.photo-placeholder{background:var(--cream-dark);border:2px dashed var(--border);border-radius:10px;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
-.photo-placeholder-icon{font-size:1.75rem;opacity:.35}
-.photo-placeholder-label{font-family:'Outfit',sans-serif;font-size:.7rem;color:var(--text-light);text-align:center}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-top:.5rem}
+.photo-item{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:var(--navy-mid);cursor:pointer;margin:0}
+.photo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.photo-item:hover img{transform:scale(1.05)}
+.photo-item figcaption{position:absolute;bottom:0;left:0;right:0;padding:.55rem .75rem;background:linear-gradient(transparent,rgba(10,20,40,.78));color:#fff;font-family:'Outfit',sans-serif;font-size:.7rem;line-height:1.3;opacity:0;transition:opacity .3s ease}
+.photo-item:hover figcaption{opacity:1}
 
 /* DIVIDER */
 .section-divider{width:48px;height:2px;background:var(--gold);margin:0 0 2.5rem;border-radius:2px}
@@ -294,30 +296,66 @@ nav.scrolled .nav-back{color:var(--text-mid)}
       <h2>From the Assignment</h2>
       <div class="section-divider"></div>
       <div class="photo-grid">
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/XavAfve.jpg" alt="Nick's homemade Jambalaya farewell" loading="lazy">
+          <figcaption>Nick's homemade Jambalaya — my Baton Rouge farewell. Incredible!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/RejGQn3.jpg" alt="Cody Salomone's Dedication Dinner" loading="lazy">
+          <figcaption>Cody Salomone's Dedication Dinner with Braden Keyes.</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/t7gCuTf.jpg" alt="Carousel with Walt" loading="lazy">
+          <figcaption>Little convincing needed for Walt to join me on the carousel during our final Mall of Louisiana visit.</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/DpMd6a8.jpg" alt="Tracy Roper visit" loading="lazy">
+          <figcaption>A phenomenal visit with Tracy Roper and Sally Pierce.</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/E5xWWCx.jpg" alt="Pickleball with Nick" loading="lazy">
+          <figcaption>No chance against Nick — I need someone more my speed at pickleball!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/mJAcoZA.jpg" alt="First LSU game" loading="lazy">
+          <figcaption>First LSU game!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/nEBJTnr.jpg" alt="LSU Tigers game" loading="lazy">
+          <figcaption>Let's go Tigers!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/amjyxoB.jpg" alt="Mary employee of the month" loading="lazy">
+          <figcaption>So proud of Mary for winning employee of the month!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/5KPHkYE.jpg" alt="Team bonding at the movies" loading="lazy">
+          <figcaption>Team bonding at the movies!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/suMIKBV.jpg" alt="Best BBQ in Louisiana" loading="lazy">
+          <figcaption>Best BBQ in Louisiana and even better company!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/NoeTItv.jpg" alt="Catering delivery en route" loading="lazy">
+          <figcaption>On our way to deliver $10,600 in box meals! Jaylen does not seem as thrilled.</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/c8KOK9U.jpg" alt="Last day t-shirt" loading="lazy">
+          <figcaption>They made me a t-shirt with my face for my last day :(</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/0QSQFo3.jpg" alt="I miss this team" loading="lazy">
+          <figcaption>I miss this team!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/HWnEQPt.jpg" alt="Catering box meals complete" loading="lazy">
+          <figcaption>$10,600 in catering box meals complete!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/0s25wsW.jpg" alt="Alicia is the GOAT" loading="lazy">
+          <figcaption>Alicia is the GOAT</figcaption>
+        </figure>
       </div>
     </div>
 
