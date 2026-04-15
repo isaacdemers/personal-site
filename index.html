@@ -1349,7 +1349,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">Development</div>
     <h2 class="sec-title fade-in">Always Growing, Always Learning</h2>
     <div class="dev-grid">
-      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#128218;</div><h3>Reading & Learning</h3></div><div class="dev-card-body"><p>I read consistently to challenge my thinking and expand my leadership capacity. Explore the 26 books below that have most shaped how I lead, serve, and grow&#8212;from Chick-fil-A culture to entrepreneurial grit. Click any spine to learn more.</p></div></div>
+      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#128218;</div><h3>Reading & Learning</h3></div><div class="dev-card-body"><p>I read consistently to challenge my thinking and expand my leadership capacity. Explore the 26 books below that have most shaped how I lead, serve, and grow&#8212;from Chick-fil-A culture to entrepreneurial grit. Click any book to learn more.</p></div></div>
       <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#127919;</div><h3>Competency Growth</h3></div><div class="dev-card-body"><p>Zach Brezina rated me 4/4 on multiple competencies and called my team connection "possibly your superpower." Walt Anderson described my leadership as "performing ahead of expectations."</p><p>Currently working with an executive coach through Leadership Consulting to sharpen interview readiness and leadership presence. Public speaking in large group settings is my identified growth area.</p></div></div>
       <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#127939;</div><h3>Personal Wellness</h3></div><div class="dev-card-body"><p>Leading well starts with being well. My development plan includes a structured morning rhythm of prayer, journaling, and reflection. I pursue physical fitness, creative expression through photography and writing, and restorative rest.</p><p>I have been solo skydiving seven times. I believe in chasing discomfort and putting myself in unfamiliar territory to expand capacity.</p></div></div>
     </div>
@@ -1833,9 +1833,10 @@ document.addEventListener('keydown', function(e) {
     { title:"Little Black Stretchy Pants", author:"Chip Wilson", color:"#4A235A", h:178, asin:"1948122340",
       synopsis:"The unfiltered origin story of Lululemon by its founder—tracing a single yoga studio's rise into a global athletic empire. A candid lesson in entrepreneurship, brand building, and the relentless drive it takes to create something from nothing.",
       amazon:"https://www.amazon.com/dp/1948122340" },
-    { title:"After Steve", author:"Tripp Mickle", color:"#2C3E50", h:188, asin:"0063097030",
+    { title:"After Steve", author:"Tripp Mickle", color:"#2C3E50", h:188, asin:"0063009811",
+      cover:"https://i.imgur.com/qwAo0GX.jpg",
       synopsis:"A gripping account of Apple's post-Jobs era told through the parallel journeys of Tim Cook and Jony Ive. Reveals how two very different leaders navigated grief, legacy pressure, and the weight of succeeding a once-in-a-generation genius.",
-      amazon:"https://www.amazon.com/dp/0063097030" },
+      amazon:"https://www.amazon.com/dp/0063009811" },
     { title:"No Rules Rules", author:"Reed Hastings & Erin Meyer", color:"#16A085", h:165, asin:"1984877860",
       synopsis:"Netflix's unconventional culture—built on radical transparency, freedom, and responsibility—dissected by its co-founder and a top business professor. A compelling case for why eliminating rules can unlock extraordinary performance when trust is built first.",
       amazon:"https://www.amazon.com/dp/1984877860" },
@@ -1900,6 +1901,7 @@ document.addEventListener('keydown', function(e) {
       synopsis:"The personal and business philosophy of Chick-fil-A's founder, told through the lens of the brand's famous marketing campaign. Cathy shares how a commitment to quality, character, and purpose—not profit—became the foundation for one of America's most beloved companies.",
       amazon:"https://www.amazon.com/dp/1929619081" },
     { title:"It's Easier to Succeed Than to Fail", author:"S. Truett Cathy", color:"#0F1C32", h:145, asin:"0840790309",
+      cover:"https://i.imgur.com/3c7Ub3G.jpg",
       synopsis:"One of Truett Cathy's early works making the counterintuitive argument that integrity, hard work, and treating people right makes success more attainable than cutting corners. A foundational text for understanding the principles that shaped Chick-fil-A's remarkable culture.",
       amazon:"https://www.amazon.com/dp/0840790309" }
   ];
@@ -1918,7 +1920,8 @@ document.addEventListener('keydown', function(e) {
     rowBooks.forEach(function(book, i) {
       var idx = rows[0].length > i ? BOOKS.indexOf(book) : BOOKS.indexOf(book);
       idx = BOOKS.indexOf(book);
-      html += '<div class="book-spine" role="button" tabindex="0" aria-label="' + esc(book.title) + '" data-idx="' + idx + '" style="--sc:' + book.color + ';--spine-h:' + book.h + 'px;background-image:url(https://images-na.ssl-images-amazon.com/images/P/' + book.asin + '.01.LZZZZZZZ.jpg)">';
+      var coverUrl = book.cover || ('https://images-na.ssl-images-amazon.com/images/P/' + book.asin + '.01.LZZZZZZZ.jpg');
+      html += '<div class="book-spine" role="button" tabindex="0" aria-label="' + esc(book.title) + '" data-idx="' + idx + '" style="--sc:' + book.color + ';--spine-h:' + book.h + 'px;background-image:url(' + coverUrl + ')">';
       html += '</div>';
     });
     html += '</div><div class="shelf-rail"></div></div>';
@@ -1938,7 +1941,7 @@ document.addEventListener('keydown', function(e) {
     document.getElementById('bmAmazon').href = b.amazon;
     var cover = document.getElementById('bmCover');
     cover.style.display = '';
-    cover.src = 'https://images-na.ssl-images-amazon.com/images/P/' + b.asin + '.01.LZZZZZZZ.jpg';
+    cover.src = b.cover || ('https://images-na.ssl-images-amazon.com/images/P/' + b.asin + '.01.LZZZZZZZ.jpg');
     cover.alt = b.title;
     document.getElementById('bmPrev').disabled = idx === 0;
     document.getElementById('bmNext').disabled = idx === BOOKS.length - 1;
