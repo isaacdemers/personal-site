@@ -134,6 +134,20 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
 .footer-nav a:hover{color:var(--gold-light)}
 .footer-copy{font-family:'Outfit',sans-serif;font-size:.72rem;color:rgba(255,255,255,.25)}
 
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.active{opacity:1;pointer-events:all}
+.lightbox-img{max-width:90vw;max-height:85vh;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,.6);object-fit:contain;transform:scale(.95);transition:transform .3s}
+.lightbox.active .lightbox-img{transform:scale(1)}
+.lightbox-close{position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,.1);border:none;color:white;font-size:1.4rem;line-height:1;cursor:pointer;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .25s;z-index:1}
+.lightbox-close:hover{background:rgba(255,255,255,.25)}
+.lightbox-caption{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.85);font-size:.85rem;text-align:center;background:rgba(0,0,0,.55);padding:.45rem 1.25rem;border-radius:100px;max-width:80vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:white;font-size:1.8rem;line-height:1;cursor:pointer;width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .25s}
+.lightbox-prev{left:1.25rem}.lightbox-next{right:1.25rem}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,.22)}
+.lightbox-prev[disabled],.lightbox-next[disabled]{opacity:.2;cursor:default}
+.lightbox-counter{position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.45);font-size:.75rem;letter-spacing:.05em}
+
 @media(max-width:800px){
   .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:rgba(254,252,248,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:5rem 2rem 2rem;gap:1.4rem;box-shadow:-10px 0 40px rgba(15,28,50,.12);transform:translateX(100%);transition:transform .35s ease;z-index:999}
   .nav-links.show{transform:translateX(0)}
@@ -319,7 +333,62 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
       toggle.setAttribute('aria-expanded', links.classList.contains('show'));
     });
   }
+
+  // Lightbox
+  (function() {
+    var photos = [];
+    document.querySelectorAll('.photo-item').forEach(function(fig) {
+      var img = fig.querySelector('img');
+      var cap = fig.querySelector('figcaption');
+      if (img) photos.push({ url: img.src, caption: cap ? cap.textContent : img.alt });
+    });
+    document.querySelectorAll('.photo-item').forEach(function(fig, i) {
+      fig.addEventListener('click', function() { openLb(i); });
+    });
+    var lbPhotos = photos, lbIdx = 0;
+    function openLb(idx) {
+      lbIdx = idx; updateLb();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function updateLb() {
+      var p = lbPhotos[lbIdx];
+      document.getElementById('lbImg').src = p.url;
+      document.getElementById('lbImg').alt = p.caption || '';
+      var cap = document.getElementById('lbCaption');
+      cap.textContent = p.caption || ''; cap.style.display = p.caption ? '' : 'none';
+      var counter = document.getElementById('lbCounter');
+      if (lbPhotos.length > 1) { counter.textContent = (lbIdx+1) + ' / ' + lbPhotos.length; counter.style.display = ''; }
+      else { counter.style.display = 'none'; }
+      document.getElementById('lbPrev').disabled = lbIdx === 0;
+      document.getElementById('lbNext').disabled = lbIdx === lbPhotos.length - 1;
+    }
+    function closeLb() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lbClose').addEventListener('click', closeLb);
+    document.getElementById('lbPrev').addEventListener('click', function() { if(lbIdx>0){lbIdx--;updateLb();} });
+    document.getElementById('lbNext').addEventListener('click', function() { if(lbIdx<lbPhotos.length-1){lbIdx++;updateLb();} });
+    document.getElementById('lightbox').addEventListener('click', function(e) { if(e.target===this) closeLb(); });
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key==='Escape') closeLb();
+      if (e.key==='ArrowLeft' && lbIdx>0) { lbIdx--; updateLb(); }
+      if (e.key==='ArrowRight' && lbIdx<lbPhotos.length-1) { lbIdx++; updateLb(); }
+    });
+  })();
 })();
 </script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">&#x2715;</button>
+  <button class="lightbox-prev" id="lbPrev">&#8249;</button>
+  <img class="lightbox-img" id="lbImg" src="" alt="">
+  <button class="lightbox-next" id="lbNext">&#8250;</button>
+  <div class="lightbox-caption" id="lbCaption"></div>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
 </body>
 </html>
