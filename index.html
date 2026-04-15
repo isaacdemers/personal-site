@@ -296,6 +296,12 @@ section{padding:6rem 2rem}
 .book-modal-close:hover{background:var(--cream-dark)}
 .book-amazon-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.25rem;background:var(--navy);color:white;border-radius:8px;font-size:.83rem;font-weight:600;text-decoration:none;transition:background .2s;font-family:'Outfit',sans-serif}
 .book-amazon-btn:hover{background:var(--navy-light)}
+.bm-footer{display:flex;flex-direction:column;gap:.75rem}
+.bm-nav{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:.75rem}
+.bm-nav-btn{background:var(--cream);border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--navy);transition:background .2s;flex-shrink:0}
+.bm-nav-btn:hover:not(:disabled){background:var(--cream-dark)}
+.bm-nav-btn:disabled{opacity:.28;cursor:default}
+.bm-nav-count{font-size:.72rem;color:var(--text-light);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
 @media(max-width:700px){.shelf{overflow-x:auto;padding:1rem 1rem 0}.shelf-rail{margin:0 -1rem}.shelf-books{grid-template-columns:repeat(13,44px);gap:5px}}
 @media(max-width:480px){.shelf-books{grid-template-columns:repeat(13,38px);gap:4px}}
 
@@ -1420,7 +1426,14 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       </div>
     </div>
     <div class="book-modal-synopsis" id="bmSynopsis"></div>
-    <a class="book-amazon-btn" id="bmAmazon" href="#" target="_blank" rel="noopener noreferrer">View on Amazon &#x2197;</a>
+    <div class="bm-footer">
+      <a class="book-amazon-btn" id="bmAmazon" href="#" target="_blank" rel="noopener noreferrer">View on Amazon &#x2197;</a>
+      <div class="bm-nav">
+        <button class="bm-nav-btn" id="bmPrev" aria-label="Previous book">&#8592;</button>
+        <span class="bm-nav-count" id="bmCount"></span>
+        <button class="bm-nav-btn" id="bmNext" aria-label="Next book">&#8594;</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1916,8 +1929,10 @@ document.addEventListener('keydown', function(e) {
   bc.innerHTML = html;
 
   var overlay = document.getElementById('bookModal');
+  var _curIdx = 0;
 
   function openBook(idx) {
+    _curIdx = idx;
     var b = BOOKS[idx];
     document.getElementById('bmBar').style.background = b.color;
     document.getElementById('bmTitle').textContent = b.title;
@@ -1928,8 +1943,16 @@ document.addEventListener('keydown', function(e) {
     cover.style.display = '';
     cover.src = 'https://covers.openlibrary.org/b/isbn/' + b.isbn + '-L.jpg';
     cover.alt = b.title;
+    document.getElementById('bmPrev').disabled = idx === 0;
+    document.getElementById('bmNext').disabled = idx === BOOKS.length - 1;
+    document.getElementById('bmCount').textContent = (idx + 1) + ' of ' + BOOKS.length;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+  }
+
+  function navBook(dir) {
+    var next = _curIdx + dir;
+    if (next >= 0 && next < BOOKS.length) openBook(next);
   }
 
   function closeBook() {
@@ -1950,13 +1973,18 @@ document.addEventListener('keydown', function(e) {
   });
 
   document.getElementById('bmClose').addEventListener('click', closeBook);
+  document.getElementById('bmPrev').addEventListener('click', function() { navBook(-1); });
+  document.getElementById('bmNext').addEventListener('click', function() { navBook(1); });
 
   overlay.addEventListener('click', function(e) {
     if (e.target === overlay) closeBook();
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) closeBook();
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape') closeBook();
+    if (e.key === 'ArrowLeft') navBook(-1);
+    if (e.key === 'ArrowRight') navBook(1);
   });
 })();
 
