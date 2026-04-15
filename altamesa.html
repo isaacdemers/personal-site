@@ -101,10 +101,12 @@ nav.scrolled .nav-back{color:var(--text-mid)}
 .doc-link:hover{color:var(--navy)}
 
 /* PHOTO GRID */
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-top:.5rem}
-.photo-placeholder{background:var(--cream-dark);border:2px dashed var(--border);border-radius:10px;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
-.photo-placeholder-icon{font-size:1.75rem;opacity:.35}
-.photo-placeholder-label{font-family:'Outfit',sans-serif;font-size:.7rem;color:var(--text-light);text-align:center}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-top:.5rem}
+.photo-item{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:var(--navy-mid);cursor:pointer;margin:0}
+.photo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.photo-item:hover img{transform:scale(1.05)}
+.photo-item figcaption{position:absolute;bottom:0;left:0;right:0;padding:.55rem .75rem;background:linear-gradient(transparent,rgba(10,20,40,.78));color:#fff;font-family:'Outfit',sans-serif;font-size:.7rem;line-height:1.3;opacity:0;transition:opacity .3s ease}
+.photo-item:hover figcaption{opacity:1}
 
 /* DIVIDER */
 .section-divider{width:48px;height:2px;background:var(--gold);margin:0 0 2.5rem;border-radius:2px}
@@ -303,30 +305,106 @@ nav.scrolled .nav-back{color:var(--text-mid)}
       <h2>From the Assignment</h2>
       <div class="section-divider"></div>
       <div class="photo-grid">
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
-        <div class="photo-placeholder">
-          <span class="photo-placeholder-icon">📷</span>
-          <span class="photo-placeholder-label">Photo coming soon</span>
-        </div>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/dWZxQ2q.jpg" alt="Domingo and Sevastian" loading="lazy">
+          <figcaption>Domingo &amp; Sevastian = BOH Legends</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/VU5v1P3.jpg" alt="HTeaO in Texas" loading="lazy">
+          <figcaption>HTeaO is a must when you are in Texas</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/PDnGhaG.jpg" alt="Mom and dad visit" loading="lazy">
+          <figcaption>I love when mom and dad visit!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/q70O5a9.jpg" alt="Stock Yards with family" loading="lazy">
+          <figcaption>Took mom and dad to the Stock Yards</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/LTEDmxq.jpg" alt="Kate and John FTS" loading="lazy">
+          <figcaption>Kate &amp; John were rock-star FTS</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/hAO0NyB.jpg" alt="Serving Fort Worth" loading="lazy">
+          <figcaption>Serving Fort Worth one smile at a time</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/UDBl14x.jpg" alt="Izzy as FTS" loading="lazy">
+          <figcaption>So happy Izzy could serve as an FTS at my assignment</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/Y34i5XW.jpg" alt="Yasmine" loading="lazy">
+          <figcaption>Yasmine has such an incredible heart!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/xfukgeU.jpg" alt="FTS team Fort Worth" loading="lazy">
+          <figcaption>Could not have transitioned well in Fort Worth without this FTS team!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/YPrEkaz.jpg" alt="Wooden king chess piece" loading="lazy">
+          <figcaption>The wooden king chess piece I found in front of the store</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/IbeCxoD.jpg" alt="Sonja" loading="lazy">
+          <figcaption>Sonja will always have a special place in my heart</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/o0wTw8H.jpg" alt="Leadership team CFA visit" loading="lazy">
+          <figcaption>Took the leadership team to a nearby CFA for inspiration</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/UYDnLPE.jpg" alt="Ice storm in Fort Worth" loading="lazy">
+          <figcaption>Ice storm in Fort Worth!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/bijZvIR.jpg" alt="Kevin in dining room" loading="lazy">
+          <figcaption>Kevin cared so well for our dining room guests</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/RdMbkG0.jpg" alt="Adrian surprise visit" loading="lazy">
+          <figcaption>Adrian stopped by for a surprise visit!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/4EelSnN.jpg" alt="Berry picking at Cedar Ridge" loading="lazy">
+          <figcaption>Jonathan and I picked berries while serving at Cedar Ridge Preserve</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/yJHo4Y5.jpg" alt="Field trip" loading="lazy">
+          <figcaption>Field trip!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/hTv7UHQ.jpg" alt="Mavs game" loading="lazy">
+          <figcaption>Mavs Game! Great time with great people!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/s4XaCVt.jpg" alt="Brandon McGee" loading="lazy">
+          <figcaption>Brandon McGee is the GOAT</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/iyzMvvH.jpg" alt="Dinner with Tony and Walt" loading="lazy">
+          <figcaption>Awesome dinner with Tony Revellese &amp; Walt Anderson!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/1xCnwjd.jpg" alt="Levi as FTS" loading="lazy">
+          <figcaption>Levi came to work with me as an FTS. Brothers are back together!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/YHPItIO.jpg" alt="Haunted house with Gary" loading="lazy">
+          <figcaption>Haunted House with Gary and his leadership team</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/KkdTCpv.jpg" alt="Paulina and Halle" loading="lazy">
+          <figcaption>Love Paulina &amp; Halle!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/Az6fsOI.jpg" alt="30th birthday dinner" loading="lazy">
+          <figcaption>Group dinner to celebrate my 30th birthday!</figcaption>
+        </figure>
+        <figure class="photo-item">
+          <img src="https://i.imgur.com/imbqEXn.jpg" alt="Texas BBQ with LDP crew" loading="lazy">
+          <figcaption>Texas BBQ with an awesome LDP crew!</figcaption>
+        </figure>
       </div>
     </div>
 
