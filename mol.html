@@ -38,9 +38,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.1rem 2rem;display
 nav.scrolled{background:rgba(254,252,248,.96);backdrop-filter:blur(20px);box-shadow:var(--sh-sm);padding:.65rem 2rem}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:rgba(255,255,255,.9);text-decoration:none;letter-spacing:-.02em;transition:color .4s}
 nav.scrolled .nav-logo{color:var(--navy)}
-.nav-back{font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-decoration:none;transition:color .4s}
-nav.scrolled .nav-back{color:var(--text-mid)}
-.nav-back:hover{opacity:.75}
+.nav-logo span{color:var(--gold-light);transition:color .4s}
+nav.scrolled .nav-logo span{color:var(--red)}
+.nav-links{display:flex;gap:1.3rem;list-style:none;margin:0;padding:0}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.6);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .4s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold-light);transition:width .3s,background .4s}
+.nav-links a:hover{color:rgba(255,255,255,.95)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:rgba(255,255,255,.95)}
+nav.scrolled .nav-links a{color:var(--text-mid)}
+nav.scrolled .nav-links a::after{background:var(--red)}
+nav.scrolled .nav-links a:hover,nav.scrolled .nav-links a.active{color:var(--red)}
+.mob-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:1001;position:relative}
+.mob-toggle span{display:block;width:22px;height:2px;background:rgba(255,255,255,.8);margin:5px 0;transition:background .4s,transform .3s,opacity .3s}
+nav.scrolled .mob-toggle span{background:var(--navy)}
 
 /* HERO */
 .assignment-hero{padding:160px 2rem 80px;background:linear-gradient(145deg,var(--navy) 0%,#081220 55%,#12243E 100%);color:var(--cream);position:relative;overflow:hidden}
@@ -123,9 +134,18 @@ nav.scrolled .nav-back{color:var(--text-mid)}
 .footer-nav a:hover{color:var(--gold-light)}
 .footer-copy{font-family:'Outfit',sans-serif;font-size:.72rem;color:rgba(255,255,255,.25)}
 
+@media(max-width:800px){
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:rgba(254,252,248,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:5rem 2rem 2rem;gap:1.4rem;box-shadow:-10px 0 40px rgba(15,28,50,.12);transform:translateX(100%);transition:transform .35s ease;z-index:999}
+  .nav-links.show{transform:translateX(0)}
+  .nav-links a,.nav-links a.active{color:var(--text-mid)!important}
+  .nav-links a.active{color:var(--red)!important}
+  .nav-links a::after{background:var(--red)!important}
+  .mob-toggle{display:block}
+  .mob-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .mob-toggle.open span:nth-child(2){opacity:0}
+  .mob-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+}
 @media(max-width:640px){
-  nav{padding:1rem 1.25rem}
-  nav.scrolled{padding:.6rem 1.25rem}
   .assignment-hero{padding:120px 1.25rem 3rem}
   .assignment-content{padding:3rem 1.25rem}
   .pull-quote{padding:1.75rem 1.5rem}
@@ -137,8 +157,17 @@ nav.scrolled .nav-back{color:var(--text-mid)}
 <body>
 
   <nav id="nav">
-    <a href="index.html" class="nav-logo">Isaac Demers</a>
-    <a href="index.html#journey" class="nav-back">&larr; All Assignments</a>
+    <a href="index.html" class="nav-logo"><span>Isaac</span> Demers</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#story">Story</a></li>
+      <li><a href="index.html#legacy">Legacy</a></li>
+      <li><a href="index.html#journey" class="active">Journey</a></li>
+      <li><a href="index.html#assignments">Results</a></li>
+      <li><a href="index.html#people">People</a></li>
+      <li><a href="index.html#finances">Finances</a></li>
+      <li><a href="index.html#development">Development</a></li>
+    </ul>
+    <button class="mob-toggle" id="mobToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </nav>
 
   <!-- HERO -->
@@ -379,9 +408,18 @@ nav.scrolled .nav-back{color:var(--text-mid)}
 <script>
 (function(){
   var nav = document.getElementById('nav');
+  var toggle = document.getElementById('mobToggle');
+  var links = document.getElementById('navLinks');
   window.addEventListener('scroll', function(){
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, {passive:true});
+  if (toggle) {
+    toggle.addEventListener('click', function(){
+      toggle.classList.toggle('open');
+      links.classList.toggle('show');
+      toggle.setAttribute('aria-expanded', links.classList.contains('show'));
+    });
+  }
 })();
 </script>
 </body>
