@@ -1835,8 +1835,9 @@ document.addEventListener('keydown', function(e) {
       synopsis:"The unfiltered origin story of Lululemon by its founder—tracing a single yoga studio's rise into a global athletic empire. A candid lesson in entrepreneurship, brand building, and the relentless drive it takes to create something from nothing.",
       amazon:"https://www.amazon.com/s?k=Little+Black+Stretchy+Pants+Chip+Wilson" },
     { title:"After Steve", author:"Tripp Mickle", color:"#2C3E50", h:180, isbn:"9780063097032",
+      cover:"https://i.imgur.com/qwAo0GX.jpg",
       synopsis:"A gripping account of Apple's post-Jobs era told through the parallel journeys of Tim Cook and Jony Ive. Reveals how two very different leaders navigated grief, legacy pressure, and the weight of succeeding a once-in-a-generation genius.",
-      amazon:"https://www.amazon.com/s?k=After+Steve+Tripp+Mickle" },
+      amazon:"https://www.amazon.com/dp/0063009811" },
     { title:"No Rules Rules", author:"Reed Hastings & Erin Meyer", color:"#16A085", h:168, isbn:"9781984877772",
       synopsis:"Netflix's unconventional culture—built on radical transparency, freedom, and responsibility—dissected by its co-founder and a top business professor. A compelling case for why eliminating rules can unlock extraordinary performance when trust is built first.",
       amazon:"https://www.amazon.com/s?k=No+Rules+Rules+Reed+Hastings" },
@@ -1901,6 +1902,7 @@ document.addEventListener('keydown', function(e) {
       synopsis:"The personal and business philosophy of Chick-fil-A's founder, told through the lens of the brand's famous marketing campaign. Cathy shares how a commitment to quality, character, and purpose—not profit—became the foundation for one of America's most beloved companies.",
       amazon:"https://www.amazon.com/s?k=Eat+Mor+Chikin+Inspire+More+People+Truett+Cathy" },
     { title:"It's Easier to Succeed Than to Fail", author:"S. Truett Cathy", color:"#0F1C32", h:165, isbn:"9780785261629",
+      cover:"https://i.imgur.com/3c7Ub3G.jpg",
       synopsis:"One of Truett Cathy's early works making the counterintuitive argument that integrity, hard work, and treating people right makes success more attainable than cutting corners. A foundational text for understanding the principles that shaped Chick-fil-A's remarkable culture.",
       amazon:"https://www.amazon.com/s?k=Its+Easier+to+Succeed+Than+to+Fail+Truett+Cathy" }
   ];
@@ -1920,7 +1922,8 @@ document.addEventListener('keydown', function(e) {
     rowBooks.forEach(function(book, i) {
       var idx = rows[0].length > i ? BOOKS.indexOf(book) : BOOKS.indexOf(book);
       idx = BOOKS.indexOf(book);
-      html += '<div class="book-spine" role="button" tabindex="0" aria-label="' + esc(book.title) + '" data-idx="' + idx + '" style="--sc:' + book.color + ';--spine-h:' + book.h + 'px;background-image:url(https://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg)">';
+      var coverUrl = book.cover || ('https://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg');
+      html += '<div class="book-spine" role="button" tabindex="0" aria-label="' + esc(book.title) + '" data-idx="' + idx + '" style="--sc:' + book.color + ';--spine-h:' + book.h + 'px;background-image:url(' + coverUrl + ')">';
       html += '<span class="spine-title">' + esc(book.title) + '</span>';
       html += '</div>';
     });
@@ -1941,7 +1944,7 @@ document.addEventListener('keydown', function(e) {
     document.getElementById('bmAmazon').href = b.amazon;
     var cover = document.getElementById('bmCover');
     cover.style.display = '';
-    cover.src = 'https://covers.openlibrary.org/b/isbn/' + b.isbn + '-L.jpg';
+    cover.src = b.cover || ('https://covers.openlibrary.org/b/isbn/' + b.isbn + '-L.jpg');
     cover.alt = b.title;
     document.getElementById('bmPrev').disabled = idx === 0;
     document.getElementById('bmNext').disabled = idx === BOOKS.length - 1;
