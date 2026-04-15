@@ -1744,23 +1744,17 @@ document.addEventListener('keydown', function(e) {
   resize();
   window.addEventListener('resize', resize);
 
-  var smx = 0, smy = 0;
-  document.addEventListener('mousemove', function(e) {
-    if (window.scrollY < window.innerHeight * 0.8) {
-      smx = (e.clientX / window.innerWidth - 0.5);
-      smy = (e.clientY / window.innerHeight - 0.5);
-    }
-  });
-
   var pts = Array.from({ length: 130 }, function() {
+    var isTwinkler = Math.random() < 0.25;
     return {
       x: Math.random(), y: Math.random(),
-      r: Math.random() * 1.4 + 0.35,
+      r: isTwinkler ? Math.random() * 0.9 + 0.8 : Math.random() * 1.4 + 0.35,
       v: Math.random() * 0.00013 + 0.00004,
       d: (Math.random() - 0.5) * 0.00009,
-      o: Math.random() * 0.45 + 0.12,
+      o: isTwinkler ? Math.random() * 0.3 + 0.6 : Math.random() * 0.45 + 0.12,
       tw: Math.random() * Math.PI * 2,
-      ts: Math.random() * 0.0012 + 0.0005
+      ts: isTwinkler ? Math.random() * 0.003 + 0.0015 : Math.random() * 0.0012 + 0.0005,
+      isTwinkler: isTwinkler
     };
   });
 
@@ -1770,13 +1764,13 @@ document.addEventListener('keydown', function(e) {
       p.y -= p.v; p.x += p.d; p.tw += p.ts;
       if (p.y < 0) { p.y = 1; p.x = Math.random(); }
       if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
-      var twinkle = 0.72 + Math.sin(p.tw) * 0.28;
+      var twinkle = p.isTwinkler
+        ? Math.pow((1 + Math.sin(p.tw)) / 2, 3)
+        : 0.72 + Math.sin(p.tw) * 0.28;
       var fade = Math.min(p.y * 10, 1);
       ctx.globalAlpha = p.o * twinkle * fade;
-      var px = p.x * w + smx * p.r * 28;
-      var py = p.y * h + smy * p.r * 28;
       ctx.beginPath();
-      ctx.arc(px, py, p.r, 0, Math.PI * 2);
+      ctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
       ctx.fillStyle = '#ffffff';
       ctx.fill();
     });
@@ -1785,7 +1779,7 @@ document.addEventListener('keydown', function(e) {
   })();
 })();
 
-// Hero orb breathing + mouse parallax
+// Hero orb breathing
 (function() {
   var orbs = [
     document.querySelector('.hero-orb-a'),
@@ -1794,20 +1788,12 @@ document.addEventListener('keydown', function(e) {
   ].filter(Boolean);
   if (!orbs.length) return;
 
-  var mx = 0, my = 0;
   var cfg = [
-    { bf: 0.00042, ba: 20, ps: 24, ph: 0 },
-    { bf: 0.00033, ba: 15, ps: 34, ph: 2.1 },
-    { bf: 0.00058, ba: 12, ps: 18, ph: 4.5 }
+    { bf: 0.00042, ba: 20, ph: 0 },
+    { bf: 0.00033, ba: 15, ph: 2.1 },
+    { bf: 0.00058, ba: 12, ph: 4.5 }
   ];
   var t0 = performance.now();
-
-  document.addEventListener('mousemove', function(e) {
-    if (window.scrollY < window.innerHeight * 0.8) {
-      mx = (e.clientX / window.innerWidth - 0.5);
-      my = (e.clientY / window.innerHeight - 0.5);
-    }
-  });
 
   (function loop(now) {
     var t = now - t0;
@@ -1815,7 +1801,7 @@ document.addEventListener('keydown', function(e) {
       var c = cfg[i];
       var bx = Math.sin(t * c.bf + c.ph) * c.ba;
       var by = Math.cos(t * c.bf * 0.71 + c.ph + 1.2) * c.ba * 0.62;
-      orb.style.transform = 'translate(' + (bx + mx * c.ps) + 'px,' + (by + my * c.ps) + 'px)';
+      orb.style.transform = 'translate(' + bx + 'px,' + by + 'px)';
     });
     requestAnimationFrame(loop);
   })(t0);
