@@ -273,8 +273,8 @@ section{padding:6rem 2rem}
 /* BOOKSHELF */
 .bookcase{margin-top:3rem}
 .shelf{background:linear-gradient(180deg,#d4a870 0%,#b87940 60%,#9a6228 100%);border-radius:6px 6px 0 0;padding:1.25rem 1.5rem 0;box-shadow:0 6px 20px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.25)}
-.shelf+.shelf{margin-top:2.5rem}
-.shelf-books{display:grid;grid-template-columns:repeat(13,1fr);gap:6px;align-items:end}
+.shelf+.shelf{margin-top:2rem}
+.shelf-books{display:grid;grid-template-columns:repeat(9,1fr);gap:10px;align-items:end}
 .shelf-rail{height:20px;background:linear-gradient(180deg,#7a4f2a 0%,#5c3418 100%);border-radius:0 0 4px 4px;box-shadow:0 6px 12px rgba(0,0,0,.35),inset 0 2px 0 rgba(255,255,255,.1);margin:0 -1.5rem}
 .book-spine{height:var(--spine-h,168px);border-radius:2px 4px 4px 2px;cursor:pointer;position:relative;transition:transform .22s ease,box-shadow .22s ease;display:flex;align-items:center;justify-content:center;box-shadow:3px 0 8px rgba(0,0,0,.28),inset 5px 0 10px rgba(0,0,0,.35),inset -1px 0 3px rgba(0,0,0,.15);background-color:var(--sc,var(--navy));background-size:cover;background-position:center top;overflow:hidden}
 .book-spine::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.22) 0%,rgba(0,0,0,.04) 40%);pointer-events:none;z-index:1}
@@ -301,8 +301,8 @@ section{padding:6rem 2rem}
 .bm-nav-btn:hover:not(:disabled){background:var(--cream-dark)}
 .bm-nav-btn:disabled{opacity:.28;cursor:default}
 .bm-nav-count{font-size:.72rem;color:var(--text-light);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
-@media(max-width:700px){.shelf{overflow-x:auto;padding:1rem 1rem 0}.shelf-rail{margin:0 -1rem}.shelf-books{grid-template-columns:repeat(13,44px);gap:5px}}
-@media(max-width:480px){.shelf-books{grid-template-columns:repeat(13,38px);gap:4px}}
+@media(max-width:700px){.shelf{overflow-x:auto;padding:1rem 1rem 0}.shelf-rail{margin:0 -1rem}.shelf-books{grid-template-columns:repeat(9,80px);gap:8px}}
+@media(max-width:480px){.shelf-books{grid-template-columns:repeat(9,68px);gap:6px}}
 
 /* FINANCES */
 .fin-sec{background:linear-gradient(145deg,var(--navy) 0%,#081220 100%);color:white;padding:6rem 2rem;position:relative;overflow:hidden}
@@ -1824,82 +1824,82 @@ document.addEventListener('keydown', function(e) {
 // === BOOKSHELF ===
 (function() {
   var BOOKS = [
-    { title:"Unreasonable Hospitality", author:"Will Guidara", color:"#E51636", h:178, asin:"0593418573",
+    { title:"Unreasonable Hospitality", author:"Will Guidara", color:"#E51636", h:172, asin:"0593418573",
       synopsis:"A behind-the-scenes look at how Guidara transformed Eleven Madison Park into the world's best restaurant by going radically beyond what was expected of every guest interaction. The book makes a compelling case that genuine, thoughtful hospitality is the ultimate competitive advantage in any industry.",
       amazon:"https://www.amazon.com/dp/0593418573" },
-    { title:"Crucial Conversations", author:"Kerry Patterson, Joseph Grenny, Ron McMillan & Al Switzler", color:"#1A2E4A", h:172, asin:"1260474186",
+    { title:"Crucial Conversations", author:"Kerry Patterson, Joseph Grenny, Ron McMillan & Al Switzler", color:"#1A2E4A", h:160, asin:"1260474186",
       synopsis:"A practical guide to navigating high-stakes conversations where opinions differ and emotions run strong. Offers tools to stay calm, speak honestly, and reach outcomes that work for everyone—even in the most difficult dialogues.",
       amazon:"https://www.amazon.com/dp/1260474186" },
-    { title:"Little Black Stretchy Pants", author:"Chip Wilson", color:"#4A235A", h:165, asin:"1948122340",
+    { title:"Little Black Stretchy Pants", author:"Chip Wilson", color:"#4A235A", h:178, asin:"1948122340",
       synopsis:"The unfiltered origin story of Lululemon by its founder—tracing a single yoga studio's rise into a global athletic empire. A candid lesson in entrepreneurship, brand building, and the relentless drive it takes to create something from nothing.",
       amazon:"https://www.amazon.com/dp/1948122340" },
-    { title:"After Steve", author:"Tripp Mickle", color:"#2C3E50", h:180, asin:"0063097030",
+    { title:"After Steve", author:"Tripp Mickle", color:"#2C3E50", h:188, asin:"0063097030",
       synopsis:"A gripping account of Apple's post-Jobs era told through the parallel journeys of Tim Cook and Jony Ive. Reveals how two very different leaders navigated grief, legacy pressure, and the weight of succeeding a once-in-a-generation genius.",
       amazon:"https://www.amazon.com/dp/0063097030" },
-    { title:"No Rules Rules", author:"Reed Hastings & Erin Meyer", color:"#16A085", h:168, asin:"1984877860",
+    { title:"No Rules Rules", author:"Reed Hastings & Erin Meyer", color:"#16A085", h:165, asin:"1984877860",
       synopsis:"Netflix's unconventional culture—built on radical transparency, freedom, and responsibility—dissected by its co-founder and a top business professor. A compelling case for why eliminating rules can unlock extraordinary performance when trust is built first.",
       amazon:"https://www.amazon.com/dp/1984877860" },
-    { title:"Be Exceptional", author:"Joe Navarro", color:"#8B4513", h:175, asin:"0063025396",
+    { title:"Be Exceptional", author:"Joe Navarro", color:"#8B4513", h:168, asin:"0063025396",
       synopsis:"Former FBI agent and body language expert Joe Navarro distills decades of behavioral science into a guide for becoming truly exceptional. He identifies the five traits shared by the most effective people and shows how mastering them separates the remarkable from the merely good.",
       amazon:"https://www.amazon.com/dp/0063025396" },
-    { title:"The Secret: What Great Leaders Know and Do", author:"Ken Blanchard & Mark Miller", color:"#C9963B", h:160, asin:"1626561982",
+    { title:"The Secret: What Great Leaders Know and Do", author:"Ken Blanchard & Mark Miller", color:"#C9963B", h:148, asin:"1626561982",
       synopsis:"Told as a business fable, this book reveals the central secret of great leadership: choosing to serve others above yourself. Blanchard and Miller show that leaders who consistently prioritize the growth of those around them are the ones who earn lasting influence.",
       amazon:"https://www.amazon.com/dp/1626561982" },
-    { title:"The Heart of Leadership", author:"Mark Miller", color:"#5E8F64", h:168, asin:"1609949609",
+    { title:"The Heart of Leadership", author:"Mark Miller", color:"#5E8F64", h:145, asin:"1609949609",
       synopsis:"A leadership fable exploring why character matters far more than skill. Through a young leader's journey, Miller argues that the heart of the leader—not the head—is what ultimately determines long-term effectiveness and true influence.",
       amazon:"https://www.amazon.com/dp/1609949609" },
-    { title:"The Ride of a Lifetime", author:"Robert Iger", color:"#C0392B", h:182, asin:"0399592091",
+    { title:"The Ride of a Lifetime", author:"Robert Iger", color:"#C0392B", h:184, asin:"0399592091",
       synopsis:"Disney's longtime CEO shares the leadership lessons behind fifteen years of remarkable stewardship—including the acquisitions of Pixar, Marvel, and Lucasfilm. A masterclass in bold, optimistic leadership and the courage to take creative risks at the highest level.",
       amazon:"https://www.amazon.com/dp/0399592091" },
-    { title:"Your Next Five Moves", author:"Patrick Bet-David", color:"#2980B9", h:170, asin:"1982154810",
+    { title:"Your Next Five Moves", author:"Patrick Bet-David", color:"#2980B9", h:168, asin:"1982154810",
       synopsis:"Drawing on chess strategy and entrepreneurial experience, Bet-David teaches how elite business minds think several steps ahead. A practical framework for knowing yourself deeply, building the right team, and mastering the game of strategy in business.",
       amazon:"https://www.amazon.com/dp/1982154810" },
-    { title:"Shoe Dog", author:"Phil Knight", color:"#D35400", h:185, asin:"1501135910",
+    { title:"Shoe Dog", author:"Phil Knight", color:"#D35400", h:192, asin:"1501135910",
       synopsis:"The raw, honest memoir of Nike's founder traces the company's improbable rise from a handshake deal with a Japanese shoe manufacturer to a global empire. A testament to obsessive belief, near-constant failure, and the stubbornness required to build something that lasts.",
       amazon:"https://www.amazon.com/dp/1501135910" },
-    { title:"Good to Great", author:"Jim Collins", color:"#27AE60", h:172, asin:"0066620996",
+    { title:"Good to Great", author:"Jim Collins", color:"#27AE60", h:158, asin:"0066620996",
       synopsis:"Based on a five-year research project, Collins identifies the disciplined people, disciplined thought, and disciplined action that distinguish truly great companies from merely good ones. The 'Level 5 Leader' concept alone is worth the read.",
       amazon:"https://www.amazon.com/dp/0066620996" },
-    { title:"The Power of Habit", author:"Charles Duhigg", color:"#8E44AD", h:165, asin:"081298160X",
+    { title:"The Power of Habit", author:"Charles Duhigg", color:"#8E44AD", h:163, asin:"081298160X",
       synopsis:"An investigation into the science of why habits exist and how they can be changed—in individuals, organizations, and entire societies. A fascinating blend of neuroscience and case studies revealing how the right habits become the foundation for transformation.",
       amazon:"https://www.amazon.com/dp/081298160X" },
-    { title:"Bet on Talent", author:"Dee Ann Turner", color:"#7D6608", h:177, asin:"0801094364",
+    { title:"Bet on Talent", author:"Dee Ann Turner", color:"#7D6608", h:170, asin:"0801094364",
       synopsis:"Drawing on 33 years at Chick-fil-A, Dee Ann Turner shares the talent philosophy that made the organization legendary. A compelling case that choosing character over credentials is the single most important hiring decision any leader will ever make.",
       amazon:"https://www.amazon.com/dp/0801094364" },
-    { title:"It's My Pleasure", author:"Dee Ann Turner", color:"#B8001F", h:170, asin:"1937498883",
+    { title:"It's My Pleasure", author:"Dee Ann Turner", color:"#B8001F", h:162, asin:"1937498883",
       synopsis:"A masterwork from Chick-fil-A veteran Dee Ann Turner on building a culture of genuine care and excellence. She shows how treating people as beloved guests creates loyalty, culture, and legacy that no competitor can replicate.",
       amazon:"https://www.amazon.com/dp/1937498883" },
-    { title:"Talk Triggers", author:"Jay Baer & Daniel Lemin", color:"#2E6B8A", h:163, asin:"0525537279",
+    { title:"Talk Triggers", author:"Jay Baer & Daniel Lemin", color:"#2E6B8A", h:158, asin:"0525537279",
       synopsis:"A playbook for creating intentional word-of-mouth marketing through strategic differentiators that make customers talk about your business. Packed with case studies and a practical framework for turning ordinary experiences into extraordinary referrals.",
       amazon:"https://www.amazon.com/dp/0525537279" },
-    { title:"Be Our Guest", author:"Theodore Kinni", color:"#1A5276", h:178, asin:"1423145844",
+    { title:"Be Our Guest", author:"Theodore Kinni", color:"#1A5276", h:172, asin:"1423145844",
       synopsis:"Disney Institute's detailed study of how Walt Disney World delivers consistent, extraordinary guest experiences at massive scale. The book unpacks the four pillars of Disney's approach—Safety, Courtesy, Show, and Efficiency—and shows how any organization can apply them.",
       amazon:"https://www.amazon.com/dp/1423145844" },
-    { title:"Powerful", author:"Patty McCord", color:"#CB4335", h:168, asin:"1939714095",
+    { title:"Powerful", author:"Patty McCord", color:"#CB4335", h:155, asin:"1939714095",
       synopsis:"Netflix's former Chief Talent Officer shares the radical people principles she and Reed Hastings built together—scrapping performance reviews and policies in favor of radical honesty and treating employees as fully responsible adults. A must-read for anyone rethinking organizational culture.",
       amazon:"https://www.amazon.com/dp/1939714095" },
-    { title:"Visual Intelligence", author:"Amy Herman", color:"#117A65", h:172, asin:"0544947126",
+    { title:"Visual Intelligence", author:"Amy Herman", color:"#117A65", h:170, asin:"0544947126",
       synopsis:"A former art historian who trained law enforcement and military leaders to see more by teaching them to look at art. She shows how sharpening visual perception—noticing what's present, missing, and implied—transforms decision-making and leadership.",
       amazon:"https://www.amazon.com/dp/0544947126" },
-    { title:"God Has a Name", author:"John Mark Comer", color:"#6B4226", h:160, asin:"0310344204",
+    { title:"God Has a Name", author:"John Mark Comer", color:"#6B4226", h:155, asin:"0310344204",
       synopsis:"Drawing on the ancient Hebrew name of God revealed to Moses, Comer unpacks what it means that God is 'slow to anger and abounding in love.' A theologically rich yet accessible book about the character of God and how knowing His name changes everything about how we live.",
       amazon:"https://www.amazon.com/dp/0310344204" },
-    { title:"Dream Big", author:"Bob Goff", color:"#5B7FA6", h:173, asin:"1400219493",
+    { title:"Dream Big", author:"Bob Goff", color:"#5B7FA6", h:165, asin:"1400219493",
       synopsis:"Bob Goff's joyful invitation to stop shrinking from your dreams and start pursuing them with everything you have. With warmth and humor, he challenges readers to identify what they truly want, release what holds them back, and step boldly toward the life they were made for.",
       amazon:"https://www.amazon.com/dp/1400219493" },
-    { title:"Everybody Always", author:"Bob Goff", color:"#884EA0", h:168, asin:"0718078136",
+    { title:"Everybody Always", author:"Bob Goff", color:"#884EA0", h:162, asin:"0718078136",
       synopsis:"A follow-up to Love Does, this book is Goff's case for loving everyone—not just the easy people, but the difficult, the broken, and those we'd rather avoid. Filled with personal stories, it challenges readers to trade selective love for a completely open-armed embrace of all people.",
       amazon:"https://www.amazon.com/dp/0718078136" },
-    { title:"How Did You Do It, Truett?", author:"Truett Cathy", color:"#196F3D", h:162, asin:"1929619332",
+    { title:"How Did You Do It, Truett?", author:"Truett Cathy", color:"#196F3D", h:150, asin:"1929619332",
       synopsis:"Truett Cathy answers the question he heard most throughout his career: how did you build such a remarkable company? His answer is disarmingly simple—take care of your people and close on Sundays. A short, powerful read on business philosophy rooted in faith and service.",
       amazon:"https://www.amazon.com/dp/1929619332" },
-    { title:"It's Better to Build Boys Than Mend Men", author:"S. Truett Cathy", color:"#4A4E6B", h:170, asin:"1929619200",
+    { title:"It's Better to Build Boys Than Mend Men", author:"S. Truett Cathy", color:"#4A4E6B", h:148, asin:"1929619200",
       synopsis:"Truett Cathy's passionate case for investing in young people before life becomes harder to reshape. Drawing on decades of work with foster children and WinShape camps, he argues the highest return on any investment is pouring into the next generation.",
       amazon:"https://www.amazon.com/dp/1929619200" },
-    { title:"Eat Mor Chikin: Inspire More People", author:"S. Truett Cathy", color:"#C41230", h:178, asin:"1929619081",
+    { title:"Eat Mor Chikin: Inspire More People", author:"S. Truett Cathy", color:"#C41230", h:158, asin:"1929619081",
       synopsis:"The personal and business philosophy of Chick-fil-A's founder, told through the lens of the brand's famous marketing campaign. Cathy shares how a commitment to quality, character, and purpose—not profit—became the foundation for one of America's most beloved companies.",
       amazon:"https://www.amazon.com/dp/1929619081" },
-    { title:"It's Easier to Succeed Than to Fail", author:"S. Truett Cathy", color:"#0F1C32", h:165, asin:"0840790309",
+    { title:"It's Easier to Succeed Than to Fail", author:"S. Truett Cathy", color:"#0F1C32", h:145, asin:"0840790309",
       synopsis:"One of Truett Cathy's early works making the counterintuitive argument that integrity, hard work, and treating people right makes success more attainable than cutting corners. A foundational text for understanding the principles that shaped Chick-fil-A's remarkable culture.",
       amazon:"https://www.amazon.com/dp/0840790309" }
   ];
@@ -1911,8 +1911,7 @@ document.addEventListener('keydown', function(e) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  var half = Math.ceil(BOOKS.length / 2);
-  var rows = [BOOKS.slice(0, half), BOOKS.slice(half)];
+  var rows = [BOOKS.slice(0, 9), BOOKS.slice(9, 18), BOOKS.slice(18)];
   var html = '';
   rows.forEach(function(rowBooks) {
     html += '<div class="shelf"><div class="shelf-books">';
