@@ -594,24 +594,34 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 .journey-timeline {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0;
-  max-width: 800px;
-  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200,160,80,0.3) transparent;
+  align-items: flex-start;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
 }
+.journey-timeline::-webkit-scrollbar{height:4px}
+.journey-timeline::-webkit-scrollbar-thumb{background:rgba(200,160,80,0.3);border-radius:2px}
 
 .journey-stop {
   display: flex;
-  gap: 32px;
-  position: relative;
+  flex-direction: column;
+  gap: 0;
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  padding-right: 24px;
 }
 
 .journey-connector {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  flex-shrink: 0;
-  padding-top: 8px;
+  padding-top: 0;
+  margin-bottom: 20px;
 }
 
 .journey-dot {
@@ -639,11 +649,10 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 }
 
 .journey-line {
-  width: 2px;
   flex: 1;
-  min-height: 40px;
-  background: linear-gradient(to bottom, var(--gold), rgba(200, 160, 80, 0.2));
-  margin-top: 8px;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), rgba(200, 160, 80, 0.15));
+  margin-left: 8px;
 }
 
 .journey-card {
@@ -651,7 +660,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 32px;
-  margin-bottom: 40px;
+  margin-bottom: 0;
   flex: 1;
   transition: background 0.3s ease, border-color 0.3s ease;
 }
@@ -799,7 +808,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 @media (max-width: 600px) {
   .journey-stop {
-    gap: 16px;
+    flex: 0 0 280px;
   }
 
   .journey-card {
@@ -886,7 +895,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <h2 class="sec-title">The Journey</h2>
     <p class="sec-sub" style="text-align:center;margin-bottom:60px;">Every assignment is a new restaurant, a new community, and a new set of problems to solve. This is the work.</p>
 
-    <div class="journey-timeline">
+    <div class="journey-timeline" id="journey-scroll">
 
       <!-- Assignment 1: Mall of Louisiana -->
       <div class="journey-stop completed">
@@ -956,6 +965,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         </div>
       </div>
 
+    </div>
+    <div class="scroll-controls" style="margin-top:.85rem">
+      <button class="scroll-btn" data-target="journey-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
+      <span style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)">Scroll through assignments</span>
+      <button class="scroll-btn" data-target="journey-scroll" data-dir="1" aria-label="Next">&#8594;</button>
     </div>
   </div>
 </section>
