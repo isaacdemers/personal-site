@@ -195,13 +195,11 @@ section{padding:4rem 2rem}
 
 /* TIMELINE */
 .tl-sec{background:var(--warm)}
-.timeline{position:relative;margin-top:2rem;padding-bottom:1.25rem;display:flex;flex-direction:row;gap:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;scroll-snap-type:x mandatory;align-items:stretch}
-.timeline::-webkit-scrollbar{height:4px}.timeline::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:2px}
-.tl-item{position:relative;flex:0 0 240px;scroll-snap-align:start;padding-top:3.5rem;margin-bottom:0;display:flex;flex-direction:column;opacity:0;transform:translateY(10px);transition:all .6s}
+.timeline{position:relative;margin-top:2rem;padding-left:3rem}
+.timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),var(--sage),var(--navy-light))}
+.tl-item{position:relative;margin-bottom:2.5rem;opacity:0;transform:translateY(20px);transition:all .6s}
 .tl-item.visible{opacity:1;transform:translateY(0)}
-.tl-item::before{content:'';position:absolute;left:calc(50% + 12px);top:21px;width:calc(100% + 20px - 24px);height:2px;background:rgba(26,46,74,0.12)}
-.tl-item:last-child::before{display:none}
-.tl-dot{position:absolute;left:50%;transform:translateX(-50%);top:10px;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center}
+.tl-dot{position:absolute;left:-3rem;top:.2rem;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center}
 .tl-dot.gold{border-color:var(--gold)}.tl-dot.sage{border-color:var(--sage)}.tl-dot.navy{border-color:var(--navy-light)}.tl-dot.active{border-color:var(--sage);box-shadow:0 0 0 4px rgba(94,143,100,.2)}
 .tl-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--red)}
 .tl-dot.gold .tl-dot-inner{background:var(--gold)}.tl-dot.sage .tl-dot-inner{background:var(--sage)}.tl-dot.navy .tl-dot-inner{background:var(--navy-light)}.tl-dot.active .tl-dot-inner{background:var(--sage);animation:pulse 2s ease infinite}
@@ -215,9 +213,9 @@ section{padding:4rem 2rem}
 .tag-edu{background:rgba(201,150,59,.1);color:#A07A20}
 .tag-personal{background:rgba(94,143,100,.1);color:#4A7550}
 .tag-current{background:rgba(94,143,100,.12);color:var(--sage);border:1px solid rgba(94,143,100,.2)}
-.tl-row{display:flex;flex-direction:column;gap:.75rem}
+.tl-row{display:flex;gap:1rem;align-items:flex-start}
 .tl-content{flex:1;min-width:0}
-.tl-photo{width:100%;aspect-ratio:1;height:auto;border-radius:10px;object-fit:cover;order:-1;box-shadow:var(--sh-sm);cursor:pointer;display:block}
+.tl-photo{width:110px;height:82px;border-radius:10px;object-fit:cover;flex-shrink:0;margin-top:1.5rem;box-shadow:var(--sh-sm);cursor:pointer}
 
 /* ASSIGNMENTS */
 .assign-sec{background:var(--navy);color:white;padding:4rem 2rem}
@@ -561,6 +559,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .journey-timeline::before{display:none}
   .journey-card{margin-bottom:24px}
   .journey-connector{margin-bottom:12px}
+  .tl-photo{display:none}
 }
 @media(max-width:600px){.hero-stats{flex-direction:column;gap:.75rem}}
 
@@ -758,6 +757,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   display: flex;
   align-items: baseline;
   gap: 12px;
+  margin-top: auto;
   margin-bottom: 16px;
   padding: 12px 16px;
   background: rgba(255, 255, 255, 0.03);
@@ -806,7 +806,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   text-decoration: none;
   text-transform: uppercase;
   transition: opacity 0.2s ease;
-  margin-top: auto;
   align-self: flex-start;
 }
 
@@ -1386,7 +1385,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">Career Timeline</div>
     <h2 class="sec-title fade-in">From Valet to Operator Candidate</h2>
     <p class="sec-sub fade-in">Every chapter built on the last. Every setback became a setup.</p>
-    <div class="timeline" id="tl-scroll">
+    <div class="timeline">
       <div class="tl-item"><div class="tl-dot navy"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">AUG 2015 - OCT 2021 &bull; 6 yrs 3 mos</div><div class="tl-card"><h3>Rocky Gap Casino & Resort</h3><p>Rose from Valet Attendant to Lead Valet to Valet Supervisor to Hotel Operations Supervisor to Marketing Manager over six years. Built operational systems, led cross-functional teams, and developed leaders including Josh James, Angelina Bloom, Jacob Santameyer, and Brandon Stotler.</p><span class="tl-tag tag-career">Career Foundation</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/sTd4qf9.jpg" alt="Rocky Gap Casino & Resort"></div></div>
 
       <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">2020</div><div class="tl-card"><h3>Liberty University, Graduated with Honors</h3><p>Completed my degree while working demanding hospitality hours at Rocky Gap. Proved that discipline and commitment could coexist, even when the schedule said otherwise.</p><span class="tl-tag tag-edu">Education</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/ePrgZy7.jpg" alt="Liberty University"></div></div>
@@ -1395,16 +1394,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
       <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">MAR 2025</div><div class="tl-card"><h3>Accepted into LDP (Third Application)</h3><p>After two rejections, accepted into the Leadership Development Program. Joined March 3, 2025, at the Chick-fil-A Corporate Support Center.</p><span class="tl-tag tag-personal">Milestone</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/rgLP9eE.jpg" alt="LDP Acceptance"></div></div>
 
-      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">APR - OCT 2025</div><div class="tl-card"><h3>IM Assignment 1: Mall of Louisiana</h3><p>Served as Interim Manager on a six-month assignment. Promoted Hayleigh Bozant to Executive Director. Drove 12%+ sales growth, achieved 100% QIV in Q2, and executed the largest catering delivery in the location's history at $10,600. Tracy Roper told me he would hand me the keys to a restaurant.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/bAsOOSv.jpg" alt="Mall of Louisiana"></div></div>
+      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">APR - OCT 2025</div><div class="tl-card"><h3>IM Assignment 1: Mall of Louisiana</h3><p>Served as Interim Manager on a six-month assignment. Promoted Hayleigh Bozant to Executive Director. Drove 12%+ sales growth, achieved 100% QIV in Q2, and executed the largest catering delivery in the location's history at $10,600. Tracy Roper told me he would hand me the keys to a restaurant.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/DoDkykH.jpg" alt="Mall of Louisiana"></div></div>
 
-      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">NOV 2025 - MAR 2026</div><div class="tl-card"><h3>IM Assignment 2: Altamesa & McCart, Fort Worth, TX</h3><p>First IM on grounds during a confidential operator transition. Led through power outages, roof leaks, sewage issues, and organizational rebuilds. Promoted Tonia Coulston and Sevastian Galvan. QIV rose from 76.6% to 91.1%. Swung net profit from -11.5% to +9.2% in one month.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/pvCAR3x.jpg" alt="Altamesa & McCart"></div></div>
+      <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">NOV 2025 - MAR 2026</div><div class="tl-card"><h3>IM Assignment 2: Altamesa & McCart, Fort Worth, TX</h3><p>First IM on grounds during a confidential operator transition. Led through power outages, roof leaks, sewage issues, and organizational rebuilds. Promoted Tonia Coulston and Sevastian Galvan. QIV rose from 76.6% to 91.1%. Swung net profit from -11.5% to +9.2% in one month.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/0SnPztq.jpg" alt="Altamesa & McCart"></div></div>
 
       <div class="tl-item"><div class="tl-dot active"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">MAR 2026 - PRESENT</div><div class="tl-card"><h3>GOS Assignment: Latham Farms, Albany, NY</h3><p>Currently serving as Grand Opening Supervisor for my first grand opening assignment. Leading operations, team readiness, and community launch strategy.</p><span class="tl-tag tag-current">Current Assignment</span></div></div></div></div>
-    </div>
-    <div class="scroll-controls" style="margin-top:.85rem">
-      <button class="scroll-btn" data-target="tl-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
-      <span class="horiz-scroll-hint">Scroll through the timeline</span>
-      <button class="scroll-btn" data-target="tl-scroll" data-dir="1" aria-label="Next">&#8594;</button>
     </div>
   </div>
 </section>
