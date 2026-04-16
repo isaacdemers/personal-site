@@ -514,7 +514,12 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .ff-pullquote{background:transparent;border-left:4px solid var(--red);padding:1.25rem 2rem;margin:.5rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--navy);line-height:1.55}
 .ff-photo-grid{display:grid;gap:1.5rem;margin:1.75rem 0}.ff-photo-grid-2{grid-template-columns:1fr 1fr}.ff-photo-entry img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:12px;display:block;margin-bottom:.85rem}.ff-entry-label{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem}.ff-entry-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--navy);margin-bottom:.45rem;line-height:1.35}.ff-entry-text{font-size:.9rem;color:var(--text-mid);line-height:1.78}.ff-featured-split{display:grid;grid-template-columns:1.25fr 1fr;gap:2rem;align-items:start;margin:1.75rem 0 2rem}.ff-featured-split>img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:12px}.ff-featured-split-body{padding-top:.25rem}
 .ff-scroll-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;margin:2rem -2rem 0;padding:0 2rem 1rem}.ff-scroll-wrap::-webkit-scrollbar{height:4px}.ff-scroll-wrap::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:2px}.ff-scroll-track{display:flex;gap:1.25rem;scroll-snap-type:x mandatory}.ff-scroll-card{flex:0 0 260px;scroll-snap-align:start;background:white;border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm)}.ff-scroll-card img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;display:block}.ff-scroll-card-body{padding:1.1rem 1.25rem 1.25rem}.ff-scroll-card-body .ff-entry-label{display:block;margin-bottom:.25rem}.ff-scroll-card-body .ff-entry-title{font-size:.98rem;margin-bottom:.35rem}.ff-scroll-card-body .ff-entry-text{font-size:.83rem;line-height:1.7}.ff-scroll-quote{flex:0 0 280px;scroll-snap-align:start;background:var(--navy);border-radius:14px;padding:1.75rem;display:flex;align-items:center;box-shadow:var(--sh-sm)}.ff-scroll-quote p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:white;line-height:1.6;border-left:3px solid var(--red);padding-left:1rem;margin:0}
-.horiz-scroll-hint{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light);text-align:center;margin-top:.35rem;opacity:.7}
+.horiz-scroll-hint{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light);opacity:.7}
+.scroll-controls{display:flex;align-items:center;justify-content:center;gap:.85rem;margin-top:.6rem}
+.scroll-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:white;box-shadow:var(--sh-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:.9rem;transition:background .2s,color .2s,border-color .2s;flex-shrink:0;line-height:1}
+.scroll-btn:hover{background:var(--navy);color:white;border-color:var(--navy)}
+.scroll-btn:disabled{opacity:.25;cursor:default}
+.scroll-btn:disabled:hover{background:white;color:var(--navy);border-color:var(--border)}
 .people-scroll-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;margin:1.75rem -2rem 0;padding:0 2rem 1rem}.people-scroll-wrap::-webkit-scrollbar{height:4px}.people-scroll-wrap::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:2px}.people-scroll-track{display:flex;gap:1.25rem;scroll-snap-type:x mandatory}.people-scroll-track .person-card{flex:0 0 220px;scroll-snap-align:start}
 
 /* RESPONSIVE */
@@ -1189,13 +1194,13 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   </div>
 </section>
 
-<!-- FAITH & FAMILY -->
+<!-- ORIGIN STORY -->
 <section class="ff-sec" id="faith-family">
   <div class="sec-inner">
-    <div class="sec-label fade-in">Faith &amp; Family</div>
-    <h2 class="sec-title fade-in">The People Who Made Me</h2>
-    <p class="ff-deck fade-in">Scroll through the moments and people that wired me — long before I ever stepped behind a counter.</p>
-    <div class="ff-scroll-wrap fade-in">
+    <div class="sec-label fade-in">Origin Story</div>
+    <h2 class="sec-title fade-in">The Road That Led Here</h2>
+    <p class="ff-deck fade-in">From a garden in Maryland to the red couch in Atlanta — the moments, people, and chapters that built everything.</p>
+    <div class="ff-scroll-wrap fade-in" id="ff-scroll">
       <div class="ff-scroll-track">
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/XLma33P.jpg" alt="Isaac and Gram (Nancy Hawbaker) working in the garden" loading="lazy">
@@ -1261,20 +1266,96 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
             <p class="ff-entry-text">Basketball taught me how to carry a team through a stretch when nothing is working and still hand the credit to someone else. The number that mattered was how my teammates were playing when the game was on the line.</p>
           </div>
         </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/u9pvRk8.jpg" alt="Isaac coaching a human video team at Fine Arts, won regional competition, early college" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Fine Arts — Early College</span>
+            <div class="ff-entry-title">From performer to coach</div>
+            <p class="ff-entry-text">I went from competing in human video to coaching one. Our team won the regional Fine Arts competition. Something about standing behind a team and watching them perform what you built together — I understood leadership differently after that.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/hjMwwy7.jpg" alt="Isaac receiving the Ace of Diamonds Award at Rocky Gap Casino with GM Skylar Dice, age 21" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Rocky Gap Casino &amp; Resort — Age 21</span>
+            <div class="ff-entry-title">Ace of Diamonds</div>
+            <p class="ff-entry-text">At 21 I was Hotel Operations Supervisor at Rocky Gap. This is the moment I received the Ace of Diamonds Award alongside GM Skylar Dice. I did not know it yet, but this was the proving ground for everything that came next.</p>
+          </div>
+        </div>
         <div class="ff-scroll-quote">
           <p>I had not given God the keys to my destiny, and in return He did not give me the keys to my dream. I was not releasing myself to be broken and rebuilt. I wanted to show God I was truly surrendering for this next season.</p>
         </div>
         <div class="ff-scroll-card">
-          <img src="https://i.imgur.com/Ms8mnIf.jpg" alt="Second baptism, National Community Church, Washington DC" loading="lazy">
+          <img src="https://i.imgur.com/CXNCw5X.jpg" alt="Second baptism, National Community Church, Washington DC" loading="lazy">
           <div class="ff-scroll-card-body">
             <span class="ff-entry-label">Faith</span>
             <div class="ff-entry-title">Two baptisms, two chapters</div>
             <p class="ff-entry-text">My father baptized me in a creek in Maryland at ten — that faith was mine. Before LDP, Lexie and I were baptized together at National Community Church. A new chapter, with God in control.</p>
           </div>
         </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/FFNiWei.jpg" alt="Young Levi Demers with a Chick-fil-A cow mascot in Hagerstown Maryland" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Hagerstown, Maryland</span>
+            <div class="ff-entry-title">Before we knew</div>
+            <p class="ff-entry-text">Levi with a Chick-fil-A cow. I was probably in 9th grade when this was taken — Levi a couple years behind me. Neither of us could have known then that we would both end up building careers inside the brand. One of the most special photos I own.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/uGCuRhE.jpg" alt="Grand opening of Chick-fil-A Ridgeside Drive in Mount Airy Maryland, Isaac and Levi's first time working together" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">CFA Ridgeside Drive — Mount Airy, MD</span>
+            <div class="ff-entry-title">The first one</div>
+            <p class="ff-entry-text">Grand opening of Chick-fil-A Ridgeside Drive. This was the first time Levi and I worked together, and my first day inside the brand. Everything that followed — every assignment, every team, every result — started here.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/InGr1Ao.jpg" alt="Isaac and Levi working together in the BOH rotating chicken" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Levi &amp; Isaac — BOH</span>
+            <div class="ff-entry-title">In the work together</div>
+            <p class="ff-entry-text">Levi and I in the back of house rotating chicken. The two of us who once built Lego hotels in Toronto, now building something real. Side by side in the work.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/EhBgRFO.jpg" alt="Levi and Isaac serving together at FTS grand opening in North Barrie Ontario, Canada" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">FTS — North Barrie, Ontario</span>
+            <div class="ff-entry-title">Full circle in Canada</div>
+            <p class="ff-entry-text">Levi and I serving together at a grand opening in North Barrie — the first FTS assignment we served together, and my second FTS assignment. Two kids who grew up between Canada and Maryland, back in Canada, serving people. Full circle.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/lkfZi94.jpg" alt="Isaac with FTS team serving at grand opening at Rideau Centre mall in Ottawa" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">FTS — Ottawa, Ontario</span>
+            <div class="ff-entry-title">Rideau Centre grand opening</div>
+            <p class="ff-entry-text">Serving a grand opening at the Rideau Centre mall in Ottawa with my FTS team. Every opening is a new set of people, a new city, a new team to build fast. This one was in Canada — which never gets old.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/6t6crEw.jpg" alt="Isaac with his LDP class on the Chick-fil-A red couch, March 2025" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">LDP — March 2025</span>
+            <div class="ff-entry-title">The red couch</div>
+            <p class="ff-entry-text">My LDP class on the famous Chick-fil-A red couch on day one at the Corporate Support Center. Everything before this moment was preparation. Everything after is the mission.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/547XmcJ.jpg" alt="Isaac and Levi together on Isaac's first day in LDP at the Chick-fil-A Corporate Support Center" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">LDP Day One — A God Moment</span>
+            <div class="ff-entry-title">Levi was there</div>
+            <p class="ff-entry-text">Levi happened to be at the Support Center on a tour with our operator on my first day in LDP. Of all the days. Of all the timing. We got this photo. Some things are not coincidences.</p>
+          </div>
+        </div>
       </div>
     </div>
-    <p class="horiz-scroll-hint">&#8592; Scroll to explore the story &#8594;</p>
+    <div class="scroll-controls">
+      <button class="scroll-btn" data-target="ff-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
+      <span class="horiz-scroll-hint">Scroll to explore the story</span>
+      <button class="scroll-btn" data-target="ff-scroll" data-dir="1" aria-label="Next">&#8594;</button>
+    </div>
   </div>
 </section>
 
@@ -1399,7 +1480,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">People Developed</div>
     <h2 class="sec-title fade-in">The Legacy That Matters Most</h2>
     <p class="sec-sub fade-in">Developing people is not a box to check. It is the work. These leaders carry forward everything we built together.</p>
-    <div class="people-scroll-wrap fade-in">
+    <div class="people-scroll-wrap fade-in" id="people-scroll">
       <div class="people-scroll-track">
         <div class="person-card"><div class="person-avatar pa-1">HB</div><h4>Hayleigh Bozant</h4><div class="person-role">Executive Director, MOL</div><p>Promoted at Mall of Louisiana. Grew from strong contributor to the leader driving the entire operation.</p></div>
         <div class="person-card"><div class="person-avatar pa-2">TC</div><h4>Tonia Coulston</h4><div class="person-role">FOH Executive Director, Altamesa</div><p>Promoted at Altamesa. Her growth in leadership presence and accountability became a model for the team.</p></div>
@@ -1413,7 +1494,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="person-card"><div class="person-avatar pa-10">BS</div><h4>Brandon Stotler</h4><div class="person-role">Valet Supervisor, Rocky Gap</div><p>Developed into a valet supervisor, carrying forward the leadership standard Isaac established in the department.</p></div>
       </div>
     </div>
-    <p class="horiz-scroll-hint">&#8592; Scroll to see all 10 leaders &#8594;</p>
+    <div class="scroll-controls">
+      <button class="scroll-btn" data-target="people-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
+      <span class="horiz-scroll-hint">Scroll to see all 10 leaders</span>
+      <button class="scroll-btn" data-target="people-scroll" data-dir="1" aria-label="Next">&#8594;</button>
+    </div>
   </div>
 </section>
 
@@ -1933,6 +2018,17 @@ document.addEventListener('keydown', function(e) {
   });
 })();
 
+// === SCROLL BUTTONS ===
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('.scroll-btn');
+  if (!btn) return;
+  var target = document.getElementById(btn.dataset.target);
+  if (!target) return;
+  var card = target.querySelector('.ff-scroll-card, .person-card, .book-spine');
+  var amount = card ? card.offsetWidth + 16 : 280;
+  target.scrollBy({ left: parseInt(btn.dataset.dir) * amount, behavior: 'smooth' });
+});
+
 // === BOOKSHELF ===
 (function() {
   var BOOKS = [
@@ -2037,12 +2133,12 @@ document.addEventListener('keydown', function(e) {
     return '<div class="book-spine" role="button" tabindex="0" aria-label="' + esc(book.title) + '" data-idx="' + idx + '" style="--sc:' + book.color + styleH + ';background-image:url(' + coverUrlFor(book) + ')"></div>';
   }
   function renderBookshelf() {
-    var html = '<div class="shelf shelf-mobile"><div class="shelf-mobile-canvas"><div class="shelf-books">';
+    var html = '<div class="shelf shelf-mobile" id="shelf-scroll"><div class="shelf-mobile-canvas"><div class="shelf-books">';
     BOOKS.forEach(function(book, idx) {
       html += spineHtml(book, idx, false);
     });
     html += '</div><div class="shelf-rail"></div></div></div>';
-    html += '<div class="shelf-scroll-hint">&#8592; Scroll to browse all ' + BOOKS.length + ' &#8594;</div>';
+    html += '<div class="scroll-controls"><button class="scroll-btn" data-target="shelf-scroll" data-dir="-1" aria-label="Previous">&#8592;</button><span class="shelf-scroll-hint">Scroll to browse all ' + BOOKS.length + '</span><button class="scroll-btn" data-target="shelf-scroll" data-dir="1" aria-label="Next">&#8594;</button></div>';
     bc.innerHTML = html;
   }
   renderBookshelf();
