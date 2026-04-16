@@ -313,15 +313,18 @@ section{padding:4rem 2rem}
 .bm-nav-btn:hover:not(:disabled){background:var(--cream-dark)}
 .bm-nav-btn:disabled{opacity:.28;cursor:default}
 .bm-nav-count{font-size:.72rem;color:var(--text-light);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+.shelf-mobile{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;background:none;box-shadow:none;border-radius:0;padding:0;position:relative}
+.shelf-mobile-canvas{display:inline-flex;flex-direction:column;min-width:100%;background:linear-gradient(180deg,#d4a870 0%,#b87940 60%,#9a6228 100%);border-radius:6px 6px 0 0;padding:1rem 1.5rem 0;box-shadow:0 6px 20px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.25)}
+.shelf-mobile .shelf-books{display:flex;flex-direction:row;gap:10px;align-items:end;grid-template-columns:none;padding-bottom:.25rem}
+.shelf-mobile .book-spine{width:120px;height:180px;flex-shrink:0;border-radius:3px;background-position:center center;box-shadow:2px 2px 8px rgba(0,0,0,.28),inset 2px 0 6px rgba(0,0,0,.18)}
+.shelf-mobile .book-spine:hover,.shelf-mobile .book-spine:focus{transform:translateY(-8px)}
+.shelf-mobile .shelf-rail{margin:0 -1.5rem}
+.shelf-scroll-hint{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);text-align:center;margin-top:.85rem;opacity:.7}
 @media(max-width:700px){
   .bookcase{margin-left:-1.25rem;margin-right:-1.25rem}
-  .shelf-mobile{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;background:none;box-shadow:none;border-radius:0;padding:0;position:relative}
-  .shelf-mobile-canvas{display:inline-flex;flex-direction:column;min-width:100%;background:linear-gradient(180deg,#d4a870 0%,#b87940 60%,#9a6228 100%);border-radius:6px 6px 0 0;padding:1rem 1rem 0;box-shadow:0 6px 20px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.25)}
-  .shelf-mobile .shelf-books{display:flex;flex-direction:row;gap:10px;align-items:end;grid-template-columns:none;padding-bottom:.25rem}
-  .shelf-mobile .book-spine{width:108px;height:162px;flex-shrink:0;border-radius:3px;background-position:center center;box-shadow:2px 2px 8px rgba(0,0,0,.28),inset 2px 0 6px rgba(0,0,0,.18)}
-  .shelf-mobile .book-spine:hover,.shelf-mobile .book-spine:focus{transform:translateY(-6px)}
+  .shelf-mobile .book-spine{width:108px;height:162px}
+  .shelf-mobile-canvas{padding:1rem 1rem 0}
   .shelf-mobile .shelf-rail{margin:0 -1rem}
-  .shelf-scroll-hint{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);text-align:center;margin-top:.85rem;opacity:.7}
 }
 @media(max-width:480px){
   .shelf-mobile .book-spine{width:96px;height:144px}
@@ -510,11 +513,14 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .ff-card p{font-size:.92rem;color:var(--text-mid);line-height:1.8}
 .ff-pullquote{background:transparent;border-left:4px solid var(--red);padding:1.25rem 2rem;margin:.5rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--navy);line-height:1.55}
 .ff-photo-grid{display:grid;gap:1.5rem;margin:1.75rem 0}.ff-photo-grid-2{grid-template-columns:1fr 1fr}.ff-photo-entry img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:12px;display:block;margin-bottom:.85rem}.ff-entry-label{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem}.ff-entry-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--navy);margin-bottom:.45rem;line-height:1.35}.ff-entry-text{font-size:.9rem;color:var(--text-mid);line-height:1.78}.ff-featured-split{display:grid;grid-template-columns:1.25fr 1fr;gap:2rem;align-items:start;margin:1.75rem 0 2rem}.ff-featured-split>img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;border-radius:12px}.ff-featured-split-body{padding-top:.25rem}
+.ff-scroll-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;margin:2rem -2rem 0;padding:0 2rem 1rem}.ff-scroll-wrap::-webkit-scrollbar{height:4px}.ff-scroll-wrap::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:2px}.ff-scroll-track{display:flex;gap:1.25rem;scroll-snap-type:x mandatory}.ff-scroll-card{flex:0 0 260px;scroll-snap-align:start;background:white;border-radius:14px;overflow:hidden;box-shadow:var(--sh-sm)}.ff-scroll-card img{width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;display:block}.ff-scroll-card-body{padding:1.1rem 1.25rem 1.25rem}.ff-scroll-card-body .ff-entry-label{display:block;margin-bottom:.25rem}.ff-scroll-card-body .ff-entry-title{font-size:.98rem;margin-bottom:.35rem}.ff-scroll-card-body .ff-entry-text{font-size:.83rem;line-height:1.7}.ff-scroll-quote{flex:0 0 280px;scroll-snap-align:start;background:var(--navy);border-radius:14px;padding:1.75rem;display:flex;align-items:center;box-shadow:var(--sh-sm)}.ff-scroll-quote p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:white;line-height:1.6;border-left:3px solid var(--red);padding-left:1rem;margin:0}
+.horiz-scroll-hint{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light);text-align:center;margin-top:.35rem;opacity:.7}
+.people-scroll-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;margin:1.75rem -2rem 0;padding:0 2rem 1rem}.people-scroll-wrap::-webkit-scrollbar{height:4px}.people-scroll-wrap::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:2px}.people-scroll-track{display:flex;gap:1.25rem;scroll-snap-type:x mandatory}.people-scroll-track .person-card{flex:0 0 220px;scroll-snap-align:start}
 
 /* RESPONSIVE */
 @media(max-width:900px){
   .story-grid,.pers-grid,.fin-dash,.feedback-grid{grid-template-columns:1fr}
-  .people-grid{grid-template-columns:repeat(2,1fr)}
+
   .dev-grid,.ahead-cards{grid-template-columns:1fr}
   .metrics-row{grid-template-columns:repeat(2,1fr)}
   .highlights-grid{grid-template-columns:1fr}
@@ -545,7 +551,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .legacy-family-section,.truett-section,.through-line-section{padding:2.5rem 1.25rem}
   .legacy-page-hero{padding:4rem 1.25rem 2rem}
 }
-@media(max-width:600px){.hero-stats{flex-direction:column;gap:.75rem}.people-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.hero-stats{flex-direction:column;gap:.75rem}}
 
 /* Reduced motion: honor OS setting for vestibular/sensitivity users */
 @media (prefers-reduced-motion: reduce) {
@@ -1184,96 +1190,91 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 </section>
 
 <!-- FAITH & FAMILY -->
-<section class="ff-sec mobile-collapsible" id="faith-family" data-mobile-collapsed="true">
+<section class="ff-sec" id="faith-family">
   <div class="sec-inner">
     <div class="sec-label fade-in">Faith &amp; Family</div>
     <h2 class="sec-title fade-in">The People Who Made Me</h2>
-    <p class="ff-deck fade-in">You cannot fully understand where someone is going without knowing where they came from. These are the people, moments, and places that wired me — long before I ever stepped behind a counter.</p>
-    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="ff-content"><span class="mobile-toggle-label">Read the full story</span><span class="mobile-toggle-icon" aria-hidden="true">&#x25BE;</span></button>
-    <div class="mobile-collapsible-content" id="ff-content">
-
-    <!-- Chapter 1: The Hawbakers -->
-    <h3 class="ff-movement-hdr fade-in">The Hawbakers — Clear Spring, Maryland</h3>
-    <div class="ff-photo-grid ff-photo-grid-2 fade-in">
-      <div class="ff-photo-entry">
-        <img src="https://i.imgur.com/XLma33P.jpg" alt="Isaac and Gram (Nancy Hawbaker) working in the garden" loading="lazy">
-        <div class="ff-entry-label">Nancy Hawbaker — Gram</div>
-        <div class="ff-entry-title">She tended everything she loved</div>
-        <p class="ff-entry-text">Gram kept a garden the way she kept a home — with patience and attention to what something needed, not just what it looked like. Working beside her in the soil taught me that care is not passive. It is daily, physical, and personal. She modeled what a table open to everyone actually looks like from the inside.</p>
-      </div>
-      <div class="ff-photo-entry">
-        <img src="https://i.imgur.com/uh9Ynzc.jpg" alt="Isaac doing arts and crafts with Pap (David Hawbaker)" loading="lazy">
-        <div class="ff-entry-label">David Hawbaker — Pap</div>
-        <div class="ff-entry-title">A craftsman's hands</div>
-        <p class="ff-entry-text">Pap was a stonemason. He built things that lasted. Sitting at the table doing arts and crafts with him, I absorbed a standard I carry everywhere: if you are going to make something, make it worth keeping. You do not rush it. You do not cut corners. You care about what your hands produce.</p>
-      </div>
-    </div>
-
-    <!-- Chapter 2: Growing Up Demers -->
-    <h3 class="ff-movement-hdr fade-in">Growing Up — Toronto &amp; Maryland</h3>
-    <div class="ff-featured-split fade-in">
-      <img src="https://i.imgur.com/gPPZRVD.jpg" alt="Isaac and his dad as a kid" loading="lazy">
-      <div class="ff-featured-split-body">
-        <div class="ff-entry-label">My Father</div>
-        <div class="ff-entry-title">He served people no one else was serving</div>
-        <p class="ff-entry-text">My dad spent my childhood counseling the addicted and serving the overlooked through the Salvation Army. Every Sunday we loaded vans with equipment and food and drove to a community center to serve hot lunches. I did not learn hospitality from a book. I absorbed it watching him look people in the eye — the ones the world had already looked away from.</p>
-        <p class="ff-entry-text" style="margin-top:.85rem">The table he kept open was not metaphorical. It was real, weekly, and costly. That image never left me.</p>
-      </div>
-    </div>
-    <div class="ff-photo-grid ff-photo-grid-2 fade-in">
-      <div class="ff-photo-entry">
-        <img src="https://i.imgur.com/iNkb2KN.jpg" alt="Isaac and his brother Levi in Toronto with Lego hotels and skyscrapers they built" loading="lazy">
-        <div class="ff-entry-label">Levi &amp; Isaac — Toronto</div>
-        <div class="ff-entry-title">I never followed the instructions</div>
-        <p class="ff-entry-text">I threw away the Lego instruction sheets. The kits were never the point. I was interested in hotels and skyscrapers — the structures where people gathered, stayed, and were served. My brother Levi and I spent hours in Toronto building towers I had imagined myself. The dream was already there. I just did not have a name for it yet.</p>
-      </div>
-      <div class="ff-photo-entry">
-        <img src="https://i.imgur.com/qwDZ5IP.jpg" alt="Mom and Dad becoming Canadian citizens — the whole family holds dual US and Canadian citizenship" loading="lazy">
-        <div class="ff-entry-label">The Demers Family</div>
-        <div class="ff-entry-title">We belong to two countries</div>
-        <p class="ff-entry-text">My parents became Canadian citizens while raising our family. All of us carry dual citizenship — American and Canadian. Growing up between two nations taught me early that identity is not fixed to one place, one culture, or one way of doing things. You carry what shaped you, wherever you go.</p>
-      </div>
-    </div>
-
-    <!-- Discover Ability bridge -->
-    <div class="ff-featured-split fade-in">
-      <img src="https://i.imgur.com/VaHUszH.jpg" alt="Isaac at Discover Ability, the program where he found his love for art and creating" loading="lazy">
-      <div class="ff-featured-split-body">
-        <div class="ff-entry-label">Discover Ability</div>
-        <div class="ff-entry-title">The moment art became mine</div>
-        <p class="ff-entry-text">My parents enrolled me in Discover Ability — a program built to help kids find out what they were made for. We did sports, theater, performances, and art. I found my way to the art side and never left. Something clicked when I had a surface, a medium, and the freedom to make something that did not exist before.</p>
-        <p class="ff-entry-text" style="margin-top:.85rem">That instinct never left. Every space I have built or led since has had that same fingerprint — the belief that environment and aesthetics say something about how much you care about the people inside them.</p>
-      </div>
-    </div>
-
-    <!-- Chapter 3: Formation -->
-    <h3 class="ff-movement-hdr fade-in">Finding My Shape — Calvary Christian Academy</h3>
-    <div class="ff-photo-grid ff-photo-grid-2 fade-in">
-      <div class="ff-photo-entry">
-        <img src="https://i.imgur.com/FXzT0r6.jpg" alt="Isaac competing in Fine Arts performing a human video with youth group students, 9th grade" loading="lazy">
-        <div class="ff-entry-label">Fine Arts — 9th Grade</div>
-        <div class="ff-entry-title">Creativity was never just a hobby</div>
-        <p class="ff-entry-text">I competed in national Fine Arts, performing a human video with students from my youth group. Standing in front of an audience and channeling conviction through movement — I learned something about the relationship between faith and craft. Neither one can be faked. The performance was the faith, and the faith was the performance.</p>
-      </div>
-      <div class="ff-photo-entry">
-        <img src="https://i.imgur.com/3QIDRCF.jpg" alt="Isaac's basketball team, Isaac wearing jersey number 3, 11th grade" loading="lazy">
-        <div class="ff-entry-label">Calvary Basketball — 11th Grade</div>
-        <div class="ff-entry-title">Jersey #3</div>
-        <p class="ff-entry-text">Basketball taught me things the classroom could not. How to absorb a loss without losing your edge. How to carry a team through a stretch when nothing is working. How to compete with everything you have and still hand the credit to someone else. The number that mattered was never mine — it was how my teammates were playing when the game was on the line.</p>
-      </div>
-    </div>
-
-    <!-- Faith -->
-    <h3 class="ff-movement-hdr fade-in">Faith</h3>
-    <div class="ff-formation">
-      <blockquote class="ff-pullquote fade-in">I had not given God the keys to my destiny, and in return He did not give me the keys to my dream. That is one of the reasons it took me longer to get into LDP. I was not releasing myself to be broken and rebuilt. I wanted to show God I was truly surrendering for this next season.</blockquote>
-      <div class="ff-card fade-in">
-        <img src="https://i.imgur.com/Ms8mnIf.jpg" alt="Second baptism, National Community Church, Washington DC" style="width:100%;height:300px;object-fit:cover;object-position:top;border-radius:12px;margin-bottom:1rem" loading="lazy">
-        <p>My father baptized me in a small creek in Maryland near my grandparents' home when I was ten. That first baptism was mine — I was not believing because my parents told me to. I was taking ownership. Years later, right before I left for LDP, Lexie and I got baptized together at National Community Church in DC. She had recently dedicated her life to Christ, and I wanted to rededicate myself as one chapter closed and another opened. I knew there were more Goliaths ahead. I knew I could only face them with God in control.</p>
+    <p class="ff-deck fade-in">Scroll through the moments and people that wired me — long before I ever stepped behind a counter.</p>
+    <div class="ff-scroll-wrap fade-in">
+      <div class="ff-scroll-track">
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/XLma33P.jpg" alt="Isaac and Gram (Nancy Hawbaker) working in the garden" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Nancy Hawbaker — Gram</span>
+            <div class="ff-entry-title">She tended everything she loved</div>
+            <p class="ff-entry-text">Gram kept a garden the way she kept a home — with patience and attention to what something needed, not just what it looked like. Working beside her taught me that care is not passive. It is daily, physical, and personal.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/uh9Ynzc.jpg" alt="Isaac doing arts and crafts with Pap (David Hawbaker)" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">David Hawbaker — Pap</span>
+            <div class="ff-entry-title">A craftsman's hands</div>
+            <p class="ff-entry-text">Pap was a stonemason — he built things that lasted. Sitting at the table with him, I absorbed a standard I carry everywhere: if you are going to make something, make it worth keeping.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/gPPZRVD.jpg" alt="Isaac and his dad as a kid" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">My Father</span>
+            <div class="ff-entry-title">He served people no one else was serving</div>
+            <p class="ff-entry-text">My dad spent my childhood counseling the addicted through the Salvation Army. I did not learn hospitality from a book. I absorbed it watching him look people in the eye that the world had already looked away from.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/iNkb2KN.jpg" alt="Isaac and his brother Levi in Toronto with Lego hotels and skyscrapers" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Levi &amp; Isaac — Toronto</span>
+            <div class="ff-entry-title">I never followed the instructions</div>
+            <p class="ff-entry-text">I threw away the Lego instruction sheets. I was interested in hotels and skyscrapers — where people gathered and were served. The dream was already there. I just did not have a name for it yet.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/qwDZ5IP.jpg" alt="Mom and Dad becoming Canadian citizens — the family holds dual US and Canadian citizenship" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">The Demers Family</span>
+            <div class="ff-entry-title">We belong to two countries</div>
+            <p class="ff-entry-text">My parents became Canadian citizens while raising us. All of us carry dual citizenship. Growing up between two nations taught me that identity is not fixed to one place. You carry what shaped you, wherever you go.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/VaHUszH.jpg" alt="Isaac at Discover Ability, where he found his love for art and creating" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Discover Ability</span>
+            <div class="ff-entry-title">The moment art became mine</div>
+            <p class="ff-entry-text">My parents enrolled me in Discover Ability — a program to help kids find what they were made for. I found my way to the art side and never left. Something clicked when I had the freedom to make something that did not exist before.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/FXzT0r6.jpg" alt="Isaac competing in Fine Arts performing a human video with youth group, 9th grade" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Fine Arts — 9th Grade</span>
+            <div class="ff-entry-title">Creativity was never just a hobby</div>
+            <p class="ff-entry-text">I competed in national Fine Arts performing a human video with my youth group. I learned that faith and craft are inseparable. You cannot fake either one. The performance was the faith.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/3QIDRCF.jpg" alt="Isaac's basketball team, jersey number 3, 11th grade" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Calvary Basketball — 11th Grade</span>
+            <div class="ff-entry-title">Jersey #3</div>
+            <p class="ff-entry-text">Basketball taught me how to carry a team through a stretch when nothing is working and still hand the credit to someone else. The number that mattered was how my teammates were playing when the game was on the line.</p>
+          </div>
+        </div>
+        <div class="ff-scroll-quote">
+          <p>I had not given God the keys to my destiny, and in return He did not give me the keys to my dream. I was not releasing myself to be broken and rebuilt. I wanted to show God I was truly surrendering for this next season.</p>
+        </div>
+        <div class="ff-scroll-card">
+          <img src="https://i.imgur.com/Ms8mnIf.jpg" alt="Second baptism, National Community Church, Washington DC" loading="lazy">
+          <div class="ff-scroll-card-body">
+            <span class="ff-entry-label">Faith</span>
+            <div class="ff-entry-title">Two baptisms, two chapters</div>
+            <p class="ff-entry-text">My father baptized me in a creek in Maryland at ten — that faith was mine. Before LDP, Lexie and I were baptized together at National Community Church. A new chapter, with God in control.</p>
+          </div>
+        </div>
       </div>
     </div>
-
-    </div>
+    <p class="horiz-scroll-hint">&#8592; Scroll to explore the story &#8594;</p>
   </div>
 </section>
 
@@ -1393,26 +1394,26 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 </section>
 
 <!-- PEOPLE -->
-<section class="people-sec mobile-collapsible" id="people" data-mobile-collapsed="true">
+<section class="people-sec" id="people">
   <div class="sec-inner">
     <div class="sec-label fade-in">People Developed</div>
     <h2 class="sec-title fade-in">The Legacy That Matters Most</h2>
     <p class="sec-sub fade-in">Developing people is not a box to check. It is the work. These leaders carry forward everything we built together.</p>
-    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="people-content"><span class="mobile-toggle-label">View all 10 leaders</span><span class="mobile-toggle-icon" aria-hidden="true">&#x25BE;</span></button>
-    <div class="mobile-collapsible-content" id="people-content">
-    <div class="people-grid">
-      <div class="person-card fade-in"><div class="person-avatar pa-1">HB</div><h4>Hayleigh Bozant</h4><div class="person-role">Executive Director, MOL</div><p>Promoted at Mall of Louisiana. Grew from strong contributor to the leader driving the entire operation.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-2">TC</div><h4>Tonia Coulston</h4><div class="person-role">FOH Executive Director, Altamesa</div><p>Promoted at Altamesa. Her growth in leadership presence and accountability became a model for the team.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-3">SG</div><h4>Sevastian Galvan</h4><div class="person-role">BOH Supervisor, FTS</div><p>Promoted at Altamesa. Became a Field Talent Staff member, executed a New York grand opening, and built a BOH training tracker that became a standout resource.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-4">DC</div><h4>Danny Caporotti</h4><div class="person-role">Accepted into LDP</div><p>Developed at Ridgeside Drive. Danny's acceptance into LDP is a testament to the multiplying effect of intentional leadership.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-5">HH</div><h4>Harry Horyat</h4><div class="person-role">Asst. Director of DT, Ridgeside</div><p>Stepped into the role after Isaac left. Led the drive-thru to become ranked number three in Maryland.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-6">IR</div><h4>Izzy Reyes</h4><div class="person-role">Asst. Director of FOH, Ridgeside</div><p>Developed at Ridgeside Drive into a front of house leader who now drives guest experience and team culture.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-7">JJ</div><h4>Josh James</h4><div class="person-role">Hotel Ops Supervisor, Rocky Gap</div><p>Started as a valet attendant with no clear direction. Led the COVID reopening and achieved record guest satisfaction scores.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-8">AB</div><h4>Angelina Bloom</h4><div class="person-role">Supervisor, Rocky Gap</div><p>Became one of the strongest supervisors on the team at Rocky Gap Casino and Resort.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-9">JS</div><h4>Jacob Santameyer</h4><div class="person-role">Front Desk Supervisor, Rocky Gap</div><p>Grew into a front desk supervisor during Isaac's tenure at the resort.</p></div>
-      <div class="person-card fade-in"><div class="person-avatar pa-10">BS</div><h4>Brandon Stotler</h4><div class="person-role">Valet Supervisor, Rocky Gap</div><p>Developed into a valet supervisor, carrying forward the leadership standard Isaac established in the department.</p></div>
+    <div class="people-scroll-wrap fade-in">
+      <div class="people-scroll-track">
+        <div class="person-card"><div class="person-avatar pa-1">HB</div><h4>Hayleigh Bozant</h4><div class="person-role">Executive Director, MOL</div><p>Promoted at Mall of Louisiana. Grew from strong contributor to the leader driving the entire operation.</p></div>
+        <div class="person-card"><div class="person-avatar pa-2">TC</div><h4>Tonia Coulston</h4><div class="person-role">FOH Executive Director, Altamesa</div><p>Promoted at Altamesa. Her growth in leadership presence and accountability became a model for the team.</p></div>
+        <div class="person-card"><div class="person-avatar pa-3">SG</div><h4>Sevastian Galvan</h4><div class="person-role">BOH Supervisor, FTS</div><p>Promoted at Altamesa. Became a Field Talent Staff member, executed a New York grand opening, and built a BOH training tracker that became a standout resource.</p></div>
+        <div class="person-card"><div class="person-avatar pa-4">DC</div><h4>Danny Caporotti</h4><div class="person-role">Accepted into LDP</div><p>Developed at Ridgeside Drive. Danny's acceptance into LDP is a testament to the multiplying effect of intentional leadership.</p></div>
+        <div class="person-card"><div class="person-avatar pa-5">HH</div><h4>Harry Horyat</h4><div class="person-role">Asst. Director of DT, Ridgeside</div><p>Stepped into the role after Isaac left. Led the drive-thru to become ranked number three in Maryland.</p></div>
+        <div class="person-card"><div class="person-avatar pa-6">IR</div><h4>Izzy Reyes</h4><div class="person-role">Asst. Director of FOH, Ridgeside</div><p>Developed at Ridgeside Drive into a front of house leader who now drives guest experience and team culture.</p></div>
+        <div class="person-card"><div class="person-avatar pa-7">JJ</div><h4>Josh James</h4><div class="person-role">Hotel Ops Supervisor, Rocky Gap</div><p>Started as a valet attendant with no clear direction. Led the COVID reopening and achieved record guest satisfaction scores.</p></div>
+        <div class="person-card"><div class="person-avatar pa-8">AB</div><h4>Angelina Bloom</h4><div class="person-role">Supervisor, Rocky Gap</div><p>Became one of the strongest supervisors on the team at Rocky Gap Casino and Resort.</p></div>
+        <div class="person-card"><div class="person-avatar pa-9">JS</div><h4>Jacob Santameyer</h4><div class="person-role">Front Desk Supervisor, Rocky Gap</div><p>Grew into a front desk supervisor during Isaac's tenure at the resort.</p></div>
+        <div class="person-card"><div class="person-avatar pa-10">BS</div><h4>Brandon Stotler</h4><div class="person-role">Valet Supervisor, Rocky Gap</div><p>Developed into a valet supervisor, carrying forward the leadership standard Isaac established in the department.</p></div>
+      </div>
     </div>
-    </div>
+    <p class="horiz-scroll-hint">&#8592; Scroll to see all 10 leaders &#8594;</p>
   </div>
 </section>
 
@@ -2036,33 +2037,15 @@ document.addEventListener('keydown', function(e) {
     return '<div class="book-spine" role="button" tabindex="0" aria-label="' + esc(book.title) + '" data-idx="' + idx + '" style="--sc:' + book.color + styleH + ';background-image:url(' + coverUrlFor(book) + ')"></div>';
   }
   function renderBookshelf() {
-    var isMobile = window.matchMedia('(max-width:700px)').matches;
-    var html = '';
-    if (isMobile) {
-      html += '<div class="shelf shelf-mobile"><div class="shelf-mobile-canvas"><div class="shelf-books">';
-      BOOKS.forEach(function(book, idx) {
-        html += spineHtml(book, idx, false);
-      });
-      html += '</div><div class="shelf-rail"></div></div></div>';
-      html += '<div class="shelf-scroll-hint">&#8592; Swipe to browse all 26 &#8594;</div>';
-    } else {
-      var rows = [BOOKS.slice(0, 9), BOOKS.slice(9, 18), BOOKS.slice(18)];
-      rows.forEach(function(rowBooks) {
-        html += '<div class="shelf"><div class="shelf-books">';
-        rowBooks.forEach(function(book) {
-          html += spineHtml(book, BOOKS.indexOf(book), true);
-        });
-        html += '</div><div class="shelf-rail"></div></div>';
-      });
-    }
+    var html = '<div class="shelf shelf-mobile"><div class="shelf-mobile-canvas"><div class="shelf-books">';
+    BOOKS.forEach(function(book, idx) {
+      html += spineHtml(book, idx, false);
+    });
+    html += '</div><div class="shelf-rail"></div></div></div>';
+    html += '<div class="shelf-scroll-hint">&#8592; Scroll to browse all ' + BOOKS.length + ' &#8594;</div>';
     bc.innerHTML = html;
   }
   renderBookshelf();
-  var _wasMobile = window.matchMedia('(max-width:700px)').matches;
-  window.addEventListener('resize', function() {
-    var nowMobile = window.matchMedia('(max-width:700px)').matches;
-    if (nowMobile !== _wasMobile) { _wasMobile = nowMobile; renderBookshelf(); }
-  });
 
   var overlay = document.getElementById('bookModal');
   var _curIdx = 0;
