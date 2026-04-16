@@ -142,6 +142,18 @@ section{padding:4rem 2rem}
 .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;color:var(--navy);margin-bottom:1rem;letter-spacing:-.02em;line-height:1.15}
 .sec-sub{font-size:1.05rem;color:var(--text-mid);line-height:1.7;max-width:640px;font-weight:300}
 
+/* MOBILE COLLAPSIBLE SECTIONS */
+.mobile-toggle{display:none}
+@media(max-width:700px){
+  .mobile-toggle{display:inline-flex;align-items:center;gap:.5rem;background:var(--navy);color:white;border:none;padding:.85rem 1.5rem;border-radius:999px;font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;margin-top:1.25rem;letter-spacing:.04em;box-shadow:0 4px 14px rgba(15,28,50,.18);transition:transform .2s,background .2s}
+  .mobile-toggle:active{transform:scale(.97)}
+  .mobile-toggle .mobile-toggle-icon{display:inline-block;transition:transform .25s;font-size:.95rem;line-height:1}
+  .mobile-collapsible[data-mobile-collapsed="true"] .mobile-collapsible-content{max-height:0;overflow:hidden;opacity:0;margin:0;padding:0;pointer-events:none;transition:max-height .3s,opacity .2s}
+  .mobile-collapsible[data-mobile-collapsed="false"] .mobile-collapsible-content{opacity:1;transition:opacity .25s}
+  .mobile-collapsible[data-mobile-collapsed="false"] .mobile-toggle .mobile-toggle-icon{transform:rotate(180deg)}
+  .feedback-sec .mobile-toggle,.ff-sec .mobile-toggle{background:white;color:var(--navy)}
+}
+
 /* STORY */
 .story-sec{background:var(--cream)}
 .story-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;margin-top:2rem;align-items:start}
@@ -301,8 +313,18 @@ section{padding:4rem 2rem}
 .bm-nav-btn:hover:not(:disabled){background:var(--cream-dark)}
 .bm-nav-btn:disabled{opacity:.28;cursor:default}
 .bm-nav-count{font-size:.72rem;color:var(--text-light);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
-@media(max-width:700px){.shelf{overflow-x:auto;padding:1rem 1rem 0}.shelf-rail{margin:0 -1rem}.shelf-books{grid-template-columns:repeat(9,80px);gap:8px}}
-@media(max-width:480px){.shelf-books{grid-template-columns:repeat(9,68px);gap:6px}}
+@media(max-width:700px){
+  .bookcase{margin-left:-1.25rem;margin-right:-1.25rem}
+  .shelf-mobile{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;border-radius:0;padding:1rem 1rem 0;position:relative}
+  .shelf-mobile .shelf-books{display:flex;flex-direction:row;gap:10px;align-items:end;grid-template-columns:none;padding-bottom:.25rem;width:max-content}
+  .shelf-mobile .book-spine{width:108px;height:162px;flex-shrink:0;border-radius:3px;background-position:center center;box-shadow:2px 2px 8px rgba(0,0,0,.28),inset 2px 0 6px rgba(0,0,0,.18)}
+  .shelf-mobile .book-spine:hover,.shelf-mobile .book-spine:focus{transform:translateY(-6px)}
+  .shelf-mobile .shelf-rail{margin:0}
+  .shelf-scroll-hint{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);text-align:center;margin-top:.85rem;opacity:.7}
+}
+@media(max-width:480px){
+  .shelf-mobile .book-spine{width:96px;height:144px}
+}
 
 /* FINANCES */
 .fin-sec{background:linear-gradient(145deg,var(--navy) 0%,#081220 100%);color:white;padding:4rem 2rem;position:relative;overflow:hidden}
@@ -1159,11 +1181,13 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 </section>
 
 <!-- FAITH & FAMILY -->
-<section class="ff-sec" id="faith-family">
+<section class="ff-sec mobile-collapsible" id="faith-family" data-mobile-collapsed="true">
   <div class="sec-inner">
     <div class="sec-label fade-in">Faith &amp; Family</div>
     <h2 class="sec-title fade-in">The People Who Made Me</h2>
     <p class="ff-deck fade-in">Before the restaurant, before the program, before the dream, there was a home, a father, a mother, and two moments in the water.</p>
+    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="ff-content"><span class="mobile-toggle-label">Read the full story</span><span class="mobile-toggle-icon" aria-hidden="true">&#x25BE;</span></button>
+    <div class="mobile-collapsible-content" id="ff-content">
 
     <!-- Roots movement -->
     <h3 class="ff-movement-hdr fade-in">Roots</h3>
@@ -1194,6 +1218,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <img src="https://i.imgur.com/Ms8mnIf.jpg" alt="Second baptism, National Community Church, Washington DC" style="width:100%;height:300px;object-fit:cover;object-position:top;border-radius:12px;margin-bottom:1rem" loading="lazy">
         <p>Right before I left for LDP, Lexie and I got baptized together at National Community Church in DC. She had recently dedicated her life to Christ, and I wanted to rededicate myself as one chapter closed and another opened. I knew there were more Goliaths ahead, and I knew I could only face them with God in control.</p>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -1314,11 +1339,13 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 </section>
 
 <!-- PEOPLE -->
-<section class="people-sec" id="people">
+<section class="people-sec mobile-collapsible" id="people" data-mobile-collapsed="true">
   <div class="sec-inner">
     <div class="sec-label fade-in">People Developed</div>
     <h2 class="sec-title fade-in">The Legacy That Matters Most</h2>
     <p class="sec-sub fade-in">Developing people is not a box to check. It is the work. These leaders carry forward everything we built together.</p>
+    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="people-content"><span class="mobile-toggle-label">View all 10 leaders</span><span class="mobile-toggle-icon" aria-hidden="true">&#x25BE;</span></button>
+    <div class="mobile-collapsible-content" id="people-content">
     <div class="people-grid">
       <div class="person-card fade-in"><div class="person-avatar pa-1">HB</div><h4>Hayleigh Bozant</h4><div class="person-role">Executive Director, MOL</div><p>Promoted at Mall of Louisiana. Grew from strong contributor to the leader driving the entire operation.</p></div>
       <div class="person-card fade-in"><div class="person-avatar pa-2">TC</div><h4>Tonia Coulston</h4><div class="person-role">FOH Executive Director, Altamesa</div><p>Promoted at Altamesa. Her growth in leadership presence and accountability became a model for the team.</p></div>
@@ -1331,15 +1358,18 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       <div class="person-card fade-in"><div class="person-avatar pa-9">JS</div><h4>Jacob Santameyer</h4><div class="person-role">Front Desk Supervisor, Rocky Gap</div><p>Grew into a front desk supervisor during Isaac's tenure at the resort.</p></div>
       <div class="person-card fade-in"><div class="person-avatar pa-10">BS</div><h4>Brandon Stotler</h4><div class="person-role">Valet Supervisor, Rocky Gap</div><p>Developed into a valet supervisor, carrying forward the leadership standard Isaac established in the department.</p></div>
     </div>
+    </div>
   </div>
 </section>
 
 <!-- FEEDBACK -->
-<section class="feedback-sec" id="feedback">
+<section class="feedback-sec mobile-collapsible" id="feedback" data-mobile-collapsed="true">
   <div class="sec-inner">
     <div class="sec-label fade-in">Feedback</div>
     <h2 class="sec-title fade-in">What Others Say</h2>
     <p class="sec-sub fade-in">Feedback from the consultants and leaders who have worked alongside me.</p>
+    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="feedback-content"><span class="mobile-toggle-label">Read what others say</span><span class="mobile-toggle-icon" aria-hidden="true">&#x25BE;</span></button>
+    <div class="mobile-collapsible-content" id="feedback-content">
     <div class="feedback-grid">
       <div class="feedback-card fade-in">
         <div class="feedback-from">Zach Brezina</div>
@@ -1365,6 +1395,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <p>His relational approach made a transformational impact on the team. His presence, empathy, and consistency created a healthy culture in a restaurant that had experienced instability for years.</p>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -1943,20 +1974,41 @@ document.addEventListener('keydown', function(e) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  var rows = [BOOKS.slice(0, 9), BOOKS.slice(9, 18), BOOKS.slice(18)];
-  var html = '';
-  rows.forEach(function(rowBooks) {
-    html += '<div class="shelf"><div class="shelf-books">';
-    rowBooks.forEach(function(book, i) {
-      var idx = rows[0].length > i ? BOOKS.indexOf(book) : BOOKS.indexOf(book);
-      idx = BOOKS.indexOf(book);
-      var coverUrl = book.cover || ('https://images-na.ssl-images-amazon.com/images/P/' + book.asin + '.01.LZZZZZZZ.jpg');
-      html += '<div class="book-spine" role="button" tabindex="0" aria-label="' + esc(book.title) + '" data-idx="' + idx + '" style="--sc:' + book.color + ';--spine-h:' + book.h + 'px;background-image:url(' + coverUrl + ')">';
-      html += '</div>';
-    });
-    html += '</div><div class="shelf-rail"></div></div>';
+  function coverUrlFor(book) {
+    return book.cover || ('https://images-na.ssl-images-amazon.com/images/P/' + book.asin + '.01.LZZZZZZZ.jpg');
+  }
+  function spineHtml(book, idx, includeHeight) {
+    var styleH = includeHeight ? (';--spine-h:' + book.h + 'px') : '';
+    return '<div class="book-spine" role="button" tabindex="0" aria-label="' + esc(book.title) + '" data-idx="' + idx + '" style="--sc:' + book.color + styleH + ';background-image:url(' + coverUrlFor(book) + ')"></div>';
+  }
+  function renderBookshelf() {
+    var isMobile = window.matchMedia('(max-width:700px)').matches;
+    var html = '';
+    if (isMobile) {
+      html += '<div class="shelf shelf-mobile"><div class="shelf-books">';
+      BOOKS.forEach(function(book, idx) {
+        html += spineHtml(book, idx, false);
+      });
+      html += '</div><div class="shelf-rail"></div></div>';
+      html += '<div class="shelf-scroll-hint">&#8592; Swipe to browse all 26 &#8594;</div>';
+    } else {
+      var rows = [BOOKS.slice(0, 9), BOOKS.slice(9, 18), BOOKS.slice(18)];
+      rows.forEach(function(rowBooks) {
+        html += '<div class="shelf"><div class="shelf-books">';
+        rowBooks.forEach(function(book) {
+          html += spineHtml(book, BOOKS.indexOf(book), true);
+        });
+        html += '</div><div class="shelf-rail"></div></div>';
+      });
+    }
+    bc.innerHTML = html;
+  }
+  renderBookshelf();
+  var _wasMobile = window.matchMedia('(max-width:700px)').matches;
+  window.addEventListener('resize', function() {
+    var nowMobile = window.matchMedia('(max-width:700px)').matches;
+    if (nowMobile !== _wasMobile) { _wasMobile = nowMobile; renderBookshelf(); }
   });
-  bc.innerHTML = html;
 
   var overlay = document.getElementById('bookModal');
   var _curIdx = 0;
@@ -2015,6 +2067,25 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeBook();
     if (e.key === 'ArrowLeft') navBook(-1);
     if (e.key === 'ArrowRight') navBook(1);
+  });
+})();
+
+// === MOBILE COLLAPSIBLE SECTIONS ===
+(function() {
+  document.querySelectorAll('.mobile-toggle').forEach(function(btn) {
+    var label = btn.querySelector('.mobile-toggle-label');
+    if (label) label.dataset.original = label.textContent;
+    btn.addEventListener('click', function() {
+      var sec = btn.closest('.mobile-collapsible');
+      if (!sec) return;
+      var nowCollapsed = sec.getAttribute('data-mobile-collapsed') !== 'true' ? true : false;
+      sec.setAttribute('data-mobile-collapsed', nowCollapsed ? 'true' : 'false');
+      btn.setAttribute('aria-expanded', nowCollapsed ? 'false' : 'true');
+      if (label) label.textContent = nowCollapsed ? label.dataset.original : 'Show less';
+      if (nowCollapsed) {
+        sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
 })();
 
