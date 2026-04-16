@@ -125,14 +125,21 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
 .pull-quote-attribution{font-family:'Outfit',sans-serif;font-size:.78rem;color:var(--gold-light);letter-spacing:.04em}
 
 /* DOCS GRID */
-.docs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:.5rem}
-.doc-card{background:white;border:1px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.4rem;box-shadow:var(--sh-sm);transition:border-color .25s,box-shadow .25s}
-.doc-card:hover{border-color:var(--navy-light);box-shadow:var(--sh-md)}
-.doc-icon{font-size:1.4rem}
-.doc-name{font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;color:var(--navy);line-height:1.35}
+.docs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-top:.5rem}
+.doc-card{background:white;border:1px solid var(--border);border-radius:12px;padding:1.25rem;box-shadow:var(--sh-sm);transition:border-color .25s,box-shadow .25s}
+.doc-card.open{border-color:var(--navy-light)}
+.doc-card-header{display:flex;align-items:center;gap:.75rem;cursor:pointer;user-select:none}
+.doc-card-header:hover .doc-name{color:var(--red)}
+.doc-icon{font-size:1.4rem;flex-shrink:0}
+.doc-card-info{flex:1;min-width:0}
+.doc-name{font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:600;color:var(--navy);line-height:1.35;transition:color .2s}
 .doc-meta{font-family:'Outfit',sans-serif;font-size:.7rem;color:var(--text-light)}
-.doc-link{font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);text-decoration:none;margin-top:.2rem;transition:color .2s}
-.doc-link:hover{color:var(--navy)}
+.doc-chevron{font-size:1rem;color:var(--text-light);transition:transform .25s;flex-shrink:0;line-height:1}
+.doc-card.open .doc-chevron{transform:rotate(90deg)}
+.doc-months{max-height:0;overflow:hidden;transition:max-height .35s ease,padding-top .35s ease;display:flex;flex-direction:column;gap:.4rem;padding-top:0}
+.doc-card.open .doc-months{max-height:400px;padding-top:.85rem}
+.doc-month-link{font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:500;color:var(--navy);text-decoration:none;padding:.35rem .7rem;background:var(--cream);border-radius:6px;border:1px solid var(--border);transition:background .2s,color .2s,border-color .2s;display:block}
+.doc-month-link:hover{background:var(--navy);color:white;border-color:var(--navy)}
 
 /* PHOTO GRID */
 .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin-top:.5rem}
@@ -339,106 +346,69 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
       <div class="section-divider"></div>
       <div class="docs-grid">
         <div class="doc-card">
-          <span class="doc-icon">📊</span>
-          <p class="doc-name">July State of the Business</p>
-          <p class="doc-meta">Monthly business report — July 2025</p>
-          <a href="docs/mol/business-update-july.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
+          <div class="doc-card-header" onclick="toggleDoc(this)">
+            <span class="doc-icon">📊</span>
+            <div class="doc-card-info">
+              <p class="doc-name">State of the Business</p>
+              <p class="doc-meta">July – September 2025</p>
+            </div>
+            <span class="doc-chevron">&#8250;</span>
+          </div>
+          <div class="doc-months">
+            <a href="docs/mol/business-update-july.pdf" class="doc-month-link" target="_blank" rel="noopener">July 2025</a>
+            <a href="docs/mol/business-update-august.pdf" class="doc-month-link" target="_blank" rel="noopener">August 2025</a>
+            <a href="docs/mol/business-update-september.pdf" class="doc-month-link" target="_blank" rel="noopener">September 2025</a>
+          </div>
         </div>
         <div class="doc-card">
-          <span class="doc-icon">📊</span>
-          <p class="doc-name">August State of the Business</p>
-          <p class="doc-meta">Monthly business report — August 2025</p>
-          <a href="docs/mol/business-update-august.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
+          <div class="doc-card-header" onclick="toggleDoc(this)">
+            <span class="doc-icon">📋</span>
+            <div class="doc-card-info">
+              <p class="doc-name">FCR Reports</p>
+              <p class="doc-meta">July – September 2025</p>
+            </div>
+            <span class="doc-chevron">&#8250;</span>
+          </div>
+          <div class="doc-months">
+            <a href="docs/mol/fcr-reports-july.pdf" class="doc-month-link" target="_blank" rel="noopener">July 2025</a>
+            <a href="docs/mol/fcr-reports-august.pdf" class="doc-month-link" target="_blank" rel="noopener">August 2025</a>
+            <a href="docs/mol/fcr-reports-september.pdf" class="doc-month-link" target="_blank" rel="noopener">September 2025</a>
+          </div>
         </div>
         <div class="doc-card">
-          <span class="doc-icon">📊</span>
-          <p class="doc-name">September State of the Business</p>
-          <p class="doc-meta">Monthly business report — September 2025</p>
-          <a href="docs/mol/busines-update-september.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
+          <div class="doc-card-header" onclick="toggleDoc(this)">
+            <span class="doc-icon">🍗</span>
+            <div class="doc-card-info">
+              <p class="doc-name">Food Cost Reports</p>
+              <p class="doc-meta">April – September 2025</p>
+            </div>
+            <span class="doc-chevron">&#8250;</span>
+          </div>
+          <div class="doc-months">
+            <a href="docs/mol/food-cost-april.pdf" class="doc-month-link" target="_blank" rel="noopener">April 2025</a>
+            <a href="docs/mol/food-cost-may.pdf" class="doc-month-link" target="_blank" rel="noopener">May 2025</a>
+            <a href="docs/mol/food-cost-june.pdf" class="doc-month-link" target="_blank" rel="noopener">June 2025</a>
+            <a href="docs/mol/food-cost-july.pdf" class="doc-month-link" target="_blank" rel="noopener">July 2025</a>
+            <a href="docs/mol/food-cost-august.pdf" class="doc-month-link" target="_blank" rel="noopener">August 2025</a>
+            <a href="docs/mol/food-cost-september.pdf" class="doc-month-link" target="_blank" rel="noopener">September 2025</a>
+          </div>
         </div>
         <div class="doc-card">
-          <span class="doc-icon">📋</span>
-          <p class="doc-name">FCR Report — July</p>
-          <p class="doc-meta">Food Cost Report — July 2025</p>
-          <a href="docs/mol/fcr-reports-july.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">📋</span>
-          <p class="doc-name">FCR Report — August</p>
-          <p class="doc-meta">Food Cost Report — August 2025</p>
-          <a href="docs/mol/fcr-reports-august.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">📋</span>
-          <p class="doc-name">FCR Report — September</p>
-          <p class="doc-meta">Food Cost Report — September 2025</p>
-          <a href="docs/mol/fcr-reports-september.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">🍗</span>
-          <p class="doc-name">Food Cost — April</p>
-          <p class="doc-meta">April 2025</p>
-          <a href="docs/mol/food-cost-april.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">🍗</span>
-          <p class="doc-name">Food Cost — May</p>
-          <p class="doc-meta">May 2025</p>
-          <a href="docs/mol/food-cost-may.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">🍗</span>
-          <p class="doc-name">Food Cost — June</p>
-          <p class="doc-meta">June 2025</p>
-          <a href="docs/mol/food-cost-june.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">🍗</span>
-          <p class="doc-name">Food Cost — July</p>
-          <p class="doc-meta">July 2025</p>
-          <a href="docs/mol/food-cost-july.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">🍗</span>
-          <p class="doc-name">Food Cost — August</p>
-          <p class="doc-meta">August 2025</p>
-          <a href="docs/mol/food-cost-august.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">🍗</span>
-          <p class="doc-name">Food Cost — September</p>
-          <p class="doc-meta">September 2025</p>
-          <a href="docs/mol/food-cost-september.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">📁</span>
-          <p class="doc-name">Restaurant Data — April</p>
-          <p class="doc-meta">April 2025</p>
-          <a href="docs/mol/restaurant-data-april.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">📁</span>
-          <p class="doc-name">Restaurant Data — May</p>
-          <p class="doc-meta">May 2025</p>
-          <a href="docs/mol/restaurant-data-may.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">📁</span>
-          <p class="doc-name">Restaurant Data — June</p>
-          <p class="doc-meta">June 2025</p>
-          <a href="docs/mol/restaurant-data-june.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">📁</span>
-          <p class="doc-name">Restaurant Data — July</p>
-          <p class="doc-meta">July 2025</p>
-          <a href="docs/mol/restaurant-data-july.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
-        </div>
-        <div class="doc-card">
-          <span class="doc-icon">📁</span>
-          <p class="doc-name">Restaurant Data — August</p>
-          <p class="doc-meta">August 2025</p>
-          <a href="docs/mol/restaurant-data-august.pdf" class="doc-link" target="_blank" rel="noopener">View PDF</a>
+          <div class="doc-card-header" onclick="toggleDoc(this)">
+            <span class="doc-icon">📁</span>
+            <div class="doc-card-info">
+              <p class="doc-name">Restaurant Data Reports</p>
+              <p class="doc-meta">April – August 2025</p>
+            </div>
+            <span class="doc-chevron">&#8250;</span>
+          </div>
+          <div class="doc-months">
+            <a href="docs/mol/restaurant-data-april.pdf" class="doc-month-link" target="_blank" rel="noopener">April 2025</a>
+            <a href="docs/mol/restaurant-data-may.pdf" class="doc-month-link" target="_blank" rel="noopener">May 2025</a>
+            <a href="docs/mol/restaurant-data-june.pdf" class="doc-month-link" target="_blank" rel="noopener">June 2025</a>
+            <a href="docs/mol/restaurant-data-july.pdf" class="doc-month-link" target="_blank" rel="noopener">July 2025</a>
+            <a href="docs/mol/restaurant-data-august.pdf" class="doc-month-link" target="_blank" rel="noopener">August 2025</a>
+          </div>
         </div>
       </div>
     </div>
@@ -554,6 +524,11 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
       toggle.setAttribute('aria-expanded', links.classList.contains('show'));
     });
   }
+
+  // Doc accordion
+  window.toggleDoc = function(header) {
+    header.parentElement.classList.toggle('open');
+  };
 
   // Lightbox
   (function() {
