@@ -399,8 +399,9 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
   }
 
   // Doc accordion
-  window.toggleDoc = function(header) {
-    header.parentElement.classList.toggle('open');
+  window.toggleDoc = function(card, e) {
+    if (e && e.target.closest('a')) return;
+    card.classList.toggle('open');
   };
 
   // Lightbox

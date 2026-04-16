@@ -357,8 +357,8 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
       <h2>Assignment Records</h2>
       <div class="section-divider"></div>
       <div class="docs-grid">
-        <div class="doc-card">
-          <div class="doc-card-header" onclick="toggleDoc(this)">
+        <div class="doc-card" onclick="toggleDoc(this,event)">
+          <div class="doc-card-header">
             <div class="doc-card-info">
               <p class="doc-name">State of the Business</p>
             </div>
@@ -370,8 +370,8 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
             <a href="docs/altamesa/business-update-february.pdf" class="doc-month-link" target="_blank" rel="noopener">February 2026</a>
           </div>
         </div>
-        <div class="doc-card">
-          <div class="doc-card-header" onclick="toggleDoc(this)">
+        <div class="doc-card" onclick="toggleDoc(this,event)">
+          <div class="doc-card-header">
             <div class="doc-card-info">
               <p class="doc-name">FCR Reports</p>
             </div>
@@ -384,8 +384,8 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
             <a href="docs/altamesa/fcr-report-february.pdf" class="doc-month-link" target="_blank" rel="noopener">February 2026</a>
           </div>
         </div>
-        <div class="doc-card">
-          <div class="doc-card-header" onclick="toggleDoc(this)">
+        <div class="doc-card" onclick="toggleDoc(this,event)">
+          <div class="doc-card-header">
             <div class="doc-card-info">
               <p class="doc-name">Food Cost Reports</p>
             </div>
@@ -398,8 +398,8 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
             <a href="docs/altamesa/food-cost-february.pdf" class="doc-month-link" target="_blank" rel="noopener">February 2026</a>
           </div>
         </div>
-        <div class="doc-card">
-          <div class="doc-card-header" onclick="toggleDoc(this)">
+        <div class="doc-card" onclick="toggleDoc(this,event)">
+          <div class="doc-card-header">
             <div class="doc-card-info">
               <p class="doc-name">Restaurant Data Reports</p>
             </div>
@@ -412,8 +412,8 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
             <a href="docs/altamesa/restaurant-data-february.pdf" class="doc-month-link" target="_blank" rel="noopener">February 2026</a>
           </div>
         </div>
-        <div class="doc-card">
-          <div class="doc-card-header" onclick="toggleDoc(this)">
+        <div class="doc-card" onclick="toggleDoc(this,event)">
+          <div class="doc-card-header">
             <div class="doc-card-info">
               <p class="doc-name">Facilities Updates</p>
             </div>
@@ -581,8 +581,9 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
   }
 
   // Doc accordion
-  window.toggleDoc = function(header) {
-    header.parentElement.classList.toggle('open');
+  window.toggleDoc = function(card, e) {
+    if (e && e.target.closest('a')) return;
+    card.classList.toggle('open');
   };
 
   // Lightbox
