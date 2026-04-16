@@ -195,12 +195,13 @@ section{padding:4rem 2rem}
 
 /* TIMELINE */
 .tl-sec{background:var(--warm)}
-.timeline{position:relative;margin-top:2rem;padding-left:0;display:flex;flex-direction:row;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;scroll-snap-type:x mandatory;padding-bottom:1.25rem;align-items:flex-start}
+.timeline{position:relative;margin-top:2rem;padding-bottom:1.25rem;display:flex;flex-direction:row;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;scroll-snap-type:x mandatory;align-items:stretch}
 .timeline::-webkit-scrollbar{height:4px}.timeline::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:2px}
-.timeline::before{content:'';position:absolute;left:12px;right:0;top:11px;height:2px;width:auto;background:linear-gradient(to right,var(--red),var(--gold),var(--sage),var(--navy-light))}
-.tl-item{position:relative;flex:0 0 320px;scroll-snap-align:start;display:flex;flex-direction:column;padding-right:24px;margin-bottom:0;opacity:0;transform:translateY(10px);transition:all .6s}
+.tl-item{position:relative;flex:0 0 280px;scroll-snap-align:start;padding-top:2.75rem;padding-right:20px;margin-bottom:0;display:flex;flex-direction:column;opacity:0;transform:translateY(10px);transition:all .6s}
 .tl-item.visible{opacity:1;transform:translateY(0)}
-.tl-dot{position:relative;left:auto;top:auto;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:1rem}
+.tl-item::before{content:'';position:absolute;left:24px;top:33px;right:0;height:2px;background:rgba(26,46,74,0.12)}
+.tl-item:last-child::before{display:none}
+.tl-dot{position:absolute;left:0;top:22px;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center}
 .tl-dot.gold{border-color:var(--gold)}.tl-dot.sage{border-color:var(--sage)}.tl-dot.navy{border-color:var(--navy-light)}.tl-dot.active{border-color:var(--sage);box-shadow:0 0 0 4px rgba(94,143,100,.2)}
 .tl-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--red)}
 .tl-dot.gold .tl-dot-inner{background:var(--gold)}.tl-dot.sage .tl-dot-inner{background:var(--sage)}.tl-dot.navy .tl-dot-inner{background:var(--navy-light)}.tl-dot.active .tl-dot-inner{background:var(--sage);animation:pulse 2s ease infinite}
@@ -216,7 +217,7 @@ section{padding:4rem 2rem}
 .tag-current{background:rgba(94,143,100,.12);color:var(--sage);border:1px solid rgba(94,143,100,.2)}
 .tl-row{display:flex;flex-direction:column;gap:.75rem}
 .tl-content{flex:1;min-width:0}
-.tl-photo{width:100%;height:130px;border-radius:10px;object-fit:cover;display:block;box-shadow:var(--sh-sm);cursor:pointer}
+.tl-photo{width:100%;height:110px;border-radius:10px;object-fit:cover;order:-1;box-shadow:var(--sh-sm);cursor:pointer;display:block}
 
 /* ASSIGNMENTS */
 .assign-sec{background:var(--navy);color:white;padding:4rem 2rem}
@@ -556,6 +557,10 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .truett-photo-placeholder{width:100%;height:200px}
   .legacy-family-section,.truett-section,.through-line-section{padding:2.5rem 1.25rem}
   .legacy-page-hero{padding:4rem 1.25rem 2rem}
+  .journey-timeline{grid-template-columns:1fr;gap:0}
+  .journey-timeline::before{display:none}
+  .journey-card{margin-bottom:24px}
+  .journey-connector{margin-bottom:12px}
 }
 @media(max-width:600px){.hero-stats{flex-direction:column;gap:.75rem}}
 
@@ -594,35 +599,40 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 }
 
 .journey-timeline {
-  display: flex;
-  flex-direction: row;
-  gap: 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(200,160,80,0.3) transparent;
-  align-items: flex-start;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
 }
-.journey-timeline::-webkit-scrollbar{height:4px}
-.journey-timeline::-webkit-scrollbar-thumb{background:rgba(200,160,80,0.3);border-radius:2px}
+
+.journey-timeline::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: calc((100% - 48px) / 6);
+  right: calc((100% - 48px) / 6);
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), rgba(200, 160, 80, 0.25));
+  z-index: 0;
+}
 
 .journey-stop {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  flex: 0 0 340px;
-  scroll-snap-align: start;
-  padding-right: 24px;
+  position: relative;
+  align-items: stretch;
 }
 
 .journey-connector {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  padding-top: 0;
-  margin-bottom: 20px;
+  justify-content: center;
+  height: 36px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
 }
 
 .journey-dot {
@@ -650,17 +660,14 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 }
 
 .journey-line {
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(to right, var(--gold), rgba(200, 160, 80, 0.15));
-  margin-left: 8px;
+  display: none;
 }
 
 .journey-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 32px;
+  padding: 28px;
   margin-bottom: 0;
   flex: 1;
   transition: background 0.3s ease, border-color 0.3s ease;
@@ -896,7 +903,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <h2 class="sec-title">The Journey</h2>
     <p class="sec-sub" style="text-align:center;margin-bottom:60px;">Every assignment is a new restaurant, a new community, and a new set of problems to solve. This is the work.</p>
 
-    <div class="journey-timeline" id="journey-scroll">
+    <div class="journey-timeline">
 
       <!-- Assignment 1: Mall of Louisiana -->
       <div class="journey-stop completed">
@@ -966,11 +973,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         </div>
       </div>
 
-    </div>
-    <div class="scroll-controls" style="margin-top:.85rem">
-      <button class="scroll-btn" data-target="journey-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
-      <span style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)">Scroll through assignments</span>
-      <button class="scroll-btn" data-target="journey-scroll" data-dir="1" aria-label="Next">&#8594;</button>
     </div>
   </div>
 </section>
@@ -1084,125 +1086,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="story-card fade-in edge-red">
           <h4>Core Convictions</h4>
           <p>Faith. Family. Creativity. Growth. Excellence. Do hard things. Dream big. Show up as your best.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- LEGACY (folded in from former legacy.html) -->
-<section id="legacy">
-  <!-- page hero -->
-  <div class="legacy-page-hero">
-    <div class="sec-label fade-in">Legacy</div>
-    <h2 class="legacy-page-hero-title fade-in">Roots that run deep</h2>
-    <p class="legacy-page-hero-sub fade-in">I did not learn hospitality. I absorbed it. Four people built the foundation long before I ever stepped behind a counter. This page is for them, and for the man who built a brand on the same conviction.</p>
-  </div>
-
-  <!-- Family blocks -->
-  <div class="legacy-family-section">
-    <div class="sec-inner">
-
-      <!-- Demers family -->
-      <h2 class="legacy-section-hdr fade-in">The Demers family &mdash; Manchester, New Hampshire</h2>
-      <div class="legacy-card-merged fade-in">
-        <img src="https://i.imgur.com/0D2lKpi.jpg" alt="The Late Henry and Pauline Demers" class="legacy-merged-photo" loading="lazy">
-        <div class="legacy-merged-content">
-          <div class="legacy-merged-title">The Late Henry &amp; Pauline Demers</div>
-          <div class="legacy-merged-tags">
-            <span class="legacy-card-tag">Korean War veteran / Entrepreneur</span>
-            <span class="legacy-card-tag">Nurse / Co-founder</span>
-          </div>
-          <div class="legacy-merged-bios">
-            <div class="legacy-bio-col">
-              <strong>Henry Christostone Demers</strong>
-              <p>Built two nursing homes from the ground up in Manchester, New Hampshire. A Korean War veteran with an entrepreneur's heart, he saw people the world overlooked and built something to serve them. Every resident received care. Every staff member received investment. That was his operating philosophy, and it is mine.</p>
-            </div>
-            <div class="legacy-bio-col">
-              <strong>Pauline Rita Demers</strong>
-              <p>A nurse who built the operation alongside Henry. She made every client feel heard and seen not because it was her job, but because it was her character. The care was professional. The warmth was personal. She is where I learned that hospitality is not a skill. It is a posture.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <figure class="legacy-feature-img fade-in">
-        <img src="https://i.imgur.com/tgwXQyp.jpg" alt="One of the nursing homes built by Henry and Pauline Demers in Manchester, New Hampshire" loading="lazy">
-        <figcaption>One of the nursing homes Henry and Pauline built in Manchester, New Hampshire.</figcaption>
-      </figure>
-
-      <!-- Hawbaker family -->
-      <h2 class="legacy-section-hdr fade-in">The Hawbaker family &mdash; Clear Spring, Maryland</h2>
-      <div class="legacy-card-merged fade-in">
-        <img src="https://i.imgur.com/YdlhiND.jpg" alt="David and Nancy Marie Hawbaker" class="legacy-merged-photo" loading="lazy">
-        <div class="legacy-merged-content">
-          <div class="legacy-merged-title">David &amp; Nancy Hawbaker</div>
-          <div class="legacy-merged-tags">
-            <span class="legacy-card-tag">Stonemason</span>
-            <span class="legacy-card-tag">Hospitality / Faith</span>
-          </div>
-          <div class="legacy-merged-bios">
-            <div class="legacy-bio-col">
-              <strong>David Neal Hawbaker</strong>
-              <p>Worked his entire life with his hands. Built things that lasted. Did not seek recognition. Just showed up and did the work. He is where I learned that excellence is a character trait, not a performance.</p>
-            </div>
-            <div class="legacy-bio-col">
-              <strong>Nancy Marie Hawbaker</strong>
-              <p>Kept a kitchen table where every stranger became family, regardless of their history, upbringing, race, or religion. She did not have a policy for hospitality. She had a door that was always open. That is the restaurant I want to run.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Truett Cathy -->
-  <div class="truett-section">
-    <div class="sec-inner">
-      <div class="sec-label fade-in">Philosophy</div>
-      <h2 class="sec-title fade-in">S. Truett Cathy &mdash; the philosophy I inherited</h2>
-      <div class="truett-profile fade-in">
-        <img src="https://i.imgur.com/4rq3NT6.jpg" alt="S. Truett Cathy" class="truett-photo" loading="lazy">
-        <div class="truett-body">
-          <div class="truett-name">S. Truett Cathy</div>
-          <div class="truett-dates">1921 to 2014, Founder of Chick-fil-A</div>
-          <p>Truett Cathy opened the first Dwarf Grill in 1946 in Hapeville, Georgia. He built Chick-fil-A on the belief that a business exists not only to serve customers, but to develop people. He was still at work into his eighties. The business was never the point. The people were.</p>
-          <p>Two of his convictions shape how I think about operating a restaurant. The first: it is better to build boys than mend men. The second: every person has worth beyond what they produce. Both of those ideas live in my Dream Fund &mdash; a dedicated line item in my operating model that funds team member education, growth, and community investment from day one.</p>
-        </div>
-      </div>
-      <div class="principle-cards">
-        <div class="principle-card fade-in">
-          <div class="principle-quote">"It is better to build boys than mend men."</div>
-          <p>The Dream Fund is built into my operation from day one. It funds team member growth, education, and community investment. I am not waiting for the restaurant to be profitable to begin. The fund is the business model.</p>
-        </div>
-        <div class="principle-card fade-in">
-          <div class="principle-quote">"We should be about more than just selling chicken."</div>
-          <p class="legacy-bridge">That conviction is the reason my return to Manchester is not about market share. It is about extending a legacy that was already being built there long before I applied to LDP.</p>
-          <p>Greater Manchester is home to more than 400,000 people and has three Chick-fil-A locations. The market opportunity is real. But the reason I want to be there runs deeper than market share. My grandfather built there. My family is still there. I am not entering that community. I am returning to it.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Through-line -->
-  <div class="through-line-section">
-    <div class="sec-inner">
-      <div class="sec-label fade-in">The Through-Line</div>
-      <h2 class="sec-title fade-in">The through-line</h2>
-      <p class="through-line-intro fade-in">Four grandparents. Two nursing homes. One kitchen table always open. An operator who believed business was a vehicle for people. These are not separate stories. They are the same story, and I am the next chapter of it.</p>
-      <div class="through-line-cols">
-        <div class="through-line-col fade-in accent-sage">
-          <div class="through-line-col-label">Henry built</div>
-          <p>A business that served overlooked people and developed every staff member who cared for them</p>
-        </div>
-        <div class="through-line-col fade-in accent-gold">
-          <div class="through-line-col-label">Truett built</div>
-          <p>A brand where the restaurant was a vehicle for people, not the other way around</p>
-        </div>
-        <div class="through-line-col fade-in accent-red">
-          <div class="through-line-col-label">Isaac builds</div>
-          <p>A Chick-fil-A in Manchester where the Dream Fund makes this legacy operational, not sentimental</p>
         </div>
       </div>
     </div>
@@ -1374,6 +1257,125 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   </div>
 </section>
 
+<!-- LEGACY (folded in from former legacy.html) -->
+<section id="legacy">
+  <!-- page hero -->
+  <div class="legacy-page-hero">
+    <div class="sec-label fade-in">Legacy</div>
+    <h2 class="legacy-page-hero-title fade-in">Roots that run deep</h2>
+    <p class="legacy-page-hero-sub fade-in">I did not learn hospitality. I absorbed it. Four people built the foundation long before I ever stepped behind a counter. This page is for them, and for the man who built a brand on the same conviction.</p>
+  </div>
+
+  <!-- Family blocks -->
+  <div class="legacy-family-section">
+    <div class="sec-inner">
+
+      <!-- Demers family -->
+      <h2 class="legacy-section-hdr fade-in">The Demers family &mdash; Manchester, New Hampshire</h2>
+      <div class="legacy-card-merged fade-in">
+        <img src="https://i.imgur.com/0D2lKpi.jpg" alt="The Late Henry and Pauline Demers" class="legacy-merged-photo" loading="lazy">
+        <div class="legacy-merged-content">
+          <div class="legacy-merged-title">The Late Henry &amp; Pauline Demers</div>
+          <div class="legacy-merged-tags">
+            <span class="legacy-card-tag">Korean War veteran / Entrepreneur</span>
+            <span class="legacy-card-tag">Nurse / Co-founder</span>
+          </div>
+          <div class="legacy-merged-bios">
+            <div class="legacy-bio-col">
+              <strong>Henry Christostone Demers</strong>
+              <p>Built two nursing homes from the ground up in Manchester, New Hampshire. A Korean War veteran with an entrepreneur's heart, he saw people the world overlooked and built something to serve them. Every resident received care. Every staff member received investment. That was his operating philosophy, and it is mine.</p>
+            </div>
+            <div class="legacy-bio-col">
+              <strong>Pauline Rita Demers</strong>
+              <p>A nurse who built the operation alongside Henry. She made every client feel heard and seen not because it was her job, but because it was her character. The care was professional. The warmth was personal. She is where I learned that hospitality is not a skill. It is a posture.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <figure class="legacy-feature-img fade-in">
+        <img src="https://i.imgur.com/tgwXQyp.jpg" alt="One of the nursing homes built by Henry and Pauline Demers in Manchester, New Hampshire" loading="lazy">
+        <figcaption>One of the nursing homes Henry and Pauline built in Manchester, New Hampshire.</figcaption>
+      </figure>
+
+      <!-- Hawbaker family -->
+      <h2 class="legacy-section-hdr fade-in">The Hawbaker family &mdash; Clear Spring, Maryland</h2>
+      <div class="legacy-card-merged fade-in">
+        <img src="https://i.imgur.com/YdlhiND.jpg" alt="David and Nancy Marie Hawbaker" class="legacy-merged-photo" loading="lazy">
+        <div class="legacy-merged-content">
+          <div class="legacy-merged-title">David &amp; Nancy Hawbaker</div>
+          <div class="legacy-merged-tags">
+            <span class="legacy-card-tag">Stonemason</span>
+            <span class="legacy-card-tag">Hospitality / Faith</span>
+          </div>
+          <div class="legacy-merged-bios">
+            <div class="legacy-bio-col">
+              <strong>David Neal Hawbaker</strong>
+              <p>Worked his entire life with his hands. Built things that lasted. Did not seek recognition. Just showed up and did the work. He is where I learned that excellence is a character trait, not a performance.</p>
+            </div>
+            <div class="legacy-bio-col">
+              <strong>Nancy Marie Hawbaker</strong>
+              <p>Kept a kitchen table where every stranger became family, regardless of their history, upbringing, race, or religion. She did not have a policy for hospitality. She had a door that was always open. That is the restaurant I want to run.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Truett Cathy -->
+  <div class="truett-section">
+    <div class="sec-inner">
+      <div class="sec-label fade-in">Philosophy</div>
+      <h2 class="sec-title fade-in">S. Truett Cathy &mdash; the philosophy I inherited</h2>
+      <div class="truett-profile fade-in">
+        <img src="https://i.imgur.com/4rq3NT6.jpg" alt="S. Truett Cathy" class="truett-photo" loading="lazy">
+        <div class="truett-body">
+          <div class="truett-name">S. Truett Cathy</div>
+          <div class="truett-dates">1921 to 2014, Founder of Chick-fil-A</div>
+          <p>Truett Cathy opened the first Dwarf Grill in 1946 in Hapeville, Georgia. He built Chick-fil-A on the belief that a business exists not only to serve customers, but to develop people. He was still at work into his eighties. The business was never the point. The people were.</p>
+          <p>Two of his convictions shape how I think about operating a restaurant. The first: it is better to build boys than mend men. The second: every person has worth beyond what they produce. Both of those ideas live in my Dream Fund &mdash; a dedicated line item in my operating model that funds team member education, growth, and community investment from day one.</p>
+        </div>
+      </div>
+      <div class="principle-cards">
+        <div class="principle-card fade-in">
+          <div class="principle-quote">"It is better to build boys than mend men."</div>
+          <p>The Dream Fund is built into my operation from day one. It funds team member growth, education, and community investment. I am not waiting for the restaurant to be profitable to begin. The fund is the business model.</p>
+        </div>
+        <div class="principle-card fade-in">
+          <div class="principle-quote">"We should be about more than just selling chicken."</div>
+          <p class="legacy-bridge">That conviction is the reason my return to Manchester is not about market share. It is about extending a legacy that was already being built there long before I applied to LDP.</p>
+          <p>Greater Manchester is home to more than 400,000 people and has three Chick-fil-A locations. The market opportunity is real. But the reason I want to be there runs deeper than market share. My grandfather built there. My family is still there. I am not entering that community. I am returning to it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Through-line -->
+  <div class="through-line-section">
+    <div class="sec-inner">
+      <div class="sec-label fade-in">The Through-Line</div>
+      <h2 class="sec-title fade-in">The through-line</h2>
+      <p class="through-line-intro fade-in">Four grandparents. Two nursing homes. One kitchen table always open. An operator who believed business was a vehicle for people. These are not separate stories. They are the same story, and I am the next chapter of it.</p>
+      <div class="through-line-cols">
+        <div class="through-line-col fade-in accent-sage">
+          <div class="through-line-col-label">Henry built</div>
+          <p>A business that served overlooked people and developed every staff member who cared for them</p>
+        </div>
+        <div class="through-line-col fade-in accent-gold">
+          <div class="through-line-col-label">Truett built</div>
+          <p>A brand where the restaurant was a vehicle for people, not the other way around</p>
+        </div>
+        <div class="through-line-col fade-in accent-red">
+          <div class="through-line-col-label">Isaac builds</div>
+          <p>A Chick-fil-A in Manchester where the Dream Fund makes this legacy operational, not sentimental</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TIMELINE -->
 <section class="tl-sec" id="career-timeline">
   <div class="sec-inner">
@@ -1395,7 +1397,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
       <div class="tl-item"><div class="tl-dot active"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">MAR 2026 - PRESENT</div><div class="tl-card"><h3>GOS Assignment: Latham Farms, Albany, NY</h3><p>Currently serving as Grand Opening Supervisor for my first grand opening assignment. Leading operations, team readiness, and community launch strategy.</p><span class="tl-tag tag-current">Current Assignment</span></div></div></div></div>
     </div>
-    <div class="scroll-controls" style="margin-top:.75rem">
+    <div class="scroll-controls" style="margin-top:.85rem">
       <button class="scroll-btn" data-target="tl-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
       <span class="horiz-scroll-hint">Scroll through the timeline</span>
       <button class="scroll-btn" data-target="tl-scroll" data-dir="1" aria-label="Next">&#8594;</button>
@@ -2048,7 +2050,7 @@ document.addEventListener('click', function(e) {
   if (!btn) return;
   var target = document.getElementById(btn.dataset.target);
   if (!target) return;
-  var card = target.querySelector('.ff-scroll-card, .person-card, .book-spine');
+  var card = target.querySelector('.ff-scroll-card, .person-card, .book-spine, .tl-item');
   var amount = card ? card.offsetWidth + 16 : 280;
   target.scrollBy({ left: parseInt(btn.dataset.dir) * amount, behavior: 'smooth' });
 });
