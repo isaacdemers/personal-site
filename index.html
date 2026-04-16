@@ -195,17 +195,18 @@ section{padding:4rem 2rem}
 
 /* TIMELINE */
 .tl-sec{background:var(--warm)}
-.timeline{position:relative;margin-top:2rem;padding-left:3rem}
-.timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),var(--sage),var(--navy-light))}
-.tl-item{position:relative;margin-bottom:2.5rem;opacity:0;transform:translateY(20px);transition:all .6s}
+.timeline{position:relative;margin-top:2rem;padding-left:0;display:flex;flex-direction:row;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;scroll-snap-type:x mandatory;padding-bottom:1.25rem;align-items:flex-start}
+.timeline::-webkit-scrollbar{height:4px}.timeline::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:2px}
+.timeline::before{content:'';position:absolute;left:12px;right:0;top:11px;height:2px;width:auto;background:linear-gradient(to right,var(--red),var(--gold),var(--sage),var(--navy-light))}
+.tl-item{position:relative;flex:0 0 320px;scroll-snap-align:start;display:flex;flex-direction:column;padding-right:24px;margin-bottom:0;opacity:0;transform:translateY(10px);transition:all .6s}
 .tl-item.visible{opacity:1;transform:translateY(0)}
-.tl-dot{position:absolute;left:-3rem;top:.2rem;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center}
+.tl-dot{position:relative;left:auto;top:auto;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:1rem}
 .tl-dot.gold{border-color:var(--gold)}.tl-dot.sage{border-color:var(--sage)}.tl-dot.navy{border-color:var(--navy-light)}.tl-dot.active{border-color:var(--sage);box-shadow:0 0 0 4px rgba(94,143,100,.2)}
 .tl-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--red)}
 .tl-dot.gold .tl-dot-inner{background:var(--gold)}.tl-dot.sage .tl-dot-inner{background:var(--sage)}.tl-dot.navy .tl-dot-inner{background:var(--navy-light)}.tl-dot.active .tl-dot-inner{background:var(--sage);animation:pulse 2s ease infinite}
 .tl-date{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-light);letter-spacing:.05em;margin-bottom:.4rem}
 .tl-card{background:white;border-radius:14px;padding:1.5rem;box-shadow:var(--sh-sm);transition:transform .3s,box-shadow .3s}
-.tl-card:hover{transform:translateX(4px);box-shadow:var(--sh-md)}
+.tl-card:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
 .tl-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
 .tl-card p{font-size:.9rem;color:var(--text-mid);line-height:1.6}
 .tl-tag{display:inline-block;padding:.15rem .6rem;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-top:.6rem}
@@ -213,9 +214,9 @@ section{padding:4rem 2rem}
 .tag-edu{background:rgba(201,150,59,.1);color:#A07A20}
 .tag-personal{background:rgba(94,143,100,.1);color:#4A7550}
 .tag-current{background:rgba(94,143,100,.12);color:var(--sage);border:1px solid rgba(94,143,100,.2)}
-.tl-row{display:flex;gap:1rem;align-items:flex-start}
+.tl-row{display:flex;flex-direction:column;gap:.75rem}
 .tl-content{flex:1;min-width:0}
-.tl-photo{width:110px;height:82px;border-radius:10px;object-fit:cover;flex-shrink:0;margin-top:1.5rem;box-shadow:var(--sh-sm);cursor:pointer}
+.tl-photo{width:100%;height:130px;border-radius:10px;object-fit:cover;display:block;box-shadow:var(--sh-sm);cursor:pointer}
 
 /* ASSIGNMENTS */
 .assign-sec{background:var(--navy);color:white;padding:4rem 2rem}
@@ -543,7 +544,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .nav-dropdown-num{display:none}
   section{padding:2.5rem 1.25rem}
   .story-highlights{position:static}
-  .tl-photo{display:none}
+
   .assign-tabs{flex-wrap:wrap}
   .hero-stats{gap:1.5rem}
   .legacy-card-grid,.principle-cards,.through-line-cols,.ff-roots-grid{grid-template-columns:1fr}
@@ -594,24 +595,34 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 .journey-timeline {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0;
-  max-width: 800px;
-  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(200,160,80,0.3) transparent;
+  align-items: flex-start;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
 }
+.journey-timeline::-webkit-scrollbar{height:4px}
+.journey-timeline::-webkit-scrollbar-thumb{background:rgba(200,160,80,0.3);border-radius:2px}
 
 .journey-stop {
   display: flex;
-  gap: 32px;
-  position: relative;
+  flex-direction: column;
+  gap: 0;
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  padding-right: 24px;
 }
 
 .journey-connector {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  flex-shrink: 0;
-  padding-top: 8px;
+  padding-top: 0;
+  margin-bottom: 20px;
 }
 
 .journey-dot {
@@ -639,11 +650,10 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 }
 
 .journey-line {
-  width: 2px;
   flex: 1;
-  min-height: 40px;
-  background: linear-gradient(to bottom, var(--gold), rgba(200, 160, 80, 0.2));
-  margin-top: 8px;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), rgba(200, 160, 80, 0.15));
+  margin-left: 8px;
 }
 
 .journey-card {
@@ -651,7 +661,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 32px;
-  margin-bottom: 40px;
+  margin-bottom: 0;
   flex: 1;
   transition: background 0.3s ease, border-color 0.3s ease;
 }
@@ -799,7 +809,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 
 @media (max-width: 600px) {
   .journey-stop {
-    gap: 16px;
+    flex: 0 0 280px;
   }
 
   .journey-card {
@@ -886,7 +896,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <h2 class="sec-title">The Journey</h2>
     <p class="sec-sub" style="text-align:center;margin-bottom:60px;">Every assignment is a new restaurant, a new community, and a new set of problems to solve. This is the work.</p>
 
-    <div class="journey-timeline">
+    <div class="journey-timeline" id="journey-scroll">
 
       <!-- Assignment 1: Mall of Louisiana -->
       <div class="journey-stop completed">
@@ -956,6 +966,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         </div>
       </div>
 
+    </div>
+    <div class="scroll-controls" style="margin-top:.85rem">
+      <button class="scroll-btn" data-target="journey-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
+      <span style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4)">Scroll through assignments</span>
+      <button class="scroll-btn" data-target="journey-scroll" data-dir="1" aria-label="Next">&#8594;</button>
     </div>
   </div>
 </section>
@@ -1199,23 +1214,23 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   <div class="sec-inner">
     <div class="sec-label fade-in">Origin Story</div>
     <h2 class="sec-title fade-in">The Road That Led Here</h2>
-    <p class="ff-deck fade-in">From a garden in Maryland to the red couch in Atlanta — the moments, people, and chapters that built everything.</p>
+    <p class="ff-deck fade-in">From a garden in Maryland to the red couch in Atlanta. The moments, people, and chapters that built everything.</p>
     <div class="ff-scroll-wrap fade-in" id="ff-scroll">
       <div class="ff-scroll-track">
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/XLma33P.jpg" alt="Isaac and Gram (Nancy Hawbaker) working in the garden" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">Nancy Hawbaker — Gram</span>
+            <span class="ff-entry-label">Nancy Hawbaker, Gram</span>
             <div class="ff-entry-title">She tended everything she loved</div>
-            <p class="ff-entry-text">Gram kept a garden the way she kept a home — with patience and attention to what something needed, not just what it looked like. Working beside her taught me that care is not passive. It is daily, physical, and personal.</p>
+            <p class="ff-entry-text">Gram kept a garden the way she kept a home, with patience and attention to what something needed, not just what it looked like. Working beside her taught me that care is not passive. It is daily, physical, and personal.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/uh9Ynzc.jpg" alt="Isaac doing arts and crafts with Pap (David Hawbaker)" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">David Hawbaker — Pap</span>
+            <span class="ff-entry-label">David Hawbaker, Pap</span>
             <div class="ff-entry-title">A craftsman's hands</div>
-            <p class="ff-entry-text">Pap was a stonemason — he built things that lasted. Sitting at the table with him, I absorbed a standard I carry everywhere: if you are going to make something, make it worth keeping.</p>
+            <p class="ff-entry-text">Pap was a stonemason. He built things that lasted. Sitting at the table with him, I absorbed a standard I carry everywhere: if you are going to make something, make it worth keeping.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
@@ -1229,13 +1244,13 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/iNkb2KN.jpg" alt="Isaac and his brother Levi in Toronto with Lego hotels and skyscrapers" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">Levi &amp; Isaac — Toronto</span>
+            <span class="ff-entry-label">Levi &amp; Isaac, Toronto</span>
             <div class="ff-entry-title">I never followed the instructions</div>
-            <p class="ff-entry-text">I threw away the Lego instruction sheets. I was interested in hotels and skyscrapers — where people gathered and were served. The dream was already there. I just did not have a name for it yet.</p>
+            <p class="ff-entry-text">I threw away the Lego instruction sheets. I was interested in hotels and skyscrapers, where people gathered and were served. The dream was already there. I just did not have a name for it yet.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
-          <img src="https://i.imgur.com/qwDZ5IP.jpg" alt="Mom and Dad becoming Canadian citizens — the family holds dual US and Canadian citizenship" loading="lazy">
+          <img src="https://i.imgur.com/qwDZ5IP.jpg" alt="Mom and Dad becoming Canadian citizens. The family holds dual US and Canadian citizenship." loading="lazy">
           <div class="ff-scroll-card-body">
             <span class="ff-entry-label">The Demers Family</span>
             <div class="ff-entry-title">We belong to two countries</div>
@@ -1247,13 +1262,13 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <div class="ff-scroll-card-body">
             <span class="ff-entry-label">Discover Ability</span>
             <div class="ff-entry-title">The moment art became mine</div>
-            <p class="ff-entry-text">My parents enrolled me in Discover Ability — a program to help kids find what they were made for. I found my way to the art side and never left. Something clicked when I had the freedom to make something that did not exist before.</p>
+            <p class="ff-entry-text">My parents enrolled me in Discover Ability, a program to help kids find what they were made for. I found my way to the art side and never left. Something clicked when I had the freedom to make something that did not exist before.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/FXzT0r6.jpg" alt="Isaac competing in Fine Arts performing a human video with youth group, 9th grade" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">Fine Arts — 9th Grade</span>
+            <span class="ff-entry-label">Fine Arts, 9th Grade</span>
             <div class="ff-entry-title">Creativity was never just a hobby</div>
             <p class="ff-entry-text">I competed in national Fine Arts performing a human video with my youth group. I learned that faith and craft are inseparable. You cannot fake either one. The performance was the faith.</p>
           </div>
@@ -1261,7 +1276,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/3QIDRCF.jpg" alt="Isaac's basketball team, jersey number 3, 11th grade" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">Calvary Basketball — 11th Grade</span>
+            <span class="ff-entry-label">Calvary Basketball, 11th Grade</span>
             <div class="ff-entry-title">Jersey #3</div>
             <p class="ff-entry-text">Basketball taught me how to carry a team through a stretch when nothing is working and still hand the credit to someone else. The number that mattered was how my teammates were playing when the game was on the line.</p>
           </div>
@@ -1271,13 +1286,13 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <div class="ff-scroll-card-body">
             <span class="ff-entry-label">Fine Arts — Early College</span>
             <div class="ff-entry-title">From performer to coach</div>
-            <p class="ff-entry-text">I went from competing in human video to coaching one. Our team won the regional Fine Arts competition. Something about standing behind a team and watching them perform what you built together — I understood leadership differently after that.</p>
+            <p class="ff-entry-text">I went from competing in human video to coaching one. Our team won the regional Fine Arts competition. Something about standing behind a team and watching them perform what you built together. I understood leadership differently after that.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/hjMwwy7.jpg" alt="Isaac receiving the Ace of Diamonds Award at Rocky Gap Casino with GM Skylar Dice, age 21" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">Rocky Gap Casino &amp; Resort — Age 21</span>
+            <span class="ff-entry-label">Rocky Gap Casino &amp; Resort, Age 21</span>
             <div class="ff-entry-title">Ace of Diamonds</div>
             <p class="ff-entry-text">At 21 I was Hotel Operations Supervisor at Rocky Gap. This is the moment I received the Ace of Diamonds Award alongside GM Skylar Dice. I did not know it yet, but this was the proving ground for everything that came next.</p>
           </div>
@@ -1290,7 +1305,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <div class="ff-scroll-card-body">
             <span class="ff-entry-label">Faith</span>
             <div class="ff-entry-title">Two baptisms, two chapters</div>
-            <p class="ff-entry-text">My father baptized me in a creek in Maryland at ten — that faith was mine. Before LDP, Lexie and I were baptized together at National Community Church. A new chapter, with God in control.</p>
+            <p class="ff-entry-text">My father baptized me in a creek in Maryland at ten. That faith was mine. Before LDP, Lexie and I were baptized together at National Community Church. A new chapter, with God in control.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
@@ -1298,21 +1313,21 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <div class="ff-scroll-card-body">
             <span class="ff-entry-label">Hagerstown, Maryland</span>
             <div class="ff-entry-title">Before we knew</div>
-            <p class="ff-entry-text">Levi with a Chick-fil-A cow. I was probably in 9th grade when this was taken — Levi a couple years behind me. Neither of us could have known then that we would both end up building careers inside the brand. One of the most special photos I own.</p>
+            <p class="ff-entry-text">Levi and I with the Chick-fil-A cow. I was probably in 9th grade when this was taken, with Levi a couple years behind me. Neither of us could have known then that we would both end up building careers inside the brand. One of the most special photos I own.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/uGCuRhE.jpg" alt="Grand opening of Chick-fil-A Ridgeside Drive in Mount Airy Maryland, Isaac and Levi's first time working together" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">CFA Ridgeside Drive — Mount Airy, MD</span>
+            <span class="ff-entry-label">CFA Ridgeside Drive, Mount Airy MD</span>
             <div class="ff-entry-title">The first one</div>
-            <p class="ff-entry-text">Grand opening of Chick-fil-A Ridgeside Drive. This was the first time Levi and I worked together, and my first day inside the brand. Everything that followed — every assignment, every team, every result — started here.</p>
+            <p class="ff-entry-text">Grand opening of Chick-fil-A Ridgeside Drive. This was the first time Levi and I worked together and my first day inside the brand. Every assignment, every team, and every result that followed started here.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/InGr1Ao.jpg" alt="Isaac and Levi working together in the BOH rotating chicken" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">Levi &amp; Isaac — BOH</span>
+            <span class="ff-entry-label">Levi &amp; Isaac, BOH</span>
             <div class="ff-entry-title">In the work together</div>
             <p class="ff-entry-text">Levi and I in the back of house rotating chicken. The two of us who once built Lego hotels in Toronto, now building something real. Side by side in the work.</p>
           </div>
@@ -1322,7 +1337,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <div class="ff-scroll-card-body">
             <span class="ff-entry-label">FTS — North Barrie, Ontario</span>
             <div class="ff-entry-title">Full circle in Canada</div>
-            <p class="ff-entry-text">Levi and I serving together at a grand opening in North Barrie — the first FTS assignment we served together, and my second FTS assignment. Two kids who grew up between Canada and Maryland, back in Canada, serving people. Full circle.</p>
+            <p class="ff-entry-text">Levi and I serving together at a grand opening in North Barrie. It was the first FTS assignment we served together and my second FTS assignment. Two kids who grew up between Canada and Maryland, back in Canada, serving people. Full circle.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
@@ -1330,7 +1345,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <div class="ff-scroll-card-body">
             <span class="ff-entry-label">FTS — Ottawa, Ontario</span>
             <div class="ff-entry-title">Rideau Centre grand opening</div>
-            <p class="ff-entry-text">Serving a grand opening at the Rideau Centre mall in Ottawa with my FTS team. Every opening is a new set of people, a new city, a new team to build fast. This one was in Canada — which never gets old.</p>
+            <p class="ff-entry-text">Serving a grand opening at the Rideau Centre mall in Ottawa with my FTS team. Every opening is a new set of people, a new city, a new team to build fast. This one was in Canada, which never gets old.</p>
           </div>
         </div>
         <div class="ff-scroll-card">
@@ -1344,7 +1359,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="ff-scroll-card">
           <img src="https://i.imgur.com/547XmcJ.jpg" alt="Isaac and Levi together on Isaac's first day in LDP at the Chick-fil-A Corporate Support Center" loading="lazy">
           <div class="ff-scroll-card-body">
-            <span class="ff-entry-label">LDP Day One — A God Moment</span>
+            <span class="ff-entry-label">LDP Day One, A God Moment</span>
             <div class="ff-entry-title">Levi was there</div>
             <p class="ff-entry-text">Levi happened to be at the Support Center on a tour with our operator on my first day in LDP. Of all the days. Of all the timing. We got this photo. Some things are not coincidences.</p>
           </div>
@@ -1365,7 +1380,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">Career Timeline</div>
     <h2 class="sec-title fade-in">From Valet to Operator Candidate</h2>
     <p class="sec-sub fade-in">Every chapter built on the last. Every setback became a setup.</p>
-    <div class="timeline">
+    <div class="timeline" id="tl-scroll">
       <div class="tl-item"><div class="tl-dot navy"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">AUG 2015 - OCT 2021 &bull; 6 yrs 3 mos</div><div class="tl-card"><h3>Rocky Gap Casino & Resort</h3><p>Rose from Valet Attendant to Lead Valet to Valet Supervisor to Hotel Operations Supervisor to Marketing Manager over six years. Built operational systems, led cross-functional teams, and developed leaders including Josh James, Angelina Bloom, Jacob Santameyer, and Brandon Stotler.</p><span class="tl-tag tag-career">Career Foundation</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/sTd4qf9.jpg" alt="Rocky Gap Casino & Resort"></div></div>
 
       <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">2020</div><div class="tl-card"><h3>Liberty University, Graduated with Honors</h3><p>Completed my degree while working demanding hospitality hours at Rocky Gap. Proved that discipline and commitment could coexist, even when the schedule said otherwise.</p><span class="tl-tag tag-edu">Education</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/ePrgZy7.jpg" alt="Liberty University"></div></div>
@@ -1379,6 +1394,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">NOV 2025 - MAR 2026</div><div class="tl-card"><h3>IM Assignment 2: Altamesa & McCart, Fort Worth, TX</h3><p>First IM on grounds during a confidential operator transition. Led through power outages, roof leaks, sewage issues, and organizational rebuilds. Promoted Tonia Coulston and Sevastian Galvan. QIV rose from 76.6% to 91.1%. Swung net profit from -11.5% to +9.2% in one month.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/pvCAR3x.jpg" alt="Altamesa & McCart"></div></div>
 
       <div class="tl-item"><div class="tl-dot active"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">MAR 2026 - PRESENT</div><div class="tl-card"><h3>GOS Assignment: Latham Farms, Albany, NY</h3><p>Currently serving as Grand Opening Supervisor for my first grand opening assignment. Leading operations, team readiness, and community launch strategy.</p><span class="tl-tag tag-current">Current Assignment</span></div></div></div></div>
+    </div>
+    <div class="scroll-controls" style="margin-top:.75rem">
+      <button class="scroll-btn" data-target="tl-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
+      <span class="horiz-scroll-hint">Scroll through the timeline</span>
+      <button class="scroll-btn" data-target="tl-scroll" data-dir="1" aria-label="Next">&#8594;</button>
     </div>
   </div>
 </section>
@@ -1482,16 +1502,20 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <p class="sec-sub fade-in">Developing people is not a box to check. It is the work. These leaders carry forward everything we built together.</p>
     <div class="people-scroll-wrap fade-in" id="people-scroll">
       <div class="people-scroll-track">
-        <div class="person-card"><div class="person-avatar pa-1">HB</div><h4>Hayleigh Bozant</h4><div class="person-role">Executive Director, MOL</div><p>Promoted at Mall of Louisiana. Grew from strong contributor to the leader driving the entire operation.</p></div>
-        <div class="person-card"><div class="person-avatar pa-2">TC</div><h4>Tonia Coulston</h4><div class="person-role">FOH Executive Director, Altamesa</div><p>Promoted at Altamesa. Her growth in leadership presence and accountability became a model for the team.</p></div>
-        <div class="person-card"><div class="person-avatar pa-3">SG</div><h4>Sevastian Galvan</h4><div class="person-role">BOH Supervisor, FTS</div><p>Promoted at Altamesa. Became a Field Talent Staff member, executed a New York grand opening, and built a BOH training tracker that became a standout resource.</p></div>
-        <div class="person-card"><div class="person-avatar pa-4">DC</div><h4>Danny Caporotti</h4><div class="person-role">Accepted into LDP</div><p>Developed at Ridgeside Drive. Danny's acceptance into LDP is a testament to the multiplying effect of intentional leadership.</p></div>
-        <div class="person-card"><div class="person-avatar pa-5">HH</div><h4>Harry Horyat</h4><div class="person-role">Asst. Director of DT, Ridgeside</div><p>Stepped into the role after Isaac left. Led the drive-thru to become ranked number three in Maryland.</p></div>
-        <div class="person-card"><div class="person-avatar pa-6">IR</div><h4>Izzy Reyes</h4><div class="person-role">Asst. Director of FOH, Ridgeside</div><p>Developed at Ridgeside Drive into a front of house leader who now drives guest experience and team culture.</p></div>
-        <div class="person-card"><div class="person-avatar pa-7">JJ</div><h4>Josh James</h4><div class="person-role">Hotel Ops Supervisor, Rocky Gap</div><p>Started as a valet attendant with no clear direction. Led the COVID reopening and achieved record guest satisfaction scores.</p></div>
-        <div class="person-card"><div class="person-avatar pa-8">AB</div><h4>Angelina Bloom</h4><div class="person-role">Supervisor, Rocky Gap</div><p>Became one of the strongest supervisors on the team at Rocky Gap Casino and Resort.</p></div>
-        <div class="person-card"><div class="person-avatar pa-9">JS</div><h4>Jacob Santameyer</h4><div class="person-role">Front Desk Supervisor, Rocky Gap</div><p>Grew into a front desk supervisor during Isaac's tenure at the resort.</p></div>
-        <div class="person-card"><div class="person-avatar pa-10">BS</div><h4>Brandon Stotler</h4><div class="person-role">Valet Supervisor, Rocky Gap</div><p>Developed into a valet supervisor, carrying forward the leadership standard Isaac established in the department.</p></div>
+        <!-- Rocky Gap Casino & Resort -->
+        <div class="person-card"><div class="person-avatar pa-1">AB</div><h4>Angelina Bloom</h4><div class="person-role">Supervisor, Rocky Gap</div><p>Became one of the strongest supervisors on the team at Rocky Gap Casino and Resort.</p></div>
+        <div class="person-card"><div class="person-avatar pa-2">JJ</div><h4>Josh James</h4><div class="person-role">Hotel Ops Supervisor, Rocky Gap</div><p>Started as a valet attendant with no clear direction. Led the COVID reopening and achieved record guest satisfaction scores.</p></div>
+        <div class="person-card"><div class="person-avatar pa-3">JS</div><h4>Jacob Santameyer</h4><div class="person-role">Front Desk Supervisor, Rocky Gap</div><p>Grew into a front desk supervisor during Isaac's tenure at the resort.</p></div>
+        <div class="person-card"><div class="person-avatar pa-4">BS</div><h4>Brandon Stotler</h4><div class="person-role">Valet Supervisor, Rocky Gap</div><p>Developed into a valet supervisor, carrying forward the leadership standard Isaac established in the department.</p></div>
+        <!-- Chick-fil-A Ridgeside Drive -->
+        <div class="person-card"><div class="person-avatar pa-5">DC</div><h4>Danny Caporotti</h4><div class="person-role">Accepted into LDP</div><p>Developed at Ridgeside Drive. Danny's acceptance into LDP is a testament to the multiplying effect of intentional leadership.</p></div>
+        <div class="person-card"><div class="person-avatar pa-6">HH</div><h4>Harry Horyat</h4><div class="person-role">Asst. Director of DT, Ridgeside</div><p>Stepped into the role after Isaac left. Led the drive-thru to become ranked number three in Maryland.</p></div>
+        <div class="person-card"><div class="person-avatar pa-7">IR</div><h4>Izzy Reyes</h4><div class="person-role">Asst. Director of FOH, Ridgeside</div><p>Developed at Ridgeside Drive into a front of house leader who now drives guest experience and team culture.</p></div>
+        <!-- Mall of Louisiana -->
+        <div class="person-card"><div class="person-avatar pa-8">HB</div><h4>Hayleigh Bozant</h4><div class="person-role">Executive Director, MOL</div><p>Promoted at Mall of Louisiana. Grew from strong contributor to the leader driving the entire operation.</p></div>
+        <!-- Altamesa & McCart -->
+        <div class="person-card"><div class="person-avatar pa-9">TC</div><h4>Tonia Coulston</h4><div class="person-role">FOH Executive Director, Altamesa</div><p>Promoted at Altamesa. Her growth in leadership presence and accountability became a model for the team.</p></div>
+        <div class="person-card"><div class="person-avatar pa-10">SG</div><h4>Sevastian Galvan</h4><div class="person-role">BOH Supervisor, FTS</div><p>Promoted at Altamesa. Became a Field Talent Staff member, executed a New York grand opening, and built a BOH training tracker that became a standout resource.</p></div>
       </div>
     </div>
     <div class="scroll-controls">
