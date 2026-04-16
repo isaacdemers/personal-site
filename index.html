@@ -195,17 +195,18 @@ section{padding:4rem 2rem}
 
 /* TIMELINE */
 .tl-sec{background:var(--warm)}
-.timeline{position:relative;margin-top:2rem;padding-left:3rem}
-.timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),var(--sage),var(--navy-light))}
-.tl-item{position:relative;margin-bottom:2.5rem;opacity:0;transform:translateY(20px);transition:all .6s}
+.timeline{position:relative;margin-top:2rem;padding-left:0;display:flex;flex-direction:row;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--cream-dark) transparent;scroll-snap-type:x mandatory;padding-bottom:1.25rem;align-items:flex-start}
+.timeline::-webkit-scrollbar{height:4px}.timeline::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:2px}
+.timeline::before{content:'';position:absolute;left:12px;right:0;top:11px;height:2px;width:auto;background:linear-gradient(to right,var(--red),var(--gold),var(--sage),var(--navy-light))}
+.tl-item{position:relative;flex:0 0 320px;scroll-snap-align:start;display:flex;flex-direction:column;padding-right:24px;margin-bottom:0;opacity:0;transform:translateY(10px);transition:all .6s}
 .tl-item.visible{opacity:1;transform:translateY(0)}
-.tl-dot{position:absolute;left:-3rem;top:.2rem;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center}
+.tl-dot{position:relative;left:auto;top:auto;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--red);z-index:2;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:1rem}
 .tl-dot.gold{border-color:var(--gold)}.tl-dot.sage{border-color:var(--sage)}.tl-dot.navy{border-color:var(--navy-light)}.tl-dot.active{border-color:var(--sage);box-shadow:0 0 0 4px rgba(94,143,100,.2)}
 .tl-dot-inner{width:7px;height:7px;border-radius:50%;background:var(--red)}
 .tl-dot.gold .tl-dot-inner{background:var(--gold)}.tl-dot.sage .tl-dot-inner{background:var(--sage)}.tl-dot.navy .tl-dot-inner{background:var(--navy-light)}.tl-dot.active .tl-dot-inner{background:var(--sage);animation:pulse 2s ease infinite}
 .tl-date{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text-light);letter-spacing:.05em;margin-bottom:.4rem}
 .tl-card{background:white;border-radius:14px;padding:1.5rem;box-shadow:var(--sh-sm);transition:transform .3s,box-shadow .3s}
-.tl-card:hover{transform:translateX(4px);box-shadow:var(--sh-md)}
+.tl-card:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
 .tl-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
 .tl-card p{font-size:.9rem;color:var(--text-mid);line-height:1.6}
 .tl-tag{display:inline-block;padding:.15rem .6rem;border-radius:100px;font-size:.65rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-top:.6rem}
@@ -213,9 +214,9 @@ section{padding:4rem 2rem}
 .tag-edu{background:rgba(201,150,59,.1);color:#A07A20}
 .tag-personal{background:rgba(94,143,100,.1);color:#4A7550}
 .tag-current{background:rgba(94,143,100,.12);color:var(--sage);border:1px solid rgba(94,143,100,.2)}
-.tl-row{display:flex;gap:1rem;align-items:flex-start}
+.tl-row{display:flex;flex-direction:column;gap:.75rem}
 .tl-content{flex:1;min-width:0}
-.tl-photo{width:110px;height:82px;border-radius:10px;object-fit:cover;flex-shrink:0;margin-top:1.5rem;box-shadow:var(--sh-sm);cursor:pointer}
+.tl-photo{width:100%;height:130px;border-radius:10px;object-fit:cover;display:block;box-shadow:var(--sh-sm);cursor:pointer}
 
 /* ASSIGNMENTS */
 .assign-sec{background:var(--navy);color:white;padding:4rem 2rem}
@@ -543,7 +544,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .nav-dropdown-num{display:none}
   section{padding:2.5rem 1.25rem}
   .story-highlights{position:static}
-  .tl-photo{display:none}
+
   .assign-tabs{flex-wrap:wrap}
   .hero-stats{gap:1.5rem}
   .legacy-card-grid,.principle-cards,.through-line-cols,.ff-roots-grid{grid-template-columns:1fr}
@@ -1379,7 +1380,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">Career Timeline</div>
     <h2 class="sec-title fade-in">From Valet to Operator Candidate</h2>
     <p class="sec-sub fade-in">Every chapter built on the last. Every setback became a setup.</p>
-    <div class="timeline">
+    <div class="timeline" id="tl-scroll">
       <div class="tl-item"><div class="tl-dot navy"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">AUG 2015 - OCT 2021 &bull; 6 yrs 3 mos</div><div class="tl-card"><h3>Rocky Gap Casino & Resort</h3><p>Rose from Valet Attendant to Lead Valet to Valet Supervisor to Hotel Operations Supervisor to Marketing Manager over six years. Built operational systems, led cross-functional teams, and developed leaders including Josh James, Angelina Bloom, Jacob Santameyer, and Brandon Stotler.</p><span class="tl-tag tag-career">Career Foundation</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/sTd4qf9.jpg" alt="Rocky Gap Casino & Resort"></div></div>
 
       <div class="tl-item"><div class="tl-dot gold"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">2020</div><div class="tl-card"><h3>Liberty University, Graduated with Honors</h3><p>Completed my degree while working demanding hospitality hours at Rocky Gap. Proved that discipline and commitment could coexist, even when the schedule said otherwise.</p><span class="tl-tag tag-edu">Education</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/ePrgZy7.jpg" alt="Liberty University"></div></div>
@@ -1393,6 +1394,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">NOV 2025 - MAR 2026</div><div class="tl-card"><h3>IM Assignment 2: Altamesa & McCart, Fort Worth, TX</h3><p>First IM on grounds during a confidential operator transition. Led through power outages, roof leaks, sewage issues, and organizational rebuilds. Promoted Tonia Coulston and Sevastian Galvan. QIV rose from 76.6% to 91.1%. Swung net profit from -11.5% to +9.2% in one month.</p><span class="tl-tag tag-career">LDP Assignment</span></div></div><img class="tl-photo" loading="lazy" decoding="async" src="https://i.imgur.com/pvCAR3x.jpg" alt="Altamesa & McCart"></div></div>
 
       <div class="tl-item"><div class="tl-dot active"><div class="tl-dot-inner"></div></div><div class="tl-row"><div class="tl-content"><div class="tl-date">MAR 2026 - PRESENT</div><div class="tl-card"><h3>GOS Assignment: Latham Farms, Albany, NY</h3><p>Currently serving as Grand Opening Supervisor for my first grand opening assignment. Leading operations, team readiness, and community launch strategy.</p><span class="tl-tag tag-current">Current Assignment</span></div></div></div></div>
+    </div>
+    <div class="scroll-controls" style="margin-top:.75rem">
+      <button class="scroll-btn" data-target="tl-scroll" data-dir="-1" aria-label="Previous">&#8592;</button>
+      <span class="horiz-scroll-hint">Scroll through the timeline</span>
+      <button class="scroll-btn" data-target="tl-scroll" data-dir="1" aria-label="Next">&#8594;</button>
     </div>
   </div>
 </section>
