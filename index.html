@@ -509,6 +509,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .ff-photo-placeholder{height:200px;background:var(--cream-dark);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-light);font-size:.85rem;font-family:'Outfit',sans-serif;margin-bottom:1rem;text-align:center;padding:1rem}
 .ff-card p{font-size:.92rem;color:var(--text-mid);line-height:1.8}
 .ff-pullquote{background:transparent;border-left:4px solid var(--red);padding:1.25rem 2rem;margin:.5rem 0;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:var(--navy);line-height:1.55}
+.ff-photo-grid{display:grid;gap:1.5rem;margin:1.75rem 0}.ff-photo-grid-2{grid-template-columns:1fr 1fr}.ff-photo-entry img{width:100%;height:280px;object-fit:cover;border-radius:12px;display:block;margin-bottom:.85rem}.ff-entry-label{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem}.ff-entry-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--navy);margin-bottom:.45rem;line-height:1.35}.ff-entry-text{font-size:.9rem;color:var(--text-mid);line-height:1.78}.ff-featured-split{display:grid;grid-template-columns:1.25fr 1fr;gap:2rem;align-items:start;margin:1.75rem 0 2rem}.ff-featured-split>img{width:100%;height:360px;object-fit:cover;border-radius:12px}.ff-featured-split-body{padding-top:.25rem}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -535,6 +536,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .assign-tabs{flex-wrap:wrap}
   .hero-stats{gap:1.5rem}
   .legacy-card-grid,.principle-cards,.through-line-cols,.ff-roots-grid{grid-template-columns:1fr}
+  .ff-photo-grid-2,.ff-featured-split{grid-template-columns:1fr}
   .legacy-card-merged{grid-template-columns:1fr;justify-items:center}
   .legacy-merged-photo{width:100%;max-width:300px;height:auto;aspect-ratio:1}
   .legacy-card-merged .legacy-merged-content{text-align:left;width:100%}
@@ -1186,40 +1188,80 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   <div class="sec-inner">
     <div class="sec-label fade-in">Faith &amp; Family</div>
     <h2 class="sec-title fade-in">The People Who Made Me</h2>
-    <p class="ff-deck fade-in">Before the restaurant, before the program, before the dream, there was a home, a father, a mother, and two moments in the water.</p>
+    <p class="ff-deck fade-in">You cannot fully understand where someone is going without knowing where they came from. These are the people, moments, and places that wired me — long before I ever stepped behind a counter.</p>
     <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="ff-content"><span class="mobile-toggle-label">Read the full story</span><span class="mobile-toggle-icon" aria-hidden="true">&#x25BE;</span></button>
     <div class="mobile-collapsible-content" id="ff-content">
 
-    <!-- Roots movement -->
-    <h3 class="ff-movement-hdr fade-in">Roots</h3>
-    <div class="ff-roots-grid">
-      <div class="ff-card fade-in">
-        <div class="ff-photo-placeholder">Dad serving with the Salvation Army, Toronto</div>
-        <p>My father spent my childhood counseling the addicted and serving the overlooked through the Salvation Army. Every Sunday we loaded vans with equipment and food and drove to a community center to serve hot lunches. I did not learn hospitality. I absorbed it watching him see people the world had stopped seeing.</p>
+    <!-- Chapter 1: The Hawbakers -->
+    <h3 class="ff-movement-hdr fade-in">The Hawbakers — Clear Spring, Maryland</h3>
+    <div class="ff-photo-grid ff-photo-grid-2 fade-in">
+      <div class="ff-photo-entry">
+        <img src="https://i.imgur.com/XLma33P.jpg" alt="Isaac and Gram (Nancy Hawbaker) working in the garden" loading="lazy">
+        <div class="ff-entry-label">Nancy Hawbaker — Gram</div>
+        <div class="ff-entry-title">She tended everything she loved</div>
+        <p class="ff-entry-text">Gram kept a garden the way she kept a home — with patience and attention to what something needed, not just what it looked like. Working beside her in the soil taught me that care is not passive. It is daily, physical, and personal. She modeled what a table open to everyone actually looks like from the inside.</p>
       </div>
-      <div class="ff-card fade-in">
-        <div class="ff-photo-placeholder">Me serving as a kid, Salvation Army Christmas Kettle</div>
-        <p>Every Christmas my family collected donations through the Christmas Kettle program. While other kids followed Lego instructions, I threw them away and built hotels and businesses. Service and imagination were the same thing in our house.</p>
-      </div>
-      <div class="ff-card fade-in">
-        <div class="ff-photo-placeholder">First baptism, small creek in Maryland, age 10</div>
-        <p>My father baptized me in a small creek in Maryland near my grandparents' home. Just immediate family. I was ten, and for me that first baptism was a symbol that my faith had become mine. I was taking ownership. I did not believe in Christ because my parents told me to. I believed in Christ because of what he did in my life.</p>
+      <div class="ff-photo-entry">
+        <img src="https://i.imgur.com/uh9Ynzc.jpg" alt="Isaac doing arts and crafts with Pap (David Hawbaker)" loading="lazy">
+        <div class="ff-entry-label">David Hawbaker — Pap</div>
+        <div class="ff-entry-title">A craftsman's hands</div>
+        <p class="ff-entry-text">Pap was a stonemason. He built things that lasted. Sitting at the table doing arts and crafts with him, I absorbed a standard I carry everywhere: if you are going to make something, make it worth keeping. You do not rush it. You do not cut corners. You care about what your hands produce.</p>
       </div>
     </div>
 
-    <!-- Formation movement -->
-    <h3 class="ff-movement-hdr fade-in">Formation</h3>
-    <div class="ff-formation">
-      <div class="ff-card fade-in">
-        <div class="ff-photo-placeholder">Fine Arts competition, Calvary Christian Academy</div>
-        <p>I competed in national Fine Arts competitions in photography and videography, and I carry a camera with me to this day. Creativity is not a hobby for me. It is how I pay attention to people and places.</p>
+    <!-- Chapter 2: Growing Up Demers -->
+    <h3 class="ff-movement-hdr fade-in">Growing Up — Toronto &amp; Maryland</h3>
+    <div class="ff-featured-split fade-in">
+      <img src="https://i.imgur.com/gPPZRVD.jpg" alt="Isaac and his dad as a kid" loading="lazy">
+      <div class="ff-featured-split-body">
+        <div class="ff-entry-label">My Father</div>
+        <div class="ff-entry-title">He served people no one else was serving</div>
+        <p class="ff-entry-text">My dad spent my childhood counseling the addicted and serving the overlooked through the Salvation Army. Every Sunday we loaded vans with equipment and food and drove to a community center to serve hot lunches. I did not learn hospitality from a book. I absorbed it watching him look people in the eye — the ones the world had already looked away from.</p>
+        <p class="ff-entry-text" style="margin-top:.85rem">The table he kept open was not metaphorical. It was real, weekly, and costly. That image never left me.</p>
       </div>
+    </div>
+    <div class="ff-photo-grid ff-photo-grid-2 fade-in">
+      <div class="ff-photo-entry">
+        <img src="https://i.imgur.com/iNkb2KN.jpg" alt="Isaac and his brother Levi in Toronto with Lego hotels and skyscrapers they built" loading="lazy">
+        <div class="ff-entry-label">Levi &amp; Isaac — Toronto</div>
+        <div class="ff-entry-title">I never followed the instructions</div>
+        <p class="ff-entry-text">I threw away the Lego instruction sheets. The kits were never the point. I was interested in hotels and skyscrapers — the structures where people gathered, stayed, and were served. My brother Levi and I spent hours in Toronto building towers I had imagined myself. The dream was already there. I just did not have a name for it yet.</p>
+      </div>
+      <div class="ff-photo-entry">
+        <img src="https://i.imgur.com/qwDZ5IP.jpg" alt="Mom and Dad becoming Canadian citizens — the whole family holds dual US and Canadian citizenship" loading="lazy">
+        <div class="ff-entry-label">The Demers Family</div>
+        <div class="ff-entry-title">We belong to two countries</div>
+        <p class="ff-entry-text">My parents became Canadian citizens while raising our family. All of us carry dual citizenship — American and Canadian. Growing up between two nations taught me early that identity is not fixed to one place, one culture, or one way of doing things. You carry what shaped you, wherever you go.</p>
+      </div>
+    </div>
+
+    <!-- Chapter 3: Formation -->
+    <h3 class="ff-movement-hdr fade-in">Finding My Shape — Calvary Christian Academy</h3>
+    <div class="ff-photo-grid ff-photo-grid-2 fade-in">
+      <div class="ff-photo-entry">
+        <img src="https://i.imgur.com/FXzT0r6.jpg" alt="Isaac competing in Fine Arts performing a human video with youth group students, 9th grade" loading="lazy">
+        <div class="ff-entry-label">Fine Arts — 9th Grade</div>
+        <div class="ff-entry-title">Creativity was never just a hobby</div>
+        <p class="ff-entry-text">I competed in national Fine Arts, performing a human video with students from my youth group. Standing in front of an audience and channeling conviction through movement — I learned something about the relationship between faith and craft. Neither one can be faked. The performance was the faith, and the faith was the performance.</p>
+      </div>
+      <div class="ff-photo-entry">
+        <img src="https://i.imgur.com/3QIDRCF.jpg" alt="Isaac's basketball team, Isaac wearing jersey number 3, 11th grade" loading="lazy">
+        <div class="ff-entry-label">Calvary Basketball — 11th Grade</div>
+        <div class="ff-entry-title">Jersey #3</div>
+        <p class="ff-entry-text">Basketball taught me things the classroom could not. How to absorb a loss without losing your edge. How to carry a team through a stretch when nothing is working. How to compete with everything you have and still hand the credit to someone else. The number that mattered was never mine — it was how my teammates were playing when the game was on the line.</p>
+      </div>
+    </div>
+
+    <!-- Faith -->
+    <h3 class="ff-movement-hdr fade-in">Faith</h3>
+    <div class="ff-formation">
       <blockquote class="ff-pullquote fade-in">I had not given God the keys to my destiny, and in return He did not give me the keys to my dream. That is one of the reasons it took me longer to get into LDP. I was not releasing myself to be broken and rebuilt. I wanted to show God I was truly surrendering for this next season.</blockquote>
       <div class="ff-card fade-in">
         <img src="https://i.imgur.com/Ms8mnIf.jpg" alt="Second baptism, National Community Church, Washington DC" style="width:100%;height:300px;object-fit:cover;object-position:top;border-radius:12px;margin-bottom:1rem" loading="lazy">
-        <p>Right before I left for LDP, Lexie and I got baptized together at National Community Church in DC. She had recently dedicated her life to Christ, and I wanted to rededicate myself as one chapter closed and another opened. I knew there were more Goliaths ahead, and I knew I could only face them with God in control.</p>
+        <p>My father baptized me in a small creek in Maryland near my grandparents' home when I was ten. That first baptism was mine — I was not believing because my parents told me to. I was taking ownership. Years later, right before I left for LDP, Lexie and I got baptized together at National Community Church in DC. She had recently dedicated her life to Christ, and I wanted to rededicate myself as one chapter closed and another opened. I knew there were more Goliaths ahead. I knew I could only face them with God in control.</p>
       </div>
     </div>
+
     </div>
   </div>
 </section>
