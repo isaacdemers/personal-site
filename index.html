@@ -315,11 +315,12 @@ section{padding:4rem 2rem}
 .bm-nav-count{font-size:.72rem;color:var(--text-light);font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
 @media(max-width:700px){
   .bookcase{margin-left:-1.25rem;margin-right:-1.25rem}
-  .shelf-mobile{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;border-radius:0;padding:1rem 1rem 0;position:relative}
-  .shelf-mobile .shelf-books{display:flex;flex-direction:row;gap:10px;align-items:end;grid-template-columns:none;padding-bottom:.25rem;width:max-content}
+  .shelf-mobile{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;background:none;box-shadow:none;border-radius:0;padding:0;position:relative}
+  .shelf-mobile-canvas{display:inline-flex;flex-direction:column;min-width:100%;background:linear-gradient(180deg,#d4a870 0%,#b87940 60%,#9a6228 100%);border-radius:6px 6px 0 0;padding:1rem 1rem 0;box-shadow:0 6px 20px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.25)}
+  .shelf-mobile .shelf-books{display:flex;flex-direction:row;gap:10px;align-items:end;grid-template-columns:none;padding-bottom:.25rem}
   .shelf-mobile .book-spine{width:108px;height:162px;flex-shrink:0;border-radius:3px;background-position:center center;box-shadow:2px 2px 8px rgba(0,0,0,.28),inset 2px 0 6px rgba(0,0,0,.18)}
   .shelf-mobile .book-spine:hover,.shelf-mobile .book-spine:focus{transform:translateY(-6px)}
-  .shelf-mobile .shelf-rail{margin:0}
+  .shelf-mobile .shelf-rail{margin:0 -1rem}
   .shelf-scroll-hint{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);text-align:center;margin-top:.85rem;opacity:.7}
 }
 @media(max-width:480px){
@@ -1985,11 +1986,11 @@ document.addEventListener('keydown', function(e) {
     var isMobile = window.matchMedia('(max-width:700px)').matches;
     var html = '';
     if (isMobile) {
-      html += '<div class="shelf shelf-mobile"><div class="shelf-books">';
+      html += '<div class="shelf shelf-mobile"><div class="shelf-mobile-canvas"><div class="shelf-books">';
       BOOKS.forEach(function(book, idx) {
         html += spineHtml(book, idx, false);
       });
-      html += '</div><div class="shelf-rail"></div></div>';
+      html += '</div><div class="shelf-rail"></div></div></div>';
       html += '<div class="shelf-scroll-hint">&#8592; Swipe to browse all 26 &#8594;</div>';
     } else {
       var rows = [BOOKS.slice(0, 9), BOOKS.slice(9, 18), BOOKS.slice(18)];
