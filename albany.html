@@ -222,6 +222,22 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
   .photo-grid{grid-template-columns:repeat(2,1fr)}
   .hero-stats-strip{grid-template-columns:1fr;gap:.75rem}
 }
+
+/* BOTTOM TAB BAR (mobile only) */
+.bottom-tab-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(254,252,248,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:900;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bottom-tab-bar-inner{display:flex;justify-content:space-around;align-items:stretch;max-width:480px;margin:0 auto}
+.bottom-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 4px 10px;text-decoration:none;color:var(--text-light);font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;min-height:56px;transition:color .2s,background .15s;position:relative}
+.bottom-tab::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%) scaleX(0);width:28px;height:2px;background:var(--red);border-radius:0 0 2px 2px;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.bottom-tab svg{width:22px;height:22px;stroke-width:1.7;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.bottom-tab.active{color:var(--red)}
+.bottom-tab.active::before{transform:translateX(-50%) scaleX(1)}
+.bottom-tab:active{background:rgba(15,28,50,.05)}
+.bottom-tab-label{line-height:1}
+body.nav-open .bottom-tab-bar{opacity:0;pointer-events:none;transition:opacity .2s}
+@media(max-width:700px){
+  .bottom-tab-bar{display:block}
+  body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+}
   </style>
 </head>
 <body>
@@ -402,6 +418,70 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
 </div>
 
 <script>
+// === BOTTOM TAB BAR ===
+(function() {
+  if (document.querySelector('.bottom-tab-bar')) return;
+  var tabs = [
+    { id:'top', label:'Home', href:'index.html',
+      svg:'<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h4v-6h4v6h4V10"/></svg>' },
+    { id:'journey', label:'Journey', href:'index.html#journey',
+      svg:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-5 2 2-5 5-2z"/></svg>' },
+    { id:'story', label:'Story', href:'index.html#story',
+      svg:'<svg viewBox="0 0 24 24"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>' },
+    { id:'people', label:'People', href:'index.html#people',
+      svg:'<svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="10" r="2.6"/><path d="M15 20c0-2.7 2-4.8 4.5-4.8"/></svg>' },
+    { id:'legacy', label:'Legacy', href:'index.html#legacy',
+      svg:'<svg viewBox="0 0 24 24"><path d="M7 3h10v18l-5-3.5L7 21z"/></svg>' }
+  ];
+  var html = '<nav class="bottom-tab-bar" aria-label="Primary"><div class="bottom-tab-bar-inner">';
+  tabs.forEach(function(t) {
+    html += '<a class="bottom-tab" href="' + t.href + '" data-tab="' + t.id + '">' +
+            '<span aria-hidden="true">' + t.svg + '</span>' +
+            '<span class="bottom-tab-label">' + t.label + '</span></a>';
+  });
+  html += '</div></nav>';
+  document.body.insertAdjacentHTML('beforeend', html);
+  var j = document.querySelector('.bottom-tab[data-tab="journey"]');
+  if (j) j.classList.add('active');
+})();
+
+// === SWIPE BETWEEN ASSIGNMENTS (touch only) ===
+(function() {
+  var navEl = document.querySelector('.assignment-nav');
+  if (!navEl) return;
+  var anchors = navEl.querySelectorAll('a[href]');
+  var prevHref = null, nextHref = null;
+  anchors.forEach(function(a) {
+    var t = (a.textContent || '').trim();
+    if (t.indexOf('\u2190') === 0) prevHref = a.getAttribute('href');
+    else if (t.indexOf('\u2192') > -1 || /Next:/i.test(t) || /\u2192/.test(t)) nextHref = a.getAttribute('href');
+  });
+  if (!prevHref && !nextHref) return;
+  var startX = 0, startY = 0, startT = 0, tracking = false;
+  document.addEventListener('touchstart', function(e) {
+    if (e.touches.length !== 1) return;
+    if (e.target.closest('a, button, input, textarea, select, .lightbox, .photo-item, .docs-grid, [data-no-swipe]')) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    startT = Date.now();
+    tracking = true;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    if (!tracking) return;
+    tracking = false;
+    var touch = (e.changedTouches && e.changedTouches[0]);
+    if (!touch) return;
+    var dx = touch.clientX - startX;
+    var dy = touch.clientY - startY;
+    var dt = Date.now() - startT;
+    if (dt > 700) return;
+    if (Math.abs(dx) < 90) return;
+    if (Math.abs(dy) > 55) return;
+    if (dx < 0 && nextHref) { location.href = nextHref; }
+    else if (dx > 0 && prevHref) { location.href = prevHref; }
+  }, { passive: true });
+})();
+
 (function(){
   var nav = document.getElementById('nav');
   var toggle = document.getElementById('mobToggle');

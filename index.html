@@ -152,6 +152,8 @@ section{padding:4rem 2rem}
   .mobile-collapsible[data-mobile-collapsed="false"] .mobile-collapsible-content{opacity:1;transition:opacity .25s}
   .mobile-collapsible[data-mobile-collapsed="false"] .mobile-toggle .mobile-toggle-icon{transform:rotate(180deg)}
   .feedback-sec .mobile-toggle,.ff-sec .mobile-toggle{background:white;color:var(--navy)}
+  .fin-sec .mobile-toggle{background:var(--gold);color:var(--navy);margin-top:1.5rem}
+  .mobile-collapsible[data-mobile-collapsed="true"].fin-details-wrap{margin-top:0}
 }
 
 /* STORY */
@@ -391,6 +393,18 @@ section{padding:4rem 2rem}
 .ahead-card p{font-size:.88rem;color:var(--text-mid);line-height:1.7}
 .ahead-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:700;color:rgba(0,0,0,.03);position:absolute;top:.75rem;right:1.25rem}
 
+/* BOTTOM TAB BAR (mobile only) */
+.bottom-tab-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(254,252,248,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);z-index:900;padding-bottom:env(safe-area-inset-bottom,0px)}
+.bottom-tab-bar-inner{display:flex;justify-content:space-around;align-items:stretch;max-width:480px;margin:0 auto}
+.bottom-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 4px 10px;text-decoration:none;color:var(--text-light);font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;min-height:56px;transition:color .2s,background .15s;position:relative}
+.bottom-tab::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%) scaleX(0);width:28px;height:2px;background:var(--red);border-radius:0 0 2px 2px;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.bottom-tab svg{width:22px;height:22px;stroke-width:1.7;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.bottom-tab.active{color:var(--red)}
+.bottom-tab.active::before{transform:translateX(-50%) scaleX(1)}
+.bottom-tab:active{background:rgba(15,28,50,.05)}
+.bottom-tab-label{line-height:1}
+body.nav-open .bottom-tab-bar{opacity:0;pointer-events:none;transition:opacity .2s}
+
 /* FOOTER */
 footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 .footer-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;margin-bottom:.3rem}
@@ -567,6 +581,10 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .tl-photo{display:none}
   .journey-section{padding:3rem 1.25rem}
   .ff-scroll-wrap,.people-scroll-wrap{margin-left:-1.25rem;margin-right:-1.25rem;padding-left:1.25rem;padding-right:1.25rem}
+}
+@media(max-width:700px){
+  .bottom-tab-bar{display:block}
+  body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
 }
 @media(max-width:600px){
   .hero-stats{flex-direction:column;gap:.75rem}
@@ -1390,28 +1408,31 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   </div>
 
   <!-- Truett Cathy -->
-  <div class="truett-section">
+  <div class="truett-section mobile-collapsible" data-mobile-collapsed="true">
     <div class="sec-inner">
       <div class="sec-label fade-in">Philosophy</div>
       <h2 class="sec-title fade-in">S. Truett Cathy &mdash; the philosophy I inherited</h2>
-      <div class="truett-profile fade-in">
-        <img src="https://i.imgur.com/4rq3NT6.jpg" alt="S. Truett Cathy" class="truett-photo" loading="lazy">
-        <div class="truett-body">
-          <div class="truett-name">S. Truett Cathy</div>
-          <div class="truett-dates">1921 to 2014, Founder of Chick-fil-A</div>
-          <p>Truett Cathy opened the first Dwarf Grill in 1946 in Hapeville, Georgia. He built Chick-fil-A on the belief that a business exists not only to serve customers, but to develop people. He was still at work into his eighties. The business was never the point. The people were.</p>
-          <p>Two of his convictions shape how I think about operating a restaurant. The first: it is better to build boys than mend men. The second: every person has worth beyond what they produce. Both of those ideas live in my Dream Fund &mdash; a dedicated line item in my operating model that funds team member education, growth, and community investment from day one.</p>
+      <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="truett-content"><span class="mobile-toggle-label">Read the philosophy</span><span class="mobile-toggle-icon" aria-hidden="true">&#x25BE;</span></button>
+      <div class="mobile-collapsible-content" id="truett-content">
+        <div class="truett-profile fade-in">
+          <img src="https://i.imgur.com/4rq3NT6.jpg" alt="S. Truett Cathy" class="truett-photo" loading="lazy">
+          <div class="truett-body">
+            <div class="truett-name">S. Truett Cathy</div>
+            <div class="truett-dates">1921 to 2014, Founder of Chick-fil-A</div>
+            <p>Truett Cathy opened the first Dwarf Grill in 1946 in Hapeville, Georgia. He built Chick-fil-A on the belief that a business exists not only to serve customers, but to develop people. He was still at work into his eighties. The business was never the point. The people were.</p>
+            <p>Two of his convictions shape how I think about operating a restaurant. The first: it is better to build boys than mend men. The second: every person has worth beyond what they produce. Both of those ideas live in my Dream Fund &mdash; a dedicated line item in my operating model that funds team member education, growth, and community investment from day one.</p>
+          </div>
         </div>
-      </div>
-      <div class="principle-cards">
-        <div class="principle-card fade-in">
-          <div class="principle-quote">"It is better to build boys than mend men."</div>
-          <p>The Dream Fund is built into my operation from day one. It funds team member growth, education, and community investment. I am not waiting for the restaurant to be profitable to begin. The fund is the business model.</p>
-        </div>
-        <div class="principle-card fade-in">
-          <div class="principle-quote">"We should be about more than just selling chicken."</div>
-          <p class="legacy-bridge">That conviction is the reason my return to Manchester is not about market share. It is about extending a legacy that was already being built there long before I applied to LDP.</p>
-          <p>Greater Manchester is home to more than 400,000 people and has three Chick-fil-A locations. The market opportunity is real. But the reason I want to be there runs deeper than market share. My grandfather built there. My family is still there. I am not entering that community. I am returning to it.</p>
+        <div class="principle-cards">
+          <div class="principle-card fade-in">
+            <div class="principle-quote">"It is better to build boys than mend men."</div>
+            <p>The Dream Fund is built into my operation from day one. It funds team member growth, education, and community investment. I am not waiting for the restaurant to be profitable to begin. The fund is the business model.</p>
+          </div>
+          <div class="principle-card fade-in">
+            <div class="principle-quote">"We should be about more than just selling chicken."</div>
+            <p class="legacy-bridge">That conviction is the reason my return to Manchester is not about market share. It is about extending a legacy that was already being built there long before I applied to LDP.</p>
+            <p>Greater Manchester is home to more than 400,000 people and has three Chick-fil-A locations. The market opportunity is real. But the reason I want to be there runs deeper than market share. My grandfather built there. My family is still there. I am not entering that community. I am returning to it.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1634,11 +1655,16 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
           <div class="fin-bar"><div class="fin-bar-fill" id="barFill" style="width:0%"></div></div>
         </div>
       </div>
-      <div class="fin-details">
-        <div class="fin-detail fade-in"><div class="fin-detail-icon sal">&#128176;</div><div><h4>$85,000 Annual Salary</h4><p>Monthly take-home: $4,732. Near-zero expenses beyond subscriptions, allowing aggressive savings.</p></div></div>
-        <div class="fin-detail fade-in"><div class="fin-detail-icon inc">&#128202;</div><div><h4>$16,380 Net Worth</h4><p>Savings and retirement minus debt. Includes $2,935 in retirement investments alongside $30,738 in savings &amp; checking.</p></div></div>
-        <div class="fin-detail fade-in"><div class="fin-detail-icon debt">&#128195;</div><div><h4>$17,293 Total Debt</h4><p>$16,280 in student loans and $1,013 in credit card debt. Planned to be eliminated within two years.</p></div></div>
-        <div class="fin-detail fade-in"><div class="fin-detail-icon goal">&#127919;</div><div><h4>$60,000 Savings Goal</h4><p>Target by end of 2026. With minimal expenses and consistent income, this goal is well within reach.</p></div></div>
+      <div class="fin-details-wrap mobile-collapsible" data-mobile-collapsed="true">
+        <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="fin-details-content"><span class="mobile-toggle-label">Show full financial breakdown</span><span class="mobile-toggle-icon" aria-hidden="true">&#x25BE;</span></button>
+        <div class="mobile-collapsible-content" id="fin-details-content">
+          <div class="fin-details">
+            <div class="fin-detail fade-in"><div class="fin-detail-icon sal">&#128176;</div><div><h4>$85,000 Annual Salary</h4><p>Monthly take-home: $4,732. Near-zero expenses beyond subscriptions, allowing aggressive savings.</p></div></div>
+            <div class="fin-detail fade-in"><div class="fin-detail-icon inc">&#128202;</div><div><h4>$16,380 Net Worth</h4><p>Savings and retirement minus debt. Includes $2,935 in retirement investments alongside $30,738 in savings &amp; checking.</p></div></div>
+            <div class="fin-detail fade-in"><div class="fin-detail-icon debt">&#128195;</div><div><h4>$17,293 Total Debt</h4><p>$16,280 in student loans and $1,013 in credit card debt. Planned to be eliminated within two years.</p></div></div>
+            <div class="fin-detail fade-in"><div class="fin-detail-icon goal">&#127919;</div><div><h4>$60,000 Savings Goal</h4><p>Target by end of 2026. With minimal expenses and consistent income, this goal is well within reach.</p></div></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2115,6 +2141,73 @@ document.addEventListener('click', function(e) {
   var amount = card ? card.offsetWidth + 16 : 280;
   target.scrollBy({ left: parseInt(btn.dataset.dir) * amount, behavior: 'smooth' });
 });
+
+// === BOTTOM TAB BAR ===
+(function() {
+  if (document.querySelector('.bottom-tab-bar')) return;
+  var path = (location.pathname || '').replace(/\/+$/, '/');
+  var isIndex = path === '/' || /\/index\.html$/.test(path);
+  var tabs = [
+    { id:'top', label:'Home', href: isIndex ? '#top' : 'index.html',
+      svg:'<svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v10h4v-6h4v6h4V10"/></svg>' },
+    { id:'journey', label:'Journey', href: (isIndex?'':'index.html') + '#journey',
+      svg:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-5 2 2-5 5-2z"/></svg>' },
+    { id:'story', label:'Story', href: (isIndex?'':'index.html') + '#story',
+      svg:'<svg viewBox="0 0 24 24"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>' },
+    { id:'people', label:'People', href: (isIndex?'':'index.html') + '#people',
+      svg:'<svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="10" r="2.6"/><path d="M15 20c0-2.7 2-4.8 4.5-4.8"/></svg>' },
+    { id:'legacy', label:'Legacy', href: (isIndex?'':'index.html') + '#legacy',
+      svg:'<svg viewBox="0 0 24 24"><path d="M7 3h10v18l-5-3.5L7 21z"/></svg>' }
+  ];
+  var html = '<nav class="bottom-tab-bar" aria-label="Primary"><div class="bottom-tab-bar-inner">';
+  tabs.forEach(function(t) {
+    html += '<a class="bottom-tab" href="' + t.href + '" data-tab="' + t.id + '">' +
+            '<span aria-hidden="true">' + t.svg + '</span>' +
+            '<span class="bottom-tab-label">' + t.label + '</span></a>';
+  });
+  html += '</div></nav>';
+  document.body.insertAdjacentHTML('beforeend', html);
+
+  var tabEls = document.querySelectorAll('.bottom-tab');
+  var byId = {};
+  tabEls.forEach(function(el) { byId[el.dataset.tab] = el; });
+  // Smooth-scroll for anchor taps on the index page
+  tabEls.forEach(function(el) {
+    el.addEventListener('click', function(e) {
+      var href = el.getAttribute('href');
+      if (!href || href.indexOf('#') === -1) return;
+      if (href.indexOf('index.html') === 0 && !isIndex) return; // let browser navigate
+      if (isIndex && href.charAt(0) === '#') {
+        e.preventDefault();
+        var id = href.slice(1);
+        var t = document.getElementById(id);
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  if (isIndex && 'IntersectionObserver' in window) {
+    var sectionIds = ['top','journey','story','people','legacy'];
+    var sections = sectionIds.map(function(id) { return document.getElementById(id); }).filter(Boolean);
+    var activeId = 'top';
+    var setActive = function(id) {
+      if (id === activeId) return;
+      activeId = id;
+      tabEls.forEach(function(e) { e.classList.toggle('active', e.dataset.tab === id); });
+    };
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function(s) { obs.observe(s); });
+    // Seed active state based on scroll position
+    if (byId.top) byId.top.classList.add('active');
+  } else if (!isIndex) {
+    // On sub-pages (assignment pages) highlight Journey as context
+    if (byId.journey) byId.journey.classList.add('active');
+  }
+})();
 
 // === MOBILE SCROLL PROGRESS BARS ===
 window.initScrollProgress = function() {
