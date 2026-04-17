@@ -57,8 +57,9 @@ html{scroll-behavior:smooth;font-size:16px}
 body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--warm);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 /* NAV */
-nav{position:fixed;top:0;width:100%;z-index:1000;padding:1.1rem 2rem;transition:all .4s;background:transparent}
+nav{position:fixed;top:0;width:100%;z-index:1000;padding:1.1rem 2rem;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .4s,padding .4s,box-shadow .4s;background:transparent}
 nav.scrolled{background:rgba(254,252,248,.96);backdrop-filter:blur(20px);box-shadow:var(--sh-sm);padding:.65rem 2rem}
+nav.nav-hidden{transform:translateY(-100%)}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:-.02em}
 .nav-logo span{color:var(--red)}
@@ -585,6 +586,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 @media(max-width:700px){
   .bottom-tab-bar{display:block}
   body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+  .mob-toggle{display:none}
 }
 @media(max-width:600px){
   .hero-stats{flex-direction:column;gap:.75rem}
@@ -1826,9 +1828,30 @@ if (footerDate) footerDate.textContent = "Last updated: " + CONFIG.lastUpdated;
 
 // --- Core Functionality (animations, nav, etc.) ---
 
-// Nav scroll effect
+// Nav scroll effect + auto-hide on scroll down
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+(function() {
+  if (!nav) return;
+  let lastY = window.scrollY;
+  let ticking = false;
+  function onScroll() {
+    const y = window.scrollY;
+    const delta = y - lastY;
+    nav.classList.toggle('scrolled', y > 50);
+    if (y < 80 || document.body.classList.contains('nav-open')) {
+      nav.classList.remove('nav-hidden');
+    } else if (delta > 8) {
+      nav.classList.add('nav-hidden');
+    } else if (delta < -8) {
+      nav.classList.remove('nav-hidden');
+    }
+    lastY = y;
+    ticking = false;
+  }
+  window.addEventListener('scroll', function() {
+    if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+})();
 
 // Fade-in observer
 const obs = new IntersectionObserver(e => e.forEach(el => {
