@@ -199,7 +199,34 @@ section{padding:4rem 2rem}
 .story-metric-card.accent-gold .story-metric-val{color:var(--gold)}
 .story-metric-lbl{font-family:'Outfit',sans-serif;font-size:.75rem;color:var(--text-light);line-height:1.45}
 @media(max-width:900px){.story-metrics{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.story-metrics{grid-template-columns:1fr}}
+/* Story metrics: Apple-highlights carousel on phones */
+.story-controls{display:none}
+@media(max-width:600px){
+  .story-metrics{display:flex;grid-template-columns:none;gap:12px;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;scroll-padding-left:1.25rem;padding:4px 1.25rem 8px;margin:1.25rem -1.25rem 0;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-x pan-y}
+  .story-metrics::-webkit-scrollbar{display:none}
+  .story-metric-card{flex:0 0 82%;scroll-snap-align:center;scroll-snap-stop:always;border-radius:20px;padding:26px 22px 22px;min-height:180px;position:relative;overflow:hidden;border:1px solid rgba(15,28,50,.08);border-top-width:1px;box-shadow:0 10px 28px rgba(15,28,50,.08);display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(160deg,rgba(255,255,255,.6) 0%,var(--cream-dark) 100%)}
+  .story-metric-card::before{content:'';position:absolute;top:-40%;right:-30%;width:220px;height:220px;pointer-events:none;opacity:.22;border-radius:50%}
+  .story-metric-card.accent-red::before{background:radial-gradient(circle,var(--red) 0%,transparent 70%)}
+  .story-metric-card.accent-navy::before{background:radial-gradient(circle,var(--navy) 0%,transparent 70%)}
+  .story-metric-card.accent-sage::before{background:radial-gradient(circle,var(--sage) 0%,transparent 70%)}
+  .story-metric-card.accent-gold::before{background:radial-gradient(circle,var(--gold) 0%,transparent 70%)}
+  .story-metric-val{font-size:2.6rem;margin-bottom:.5rem;position:relative}
+  .story-metric-lbl{font-size:.88rem;line-height:1.55;position:relative}
+  .story-controls{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px auto 0;max-width:360px}
+  .story-dots{display:flex;align-items:center;gap:9px;padding:9px 13px;background:rgba(15,28,50,.05);border-radius:999px;border:1px solid rgba(15,28,50,.08)}
+  .story-dot-btn{appearance:none;-webkit-appearance:none;background:rgba(15,28,50,.22);border:0;padding:0;width:7px;height:7px;border-radius:999px;cursor:pointer;transition:width .4s cubic-bezier(.2,.8,.2,1),background-color .2s;position:relative;overflow:hidden;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+  .story-dot-btn.active{width:42px;background:rgba(15,28,50,.1)}
+  .story-dot-fill{position:absolute;top:0;left:0;height:100%;width:0;background:var(--navy);border-radius:999px}
+  .story-dot-btn.active.playing .story-dot-fill{animation:story-fill 5.5s linear forwards}
+  @keyframes story-fill{from{width:0}to{width:100%}}
+  .story-play{appearance:none;-webkit-appearance:none;background:rgba(15,28,50,.05);border:1px solid rgba(15,28,50,.08);color:var(--navy);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent;transition:background-color .15s}
+  .story-play:active{background:rgba(15,28,50,.1);transform:scale(.94)}
+  .story-play .icon-pause{display:block}
+  .story-play .icon-play{display:none}
+  .story-play[aria-pressed="false"] .icon-pause{display:none}
+  .story-play[aria-pressed="false"] .icon-play{display:block;margin-left:2px}
+}
+@media(max-width:480px){.story-metric-card{flex:0 0 84%}}
 .story-card h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--navy);margin-bottom:.4rem}
 .story-card p{font-size:.88rem;color:var(--text-mid);line-height:1.6}
 .story-quote{border-left:2px solid var(--red);padding-left:1.25rem;margin:1.5rem 0 .5rem}
@@ -1168,6 +1195,18 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         <div class="story-metric-val">5+</div>
         <div class="story-metric-lbl">Leaders I have developed into director-level roles</div>
       </div>
+    </div>
+    <div class="story-controls" aria-hidden="false">
+      <div class="story-dots" role="tablist" aria-label="Story highlights">
+        <button type="button" class="story-dot-btn active" role="tab" aria-label="Perfect QIV score" data-idx="0"><span class="story-dot-fill"></span></button>
+        <button type="button" class="story-dot-btn" role="tab" aria-label="Record catering delivery" data-idx="1"><span class="story-dot-fill"></span></button>
+        <button type="button" class="story-dot-btn" role="tab" aria-label="QIV improvement" data-idx="2"><span class="story-dot-fill"></span></button>
+        <button type="button" class="story-dot-btn" role="tab" aria-label="Leaders developed" data-idx="3"><span class="story-dot-fill"></span></button>
+      </div>
+      <button type="button" class="story-play" aria-label="Pause autoplay" aria-pressed="true">
+        <svg class="icon-pause" viewBox="0 0 14 16" width="14" height="16" aria-hidden="true"><rect x="1" y="1" width="4" height="14" rx="1" fill="currentColor"/><rect x="9" y="1" width="4" height="14" rx="1" fill="currentColor"/></svg>
+        <svg class="icon-play" viewBox="0 0 14 16" width="14" height="16" aria-hidden="true"><path d="M2 1 L13 8 L2 15 Z" fill="currentColor"/></svg>
+      </button>
     </div>
     <div class="story-grid">
       <div class="story-text fade-in">
@@ -2493,149 +2532,143 @@ document.addEventListener('click', function(e) {
   }
 })();
 
-// === JOURNEY CAROUSEL (Apple-highlights style) ===
+// === APPLE-HIGHLIGHTS CAROUSELS (Journey + Story Metrics) ===
 (function(){
-  var timeline = document.querySelector('.journey-timeline');
-  var controls = document.querySelector('.journey-controls');
-  if (!timeline || !controls) return;
-  var dots = Array.prototype.slice.call(controls.querySelectorAll('.journey-dot-btn'));
-  var playBtn = controls.querySelector('.journey-play');
-  var stops = Array.prototype.slice.call(timeline.querySelectorAll('.journey-stop'));
-  if (!dots.length || !stops.length) return;
+  function init(opts){
+    var track = document.querySelector(opts.track);
+    var controls = document.querySelector(opts.controls);
+    if (!track || !controls) return;
+    var dots = Array.prototype.slice.call(controls.querySelectorAll(opts.dot));
+    var playBtn = controls.querySelector(opts.play);
+    var items = Array.prototype.slice.call(track.querySelectorAll(opts.item));
+    if (!dots.length || !items.length || !playBtn) return;
 
-  var AUTOPLAY_MS = 6000;
-  var RESUME_DELAY_MS = 4500;
-  var current = 0;
-  var playing = true;
-  var autoTimer = null;
-  var resumeTimer = null;
-  var programmaticScroll = false;
-  var programmaticClearTimer = null;
-  var scrollSyncTimer = null;
-  var inView = false;
-  var mql = window.matchMedia('(max-width: 900px)');
-  var isMobile = function(){ return mql.matches; };
+    var AUTOPLAY_MS = opts.autoplayMs || 6000;
+    var RESUME_DELAY_MS = opts.resumeMs || 4500;
+    var GAP = opts.gap || 14;
+    var mql = window.matchMedia(opts.mediaQuery || '(max-width: 900px)');
+    var active = function(){ return mql.matches; };
 
-  function setActive(idx) {
-    current = idx;
-    dots.forEach(function(d, i){
-      d.classList.toggle('active', i === idx);
-      if (i !== idx) d.classList.remove('playing');
-    });
-    if (playing && isMobile() && inView) {
-      var activeDot = dots[idx];
-      activeDot.classList.remove('playing');
-      void activeDot.offsetWidth; /* reflow to restart animation */
-      activeDot.classList.add('playing');
+    var current = 0, playing = true;
+    var autoTimer = null, resumeTimer = null;
+    var programmaticScroll = false, programmaticClearTimer = null;
+    var scrollSyncTimer = null, inView = false;
+
+    function setActive(idx){
+      current = idx;
+      dots.forEach(function(d, i){
+        d.classList.toggle('active', i === idx);
+        if (i !== idx) d.classList.remove('playing');
+      });
+      if (playing && active() && inView){
+        var ad = dots[idx];
+        ad.classList.remove('playing');
+        void ad.offsetWidth;
+        ad.classList.add('playing');
+      }
     }
-  }
-
-  function goTo(idx, smooth) {
-    if (idx < 0) idx = stops.length - 1;
-    if (idx >= stops.length) idx = 0;
-    var left = stops[idx].offsetLeft - timeline.offsetLeft;
-    programmaticScroll = true;
-    if (programmaticClearTimer) clearTimeout(programmaticClearTimer);
-    try {
-      timeline.scrollTo({ left: left, behavior: smooth ? 'smooth' : 'auto' });
-    } catch(_) {
-      timeline.scrollLeft = left;
+    function clearAuto(){ if (autoTimer){ clearTimeout(autoTimer); autoTimer = null; } }
+    function freezeFill(){ dots.forEach(function(d){ d.classList.remove('playing'); }); }
+    function goTo(idx, smooth){
+      if (idx < 0) idx = items.length - 1;
+      if (idx >= items.length) idx = 0;
+      var left = items[idx].offsetLeft - track.offsetLeft;
+      programmaticScroll = true;
+      if (programmaticClearTimer) clearTimeout(programmaticClearTimer);
+      try { track.scrollTo({ left: left, behavior: smooth ? 'smooth' : 'auto' }); }
+      catch(_){ track.scrollLeft = left; }
+      setActive(idx);
+      programmaticClearTimer = setTimeout(function(){ programmaticScroll = false; }, 700);
     }
-    setActive(idx);
-    programmaticClearTimer = setTimeout(function(){ programmaticScroll = false; }, 700);
-  }
-
-  function startAutoplay() {
-    clearAutoTimer();
-    if (!playing || !isMobile() || !inView) return;
-    autoTimer = setTimeout(function(){ goTo(current + 1, true); startAutoplay(); }, AUTOPLAY_MS);
-    var activeDot = dots[current];
-    activeDot.classList.remove('playing');
-    void activeDot.offsetWidth;
-    activeDot.classList.add('playing');
-  }
-
-  function clearAutoTimer() {
-    if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
-  }
-
-  function freezeFill() {
-    dots.forEach(function(d){ d.classList.remove('playing'); });
-  }
-
-  function pauseForInteraction() {
-    clearAutoTimer();
-    freezeFill();
-    if (resumeTimer) clearTimeout(resumeTimer);
-    if (playing && isMobile() && inView) {
-      resumeTimer = setTimeout(startAutoplay, RESUME_DELAY_MS);
+    function startAuto(){
+      clearAuto();
+      if (!playing || !active() || !inView) return;
+      autoTimer = setTimeout(function(){ goTo(current + 1, true); startAuto(); }, AUTOPLAY_MS);
+      var ad = dots[current];
+      ad.classList.remove('playing');
+      void ad.offsetWidth;
+      ad.classList.add('playing');
     }
-  }
-
-  timeline.addEventListener('scroll', function(){
-    if (scrollSyncTimer) clearTimeout(scrollSyncTimer);
-    scrollSyncTimer = setTimeout(function(){
-      var w = stops[0].getBoundingClientRect().width + 14; /* gap */
-      var idx = Math.round(timeline.scrollLeft / w);
-      if (idx < 0) idx = 0;
-      if (idx >= stops.length) idx = stops.length - 1;
-      if (idx !== current) setActive(idx);
-    }, 90);
-  }, { passive: true });
-
-  timeline.addEventListener('touchstart', function(){
-    if (programmaticScroll) return;
-    clearAutoTimer();
-    freezeFill();
-    if (resumeTimer) clearTimeout(resumeTimer);
-  }, { passive: true });
-
-  timeline.addEventListener('touchend', function(){
-    if (programmaticScroll) return;
-    if (playing && isMobile() && inView) {
+    function pauseForInteraction(){
+      clearAuto(); freezeFill();
       if (resumeTimer) clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(startAutoplay, RESUME_DELAY_MS);
+      if (playing && active() && inView){
+        resumeTimer = setTimeout(startAuto, RESUME_DELAY_MS);
+      }
     }
-  }, { passive: true });
 
-  dots.forEach(function(d, i){
-    d.addEventListener('click', function(){
-      goTo(i, true);
-      if (window.__haptic) window.__haptic(8);
-      pauseForInteraction();
+    track.addEventListener('scroll', function(){
+      if (scrollSyncTimer) clearTimeout(scrollSyncTimer);
+      scrollSyncTimer = setTimeout(function(){
+        var w = items[0].getBoundingClientRect().width + GAP;
+        var idx = Math.round(track.scrollLeft / w);
+        if (idx < 0) idx = 0;
+        if (idx >= items.length) idx = items.length - 1;
+        if (idx !== current) setActive(idx);
+      }, 90);
+    }, { passive: true });
+
+    track.addEventListener('touchstart', function(){
+      if (programmaticScroll) return;
+      clearAuto(); freezeFill();
+      if (resumeTimer) clearTimeout(resumeTimer);
+    }, { passive: true });
+
+    track.addEventListener('touchend', function(){
+      if (programmaticScroll) return;
+      if (playing && active() && inView){
+        if (resumeTimer) clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(startAuto, RESUME_DELAY_MS);
+      }
+    }, { passive: true });
+
+    dots.forEach(function(d, i){
+      d.addEventListener('click', function(){
+        goTo(i, true);
+        if (window.__haptic) window.__haptic(8);
+        pauseForInteraction();
+      });
     });
-  });
 
-  playBtn.addEventListener('click', function(){
-    playing = !playing;
-    playBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
-    playBtn.setAttribute('aria-label', playing ? 'Pause autoplay' : 'Play autoplay');
-    if (window.__haptic) window.__haptic(10);
-    if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
-    if (playing) startAutoplay();
-    else { clearAutoTimer(); freezeFill(); }
-  });
-
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      inView = e.isIntersecting;
-      if (inView && isMobile() && playing) startAutoplay();
-      else { clearAutoTimer(); freezeFill(); }
+    playBtn.addEventListener('click', function(){
+      playing = !playing;
+      playBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      playBtn.setAttribute('aria-label', playing ? 'Pause autoplay' : 'Play autoplay');
+      if (window.__haptic) window.__haptic(10);
+      if (resumeTimer){ clearTimeout(resumeTimer); resumeTimer = null; }
+      if (playing) startAuto();
+      else { clearAuto(); freezeFill(); }
     });
-  }, { threshold: 0.45 });
-  io.observe(timeline);
 
-  var onMqChange = function(){
-    if (isMobile()) {
-      if (inView && playing) startAutoplay();
-    } else {
-      clearAutoTimer(); freezeFill();
-    }
-  };
-  if (mql.addEventListener) mql.addEventListener('change', onMqChange);
-  else if (mql.addListener) mql.addListener(onMqChange);
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        inView = e.isIntersecting;
+        if (inView && active() && playing) startAuto();
+        else { clearAuto(); freezeFill(); }
+      });
+    }, { threshold: 0.45 });
+    io.observe(track);
 
-  setActive(0);
+    var onMq = function(){
+      if (active()){ if (inView && playing) startAuto(); }
+      else { clearAuto(); freezeFill(); }
+    };
+    if (mql.addEventListener) mql.addEventListener('change', onMq);
+    else if (mql.addListener) mql.addListener(onMq);
+
+    setActive(0);
+  }
+
+  init({
+    track: '.journey-timeline', controls: '.journey-controls',
+    item: '.journey-stop', dot: '.journey-dot-btn', play: '.journey-play',
+    autoplayMs: 6000, gap: 14, mediaQuery: '(max-width: 900px)'
+  });
+  init({
+    track: '.story-metrics', controls: '.story-controls',
+    item: '.story-metric-card', dot: '.story-dot-btn', play: '.story-play',
+    autoplayMs: 5500, gap: 12, mediaQuery: '(max-width: 600px)'
+  });
 })();
 
 // === MOBILE SCROLL PROGRESS BARS ===
