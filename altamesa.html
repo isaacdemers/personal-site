@@ -181,20 +181,24 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
 .lightbox-counter{position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.45);font-size:.75rem;letter-spacing:.05em}
 
 @media(max-width:800px){
-  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:rgba(254,252,248,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:5rem 2rem 2rem;gap:1.4rem;box-shadow:-10px 0 40px rgba(15,28,50,.12);transform:translateX(100%);transition:transform .35s ease;z-index:999}
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(86vw,360px);background:rgba(254,252,248,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:stretch;justify-content:flex-start;padding:5rem 1.25rem 2rem;gap:.25rem;box-shadow:-10px 0 40px rgba(15,28,50,.12);transform:translateX(100%);transition:transform .35s ease;z-index:999;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .nav-links.show{transform:translateX(0)}
-  .nav-links a,.nav-links a.active{color:var(--text-mid)!important}
+  .nav-links li{width:100%}
+  .nav-links a,.nav-links a.active{color:var(--text-mid)!important;display:flex;align-items:center;min-height:48px;padding:.5rem .75rem;border-radius:10px;width:100%;font-size:1rem}
+  .nav-links a:hover,.nav-links a:focus{background:rgba(15,28,50,.04)}
   .nav-links a.active{color:var(--red)!important}
   .nav-links a::after{background:var(--red)!important}
   .mob-toggle{display:block}
   .mob-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .mob-toggle.open span:nth-child(2){opacity:0}
   .mob-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  .nav-dropdown-menu{position:static;transform:none!important;opacity:1!important;pointer-events:all!important;box-shadow:none;border:none;border-left:2px solid var(--border);padding:.3rem 0 .3rem 1rem;margin:.1rem 0 .35rem;border-radius:0;background:transparent;min-width:0}
-  .nav-dropdown-item{padding:.3rem .5rem;gap:.05rem}
-  .nav-dropdown-name{font-size:.88rem;color:var(--navy)!important}
+  .nav-dropdown-menu{position:static;transform:none!important;opacity:1!important;pointer-events:all!important;box-shadow:none;border:none;border-left:2px solid var(--border);padding:.25rem 0 .5rem .75rem;margin:.25rem 0 .5rem 1rem;border-radius:0;background:transparent;min-width:0}
+  .nav-dropdown-item{padding:.65rem .75rem;gap:.1rem;border-radius:8px;min-height:44px}
+  .nav-dropdown-item:hover,.nav-dropdown-item:focus{background:rgba(15,28,50,.04)}
+  .nav-dropdown-name{font-size:.95rem;color:var(--navy)!important}
   .nav-caret{display:none}
   .nav-dropdown-num{display:none}
+  body.nav-open{overflow:hidden}
 }
 @media(max-width:640px){
   .assignment-hero{padding:120px 1.25rem 3rem}
@@ -202,6 +206,21 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
   .pull-quote{padding:1.75rem 1.5rem}
   .hero-stats-strip{grid-template-columns:repeat(2,1fr)}
   .assignment-nav{flex-direction:column;gap:.75rem}
+  .docs-grid{grid-template-columns:1fr;gap:.75rem}
+  .doc-card{padding:1.1rem 1.25rem;min-height:64px}
+  .doc-card:hover{transform:none;box-shadow:var(--sh-sm);background:white}
+  .doc-name{font-size:.95rem}
+  .doc-meta{font-size:.75rem}
+  .doc-chevron{font-size:1rem}
+  .doc-month-link{padding:.7rem 1rem;font-size:.85rem;min-height:44px;display:flex;align-items:center}
+  .photo-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem}
+  .lightbox-prev,.lightbox-next{width:48px;height:48px}
+}
+@media(max-width:480px){
+  .assignment-hero{padding:100px 1rem 2.5rem}
+  .assignment-content{padding:2.5rem 1rem}
+  .photo-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-stats-strip{grid-template-columns:1fr;gap:.75rem}
 }
   </style>
 </head>
@@ -281,7 +300,7 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
       <span class="content-section-label">Context</span>
       <h2>The Situation</h2>
       <div class="section-divider"></div>
-      <p>I arrived at Altamesa &amp; McCart on October 12, 2025, as the first Interim Manager on the grounds during a confidential operator transition — one of the most complex assignment types in the program. The restaurant had been run into the ground. EcoSure food safety scores had deteriorated to a 5 under the previous operator's final months. The business was losing nearly 12% net profit. Facilities were failing. The community had been underserved for years.</p>
+      <p>I arrived at Altamesa &amp; McCart on October 12, 2025, as the first Interim Manager on the grounds during a confidential operator transition — one of the most complex assignment types in the program. The restaurant had been run into the ground. EcoSure food safety scores had deteriorated to a 5 under the previous operator's final months. The business was running a nearly 12% net loss. Facilities were failing. The community had been underserved for years.</p>
       <p>In the months that followed, the team navigated power outages, a leaking roof, sewage backups, a broken water heater, and the emotional weight of working alongside an operator being let go — all while rebuilding culture, developing leaders, and managing over $100,000 in facilities repairs.</p>
     </div>
 
@@ -290,7 +309,7 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
       <span class="content-section-label">Results</span>
       <h2>What We Built</h2>
       <div class="section-divider"></div>
-      <p>The QIV score rose from 76.6% to 91.1% — a 14.5-point improvement in a single quarter. The EcoSure food safety score, which had deteriorated to a 5, improved to a 4 by Q4 2025 and reached a 3 in the first official scored visit of 2026. In December, just 30 days after the restaurant was losing nearly 12% net profit, we turned it to over 9% positive. By January 2026, sales were up 9.98% and transactions were up 13.70% year over year.</p>
+      <p>The QIV score rose from 76.6% to 91.1% — a 14.5-point improvement in a single quarter. The EcoSure food safety score, which had deteriorated to a 5, improved to a 4 by Q4 2025 and reached a 3 in the first official scored visit of 2026. In December, just 30 days after the restaurant was running a nearly 12% net loss, we turned it to over 9% positive net profit. By January 2026, sales were up 9.98% and transactions were up 13.70% year over year.</p>
       <p>In the final weeks of the assignment, the restaurant was selected to host an international LDP readiness class, welcoming four participants from Canada and one from Puerto Rico for in-field training. A restaurant that had been failing operationally just months before was now being used as a model environment for brand-new LDP participants to learn in. Shortly after, the restaurant was also scheduled to host operator fundamentals. What was built did not need me there to sustain it.</p>
     </div>
 
@@ -572,11 +591,23 @@ nav.scrolled .mob-toggle span{background:var(--navy)}
   window.addEventListener('scroll', function(){
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, {passive:true});
-  if (toggle) {
+  if (toggle && links) {
+    var setNavOpen = function(open) {
+      links.classList.toggle('show', open);
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('nav-open', open);
+    };
     toggle.addEventListener('click', function(){
-      toggle.classList.toggle('open');
-      links.classList.toggle('show');
-      toggle.setAttribute('aria-expanded', links.classList.contains('show'));
+      setNavOpen(!links.classList.contains('show'));
+    });
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && links.classList.contains('show')) setNavOpen(false);
+    });
+    document.addEventListener('click', function(e){
+      if (!links.classList.contains('show')) return;
+      if (links.contains(e.target) || toggle.contains(e.target)) return;
+      setNavOpen(false);
     });
   }
 
