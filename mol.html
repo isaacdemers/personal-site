@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>Mall of Louisiana — Isaac Demers</title>
   <meta name="description" content="Assignment 01: Interim Manager at Chick-fil-A Mall of Louisiana. Achieved 100% QIV, 12%+ sales growth, and the largest catering delivery in location history.">
   <meta name="author" content="Isaac Demers">
@@ -41,7 +41,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--warm);-webkit-font-smoothing:antialiased}
+body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--warm);-webkit-font-smoothing:antialiased;overflow-x:hidden;touch-action:pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior-y:none}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .4s,padding .4s,box-shadow .4s}
@@ -646,6 +646,67 @@ body.menu-open{overflow:hidden}
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && sheet.classList.contains('open')) setMenuOpen(false);
     });
+
+    var sheetEl = sheet.querySelector('.menu-sheet');
+    if (sheetEl) {
+      var dragStartY = 0, dragStartX = 0, dragStartT = 0, dragY = 0, dragging = false, axisLocked = false, swipeAxis = null;
+      var reset = function() {
+        sheetEl.style.transition = '';
+        sheetEl.style.transform = '';
+      };
+      sheetEl.addEventListener('touchstart', function(e) {
+        if (!sheet.classList.contains('open')) return;
+        var t = e.touches[0];
+        dragStartY = t.clientY;
+        dragStartX = t.clientX;
+        dragStartT = Date.now();
+        dragY = 0;
+        dragging = sheetEl.scrollTop <= 0;
+        axisLocked = false;
+        swipeAxis = null;
+        if (dragging) sheetEl.style.transition = 'none';
+      }, { passive: true });
+      sheetEl.addEventListener('touchmove', function(e) {
+        if (!dragging) return;
+        var t = e.touches[0];
+        var dy = t.clientY - dragStartY;
+        var dx = t.clientX - dragStartX;
+        if (!axisLocked) {
+          if (Math.abs(dy) > 6 || Math.abs(dx) > 6) {
+            swipeAxis = Math.abs(dy) > Math.abs(dx) ? 'y' : 'x';
+            axisLocked = true;
+            if (swipeAxis === 'x') { dragging = false; reset(); return; }
+          } else {
+            return;
+          }
+        }
+        if (dy < 0) {
+          dragY = 0;
+          sheetEl.style.transform = 'translateY(0)';
+          return;
+        }
+        dragY = dy;
+        sheetEl.style.transform = 'translateY(' + dy + 'px)';
+      }, { passive: true });
+      var endDrag = function() {
+        if (!dragging) return;
+        dragging = false;
+        var dt = Date.now() - dragStartT;
+        var velocity = dragY / Math.max(dt, 1);
+        var shouldClose = dragY > 90 || velocity > 0.5;
+        if (shouldClose) {
+          sheetEl.style.transition = '';
+          sheetEl.style.transform = '';
+          setMenuOpen(false);
+        } else {
+          sheetEl.style.transition = 'transform .25s cubic-bezier(.2,.8,.2,1)';
+          sheetEl.style.transform = 'translateY(0)';
+          setTimeout(reset, 260);
+        }
+      };
+      sheetEl.addEventListener('touchend', endDrag, { passive: true });
+      sheetEl.addEventListener('touchcancel', endDrag, { passive: true });
+    }
   }
 
   var lastY = window.scrollY;

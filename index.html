@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Isaac Demers | Stirring Dreams in Others</title>
 <meta name="description" content="Isaac Demers — Chick-fil-A Leadership Development Program participant. A journey rooted in faith, forged through persistence, and driven by a calling to develop people and steward a Chick-fil-A restaurant with excellence.">
 <meta name="author" content="Isaac Demers">
@@ -54,7 +54,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--warm);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--warm);overflow-x:hidden;-webkit-font-smoothing:antialiased;touch-action:pan-y;-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior-y:none}
 
 /* NAV */
 nav{position:fixed;top:0;width:100%;z-index:1000;padding:1.1rem 2rem;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .4s,padding .4s,box-shadow .4s;background:transparent}
@@ -669,9 +669,20 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
    ===================== */
 
 .journey-section {
-  padding: 100px 0;
+  padding: 100px 2rem;
   background: var(--navy);
   color: var(--cream);
+}
+
+.journey-section .sec-inner > .sec-label,
+.journey-section .sec-inner > .sec-title,
+.journey-section .sec-inner > .sec-sub {
+  text-align: center;
+}
+
+.journey-section .sec-inner > .sec-sub {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .journey-section .sec-label {
@@ -2300,6 +2311,68 @@ document.addEventListener('click', function(e) {
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && sheet.classList.contains('open')) setMenuOpen(false);
     });
+
+    // Swipe-to-close: drag down anywhere on the sheet to dismiss
+    var sheetEl = sheet.querySelector('.menu-sheet');
+    if (sheetEl) {
+      var dragStartY = 0, dragStartX = 0, dragStartT = 0, dragY = 0, dragging = false, axisLocked = false, swipeAxis = null;
+      var reset = function() {
+        sheetEl.style.transition = '';
+        sheetEl.style.transform = '';
+      };
+      sheetEl.addEventListener('touchstart', function(e) {
+        if (!sheet.classList.contains('open')) return;
+        var t = e.touches[0];
+        dragStartY = t.clientY;
+        dragStartX = t.clientX;
+        dragStartT = Date.now();
+        dragY = 0;
+        dragging = sheetEl.scrollTop <= 0;
+        axisLocked = false;
+        swipeAxis = null;
+        if (dragging) sheetEl.style.transition = 'none';
+      }, { passive: true });
+      sheetEl.addEventListener('touchmove', function(e) {
+        if (!dragging) return;
+        var t = e.touches[0];
+        var dy = t.clientY - dragStartY;
+        var dx = t.clientX - dragStartX;
+        if (!axisLocked) {
+          if (Math.abs(dy) > 6 || Math.abs(dx) > 6) {
+            swipeAxis = Math.abs(dy) > Math.abs(dx) ? 'y' : 'x';
+            axisLocked = true;
+            if (swipeAxis === 'x') { dragging = false; reset(); return; }
+          } else {
+            return;
+          }
+        }
+        if (dy < 0) {
+          dragY = 0;
+          sheetEl.style.transform = 'translateY(0)';
+          return;
+        }
+        dragY = dy;
+        sheetEl.style.transform = 'translateY(' + dy + 'px)';
+      }, { passive: true });
+      var endDrag = function() {
+        if (!dragging) return;
+        dragging = false;
+        var dt = Date.now() - dragStartT;
+        var velocity = dragY / Math.max(dt, 1);
+        var shouldClose = dragY > 90 || velocity > 0.5;
+        if (shouldClose) {
+          sheetEl.style.transition = '';
+          sheetEl.style.transform = '';
+          setMenuOpen(false);
+        } else {
+          sheetEl.style.transition = 'transform .25s cubic-bezier(.2,.8,.2,1)';
+          sheetEl.style.transform = 'translateY(0)';
+          setTimeout(reset, 260);
+        }
+      };
+      sheetEl.addEventListener('touchend', endDrag, { passive: true });
+      sheetEl.addEventListener('touchcancel', endDrag, { passive: true });
+    }
   }
 
   // Scroll-hide the bottom bar
