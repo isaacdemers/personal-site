@@ -44,8 +44,9 @@ html{scroll-behavior:smooth;font-size:16px}
 body{font-family:'Outfit',sans-serif;color:var(--text);background:var(--warm);-webkit-font-smoothing:antialiased}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:all .4s}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.1rem 2rem;display:flex;align-items:center;justify-content:space-between;background:transparent;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .4s,padding .4s,box-shadow .4s}
 nav.scrolled{background:rgba(254,252,248,.96);backdrop-filter:blur(20px);box-shadow:var(--sh-sm);padding:.65rem 2rem}
+nav.nav-hidden{transform:translateY(-100%)}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:rgba(255,255,255,.9);text-decoration:none;letter-spacing:-.02em;transition:color .4s}
 nav.scrolled .nav-logo{color:var(--navy)}
 .nav-logo span{color:var(--gold-light);transition:color .4s}
@@ -237,6 +238,7 @@ body.nav-open .bottom-tab-bar{opacity:0;pointer-events:none;transition:opacity .
 @media(max-width:700px){
   .bottom-tab-bar{display:block}
   body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+  .mob-toggle{display:none}
 }
   </style>
 </head>
@@ -608,8 +610,24 @@ body.nav-open .bottom-tab-bar{opacity:0;pointer-events:none;transition:opacity .
   var nav = document.getElementById('nav');
   var toggle = document.getElementById('mobToggle');
   var links = document.getElementById('navLinks');
+  var lastY = window.scrollY;
+  var ticking = false;
+  function onScroll() {
+    var y = window.scrollY;
+    var delta = y - lastY;
+    nav.classList.toggle('scrolled', y > 40);
+    if (y < 80 || document.body.classList.contains('nav-open')) {
+      nav.classList.remove('nav-hidden');
+    } else if (delta > 8) {
+      nav.classList.add('nav-hidden');
+    } else if (delta < -8) {
+      nav.classList.remove('nav-hidden');
+    }
+    lastY = y;
+    ticking = false;
+  }
   window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 40);
+    if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
   }, {passive:true});
   if (toggle && links) {
     var setNavOpen = function(open) {
