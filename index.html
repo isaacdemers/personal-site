@@ -2861,6 +2861,106 @@ window.initScrollProgress();
     if (e.key === 'ArrowLeft') navBook(-1);
     if (e.key === 'ArrowRight') navBook(1);
   });
+
+  // Swipe gestures: horizontal swipe to navigate, swipe down to close
+  (function(){
+    var modalEl = overlay.querySelector('.book-modal');
+    if (!modalEl) return;
+    var startX=0, startY=0, startT=0, dx=0, dy=0;
+    var dragging=false, axis=null;
+
+    var reset = function(){
+      modalEl.style.transition = '';
+      modalEl.style.transform = '';
+      modalEl.style.opacity = '';
+    };
+
+    modalEl.addEventListener('touchstart', function(e){
+      if (!overlay.classList.contains('open')) return;
+      if (e.touches.length > 1) { dragging = false; return; }
+      var t = e.touches[0];
+      startX = t.clientX; startY = t.clientY; startT = Date.now();
+      dx = 0; dy = 0;
+      dragging = true;
+      axis = null;
+      modalEl.style.transition = 'none';
+    }, { passive: true });
+
+    modalEl.addEventListener('touchmove', function(e){
+      if (!dragging) return;
+      var t = e.touches[0];
+      var ddx = t.clientX - startX;
+      var ddy = t.clientY - startY;
+      if (!axis) {
+        if (Math.abs(ddx) > 8 || Math.abs(ddy) > 8) {
+          axis = Math.abs(ddx) > Math.abs(ddy) ? 'x' : 'y';
+        } else return;
+      }
+      if (axis === 'y') {
+        // Only allow close-drag when content is scrolled to top and pulling down
+        if (modalEl.scrollTop > 0 || ddy < 0) { dragging = false; reset(); return; }
+        dy = ddy;
+        modalEl.style.transform = 'translateY(' + ddy + 'px)';
+      } else {
+        // Damp past edges
+        var atStart = _curIdx === 0 && ddx > 0;
+        var atEnd = _curIdx === BOOKS.length - 1 && ddx < 0;
+        if (atStart || atEnd) ddx = ddx / 3;
+        dx = ddx;
+        modalEl.style.transform = 'translateX(' + ddx + 'px)';
+      }
+    }, { passive: true });
+
+    var endDrag = function(){
+      if (!dragging) return;
+      dragging = false;
+      var dt = Date.now() - startT;
+      if (axis === 'y') {
+        var vy = dy / Math.max(dt, 1);
+        if (dy > 90 || vy > 0.5) {
+          modalEl.style.transition = 'transform .25s cubic-bezier(.2,.8,.2,1)';
+          modalEl.style.transform = 'translateY(' + Math.max(window.innerHeight, modalEl.offsetHeight + 40) + 'px)';
+          if (window.__haptic) window.__haptic(10);
+          setTimeout(function(){ closeBook(); reset(); }, 240);
+        } else {
+          modalEl.style.transition = 'transform .22s cubic-bezier(.2,.8,.2,1)';
+          modalEl.style.transform = 'translateY(0)';
+          setTimeout(reset, 240);
+        }
+      } else if (axis === 'x') {
+        var vx = dx / Math.max(dt, 1);
+        var sign = dx < 0 ? 1 : -1; /* swipe left = next */
+        var shouldNav = Math.abs(dx) > 60 || Math.abs(vx) > 0.4;
+        var canNav = (sign > 0 && _curIdx < BOOKS.length - 1) || (sign < 0 && _curIdx > 0);
+        if (shouldNav && canNav) {
+          modalEl.style.transition = 'opacity .14s ease, transform .14s ease';
+          modalEl.style.opacity = '0';
+          modalEl.style.transform = 'translateX(' + (sign < 0 ? 40 : -40) + 'px)';
+          if (window.__haptic) window.__haptic(8);
+          setTimeout(function(){
+            navBook(sign);
+            modalEl.scrollTop = 0;
+            modalEl.style.transition = 'none';
+            modalEl.style.transform = 'translateX(' + (sign < 0 ? -40 : 40) + 'px)';
+            void modalEl.offsetWidth;
+            modalEl.style.transition = 'opacity .2s ease, transform .22s cubic-bezier(.2,.8,.2,1)';
+            modalEl.style.opacity = '1';
+            modalEl.style.transform = 'translateX(0)';
+            setTimeout(reset, 240);
+          }, 140);
+        } else {
+          modalEl.style.transition = 'transform .22s cubic-bezier(.2,.8,.2,1)';
+          modalEl.style.transform = 'translateX(0)';
+          setTimeout(reset, 240);
+        }
+      } else {
+        reset();
+      }
+    };
+
+    modalEl.addEventListener('touchend', endDrag, { passive: true });
+    modalEl.addEventListener('touchcancel', endDrag, { passive: true });
+  })();
 })();
 
 // === MOBILE COLLAPSIBLE SECTIONS ===
