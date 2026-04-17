@@ -634,32 +634,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .truett-photo-placeholder{width:100%;height:200px}
   .legacy-family-section,.truett-section,.through-line-section{padding:2.5rem 1.25rem}
   .legacy-page-hero{padding:4rem 1.25rem 2rem}
-  /* Journey: horizontal swipe carousel on mobile (app-like pagination) */
-  .journey-timeline{display:flex;grid-template-columns:none;gap:14px;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;scroll-padding-left:1.25rem;padding:4px 1.25rem 8px;margin:0 -1.25rem;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-x pan-y}
-  .journey-timeline::-webkit-scrollbar{display:none}
-  .journey-timeline::before{display:none}
-  .journey-stop{flex:0 0 86%;scroll-snap-align:center;scroll-snap-stop:always;margin-bottom:0}
-  .journey-card{margin-bottom:0;height:100%;position:relative;overflow:hidden;border-radius:22px;padding:28px 22px 22px;min-height:420px;background:linear-gradient(160deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.02) 60%,rgba(200,160,80,.06) 100%);border:1px solid rgba(200,160,80,.22);box-shadow:0 14px 40px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06)}
-  .journey-card::before{content:'';position:absolute;top:-30%;right:-25%;width:260px;height:260px;background:radial-gradient(circle,rgba(200,160,80,.22) 0%,rgba(200,160,80,0) 70%);pointer-events:none}
-  .journey-card.current-card{background:linear-gradient(160deg,rgba(228,0,43,.14) 0%,rgba(228,0,43,.03) 60%,rgba(228,0,43,.08) 100%);border-color:rgba(228,0,43,.35)}
-  .journey-card.current-card::before{background:radial-gradient(circle,rgba(228,0,43,.28) 0%,rgba(228,0,43,0) 70%)}
-  .journey-connector{display:none}
-  .tl-photo{display:none}
-  .journey-section{padding:3rem 1.25rem 2.25rem}
-  /* Apple-highlights style control bar */
-  .journey-controls{display:flex;align-items:center;justify-content:center;gap:10px;margin:22px auto 0;max-width:360px}
-  .journey-dots{display:flex;align-items:center;gap:9px;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:999px;border:1px solid rgba(255,255,255,.08);-webkit-backdrop-filter:blur(12px) saturate(180%);backdrop-filter:blur(12px) saturate(180%)}
-  .journey-dot-btn{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.28);border:0;padding:0;width:7px;height:7px;border-radius:999px;cursor:pointer;transition:width .4s cubic-bezier(.2,.8,.2,1),background-color .2s;position:relative;overflow:hidden;flex-shrink:0;-webkit-tap-highlight-color:transparent}
-  .journey-dot-btn.active{width:46px;background:rgba(255,255,255,.2)}
-  .journey-dot-fill{position:absolute;top:0;left:0;height:100%;width:0;background:var(--cream);border-radius:999px}
-  .journey-dot-btn.active.playing .journey-dot-fill{animation:journey-fill 6s linear forwards}
-  @keyframes journey-fill{from{width:0}to{width:100%}}
-  .journey-play{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--cream);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;-webkit-backdrop-filter:blur(12px) saturate(180%);backdrop-filter:blur(12px) saturate(180%);transition:background-color .15s ease;-webkit-tap-highlight-color:transparent}
-  .journey-play:active{background:rgba(255,255,255,.14);transform:scale(.94)}
-  .journey-play .icon-pause{display:block}
-  .journey-play .icon-play{display:none}
-  .journey-play[aria-pressed="false"] .icon-pause{display:none}
-  .journey-play[aria-pressed="false"] .icon-play{display:block;margin-left:2px}
   .ff-scroll-wrap,.people-scroll-wrap{margin-left:-1.25rem;margin-right:-1.25rem;padding-left:1.25rem;padding-right:1.25rem}
 }
 @media(max-width:700px){
@@ -782,10 +756,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   z-index: 0;
 }
 
-@media (max-width: 900px) {
-  .journey-timeline { grid-template-columns: 1fr; gap: 0; }
-  .journey-timeline::before { display: none; }
-}
 
 .journey-stop {
   display: flex;
@@ -991,11 +961,35 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 /* Apple-style carousel controls: hidden on desktop, shown on mobile */
 .journey-controls { display: none; }
 
-@media (max-width: 600px) {
-  .journey-card {
-    padding: 20px;
-  }
+/* Mobile: Apple-highlights horizontal carousel. Placed AFTER base .journey-* rules so it wins the cascade. */
+@media (max-width: 900px) {
+  .journey-timeline{display:flex;grid-template-columns:none;gap:14px;overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;scroll-padding-left:1.25rem;padding:4px 1.25rem 8px;margin:0 -1.25rem;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;touch-action:pan-x pan-y}
+  .journey-timeline::-webkit-scrollbar{display:none}
+  .journey-timeline::before{display:none}
+  .journey-stop{flex:0 0 86%;scroll-snap-align:center;scroll-snap-stop:always;margin-bottom:0}
+  .journey-card{margin-bottom:0;height:100%;position:relative;overflow:hidden;border-radius:22px;padding:28px 22px 22px;min-height:420px;background:linear-gradient(160deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.02) 60%,rgba(200,160,80,.06) 100%);border:1px solid rgba(200,160,80,.22);box-shadow:0 14px 40px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06)}
+  .journey-card::before{content:'';position:absolute;top:-30%;right:-25%;width:260px;height:260px;background:radial-gradient(circle,rgba(200,160,80,.22) 0%,rgba(200,160,80,0) 70%);pointer-events:none}
+  .journey-card.current-card{background:linear-gradient(160deg,rgba(228,0,43,.14) 0%,rgba(228,0,43,.03) 60%,rgba(228,0,43,.08) 100%);border-color:rgba(228,0,43,.35)}
+  .journey-card.current-card::before{background:radial-gradient(circle,rgba(228,0,43,.28) 0%,rgba(228,0,43,0) 70%)}
+  .journey-connector{display:none}
+  .tl-photo{display:none}
+  .journey-section{padding:3rem 1.25rem 2.25rem}
+  .journey-controls{display:flex;align-items:center;justify-content:center;gap:10px;margin:22px auto 0;max-width:360px}
+  .journey-dots{display:flex;align-items:center;gap:9px;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:999px;border:1px solid rgba(255,255,255,.08);-webkit-backdrop-filter:blur(12px) saturate(180%);backdrop-filter:blur(12px) saturate(180%)}
+  .journey-dot-btn{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.28);border:0;padding:0;width:7px;height:7px;border-radius:999px;cursor:pointer;transition:width .4s cubic-bezier(.2,.8,.2,1),background-color .2s;position:relative;overflow:hidden;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+  .journey-dot-btn.active{width:46px;background:rgba(255,255,255,.2)}
+  .journey-dot-fill{position:absolute;top:0;left:0;height:100%;width:0;background:var(--cream);border-radius:999px}
+  .journey-dot-btn.active.playing .journey-dot-fill{animation:journey-fill 6s linear forwards}
+  @keyframes journey-fill{from{width:0}to{width:100%}}
+  .journey-play{appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--cream);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;-webkit-backdrop-filter:blur(12px) saturate(180%);backdrop-filter:blur(12px) saturate(180%);transition:background-color .15s ease;-webkit-tap-highlight-color:transparent}
+  .journey-play:active{background:rgba(255,255,255,.14);transform:scale(.94)}
+  .journey-play .icon-pause{display:block}
+  .journey-play .icon-play{display:none}
+  .journey-play[aria-pressed="false"] .icon-pause{display:none}
+  .journey-play[aria-pressed="false"] .icon-play{display:block;margin-left:2px}
+}
 
+@media (max-width: 600px) {
   .journey-restaurant {
     font-size: 22px;
   }
@@ -2867,6 +2861,106 @@ window.initScrollProgress();
     if (e.key === 'ArrowLeft') navBook(-1);
     if (e.key === 'ArrowRight') navBook(1);
   });
+
+  // Swipe gestures: horizontal swipe to navigate, swipe down to close
+  (function(){
+    var modalEl = overlay.querySelector('.book-modal');
+    if (!modalEl) return;
+    var startX=0, startY=0, startT=0, dx=0, dy=0;
+    var dragging=false, axis=null;
+
+    var reset = function(){
+      modalEl.style.transition = '';
+      modalEl.style.transform = '';
+      modalEl.style.opacity = '';
+    };
+
+    modalEl.addEventListener('touchstart', function(e){
+      if (!overlay.classList.contains('open')) return;
+      if (e.touches.length > 1) { dragging = false; return; }
+      var t = e.touches[0];
+      startX = t.clientX; startY = t.clientY; startT = Date.now();
+      dx = 0; dy = 0;
+      dragging = true;
+      axis = null;
+      modalEl.style.transition = 'none';
+    }, { passive: true });
+
+    modalEl.addEventListener('touchmove', function(e){
+      if (!dragging) return;
+      var t = e.touches[0];
+      var ddx = t.clientX - startX;
+      var ddy = t.clientY - startY;
+      if (!axis) {
+        if (Math.abs(ddx) > 8 || Math.abs(ddy) > 8) {
+          axis = Math.abs(ddx) > Math.abs(ddy) ? 'x' : 'y';
+        } else return;
+      }
+      if (axis === 'y') {
+        // Only allow close-drag when content is scrolled to top and pulling down
+        if (modalEl.scrollTop > 0 || ddy < 0) { dragging = false; reset(); return; }
+        dy = ddy;
+        modalEl.style.transform = 'translateY(' + ddy + 'px)';
+      } else {
+        // Damp past edges
+        var atStart = _curIdx === 0 && ddx > 0;
+        var atEnd = _curIdx === BOOKS.length - 1 && ddx < 0;
+        if (atStart || atEnd) ddx = ddx / 3;
+        dx = ddx;
+        modalEl.style.transform = 'translateX(' + ddx + 'px)';
+      }
+    }, { passive: true });
+
+    var endDrag = function(){
+      if (!dragging) return;
+      dragging = false;
+      var dt = Date.now() - startT;
+      if (axis === 'y') {
+        var vy = dy / Math.max(dt, 1);
+        if (dy > 90 || vy > 0.5) {
+          modalEl.style.transition = 'transform .25s cubic-bezier(.2,.8,.2,1)';
+          modalEl.style.transform = 'translateY(' + Math.max(window.innerHeight, modalEl.offsetHeight + 40) + 'px)';
+          if (window.__haptic) window.__haptic(10);
+          setTimeout(function(){ closeBook(); reset(); }, 240);
+        } else {
+          modalEl.style.transition = 'transform .22s cubic-bezier(.2,.8,.2,1)';
+          modalEl.style.transform = 'translateY(0)';
+          setTimeout(reset, 240);
+        }
+      } else if (axis === 'x') {
+        var vx = dx / Math.max(dt, 1);
+        var sign = dx < 0 ? 1 : -1; /* swipe left = next */
+        var shouldNav = Math.abs(dx) > 60 || Math.abs(vx) > 0.4;
+        var canNav = (sign > 0 && _curIdx < BOOKS.length - 1) || (sign < 0 && _curIdx > 0);
+        if (shouldNav && canNav) {
+          modalEl.style.transition = 'opacity .14s ease, transform .14s ease';
+          modalEl.style.opacity = '0';
+          modalEl.style.transform = 'translateX(' + (sign < 0 ? 40 : -40) + 'px)';
+          if (window.__haptic) window.__haptic(8);
+          setTimeout(function(){
+            navBook(sign);
+            modalEl.scrollTop = 0;
+            modalEl.style.transition = 'none';
+            modalEl.style.transform = 'translateX(' + (sign < 0 ? -40 : 40) + 'px)';
+            void modalEl.offsetWidth;
+            modalEl.style.transition = 'opacity .2s ease, transform .22s cubic-bezier(.2,.8,.2,1)';
+            modalEl.style.opacity = '1';
+            modalEl.style.transform = 'translateX(0)';
+            setTimeout(reset, 240);
+          }, 140);
+        } else {
+          modalEl.style.transition = 'transform .22s cubic-bezier(.2,.8,.2,1)';
+          modalEl.style.transform = 'translateX(0)';
+          setTimeout(reset, 240);
+        }
+      } else {
+        reset();
+      }
+    };
+
+    modalEl.addEventListener('touchend', endDrag, { passive: true });
+    modalEl.addEventListener('touchcancel', endDrag, { passive: true });
+  })();
 })();
 
 // === MOBILE COLLAPSIBLE SECTIONS ===
