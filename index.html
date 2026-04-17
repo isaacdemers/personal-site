@@ -560,6 +560,8 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .journey-card{margin-bottom:24px}
   .journey-connector{margin-bottom:12px}
   .tl-photo{display:none}
+  .journey-section{padding:3rem 1.25rem}
+  .ff-scroll-wrap,.people-scroll-wrap{margin-left:-1.25rem;margin-right:-1.25rem;padding-left:1.25rem;padding-right:1.25rem}
 }
 @media(max-width:600px){.hero-stats{flex-direction:column;gap:.75rem}}
 
@@ -819,10 +821,6 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
 }
 
 @media (max-width: 600px) {
-  .journey-stop {
-    flex: 0 0 280px;
-  }
-
   .journey-card {
     padding: 20px;
   }
@@ -834,6 +832,12 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .journey-headline {
     flex-direction: column;
     gap: 4px;
+    align-items: flex-start;
+  }
+
+  .journey-teaser {
+    min-height: 0;
+    font-size: 14px;
   }
 }
 </style>
