@@ -688,6 +688,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   z-index: 0;
 }
 
+@media (max-width: 900px) {
+  .journey-timeline { grid-template-columns: 1fr; gap: 0; }
+  .journey-timeline::before { display: none; }
+}
+
 .journey-stop {
   display: flex;
   flex-direction: column;
