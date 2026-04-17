@@ -599,7 +599,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   #heroCanvas,.hero-orb-a,.hero-orb-b,.hero-orb-c,.hero-center-glow{display:none}
   .hero-orbs::before,.hero-orbs::after{animation:none;opacity:.55}
   .hero-content{padding:1.5rem 1.25rem}
-  .hero-scroll{bottom:1.25rem}
+  .hero-scroll{display:none}
   /* Slightly smaller sec titles to fit phone widths */
   .sec-title{font-size:clamp(1.75rem,7vw,2.25rem)}
   .legacy-page-hero-title{font-size:clamp(2rem,8vw,2.75rem)}
@@ -686,6 +686,11 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   height: 2px;
   background: linear-gradient(to right, var(--gold), rgba(200, 160, 80, 0.25));
   z-index: 0;
+}
+
+@media (max-width: 900px) {
+  .journey-timeline { grid-template-columns: 1fr; gap: 0; }
+  .journey-timeline::before { display: none; }
 }
 
 .journey-stop {
