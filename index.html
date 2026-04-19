@@ -316,7 +316,8 @@ section{padding:4rem 2rem}
 
 /* DEVELOPMENT */
 .dev-sec{background:var(--cream)}
-.dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;margin-top:2rem}
+.dev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin:2rem auto 0;max-width:880px}
+.dev-intro{max-width:640px;margin:3rem auto 1.25rem;text-align:center;font-size:1.05rem;color:var(--text-mid);line-height:1.7;font-weight:300}
 .dev-card{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s}
 .dev-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
 .dev-card-hdr{padding:1.75rem 1.75rem 1rem}
@@ -1766,20 +1767,19 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <div class="sec-label fade-in">Development</div>
     <h2 class="sec-title fade-in">Always Growing, Always Learning</h2>
     <div class="dev-grid">
-      <div class="dev-card fade-in"><div class="dev-card-hdr"><div class="dev-icon">&#128218;</div><h3>Reading & Learning</h3></div><div class="dev-card-body"><p>I read consistently to challenge my thinking and expand my leadership capacity. Explore the 26 books below that have most shaped how I lead, serve, and grow&#8212;from Chick-fil-A culture to entrepreneurial grit. Click any book to learn more.</p></div></div>
       <div class="dev-card fade-in">
-        <img src="https://i.imgur.com/p6gj1N8.jpg" alt="Isaac preparing for a solo skydive" loading="lazy" style="display:block;width:100%;height:180px;object-fit:cover">
+        <img src="https://i.imgur.com/p6gj1N8.jpg" alt="Isaac preparing for a solo skydive" loading="lazy" style="display:block;width:100%;height:220px;object-fit:cover;object-position:center top">
         <div class="dev-card-hdr"><h3>Pushing the Edge</h3></div>
         <div class="dev-card-body">
           <p>The night before my first solo skydive I was sick to my stomach. Lying there, I connected it directly to my dream of becoming an operator. I realized that if I could not walk toward a plane, I could not chase down something as hard as this. I went. I jumped. I went back six more times, not because it got easier, but because I needed to prove I would keep returning to what scared me.</p>
           <p>That same instinct drove me to volunteer at Cedar Ridge Preserve in Fort Worth with a fellow LDP participant, cutting invasive nandina from trails that had become overrun. It put me at the Regional Food Bank of Northeastern New York in Albany, sorting cold goods for distribution. It put me at Coffee Corner, speaking about my LDP journey to encourage future participants in a large group setting, even though that is my identified growth edge. I do not wait for discomfort to pass before I move. Discomfort is usually the signal that something worth building is on the other side.</p>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem">
             <figure style="margin:0">
-              <img src="https://i.imgur.com/3DVmDpi.jpg" alt="Volunteering at Cedar Ridge Preserve in Fort Worth" loading="lazy" style="display:block;width:100%;height:120px;object-fit:cover;border-radius:8px">
+              <img src="https://i.imgur.com/3DVmDpi.jpg" alt="Volunteering at Cedar Ridge Preserve in Fort Worth" loading="lazy" style="display:block;width:100%;height:140px;object-fit:cover;object-position:center top;border-radius:8px">
               <figcaption style="font-size:.72rem;color:var(--text-light);margin-top:.45rem;text-align:center;line-height:1.4">Cedar Ridge Preserve, Fort Worth</figcaption>
             </figure>
             <figure style="margin:0">
-              <img src="https://i.imgur.com/7bapaf5.jpg" alt="Volunteering at the Regional Food Bank of Northeastern New York in Albany" loading="lazy" style="display:block;width:100%;height:120px;object-fit:cover;border-radius:8px">
+              <img src="https://i.imgur.com/7bapaf5.jpg" alt="Volunteering at the Regional Food Bank of Northeastern New York in Albany" loading="lazy" style="display:block;width:100%;height:140px;object-fit:cover;object-position:center top;border-radius:8px">
               <figcaption style="font-size:.72rem;color:var(--text-light);margin-top:.45rem;text-align:center;line-height:1.4">Regional Food Bank, Albany</figcaption>
             </figure>
           </div>
@@ -1787,7 +1787,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
       </div>
       <div class="dev-card fade-in">
         <figure style="margin:0">
-          <img src="https://i.imgur.com/lvTHmkm.jpg" alt="Elise Moore, Executive Coach" loading="lazy" style="display:block;width:100%;height:180px;object-fit:cover">
+          <img src="https://i.imgur.com/lvTHmkm.jpg" alt="Elise Moore, Executive Coach" loading="lazy" style="display:block;width:100%;height:220px;object-fit:cover;object-position:center top">
           <figcaption style="font-size:.72rem;color:var(--text-light);text-align:center;padding:.6rem 1.75rem 0;line-height:1.4">Elise Moore, Executive Coach.</figcaption>
         </figure>
         <div class="dev-card-hdr"><h3>Investing in Whole Health</h3></div>
@@ -1798,6 +1798,7 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
         </div>
       </div>
     </div>
+    <p class="dev-intro fade-in">I read consistently to challenge my thinking and expand my leadership capacity. Below are the 26 books that have most shaped how I lead, serve, and grow&#8212;from Chick-fil-A culture to entrepreneurial grit. Click any book to learn more.</p>
     <div class="bookcase fade-in" id="bookcase"></div>
   </div>
 </section>
