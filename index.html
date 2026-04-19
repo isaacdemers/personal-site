@@ -316,10 +316,14 @@ section{padding:4rem 2rem}
 
 /* DEVELOPMENT */
 .dev-sec{background:var(--cream)}
-.dev-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin:2rem auto 0;max-width:880px}
+.dev-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin:2rem auto 0;max-width:980px}
 .dev-intro{max-width:640px;margin:3rem auto 1.25rem;text-align:center;font-size:1.05rem;color:var(--text-mid);line-height:1.7;font-weight:300}
-.dev-card{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s}
+.dev-card{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--sh-sm);transition:all .3s;display:grid;grid-template-columns:300px 1fr;align-items:start}
 .dev-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.dev-card-media{background:var(--cream)}
+.dev-card-media img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top}
+.dev-card-media figcaption{font-size:.72rem;color:var(--text-light);text-align:center;padding:.6rem 1rem 1.1rem;line-height:1.4}
+.dev-card-main{display:flex;flex-direction:column;min-width:0}
 .dev-card-hdr{padding:1.75rem 1.75rem 1rem}
 .dev-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:.75rem}
 .dev-card:nth-child(1) .dev-icon{background:rgba(229,22,54,.07)}
@@ -604,6 +608,8 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
   .story-grid,.pers-grid,.fin-dash,.feedback-grid{grid-template-columns:1fr}
 
   .dev-grid,.ahead-cards{grid-template-columns:1fr}
+  .dev-card{grid-template-columns:1fr}
+  .dev-card-media img{aspect-ratio:16/9;max-height:260px}
   .metrics-row{grid-template-columns:repeat(2,1fr)}
   .highlights-grid{grid-template-columns:1fr}
 .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(86vw,360px);background:rgba(254,252,248,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:stretch;justify-content:flex-start;padding:5rem 1.25rem 2rem;gap:.25rem;box-shadow:-10px 0 40px rgba(15,28,50,.12);transform:translateX(100%);transition:transform .35s ease;z-index:999;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -1768,33 +1774,39 @@ footer{background:var(--navy);color:white;padding:3rem 2rem;text-align:center}
     <h2 class="sec-title fade-in">Always Growing, Always Learning</h2>
     <div class="dev-grid">
       <div class="dev-card fade-in">
-        <img src="https://i.imgur.com/p6gj1N8.jpg" alt="Isaac preparing for a solo skydive" loading="lazy" style="display:block;width:100%;height:220px;object-fit:cover;object-position:center top">
-        <div class="dev-card-hdr"><h3>Pushing the Edge</h3></div>
-        <div class="dev-card-body">
-          <p>The night before my first solo skydive I was sick to my stomach. Lying there, I connected it directly to my dream of becoming an operator. I realized that if I could not walk toward a plane, I could not chase down something as hard as this. I went. I jumped. I went back six more times, not because it got easier, but because I needed to prove I would keep returning to what scared me.</p>
-          <p>That same instinct drove me to volunteer at Cedar Ridge Preserve in Fort Worth with a fellow LDP participant, cutting invasive nandina from trails that had become overrun. It put me at the Regional Food Bank of Northeastern New York in Albany, sorting cold goods for distribution. It put me at Coffee Corner, speaking about my LDP journey to encourage future participants in a large group setting, even though that is my identified growth edge. I do not wait for discomfort to pass before I move. Discomfort is usually the signal that something worth building is on the other side.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem">
-            <figure style="margin:0">
-              <img src="https://i.imgur.com/3DVmDpi.jpg" alt="Volunteering at Cedar Ridge Preserve in Fort Worth" loading="lazy" style="display:block;width:100%;height:140px;object-fit:cover;object-position:center top;border-radius:8px">
-              <figcaption style="font-size:.72rem;color:var(--text-light);margin-top:.45rem;text-align:center;line-height:1.4">Cedar Ridge Preserve, Fort Worth</figcaption>
-            </figure>
-            <figure style="margin:0">
-              <img src="https://i.imgur.com/7bapaf5.jpg" alt="Volunteering at the Regional Food Bank of Northeastern New York in Albany" loading="lazy" style="display:block;width:100%;height:140px;object-fit:cover;object-position:center top;border-radius:8px">
-              <figcaption style="font-size:.72rem;color:var(--text-light);margin-top:.45rem;text-align:center;line-height:1.4">Regional Food Bank, Albany</figcaption>
-            </figure>
+        <div class="dev-card-media">
+          <img src="https://i.imgur.com/p6gj1N8.jpg" alt="Isaac preparing for a solo skydive" loading="lazy">
+        </div>
+        <div class="dev-card-main">
+          <div class="dev-card-hdr"><h3>Pushing the Edge</h3></div>
+          <div class="dev-card-body">
+            <p>The night before my first solo skydive I was sick to my stomach. Lying there, I connected it directly to my dream of becoming an operator. I realized that if I could not walk toward a plane, I could not chase down something as hard as this. I went. I jumped. I went back six more times, not because it got easier, but because I needed to prove I would keep returning to what scared me.</p>
+            <p>That same instinct drove me to volunteer at Cedar Ridge Preserve in Fort Worth with a fellow LDP participant, cutting invasive nandina from trails that had become overrun. It put me at the Regional Food Bank of Northeastern New York in Albany, sorting cold goods for distribution. It put me at Coffee Corner, speaking about my LDP journey to encourage future participants in a large group setting, even though that is my identified growth edge. I do not wait for discomfort to pass before I move. Discomfort is usually the signal that something worth building is on the other side.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem">
+              <figure style="margin:0">
+                <img src="https://i.imgur.com/3DVmDpi.jpg" alt="Volunteering at Cedar Ridge Preserve in Fort Worth" loading="lazy" style="display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:8px">
+                <figcaption style="font-size:.72rem;color:var(--text-light);margin-top:.45rem;text-align:center;line-height:1.4">Cedar Ridge Preserve, Fort Worth</figcaption>
+              </figure>
+              <figure style="margin:0">
+                <img src="https://i.imgur.com/7bapaf5.jpg" alt="Volunteering at the Regional Food Bank of Northeastern New York in Albany" loading="lazy" style="display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center top;border-radius:8px">
+                <figcaption style="font-size:.72rem;color:var(--text-light);margin-top:.45rem;text-align:center;line-height:1.4">Regional Food Bank, Albany</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
       </div>
       <div class="dev-card fade-in">
-        <figure style="margin:0">
-          <img src="https://i.imgur.com/lvTHmkm.jpg" alt="Elise Moore, Executive Coach" loading="lazy" style="display:block;width:100%;height:220px;object-fit:cover;object-position:center top">
-          <figcaption style="font-size:.72rem;color:var(--text-light);text-align:center;padding:.6rem 1.75rem 0;line-height:1.4">Elise Moore, Executive Coach.</figcaption>
-        </figure>
-        <div class="dev-card-hdr"><h3>Investing in Whole Health</h3></div>
-        <div class="dev-card-body">
-          <p>Before LDP I worked with executive coach Elise Moore. For years I had been running against a self-built dream timeline. Married by 25. Career established by 27. House by 28. None of it was happening on schedule, and the weight of that was turning into anger, discouragement, and a creeping inability to dream at all. Elise helped me see that God-sized dreams are not on my timeline. They are on His. That shift is what I believe got me my LDP yes.</p>
-          <p>During LDP, Chick-fil-A provided access to The Rest Initiative, a personal counseling resource. I used it fully. For six months I met with a counselor outside the business who could speak to life, faith, and leadership without any stake in the outcome. I am not ashamed of that. I believe every leader I develop deserves the same kind of investment in their whole health.</p>
-          <p>I also made it a priority to build relationships with operators wherever my assignments have taken me. Operators in Fort Worth reminded me that if you want to understand a role, you need to learn from people already living it. In Albany I reached out to local operators in the Northeast, the region where I intend to build, to gain perspective, ask hard questions, and begin building the relationships that matter before I need them.</p>
+        <div class="dev-card-media">
+          <img src="https://i.imgur.com/lvTHmkm.jpg" alt="Elise Moore, Executive Coach" loading="lazy">
+          <figcaption>Elise Moore, Executive Coach.</figcaption>
+        </div>
+        <div class="dev-card-main">
+          <div class="dev-card-hdr"><h3>Investing in Whole Health</h3></div>
+          <div class="dev-card-body">
+            <p>Before LDP I worked with executive coach Elise Moore. For years I had been running against a self-built dream timeline. Married by 25. Career established by 27. House by 28. None of it was happening on schedule, and the weight of that was turning into anger, discouragement, and a creeping inability to dream at all. Elise helped me see that God-sized dreams are not on my timeline. They are on His. That shift is what I believe got me my LDP yes.</p>
+            <p>During LDP, Chick-fil-A provided access to The Rest Initiative, a personal counseling resource. I used it fully. For six months I met with a counselor outside the business who could speak to life, faith, and leadership without any stake in the outcome. I am not ashamed of that. I believe every leader I develop deserves the same kind of investment in their whole health.</p>
+            <p>I also made it a priority to build relationships with operators wherever my assignments have taken me. Operators in Fort Worth reminded me that if you want to understand a role, you need to learn from people already living it. In Albany I reached out to local operators in the Northeast, the region where I intend to build, to gain perspective, ask hard questions, and begin building the relationships that matter before I need them.</p>
+          </div>
         </div>
       </div>
     </div>
